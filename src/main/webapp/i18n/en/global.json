@@ -11,6 +11,7 @@
                 "picture": "Picture",
                 "eatery": "Eatery",
                 "product": "Product",
+                "outlet": "Outlet",
                 "additionalEntity": "JHipster will add addtional entities"
             },
             "account": {
