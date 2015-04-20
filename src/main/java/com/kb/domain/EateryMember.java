@@ -1,9 +1,15 @@
 package com.kb.domain;
 
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * A Eatery_member.
@@ -11,8 +17,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "T_EATERY_MEMBER")
 public class EateryMember implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -35,7 +42,7 @@ public class EateryMember implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -43,7 +50,7 @@ public class EateryMember implements Serializable {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
         this.title = title;
     }
 
@@ -51,7 +58,7 @@ public class EateryMember implements Serializable {
         return salutation;
     }
 
-    public void setSalutation(String salutation) {
+    public void setSalutation(final String salutation) {
         this.salutation = salutation;
     }
 
@@ -59,7 +66,7 @@ public class EateryMember implements Serializable {
         return contact_number;
     }
 
-    public void setContact_number(String contact_number) {
+    public void setContact_number(final String contact_number) {
         this.contact_number = contact_number;
     }
 
@@ -67,7 +74,7 @@ public class EateryMember implements Serializable {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -75,12 +82,12 @@ public class EateryMember implements Serializable {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(final Boolean status) {
         this.status = status;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }

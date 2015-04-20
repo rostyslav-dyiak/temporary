@@ -1,12 +1,15 @@
 package com.kb.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * A Eatery.
@@ -14,8 +17,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "T_EATERY")
 public class Eatery implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -47,7 +51,7 @@ public class Eatery implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -55,7 +59,7 @@ public class Eatery implements Serializable {
         return company_name;
     }
 
-    public void setCompany_name(String company_name) {
+    public void setCompany_name(final String company_name) {
         this.company_name = company_name;
     }
 
@@ -63,7 +67,7 @@ public class Eatery implements Serializable {
         return bus_registration_number;
     }
 
-    public void setBus_registration_number(String bus_registration_number) {
+    public void setBus_registration_number(final String bus_registration_number) {
         this.bus_registration_number = bus_registration_number;
     }
 
@@ -71,7 +75,7 @@ public class Eatery implements Serializable {
         return billing_number;
     }
 
-    public void setBilling_number(String billing_number) {
+    public void setBilling_number(final String billing_number) {
         this.billing_number = billing_number;
     }
 
@@ -79,7 +83,7 @@ public class Eatery implements Serializable {
         return postal_code;
     }
 
-    public void setPostal_code(String postal_code) {
+    public void setPostal_code(final String postal_code) {
         this.postal_code = postal_code;
     }
 
@@ -87,7 +91,7 @@ public class Eatery implements Serializable {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -95,7 +99,7 @@ public class Eatery implements Serializable {
         return company_contact_number;
     }
 
-    public void setCompany_contact_number(String company_contact_number) {
+    public void setCompany_contact_number(final String company_contact_number) {
         this.company_contact_number = company_contact_number;
     }
 
@@ -103,7 +107,7 @@ public class Eatery implements Serializable {
         return company_fax_number;
     }
 
-    public void setCompany_fax_number(String company_fax_number) {
+    public void setCompany_fax_number(final String company_fax_number) {
         this.company_fax_number = company_fax_number;
     }
 
@@ -111,12 +115,12 @@ public class Eatery implements Serializable {
         return picture;
     }
 
-    public void setPicture(Picture picture) {
+    public void setPicture(final Picture picture) {
         this.picture = picture;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
