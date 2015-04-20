@@ -30,21 +30,21 @@
 
                         </div>
                         <div class="form-group">
-                            <label translate="kbappApp.eatery.bus_registration_number">Bus_registration_number</label>
-                            <input type="text" class="form-control" name="bus_registration_number"
-                                   ng-model="eatery.bus_registration_number">
+                            <label translate="kbappApp.eatery.busRegistrationNumber">Bus_registration_number</label>
+                            <input type="text" class="form-control" name="busRegistrationNumber"
+                                   ng-model="eatery.busRegistrationNumber">
 
                         </div>
                         <div class="form-group">
-                            <label translate="kbappApp.eatery.billing_number">Billing_number</label>
-                            <input type="text" class="form-control" name="billing_number"
-                                   ng-model="eatery.billing_number">
+                            <label translate="kbappApp.eatery.billingNumber">Billing_number</label>
+                            <input type="text" class="form-control" name="billingNumber"
+                                   ng-model="eatery.billingNumber">
 
                         </div>
                         <div class="form-group">
-                            <label translate="kbappApp.eatery.postal_code">Postal_code</label>
-                            <input type="text" class="form-control" name="postal_code"
-                                   ng-model="eatery.postal_code">
+                            <label translate="kbappApp.eatery.postalCode">Postal_code</label>
+                            <input type="text" class="form-control" name="postalCode"
+                                   ng-model="eatery.postalCode">
 
                         </div>
                         <div class="form-group">
@@ -54,15 +54,15 @@
 
                         </div>
                         <div class="form-group">
-                            <label translate="kbappApp.eatery.company_contact_number">Company_contact_number</label>
-                            <input type="text" class="form-control" name="company_contact_number"
-                                   ng-model="eatery.company_contact_number">
+                            <label translate="kbappApp.eatery.companyContactNumber">Company_contact_number</label>
+                            <input type="text" class="form-control" name="companyContactNumber"
+                                   ng-model="eatery.companyContactNumber">
 
                         </div>
                         <div class="form-group">
-                            <label translate="kbappApp.eatery.company_fax_number">Company_fax_number</label>
-                            <input type="text" class="form-control" name="company_fax_number"
-                                   ng-model="eatery.company_fax_number">
+                            <label translate="kbappApp.eatery.companyFaxNumber">Company_fax_number</label>
+                            <input type="text" class="form-control" name="companyFaxNumber"
+                                   ng-model="eatery.companyFaxNumber">
 
                         </div>
 
@@ -111,12 +111,12 @@
                 <tr>
                     <th>ID</th>
                     <th translate="kbappApp.eatery.company_name">Company_name</th>
-                    <th translate="kbappApp.eatery.bus_registration_number">Bus_registration_number</th>
-                    <th translate="kbappApp.eatery.billing_number">Billing_number</th>
-                    <th translate="kbappApp.eatery.postal_code">Postal_code</th>
+                    <th translate="kbappApp.eatery.busRegistrationNumber">Bus_registration_number</th>
+                    <th translate="kbappApp.eatery.billingNumber">Billing_number</th>
+                    <th translate="kbappApp.eatery.postalCode">Postal_code</th>
                     <th translate="kbappApp.eatery.email">Email</th>
-                    <th translate="kbappApp.eatery.company_contact_number">Company_contact_number</th>
-                    <th translate="kbappApp.eatery.company_fax_number">Company_fax_number</th>
+                    <th translate="kbappApp.eatery.companyContactNumber">Company_contact_number</th>
+                    <th translate="kbappApp.eatery.companyFaxNumber">Company_fax_number</th>
                     <th></th>
                 </tr>
             </thead>
@@ -124,12 +124,12 @@
                 <tr ng-repeat="eatery in eaterys">
                     <td><a ui-sref="eateryDetail({id:eatery.id})">{{eatery.id}}</a></td>
                     <td>{{eatery.company_name}}</td>
-                    <td>{{eatery.bus_registration_number}}</td>
-                    <td>{{eatery.billing_number}}</td>
-                    <td>{{eatery.postal_code}}</td>
+                    <td>{{eatery.busRegistrationNumber}}</td>
+                    <td>{{eatery.billingNumber}}</td>
+                    <td>{{eatery.postalCode}}</td>
                     <td>{{eatery.email}}</td>
-                    <td>{{eatery.company_contact_number}}</td>
-                    <td>{{eatery.company_fax_number}}</td>
+                    <td>{{eatery.companyContactNumber}}</td>
+                    <td>{{eatery.companyFaxNumber}}</td>
                     <td>
                         <button type="submit"
                                 ui-sref="eateryDetail({id:eatery.id})"

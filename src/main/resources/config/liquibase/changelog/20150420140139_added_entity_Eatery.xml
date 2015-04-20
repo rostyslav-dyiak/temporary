@@ -16,15 +16,15 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="company_name" type="varchar(255)"/>
-            <column name="bus_registration_number" type="varchar(255)"/>
-            <column name="billing_number" type="varchar(255)"/>
-            <column name="postal_code" type="varchar(255)"/>
+            <column name="busRegistrationNumber" type="varchar(255)"/>
+            <column name="billingNumber" type="varchar(255)"/>
+            <column name="postalCode" type="varchar(255)"/>
             <column name="email" type="varchar(255)"/>
-            <column name="company_contact_number" type="varchar(255)"/>
-            <column name="company_fax_number" type="varchar(255)"/>
+            <column name="companyContactNumber" type="varchar(255)"/>
+            <column name="companyFaxNumber" type="varchar(255)"/>
             <column name="picture_id" type="bigint"/>
         </createTable>
-        
+
         <addForeignKeyConstraint baseColumnNames="picture_id"
                                  baseTableName="T_EATERY"
                                  constraintName="fk_eatery_picture_id"

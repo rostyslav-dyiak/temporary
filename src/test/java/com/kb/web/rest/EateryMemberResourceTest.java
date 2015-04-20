@@ -70,7 +70,7 @@ public class EateryMemberResourceTest {
         eatery_member = new EateryMember();
         eatery_member.setTitle(DEFAULT_TITLE);
         eatery_member.setSalutation(DEFAULT_SALUTATION);
-        eatery_member.setContact_number(DEFAULT_CONTACT_NUMBER);
+        eatery_member.setContactNumber(DEFAULT_CONTACT_NUMBER);
         eatery_member.setEmail(DEFAULT_EMAIL);
         eatery_member.setStatus(DEFAULT_STATUS);
     }
@@ -92,7 +92,7 @@ public class EateryMemberResourceTest {
         EateryMember testEatery_member = eatery_members.get(eatery_members.size() - 1);
         assertThat(testEatery_member.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testEatery_member.getSalutation()).isEqualTo(DEFAULT_SALUTATION);
-        assertThat(testEatery_member.getContact_number()).isEqualTo(DEFAULT_CONTACT_NUMBER);
+        assertThat(testEatery_member.getContactNumber()).isEqualTo(DEFAULT_CONTACT_NUMBER);
         assertThat(testEatery_member.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testEatery_member.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
@@ -152,7 +152,7 @@ public class EateryMemberResourceTest {
         // Update the eatery_member
         eatery_member.setTitle(UPDATED_TITLE);
         eatery_member.setSalutation(UPDATED_SALUTATION);
-        eatery_member.setContact_number(UPDATED_CONTACT_NUMBER);
+        eatery_member.setContactNumber(UPDATED_CONTACT_NUMBER);
         eatery_member.setEmail(UPDATED_EMAIL);
         eatery_member.setStatus(UPDATED_STATUS);
         restEatery_memberMockMvc.perform(put("/api/eatery_members")
@@ -166,7 +166,7 @@ public class EateryMemberResourceTest {
         EateryMember testEatery_member = eatery_members.get(eatery_members.size() - 1);
         assertThat(testEatery_member.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testEatery_member.getSalutation()).isEqualTo(UPDATED_SALUTATION);
-        assertThat(testEatery_member.getContact_number()).isEqualTo(UPDATED_CONTACT_NUMBER);
+        assertThat(testEatery_member.getContactNumber()).isEqualTo(UPDATED_CONTACT_NUMBER);
         assertThat(testEatery_member.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testEatery_member.getStatus()).isEqualTo(UPDATED_STATUS);
     }

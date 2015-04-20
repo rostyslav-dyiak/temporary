@@ -68,9 +68,9 @@ public class OutletResourceTest {
     public void initTest() {
         outlet = new Outlet();
         outlet.setTitle(DEFAULT_TITLE);
-        outlet.setDelivery_address(DEFAULT_DELIVERY_ADDRESS);
-        outlet.setContact_number(DEFAULT_CONTACT_NUMBER);
-        outlet.setPostal_code(DEFAULT_POSTAL_CODE);
+        outlet.setDeliveryAddress(DEFAULT_DELIVERY_ADDRESS);
+        outlet.setContactNumber(DEFAULT_CONTACT_NUMBER);
+        outlet.setPostalCode(DEFAULT_POSTAL_CODE);
         outlet.setEmail(DEFAULT_EMAIL);
     }
 
@@ -90,9 +90,9 @@ public class OutletResourceTest {
         assertThat(outlets).hasSize(databaseSizeBeforeCreate + 1);
         Outlet testOutlet = outlets.get(outlets.size() - 1);
         assertThat(testOutlet.getTitle()).isEqualTo(DEFAULT_TITLE);
-        assertThat(testOutlet.getDelivery_address()).isEqualTo(DEFAULT_DELIVERY_ADDRESS);
-        assertThat(testOutlet.getContact_number()).isEqualTo(DEFAULT_CONTACT_NUMBER);
-        assertThat(testOutlet.getPostal_code()).isEqualTo(DEFAULT_POSTAL_CODE);
+        assertThat(testOutlet.getDeliveryAddress()).isEqualTo(DEFAULT_DELIVERY_ADDRESS);
+        assertThat(testOutlet.getContactNumber()).isEqualTo(DEFAULT_CONTACT_NUMBER);
+        assertThat(testOutlet.getPostalCode()).isEqualTo(DEFAULT_POSTAL_CODE);
         assertThat(testOutlet.getEmail()).isEqualTo(DEFAULT_EMAIL);
     }
 
@@ -145,14 +145,14 @@ public class OutletResourceTest {
     public void updateOutlet() throws Exception {
         // Initialize the database
         outletRepository.saveAndFlush(outlet);
-		
+
 		int databaseSizeBeforeUpdate = outletRepository.findAll().size();
 
         // Update the outlet
         outlet.setTitle(UPDATED_TITLE);
-        outlet.setDelivery_address(UPDATED_DELIVERY_ADDRESS);
-        outlet.setContact_number(UPDATED_CONTACT_NUMBER);
-        outlet.setPostal_code(UPDATED_POSTAL_CODE);
+        outlet.setDeliveryAddress(UPDATED_DELIVERY_ADDRESS);
+        outlet.setContactNumber(UPDATED_CONTACT_NUMBER);
+        outlet.setPostalCode(UPDATED_POSTAL_CODE);
         outlet.setEmail(UPDATED_EMAIL);
         restOutletMockMvc.perform(put("/api/outlets")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -164,9 +164,9 @@ public class OutletResourceTest {
         assertThat(outlets).hasSize(databaseSizeBeforeUpdate);
         Outlet testOutlet = outlets.get(outlets.size() - 1);
         assertThat(testOutlet.getTitle()).isEqualTo(UPDATED_TITLE);
-        assertThat(testOutlet.getDelivery_address()).isEqualTo(UPDATED_DELIVERY_ADDRESS);
-        assertThat(testOutlet.getContact_number()).isEqualTo(UPDATED_CONTACT_NUMBER);
-        assertThat(testOutlet.getPostal_code()).isEqualTo(UPDATED_POSTAL_CODE);
+        assertThat(testOutlet.getDeliveryAddress()).isEqualTo(UPDATED_DELIVERY_ADDRESS);
+        assertThat(testOutlet.getContactNumber()).isEqualTo(UPDATED_CONTACT_NUMBER);
+        assertThat(testOutlet.getPostalCode()).isEqualTo(UPDATED_POSTAL_CODE);
         assertThat(testOutlet.getEmail()).isEqualTo(UPDATED_EMAIL);
     }
 
@@ -175,7 +175,7 @@ public class OutletResourceTest {
     public void deleteOutlet() throws Exception {
         // Initialize the database
         outletRepository.saveAndFlush(outlet);
-		
+
 		int databaseSizeBeforeDelete = outletRepository.findAll().size();
 
         // Get the outlet

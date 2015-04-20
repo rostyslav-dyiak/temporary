@@ -72,12 +72,12 @@ public class EateryResourceTest {
     public void initTest() {
         eatery = new Eatery();
         eatery.setCompany_name(DEFAULT_COMPANY_NAME);
-        eatery.setBus_registration_number(DEFAULT_BUS_REGISTRATION_NUMBER);
-        eatery.setBilling_number(DEFAULT_BILLING_NUMBER);
-        eatery.setPostal_code(DEFAULT_POSTAL_CODE);
+        eatery.setBusRegistrationNumber(DEFAULT_BUS_REGISTRATION_NUMBER);
+        eatery.setBillingNumber(DEFAULT_BILLING_NUMBER);
+        eatery.setPostalCode(DEFAULT_POSTAL_CODE);
         eatery.setEmail(DEFAULT_EMAIL);
-        eatery.setCompany_contact_number(DEFAULT_COMPANY_CONTACT_NUMBER);
-        eatery.setCompany_fax_number(DEFAULT_COMPANY_FAX_NUMBER);
+        eatery.setCompanyContactNumber(DEFAULT_COMPANY_CONTACT_NUMBER);
+        eatery.setCompanyFaxNumber(DEFAULT_COMPANY_FAX_NUMBER);
     }
 
     @Test
@@ -96,12 +96,12 @@ public class EateryResourceTest {
         assertThat(eaterys).hasSize(databaseSizeBeforeCreate + 1);
         Eatery testEatery = eaterys.get(eaterys.size() - 1);
         assertThat(testEatery.getCompany_name()).isEqualTo(DEFAULT_COMPANY_NAME);
-        assertThat(testEatery.getBus_registration_number()).isEqualTo(DEFAULT_BUS_REGISTRATION_NUMBER);
-        assertThat(testEatery.getBilling_number()).isEqualTo(DEFAULT_BILLING_NUMBER);
-        assertThat(testEatery.getPostal_code()).isEqualTo(DEFAULT_POSTAL_CODE);
+        assertThat(testEatery.getBusRegistrationNumber()).isEqualTo(DEFAULT_BUS_REGISTRATION_NUMBER);
+        assertThat(testEatery.getBillingNumber()).isEqualTo(DEFAULT_BILLING_NUMBER);
+        assertThat(testEatery.getPostalCode()).isEqualTo(DEFAULT_POSTAL_CODE);
         assertThat(testEatery.getEmail()).isEqualTo(DEFAULT_EMAIL);
-        assertThat(testEatery.getCompany_contact_number()).isEqualTo(DEFAULT_COMPANY_CONTACT_NUMBER);
-        assertThat(testEatery.getCompany_fax_number()).isEqualTo(DEFAULT_COMPANY_FAX_NUMBER);
+        assertThat(testEatery.getCompanyContactNumber()).isEqualTo(DEFAULT_COMPANY_CONTACT_NUMBER);
+        assertThat(testEatery.getCompanyFaxNumber()).isEqualTo(DEFAULT_COMPANY_FAX_NUMBER);
     }
 
     @Test
@@ -157,17 +157,17 @@ public class EateryResourceTest {
     public void updateEatery() throws Exception {
         // Initialize the database
         eateryRepository.saveAndFlush(eatery);
-		
+
 		int databaseSizeBeforeUpdate = eateryRepository.findAll().size();
 
         // Update the eatery
         eatery.setCompany_name(UPDATED_COMPANY_NAME);
-        eatery.setBus_registration_number(UPDATED_BUS_REGISTRATION_NUMBER);
-        eatery.setBilling_number(UPDATED_BILLING_NUMBER);
-        eatery.setPostal_code(UPDATED_POSTAL_CODE);
+        eatery.setBusRegistrationNumber(UPDATED_BUS_REGISTRATION_NUMBER);
+        eatery.setBillingNumber(UPDATED_BILLING_NUMBER);
+        eatery.setPostalCode(UPDATED_POSTAL_CODE);
         eatery.setEmail(UPDATED_EMAIL);
-        eatery.setCompany_contact_number(UPDATED_COMPANY_CONTACT_NUMBER);
-        eatery.setCompany_fax_number(UPDATED_COMPANY_FAX_NUMBER);
+        eatery.setCompanyContactNumber(UPDATED_COMPANY_CONTACT_NUMBER);
+        eatery.setCompanyFaxNumber(UPDATED_COMPANY_FAX_NUMBER);
         restEateryMockMvc.perform(put("/api/eaterys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(eatery)))
@@ -178,12 +178,12 @@ public class EateryResourceTest {
         assertThat(eaterys).hasSize(databaseSizeBeforeUpdate);
         Eatery testEatery = eaterys.get(eaterys.size() - 1);
         assertThat(testEatery.getCompany_name()).isEqualTo(UPDATED_COMPANY_NAME);
-        assertThat(testEatery.getBus_registration_number()).isEqualTo(UPDATED_BUS_REGISTRATION_NUMBER);
-        assertThat(testEatery.getBilling_number()).isEqualTo(UPDATED_BILLING_NUMBER);
-        assertThat(testEatery.getPostal_code()).isEqualTo(UPDATED_POSTAL_CODE);
+        assertThat(testEatery.getBusRegistrationNumber()).isEqualTo(UPDATED_BUS_REGISTRATION_NUMBER);
+        assertThat(testEatery.getBillingNumber()).isEqualTo(UPDATED_BILLING_NUMBER);
+        assertThat(testEatery.getPostalCode()).isEqualTo(UPDATED_POSTAL_CODE);
         assertThat(testEatery.getEmail()).isEqualTo(UPDATED_EMAIL);
-        assertThat(testEatery.getCompany_contact_number()).isEqualTo(UPDATED_COMPANY_CONTACT_NUMBER);
-        assertThat(testEatery.getCompany_fax_number()).isEqualTo(UPDATED_COMPANY_FAX_NUMBER);
+        assertThat(testEatery.getCompanyContactNumber()).isEqualTo(UPDATED_COMPANY_CONTACT_NUMBER);
+        assertThat(testEatery.getCompanyFaxNumber()).isEqualTo(UPDATED_COMPANY_FAX_NUMBER);
     }
 
     @Test
@@ -191,7 +191,7 @@ public class EateryResourceTest {
     public void deleteEatery() throws Exception {
         // Initialize the database
         eateryRepository.saveAndFlush(eatery);
-		
+
 		int databaseSizeBeforeDelete = eateryRepository.findAll().size();
 
         // Get the eatery

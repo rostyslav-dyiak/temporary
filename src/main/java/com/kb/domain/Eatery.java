@@ -1,11 +1,7 @@
 package com.kb.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -22,23 +18,23 @@ public class Eatery implements Serializable {
     @Column(name = "company_name")
     private String company_name;
 
-    @Column(name = "bus_registration_number")
-    private String bus_registration_number;
+    @Column(name = "busRegistrationNumber")
+    private String busRegistrationNumber;
 
-    @Column(name = "billing_number")
-    private String billing_number;
+    @Column(name = "billingNumber")
+    private String billingNumber;
 
-    @Column(name = "postal_code")
-    private String postal_code;
+    @Column(name = "postalCode")
+    private String postalCode;
 
     @Column(name = "email")
     private String email;
 
-    @Column(name = "company_contact_number")
-    private String company_contact_number;
+    @Column(name = "companyContactNumber")
+    private String companyContactNumber;
 
-    @Column(name = "company_fax_number")
-    private String company_fax_number;
+    @Column(name = "companyFaxNumber")
+    private String companyFaxNumber;
 
     @OneToOne
     private Picture picture;
@@ -59,28 +55,28 @@ public class Eatery implements Serializable {
         this.company_name = company_name;
     }
 
-    public String getBus_registration_number() {
-        return bus_registration_number;
+    public String getBusRegistrationNumber() {
+        return busRegistrationNumber;
     }
 
-    public void setBus_registration_number(String bus_registration_number) {
-        this.bus_registration_number = bus_registration_number;
+    public void setBusRegistrationNumber(String busRegistrationNumber) {
+        this.busRegistrationNumber = busRegistrationNumber;
     }
 
-    public String getBilling_number() {
-        return billing_number;
+    public String getBillingNumber() {
+        return billingNumber;
     }
 
-    public void setBilling_number(String billing_number) {
-        this.billing_number = billing_number;
+    public void setBillingNumber(String billingNumber) {
+        this.billingNumber = billingNumber;
     }
 
-    public String getPostal_code() {
-        return postal_code;
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    public void setPostal_code(String postal_code) {
-        this.postal_code = postal_code;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     public String getEmail() {
@@ -91,20 +87,20 @@ public class Eatery implements Serializable {
         this.email = email;
     }
 
-    public String getCompany_contact_number() {
-        return company_contact_number;
+    public String getCompanyContactNumber() {
+        return companyContactNumber;
     }
 
-    public void setCompany_contact_number(String company_contact_number) {
-        this.company_contact_number = company_contact_number;
+    public void setCompanyContactNumber(String companyContactNumber) {
+        this.companyContactNumber = companyContactNumber;
     }
 
-    public String getCompany_fax_number() {
-        return company_fax_number;
+    public String getCompanyFaxNumber() {
+        return companyFaxNumber;
     }
 
-    public void setCompany_fax_number(String company_fax_number) {
-        this.company_fax_number = company_fax_number;
+    public void setCompanyFaxNumber(String companyFaxNumber) {
+        this.companyFaxNumber = companyFaxNumber;
     }
 
     public Picture getPicture() {
@@ -141,12 +137,12 @@ public class Eatery implements Serializable {
         return "Eatery{" +
                 "id=" + id +
                 ", company_name='" + company_name + "'" +
-                ", bus_registration_number='" + bus_registration_number + "'" +
-                ", billing_number='" + billing_number + "'" +
-                ", postal_code='" + postal_code + "'" +
+                ", busRegistrationNumber='" + busRegistrationNumber + "'" +
+                ", billingNumber='" + billingNumber + "'" +
+                ", postalCode='" + postalCode + "'" +
                 ", email='" + email + "'" +
-                ", company_contact_number='" + company_contact_number + "'" +
-                ", company_fax_number='" + company_fax_number + "'" +
+                ", companyContactNumber='" + companyContactNumber + "'" +
+                ", companyFaxNumber='" + companyFaxNumber + "'" +
                 '}';
     }
 }

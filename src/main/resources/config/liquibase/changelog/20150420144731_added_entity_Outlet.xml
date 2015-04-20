@@ -18,11 +18,11 @@
             <column name="title" type="varchar(255)"/>
             <column name="delivery_address" type="varchar(255)"/>
             <column name="contact_number" type="varchar(255)"/>
-            <column name="postal_code" type="varchar(255)"/>
+            <column name="postalCode" type="varchar(255)"/>
             <column name="email" type="varchar(255)"/>
             <column name="eatery_id" type="bigint"/>
         </createTable>
-        
+
         <addForeignKeyConstraint baseColumnNames="eatery_id"
                                  baseTableName="T_OUTLET"
                                  constraintName="fk_outlet_eatery_id"

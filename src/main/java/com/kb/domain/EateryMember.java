@@ -22,8 +22,8 @@ public class EateryMember implements Serializable {
     @Column(name = "salutation")
     private String salutation;
 
-    @Column(name = "contact_number")
-    private String contact_number;
+    @Column(name = "contactNumber")
+    private String contactNumber;
 
     @Column(name = "email")
     private String email;
@@ -55,12 +55,12 @@ public class EateryMember implements Serializable {
         this.salutation = salutation;
     }
 
-    public String getContact_number() {
-        return contact_number;
+    public String getContactNumber() {
+        return contactNumber;
     }
 
-    public void setContact_number(String contact_number) {
-        this.contact_number = contact_number;
+    public void setContactNumber(String contact_number) {
+        this.contactNumber = contact_number;
     }
 
     public String getEmail() {
@@ -106,7 +106,7 @@ public class EateryMember implements Serializable {
                 "id=" + id +
                 ", title='" + title + "'" +
                 ", salutation='" + salutation + "'" +
-                ", contact_number='" + contact_number + "'" +
+                ", contactNumber='" + contactNumber + "'" +
                 ", email='" + email + "'" +
                 ", status='" + status + "'" +
                 '}';
