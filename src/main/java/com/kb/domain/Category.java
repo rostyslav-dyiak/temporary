@@ -18,6 +18,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * A Category.
+ * TODO: Consider making separate dto for resource.
+ * This will prevent Category from keepin parentId.
  */
 @Entity
 @Table(name = "T_CATEGORY")
