@@ -1,0 +1,24 @@
+{
+    "kbappApp": {
+        "outlet" : {
+            "home": {
+                "title": "Outlets",
+                "createLabel": "Créer un nouveau Outlet",
+                "createOrEditLabel": "Créer ou éditer un Outlet"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Outlet {{ id }} ?"
+            },
+            "detail": {
+                "title": "Outlet"
+            },
+            "title": "Title",
+            "delivery_address": "Delivery_address",
+            "contact_number": "Contact_number",
+            "postal_code": "Postal_code",
+            "email": "Email",
+            "Eatery": "Eatery"
+        }
+    }
+}
+
