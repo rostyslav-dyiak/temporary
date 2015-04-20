@@ -6,7 +6,7 @@ spring:
         active: dev
     datasource:
         dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
-        url: 
+        url:
         databaseName: kbapp
         serverName: localhost
         username: postgres
