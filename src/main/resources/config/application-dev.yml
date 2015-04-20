@@ -9,8 +9,8 @@ spring:
         url: 
         databaseName: kbapp
         serverName: localhost
-        username: kbapp
-        password: 
+        username: postgres
+        password: postgres
 
     jpa:
         database-platform: org.hibernate.dialect.PostgreSQL82Dialect

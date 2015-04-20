@@ -1,13 +1,14 @@
 package com.kb.domain;
 
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 
 /**
  * An authority (a security role) used by Spring Security.
@@ -15,8 +16,9 @@ import java.io.Serializable;
 @Entity
 @Table(name = "T_AUTHORITY")
 public class Authority implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    @NotNull
+	@NotNull
     @Size(min = 0, max = 50)
     @Id
     @Column(length = 50)
@@ -26,12 +28,12 @@ public class Authority implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
