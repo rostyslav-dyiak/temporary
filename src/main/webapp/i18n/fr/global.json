@@ -9,6 +9,7 @@
                 "category": "Category",
                 "eatery_member": "Eatery_member",
                 "picture": "Picture",
+                "eatery": "Eatery",
                 "additionalEntity": "JHipster will add addtional entities"
             },
             "account": {

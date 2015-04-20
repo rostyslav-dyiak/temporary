@@ -1,0 +1,78 @@
+
+<div>
+    <h2><span translate="kbappApp.eatery.detail.title">Eatery</span> {{eatery.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th translate="entity.detail.field">Field</th>
+                    <th translate="entity.detail.value">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span translate="kbappApp.eatery.company_name">Company_name</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{eatery.company_name}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="kbappApp.eatery.bus_registration_number">Bus_registration_number</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{eatery.bus_registration_number}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="kbappApp.eatery.billing_number">Billing_number</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{eatery.billing_number}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="kbappApp.eatery.postal_code">Postal_code</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{eatery.postal_code}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="kbappApp.eatery.email">Email</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{eatery.email}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="kbappApp.eatery.company_contact_number">Company_contact_number</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{eatery.company_contact_number}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="kbappApp.eatery.company_fax_number">Company_fax_number</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{eatery.company_fax_number}}" readonly>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ui-sref="eatery"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>
