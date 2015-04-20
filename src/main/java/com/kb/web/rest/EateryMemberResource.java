@@ -1,8 +1,8 @@
 package com.kb.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.kb.domain.Eatery_member;
-import com.kb.repository.Eatery_memberRepository;
+import com.kb.domain.EateryMember;
+import com.kb.repository.EateryMemberRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -21,12 +21,12 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api")
-public class Eatery_memberResource {
+public class EateryMemberResource {
 
-    private final Logger log = LoggerFactory.getLogger(Eatery_memberResource.class);
+    private final Logger log = LoggerFactory.getLogger(EateryMemberResource.class);
 
     @Inject
-    private Eatery_memberRepository eatery_memberRepository;
+    private EateryMemberRepository eatery_memberRepository;
 
     /**
      * POST  /eatery_members -> Create a new eatery_member.
@@ -35,7 +35,7 @@ public class Eatery_memberResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Void> create(@RequestBody Eatery_member eatery_member) throws URISyntaxException {
+    public ResponseEntity<Void> create(@RequestBody EateryMember eatery_member) throws URISyntaxException {
         log.debug("REST request to save Eatery_member : {}", eatery_member);
         if (eatery_member.getId() != null) {
             return ResponseEntity.badRequest().header("Failure", "A new eatery_member cannot already have an ID").build();
@@ -51,7 +51,7 @@ public class Eatery_memberResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Void> update(@RequestBody Eatery_member eatery_member) throws URISyntaxException {
+    public ResponseEntity<Void> update(@RequestBody EateryMember eatery_member) throws URISyntaxException {
         log.debug("REST request to update Eatery_member : {}", eatery_member);
         if (eatery_member.getId() == null) {
             return create(eatery_member);
@@ -67,7 +67,7 @@ public class Eatery_memberResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<Eatery_member> getAll() {
+    public List<EateryMember> getAll() {
         log.debug("REST request to get all Eatery_members");
         return eatery_memberRepository.findAll();
     }
@@ -79,7 +79,7 @@ public class Eatery_memberResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Eatery_member> get(@PathVariable Long id) {
+    public ResponseEntity<EateryMember> get(@PathVariable Long id) {
         log.debug("REST request to get Eatery_member : {}", id);
         return Optional.ofNullable(eatery_memberRepository.findOne(id))
             .map(eatery_member -> new ResponseEntity<>(

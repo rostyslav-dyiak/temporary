@@ -1,8 +1,8 @@
 package com.kb.web.rest;
 
 import com.kb.Application;
-import com.kb.domain.Eatery_member;
-import com.kb.repository.Eatery_memberRepository;
+import com.kb.domain.EateryMember;
+import com.kb.repository.EateryMemberRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +30,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the Eatery_memberResource REST controller.
  *
- * @see Eatery_memberResource
+ * @see EateryMemberResource
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-public class Eatery_memberResourceTest {
+public class EateryMemberResourceTest {
 
     private static final String DEFAULT_TITLE = "SAMPLE_TEXT";
     private static final String UPDATED_TITLE = "UPDATED_TEXT";
@@ -51,23 +51,23 @@ public class Eatery_memberResourceTest {
     private static final Boolean UPDATED_STATUS = true;
 
     @Inject
-    private Eatery_memberRepository eatery_memberRepository;
+    private EateryMemberRepository eatery_memberRepository;
 
     private MockMvc restEatery_memberMockMvc;
 
-    private Eatery_member eatery_member;
+    private EateryMember eatery_member;
 
     @PostConstruct
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        Eatery_memberResource eatery_memberResource = new Eatery_memberResource();
+        EateryMemberResource eatery_memberResource = new EateryMemberResource();
         ReflectionTestUtils.setField(eatery_memberResource, "eatery_memberRepository", eatery_memberRepository);
         this.restEatery_memberMockMvc = MockMvcBuilders.standaloneSetup(eatery_memberResource).build();
     }
 
     @Before
     public void initTest() {
-        eatery_member = new Eatery_member();
+        eatery_member = new EateryMember();
         eatery_member.setTitle(DEFAULT_TITLE);
         eatery_member.setSalutation(DEFAULT_SALUTATION);
         eatery_member.setContact_number(DEFAULT_CONTACT_NUMBER);
@@ -87,9 +87,9 @@ public class Eatery_memberResourceTest {
                 .andExpect(status().isCreated());
 
         // Validate the Eatery_member in the database
-        List<Eatery_member> eatery_members = eatery_memberRepository.findAll();
+        List<EateryMember> eatery_members = eatery_memberRepository.findAll();
         assertThat(eatery_members).hasSize(databaseSizeBeforeCreate + 1);
-        Eatery_member testEatery_member = eatery_members.get(eatery_members.size() - 1);
+        EateryMember testEatery_member = eatery_members.get(eatery_members.size() - 1);
         assertThat(testEatery_member.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testEatery_member.getSalutation()).isEqualTo(DEFAULT_SALUTATION);
         assertThat(testEatery_member.getContact_number()).isEqualTo(DEFAULT_CONTACT_NUMBER);
@@ -146,7 +146,7 @@ public class Eatery_memberResourceTest {
     public void updateEatery_member() throws Exception {
         // Initialize the database
         eatery_memberRepository.saveAndFlush(eatery_member);
-		
+
 		int databaseSizeBeforeUpdate = eatery_memberRepository.findAll().size();
 
         // Update the eatery_member
@@ -161,9 +161,9 @@ public class Eatery_memberResourceTest {
                 .andExpect(status().isOk());
 
         // Validate the Eatery_member in the database
-        List<Eatery_member> eatery_members = eatery_memberRepository.findAll();
+        List<EateryMember> eatery_members = eatery_memberRepository.findAll();
         assertThat(eatery_members).hasSize(databaseSizeBeforeUpdate);
-        Eatery_member testEatery_member = eatery_members.get(eatery_members.size() - 1);
+        EateryMember testEatery_member = eatery_members.get(eatery_members.size() - 1);
         assertThat(testEatery_member.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testEatery_member.getSalutation()).isEqualTo(UPDATED_SALUTATION);
         assertThat(testEatery_member.getContact_number()).isEqualTo(UPDATED_CONTACT_NUMBER);
@@ -176,7 +176,7 @@ public class Eatery_memberResourceTest {
     public void deleteEatery_member() throws Exception {
         // Initialize the database
         eatery_memberRepository.saveAndFlush(eatery_member);
-		
+
 		int databaseSizeBeforeDelete = eatery_memberRepository.findAll().size();
 
         // Get the eatery_member
@@ -185,7 +185,7 @@ public class Eatery_memberResourceTest {
                 .andExpect(status().isOk());
 
         // Validate the database is empty
-        List<Eatery_member> eatery_members = eatery_memberRepository.findAll();
+        List<EateryMember> eatery_members = eatery_memberRepository.findAll();
         assertThat(eatery_members).hasSize(databaseSizeBeforeDelete - 1);
     }
 }

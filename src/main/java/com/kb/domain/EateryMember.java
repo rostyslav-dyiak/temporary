@@ -10,7 +10,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "T_EATERY_MEMBER")
-public class Eatery_member implements Serializable {
+public class EateryMember implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -88,7 +88,7 @@ public class Eatery_member implements Serializable {
             return false;
         }
 
-        Eatery_member eatery_member = (Eatery_member) o;
+        EateryMember eatery_member = (EateryMember) o;
 
         if ( ! Objects.equals(id, eatery_member.id)) return false;
 
