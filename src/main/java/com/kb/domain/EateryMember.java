@@ -4,6 +4,7 @@ package com.kb.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A Eatery_member.
@@ -11,7 +12,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "T_EATERY_MEMBER")
 public class EateryMember implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,6 +32,9 @@ public class EateryMember implements Serializable {
 
     @Column(name = "status")
     private Boolean status;
+
+    @ManyToMany(mappedBy = "eateryMembers")
+    private Set<Outlet> outlets;
 
     public Long getId() {
         return id;
@@ -80,6 +84,14 @@ public class EateryMember implements Serializable {
         this.status = status;
     }
 
+    public Set<Outlet> getOutlets() {
+        return outlets;
+    }
+
+    public void setOutlets(Set<Outlet> outlets) {
+        this.outlets = outlets;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
@@ -91,7 +103,7 @@ public class EateryMember implements Serializable {
 
         EateryMember eatery_member = (EateryMember) o;
 
-        if ( ! Objects.equals(id, eatery_member.id)) return false;
+        if (!Objects.equals(id, eatery_member.id)) return false;
 
         return true;
     }
@@ -104,12 +116,13 @@ public class EateryMember implements Serializable {
     @Override
     public String toString() {
         return "Eatery_member{" +
-                "id=" + id +
-                ", title='" + title + "'" +
-                ", salutation='" + salutation + "'" +
-                ", contactNumber='" + contactNumber + "'" +
-                ", email='" + email + "'" +
-                ", status='" + status + "'" +
-                '}';
+            "id=" + id +
+            ", title='" + title + "'" +
+            ", salutation='" + salutation + "'" +
+            ", contactNumber='" + contactNumber + "'" +
+            ", email='" + email + "'" +
+            ", status='" + status + "'" +
+            '}';
     }
+
 }

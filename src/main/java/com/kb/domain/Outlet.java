@@ -3,6 +3,7 @@ package com.kb.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A Outlet.
@@ -29,6 +30,10 @@ public class Outlet implements Serializable {
 
     @Column(name = "email")
     private String email;
+
+    @ManyToMany
+    @JoinTable(name = "eatery_member_outlet", joinColumns = {@JoinColumn(name = " eatery_member_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "outlet_id", referencedColumnName = "id")})
+    private Set<EateryMember> eateryMembers;
 
     @ManyToOne
     private Eatery eatery;
@@ -89,6 +94,14 @@ public class Outlet implements Serializable {
         this.eatery = eatery;
     }
 
+    public Set<EateryMember> getEateryMembers() {
+        return eateryMembers;
+    }
+
+    public void setEateryMembers(Set<EateryMember> eateryMembers) {
+        this.eateryMembers = eateryMembers;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -100,7 +113,7 @@ public class Outlet implements Serializable {
 
         Outlet outlet = (Outlet) o;
 
-        if ( ! Objects.equals(id, outlet.id)) return false;
+        if (!Objects.equals(id, outlet.id)) return false;
 
         return true;
     }
@@ -113,12 +126,14 @@ public class Outlet implements Serializable {
     @Override
     public String toString() {
         return "Outlet{" +
-                "id=" + id +
-                ", title='" + title + "'" +
-                ", deliveryAddress='" + deliveryAddress + "'" +
-                ", contactNumber='" + contactNumber + "'" +
-                ", postalCode='" + postalCode + "'" +
-                ", email='" + email + "'" +
-                '}';
+            "id=" + id +
+            ", title='" + title + "'" +
+            ", deliveryAddress='" + deliveryAddress + "'" +
+            ", contactNumber='" + contactNumber + "'" +
+            ", postalCode='" + postalCode + "'" +
+            ", email='" + email + "'" +
+            '}';
     }
+
+
 }
