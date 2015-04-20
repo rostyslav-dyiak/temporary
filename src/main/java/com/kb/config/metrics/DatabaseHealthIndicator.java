@@ -1,14 +1,15 @@
 package com.kb.config.metrics;
 
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.sql.DataSource;
+
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.StringUtils;
-
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * SpringBoot Actuator HealthIndicator check for the Database.
@@ -35,13 +36,13 @@ public class DatabaseHealthIndicator extends AbstractHealthIndicator {
 
     private String query = null;
 
-    public DatabaseHealthIndicator(DataSource dataSource) {
+    public DatabaseHealthIndicator(final DataSource dataSource) {
         this.dataSource = dataSource;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override
-    protected void doHealthCheck(Health.Builder builder) throws Exception {
+    protected void doHealthCheck(final Health.Builder builder) throws Exception {
         String product = getProduct();
         builder.up().withDetail("database", product);
         String query = detectQuery(product);
@@ -56,10 +57,10 @@ public class DatabaseHealthIndicator extends AbstractHealthIndicator {
     }
 
     private String getProduct() {
-        return this.jdbcTemplate.execute((Connection connection) -> connection.getMetaData().getDatabaseProductName());
+        return this.jdbcTemplate.execute((final Connection connection) -> connection.getMetaData().getDatabaseProductName());
     }
 
-    protected String detectQuery(String product) {
+    protected String detectQuery(final String product) {
         String query = this.query;
         if (!StringUtils.hasText(query)) {
             query = queries.get(product);
@@ -70,7 +71,7 @@ public class DatabaseHealthIndicator extends AbstractHealthIndicator {
         return query;
     }
 
-    public void setQuery(String query) {
+    public void setQuery(final String query) {
         this.query = query;
     }
 }
