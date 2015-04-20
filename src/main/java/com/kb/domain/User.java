@@ -1,15 +1,27 @@
 package com.kb.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.validator.constraints.Email;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * A user.
@@ -17,8 +29,9 @@ import java.util.Set;
 @Entity
 @Table(name = "T_USER")
 public class User extends AbstractAuditingEntity implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -74,7 +87,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -82,7 +95,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return login;
     }
 
-    public void setLogin(String login) {
+    public void setLogin(final String login) {
         this.login = login;
     }
 
@@ -90,7 +103,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 
@@ -98,7 +111,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(final String firstName) {
         this.firstName = firstName;
     }
 
@@ -106,7 +119,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 
@@ -114,7 +127,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -122,7 +135,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return activated;
     }
 
-    public void setActivated(boolean activated) {
+    public void setActivated(final boolean activated) {
         this.activated = activated;
     }
 
@@ -130,7 +143,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return activationKey;
     }
 
-    public void setActivationKey(String activationKey) {
+    public void setActivationKey(final String activationKey) {
         this.activationKey = activationKey;
     }
 
@@ -138,7 +151,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return langKey;
     }
 
-    public void setLangKey(String langKey) {
+    public void setLangKey(final String langKey) {
         this.langKey = langKey;
     }
 
@@ -146,7 +159,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return authorities;
     }
 
-    public void setAuthorities(Set<Authority> authorities) {
+    public void setAuthorities(final Set<Authority> authorities) {
         this.authorities = authorities;
     }
 
@@ -154,12 +167,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return persistentTokens;
     }
 
-    public void setPersistentTokens(Set<PersistentToken> persistentTokens) {
+    public void setPersistentTokens(final Set<PersistentToken> persistentTokens) {
         this.persistentTokens = persistentTokens;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }

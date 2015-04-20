@@ -11,6 +11,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "T_EATERY_MEMBER")
 public class EateryMember implements Serializable {
+	private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,7 +36,7 @@ public class EateryMember implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -43,7 +44,7 @@ public class EateryMember implements Serializable {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
         this.title = title;
     }
 
@@ -51,7 +52,7 @@ public class EateryMember implements Serializable {
         return salutation;
     }
 
-    public void setSalutation(String salutation) {
+    public void setSalutation(final String salutation) {
         this.salutation = salutation;
     }
 
@@ -67,7 +68,7 @@ public class EateryMember implements Serializable {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -75,12 +76,12 @@ public class EateryMember implements Serializable {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(final Boolean status) {
         this.status = status;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }

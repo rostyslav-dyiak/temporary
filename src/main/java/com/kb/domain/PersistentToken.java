@@ -1,16 +1,22 @@
 package com.kb.domain;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Persistent tokens are used by Spring Security to automatically log in users.
@@ -20,8 +26,9 @@ import java.io.Serializable;
 @Entity
 @Table(name = "T_PERSISTENT_TOKEN")
 public class PersistentToken implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormat.forPattern("d MMMM yyyy");
+	private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormat.forPattern("d MMMM yyyy");
 
     private static final int MAX_USER_AGENT_LEN = 255;
 
@@ -54,7 +61,7 @@ public class PersistentToken implements Serializable {
         return series;
     }
 
-    public void setSeries(String series) {
+    public void setSeries(final String series) {
         this.series = series;
     }
 
@@ -62,7 +69,7 @@ public class PersistentToken implements Serializable {
         return tokenValue;
     }
 
-    public void setTokenValue(String tokenValue) {
+    public void setTokenValue(final String tokenValue) {
         this.tokenValue = tokenValue;
     }
 
@@ -70,7 +77,7 @@ public class PersistentToken implements Serializable {
         return tokenDate;
     }
 
-    public void setTokenDate(LocalDate tokenDate) {
+    public void setTokenDate(final LocalDate tokenDate) {
         this.tokenDate = tokenDate;
     }
 
@@ -83,7 +90,7 @@ public class PersistentToken implements Serializable {
         return ipAddress;
     }
 
-    public void setIpAddress(String ipAddress) {
+    public void setIpAddress(final String ipAddress) {
         this.ipAddress = ipAddress;
     }
 
@@ -91,7 +98,7 @@ public class PersistentToken implements Serializable {
         return userAgent;
     }
 
-    public void setUserAgent(String userAgent) {
+    public void setUserAgent(final String userAgent) {
         if (userAgent.length() >= MAX_USER_AGENT_LEN) {
             this.userAgent = userAgent.substring(0, MAX_USER_AGENT_LEN - 1);
         } else {
@@ -103,12 +110,12 @@ public class PersistentToken implements Serializable {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(final User user) {
         this.user = user;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
