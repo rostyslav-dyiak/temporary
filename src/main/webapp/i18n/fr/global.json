@@ -7,6 +7,7 @@
             "entities": {
                 "main": "Entités",
                 "category": "Category",
+                "eatery_member": "Eatery_member",
                 "additionalEntity": "JHipster will add addtional entities"
             },
             "account": {

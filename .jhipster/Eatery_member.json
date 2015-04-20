@@ -1,0 +1,60 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Title",
+            "fieldNameUnderscored": "title",
+            "fieldInJavaBeanMethod": "Title",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "salutation",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Salutation",
+            "fieldNameUnderscored": "salutation",
+            "fieldInJavaBeanMethod": "Salutation",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "contact_number",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Contact_number",
+            "fieldNameUnderscored": "contact_number",
+            "fieldInJavaBeanMethod": "Contact_number",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "email",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Email",
+            "fieldNameUnderscored": "email",
+            "fieldInJavaBeanMethod": "Email",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "status",
+            "fieldType": "Boolean",
+            "fieldNameCapitalized": "Status",
+            "fieldNameUnderscored": "status",
+            "fieldInJavaBeanMethod": "Status",
+            "fieldValidate": false
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOneToMany": false,
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": false,
+    "fieldsContainBigDecimal": false,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "changelogDate": "20150420134803",
+    "pagination": "no",
+    "validation": false
+}

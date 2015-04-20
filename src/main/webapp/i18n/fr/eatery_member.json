@@ -1,0 +1,23 @@
+{
+    "kbappApp": {
+        "eatery_member" : {
+            "home": {
+                "title": "Eatery_members",
+                "createLabel": "Créer un nouveau Eatery_member",
+                "createOrEditLabel": "Créer ou éditer un Eatery_member"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Eatery_member {{ id }} ?"
+            },
+            "detail": {
+                "title": "Eatery_member"
+            },
+            "title": "Title",
+            "salutation": "Salutation",
+            "contact_number": "Contact_number",
+            "email": "Email",
+            "status": "Status"
+        }
+    }
+}
+
