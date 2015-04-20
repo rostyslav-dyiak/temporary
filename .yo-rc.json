@@ -1,0 +1,19 @@
+{
+  "generator-jhipster": {
+    "baseName": "kbapp",
+    "packageName": "com.kb",
+    "packageFolder": "com/kb",
+    "authenticationType": "session",
+    "hibernateCache": "no",
+    "clusteredHttpSession": "no",
+    "websocket": "no",
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "useCompass": false,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "javaVersion": "8",
+    "rememberMeKey": "8689fb2846e32bf5eab076f118a5ac63d4b7ad55"
+  }
+}
