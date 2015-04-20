@@ -18,6 +18,14 @@
             <column name="title" type="varchar(255)"/>
             <column name="parent_id" type="bigint"/>
         </createTable>
-        
+		
+		<addForeignKeyConstraint baseColumnNames="parent_id"
+			constraintName="t_category_parent_id"
+			baseTableName="T_CATEGORY"
+			referencedTableName="T_CATEGORY"
+			deferrable="false"
+			initiallyDeferred="false"
+			referencedColumnNames="id"
+			onDelete="CASCADE" onUpdate="CASCADE" />
     </changeSet>
 </databaseChangeLog>
