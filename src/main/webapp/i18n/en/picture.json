@@ -1,0 +1,19 @@
+{
+    "kbappApp": {
+        "picture" : {
+            "home": {
+                "title": "Pictures",
+                "createLabel": "Create a new Picture",
+                "createOrEditLabel": "Create or edit a Picture"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Picture {{ id }}?"
+            },
+            "detail": {
+                "title": "Picture"
+            },
+            "url": "Url",
+            "description": "Description"
+        }
+    }
+}
