@@ -1,0 +1,159 @@
+<div class="bg-light lter b-b wrapper-md">
+    <button class="btn btn-default back-button" back-button>Back</button>
+</div>
+<div class="wrapper-md" ng-controller="ManageCompanyAddUpdateController">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Logo</label>
+
+                            <div class="col-lg-10">
+                                <img id="image-preview" class="mc-logo" src="img/logo_placeholder.png"
+                                     ng-src="{{company.logo}}"/>
+
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default" click-selector="#upload">Upload
+                                        Image
+                                    </button>
+                                    <input id="upload" type="file" file-model="logo" accept="image/*"
+                                           style="display: none;">
+                                    <button type="button" class="btn btn-default" ng-click="removeImage()">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Type</label>
+
+                            <div class="col-lg-10">
+                                <select name="type" ng-model="company.type" class="form-control">
+                                    <option value="Supplier">Supplier</option>
+                                    <option value="Eatery">Eatery</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="company.type == 'Eatery'">
+                            <label class="col-lg-2 control-label">Business Type</label>
+
+                            <div class="col-lg-10">
+                                <select name="businessType" class="form-control" ng-model="company.businessType">
+                                    <option value="Restaurant">Restaurant</option>
+                                    <option value="Fast Food Restaurant">Fast Food Restaurant</option>
+                                    <option value="Food Caterer">Food Caterer</option>
+                                    <option value="Cafe">Cafe</option>
+                                    <option value="Coffee Shop">Coffee Shop</option>
+                                    <option value="Hawker Centre">Hawker Centre</option>
+                                    <option value="Food Court">Food Court</option>
+                                    <option value="Pub & Bar">Pub & Bar</option>
+                                    <option value="Canteen">Canteen</option>
+                                    <option value="Company Canteen">Company Canteen</option>
+                                    <option value="Government Canteen">Government Canteen</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Company Name</label>
+
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="company.name"
+                                       placeholder="Company Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Company Code</label>
+
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="company.code"
+                                       placeholder="Company Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Email</label>
+
+                            <div class="col-lg-10">
+                                <input type="email" class="form-control" ng-model="company.email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Password</label>
+
+                            <div class="col-lg-10">
+                                <input type="password" class="form-control" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Contact number</label>
+
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="company.contactNumber"
+                                       placeholder="Contact number">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Status</label>
+
+                            <div class="col-lg-10">
+                                <div class="radio">
+                                    <label class="i-checks">
+                                        <input type="radio" ng-model="company.status" name="status" value="Active">
+                                        <i></i> Active
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label class="i-checks">
+                                        <input type="radio" ng-model="company.status" name="status" value="Inactive"
+                                               checked>
+                                        <i></i> Inactive
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button type="submit" class="btn btn-sm btn-info" ng-hide="company.id">Save</button>
+                                <button type="submit" class="btn btn-sm btn-info" ng-hide="!company.id">Update and
+                                    Send
+                                </button>
+                                <button class="btn btn-sm btn-danger">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6" ng-show="company.id">
+            <div class="panel panel-default">
+                <h4 class="text-center">Invitation History</h4>
+
+                <div class="table-responsive">
+                    <table st-table="rowCollectionPage" class="table table-striped text-center">
+                        <thead>
+                        <tr>
+                            <th class="text-center" st-sort="email">Email</th>
+                            <th class="text-center" st-sort="sent">Sent</th>
+                            <th class="text-center" st-sort="status">Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="row in rowCollection">
+                            <td>{{row.email}}</td>
+                            <td>{{row.sent | date}}</td>
+                            <td>{{row.status}}</td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="5"
+                                     class="no-margin"></div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

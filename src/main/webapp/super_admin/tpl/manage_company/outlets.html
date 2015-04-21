@@ -1,0 +1,44 @@
+<div class="bg-light lter b-b wrapper-md">
+    <button class="btn btn-default back-button" back-button>Back</button>
+    <a ui-sref="app.manageCompany.outletsAdd" class="btn btn-info btn-rounded">Add New Outlet</a>
+</div>
+<div class="wrapper-md" ng-controller="ManageCompanyOutletsController">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table st-table="rowCollectionPage" class="table table-striped text-center">
+                            <thead>
+                            <tr>
+                                <th class="text-center" st-sort="name">Name</th>
+                                <th class="text-center" st-sort="created">Title</th>
+                                <th class="text-center" st-sort="status">Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="row in rowCollection">
+                                <td>{{row.name}}</td>
+                                <td>{{row.created | date}}</td>
+                                <td>{{row.status}}</td>
+                                <td>
+                                    <a ui-sref="app.manageCompany.outletsEdit({id: {{row.id}} })" class="btn btn-default btn-rounded">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <div st-pagination st-items-by-page="itemsByPage" st-displayed-pages="5" class="no-margin"></div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

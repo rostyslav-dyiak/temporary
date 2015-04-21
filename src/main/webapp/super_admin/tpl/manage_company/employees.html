@@ -1,0 +1,40 @@
+<div class="bg-light lter b-b wrapper-md">
+    <button class="btn btn-default back-button" back-button>Back</button>
+</div>
+<div class="wrapper-md" ng-controller="ManageCompanyEmployeesController">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <table st-table="rowCollectionPage" class="table table-striped text-center">
+                        <thead>
+                        <tr>
+                            <th class="text-center" st-sort="email">Email Address</th>
+                            <th class="text-center" st-sort="name">Name</th>
+                            <th class="text-center" st-sort="title">Title</th>
+                            <th class="text-center" st-sort="contactNumber">Contact Number</th>
+                            <th class="text-center" st-sort="access">Access</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="row in rowCollection">
+                            <td>{{row.email}}</td>
+                            <td>{{row.name}}</td>
+                            <td>{{row.title}}</td>
+                            <td>{{row.contactNumber}}</td>
+                            <td>{{row.access}}</td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="5" class="no-margin"></div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
