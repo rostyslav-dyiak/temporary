@@ -72,7 +72,10 @@
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
-                                    return $ocLazyLoad.load('js/manage_company/list.controller.js');
+                                    return $ocLazyLoad.load([
+                                        'js/manage_company/manage-company-list.factory.js',
+                                        'js/manage_company/manage-company-list.controller.js'
+                                    ]);
                                 }
                             ]
                         }
@@ -83,7 +86,10 @@
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
-                                    return $ocLazyLoad.load('js/manage_company/outlets.controller.js');
+                                    return $ocLazyLoad.load([
+                                        'js/manage_company/outlets.factory.js',
+                                        'js/manage_company/outlets.controller.js'
+                                    ]);
                                 }
                             ]
                         }
@@ -119,7 +125,10 @@
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
-                                    return $ocLazyLoad.load('js/manage_company/employees.controller.js');
+                                    return $ocLazyLoad.load([
+                                        'js/manage_company/employees.factory.js',
+                                        'js/manage_company/employees.controller.js'
+                                    ]);
                                 }
                             ]
                         }
@@ -130,7 +139,17 @@
                     })
                     .state('app.productType', {
                         url: '/product_type',
-                        templateUrl: 'tpl/product_type.html'
+                        templateUrl: 'tpl/product_type.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/product_type/product-type.factory.js',
+                                        'js/product_type/product-type.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
                     })
                     .state('app.taxType', {
                         url: '/tax_type',
@@ -146,7 +165,17 @@
                     })
                     .state('app.businessType', {
                         url: '/business_type',
-                        templateUrl: 'tpl/business_type.html'
+                        templateUrl: 'tpl/business_type.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/business_type/business-type.factory.js',
+                                        'js/business_type/business-type.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
                     })
                     .state('app.unit', {
                         url: '/unit',

@@ -1,0 +1,28 @@
+{
+    "types": [{
+        "id": 0,
+        "name": "Restaurant",
+        "description": "Some dummy text 0",
+        "order": 0
+    }, {
+        "id": 1,
+        "name": "Food Caterer",
+        "description": "Some dummy text 1",
+        "order": 2
+    }, {
+        "id": 3,
+        "name": "Cafe",
+        "description": "Some dummy text 3",
+        "order": 4
+    }, {
+        "id": 4,
+        "name": "Coffee",
+        "description": "Some dummy text 4",
+        "order": 3
+    }, {
+        "id": 5,
+        "name": "Fast Food Restaurant",
+        "description": "Some dummy text 5",
+        "order": 1
+    }]
+}

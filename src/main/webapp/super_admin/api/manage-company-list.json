@@ -1,0 +1,27 @@
+{
+    "companies": [{
+        "id": 0,
+        "code": "FX",
+        "logo": "https://www.edubuntu.org/sites/default/files/images/ubuntu-logo-only_32.png",
+        "name": "FoodService",
+        "type": "Suplier",
+        "created": "10/03/2015",
+        "status": "Active"
+    }, {
+        "id": 1,
+        "code": "MB",
+        "logo": "https://www.edubuntu.org/sites/default/files/images/ubuntu-logo-only_32.png",
+        "name": "Mr Bean",
+        "type": "Eatery",
+        "created": "02/12/2013",
+        "status": "Active"
+    }, {
+        "id": 2,
+        "code": "CJ",
+        "logo": "https://www.edubuntu.org/sites/default/files/images/ubuntu-logo-only_32.png",
+        "name": "Cafe J",
+        "type": "Eatery",
+        "created": "-",
+        "status": "Inactive"
+    }]
+}

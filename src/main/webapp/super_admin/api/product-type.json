@@ -1,0 +1,28 @@
+{
+    "types": [{
+        "id": 0,
+        "name": "Staples",
+        "description": "Some dummy text 0",
+        "order": 0
+    }, {
+        "id": 1,
+        "name": "Dried Stuff",
+        "description": "Some dummy text 1",
+        "order": 2
+    }, {
+        "id": 3,
+        "name": "Frozen Stuff",
+        "description": "Some dummy text 3",
+        "order": 4
+    }, {
+        "id": 4,
+        "name": "Fresh",
+        "description": "Some dummy text 4",
+        "order": 3
+    }, {
+        "id": 5,
+        "name": "Dessert",
+        "description": "Some dummy text 5",
+        "order": 1
+    }]
+}

@@ -13,6 +13,7 @@ angular.module('app', [
     'ui.utils',
     'ui.load',
     'ui.jq',
+    'ui.sortable',
     'oc.lazyLoad',
     'pascalprecht.translate'
 ]);

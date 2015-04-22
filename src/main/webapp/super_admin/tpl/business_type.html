@@ -1,1 +1,57 @@
-<h1>Business Type</h1>
+<div class="bg-light lter b-b wrapper-md">
+    <button class="btn btn-default back-button" back-button>Back</button>
+</div>
+<div class="wrapper-md" ng-controller="BusinessTypeController">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <button class="btn btn-info btn-rounded">Add New Business Type</button>
+
+                    <ul ui-sortable="sortableOptions" class="list-group gutter list-group-lg list-group-sp types-list" ng-model="types">
+                        <li class="list-group-item" ng-repeat="type in types">
+                                <span class="pull-left">
+                                    <i class="fa fa-sort text-muted fa m-r-sm"></i>
+                                </span>
+                                <button class="btn btn-danger btn-rounded pull-right" ng-click="removeType(type.id)">Delete</button>
+
+                            <div class="clear type-name" ng-click="editType(type.id)">
+                                {{ type.name }}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6" ng-show="type.id">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Business Type Name</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="type.name"
+                                       placeholder="Business Type Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Type Description</label>
+
+                            <div class="col-sm-10">
+                                <textarea class="form-control" ng-model="type.description" rows="5"
+                                          placeholder="Type Description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-sm btn-info">Save</button>
+                                <button class="btn btn-sm btn-danger">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,7 +9,6 @@ angular.module('app')
   .constant('JQ_CONFIG', {
       screenfull:     [   '../bower_components/screenfull/dist/screenfull.min.js'],
       slimScroll:     [   '../bower_components/slimscroll/jquery.slimscroll.min.js'],
-      sortable:       [   '../bower_components/html5sortable/jquery.sortable.js'],
       nestable:       [   '../bower_components/nestable/jquery.nestable.js',
                           '../bower_components/nestable/jquery.nestable.css'],
       filestyle:      [   '../bower_components/bootstrap-filestyle/src/bootstrap-filestyle.js'],
@@ -17,7 +16,7 @@ angular.module('app')
                           '../bower_components/bootstrap-chosen/bootstrap-chosen.css'],
       footable:       [   '../bower_components/footable/dist/footable.all.min.js',
                           '../bower_components/footable/css/footable.core.css']
-                      
+
     }
   )
   // oclazyload config

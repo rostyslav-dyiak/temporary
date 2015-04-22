@@ -1,13 +1,11 @@
-<div class="bg-light lter b-b wrapper-md">
-    <h1 class="m-n font-thin h3">Manage Company</h1>
+<div class="bg-light lter b-b wrapper-md clearfix">
+    <h1 class="m-n font-thin h3 pull-left">Manage Company</h1>
+    <a ui-sref="app.manageCompany.add" class="btn btn-info btn-rounded pull-right">Add New Company</a>
 </div>
 <div class="wrapper-md" ng-controller="ManageCompanyListController">
     <div class="panel panel-default">
-        <div class="text-center additional-padding">
-            <a ui-sref="app.manageCompany.add" class="btn btn-info btn-rounded">Add New Company</a>
-        </div>
         <div class="additional-padding">
-            <div class="col-sm-4 col-sm-offset-4">
+            <div class="col-sm-4">
                 <input st-search placeholder="Search Company Name or Code" class="input-sm form-control" type="search"/>
             </div>
         </div>
@@ -28,7 +26,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="row in rowCollection">
+                <tr ng-repeat="row in companies">
                     <td>{{row.code | uppercase}}</td>
                     <td><img ng-src="{{row.logo}}" alt="{{row.name}}"></td>
                     <td>{{row.name}}</td>

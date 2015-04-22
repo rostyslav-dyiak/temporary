@@ -1,0 +1,18 @@
+{
+    "outlets": [{
+        "id": 0,
+        "name": "Mr Bean Bugins",
+        "created": "10/03/2015",
+        "status": "Active"
+    },{
+        "id": 1,
+        "name": "Mr Bean Orchard",
+        "created": "02/12/2013",
+        "status": "Active"
+    },{
+        "id": 2,
+        "name": "Mr Bean Novena",
+        "created": "10/03/2015",
+        "status": "Active"
+    }]
+}

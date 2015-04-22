@@ -5186,3 +5186,14 @@ a.text-#000000:hover {
     max-width: 120px;
     max-height: 120px;
 }
+
+/* Type screens */
+.types-list {
+    margin-top: 20px;
+}
+.types-list li .btn {
+    margin-top: -6px;
+}
+.type-name:hover {
+    cursor: pointer;
+}
