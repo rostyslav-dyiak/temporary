@@ -12,6 +12,7 @@
                 "eatery": "Eatery",
                 "product": "Product",
                 "outlet": "Outlet",
+                "dom": "Dom",
                 "additionalEntity": "JHipster will add addtional entities"
             },
             "account": {
