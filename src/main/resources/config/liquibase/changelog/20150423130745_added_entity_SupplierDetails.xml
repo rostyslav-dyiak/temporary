@@ -28,4 +28,18 @@
         </createTable>
         
     </changeSet>
+    <changeSet id="adding_supplier_idtosupplier_details_table" author="ivanursul">
+    	<addColumn tableName="T_SUPPLIERDETAILS">
+    		<column name="supplier_id"  type="bigint"/>
+    	</addColumn>
+		<addForeignKeyConstraint 
+			constraintName="fk_t_supplierdetails_supplier_id" 
+			referencedTableName="T_COMPANY" 
+			referencedColumnNames="id"
+			baseTableName="T_SUPPLIERDETAILS" 
+			baseColumnNames="supplier_id"
+			onDelete="CASCADE"
+			onUpdate="CASCADE" />        
+    </changeSet>
+    
 </databaseChangeLog>

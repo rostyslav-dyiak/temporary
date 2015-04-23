@@ -1,13 +1,23 @@
 package com.kb.web.rest;
 
-import com.kb.Application;
-import com.kb.domain.SupplierDetails;
-import com.kb.repository.SupplierDetailsRepository;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -19,13 +29,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.kb.Application;
+import com.kb.domain.SupplierDetails;
+import com.kb.repository.SupplierDetailsRepository;
 
 /**
  * Test class for the SupplierDetailsResource REST controller.
@@ -88,9 +94,7 @@ public class SupplierDetailsResourceTest {
         supplierDetails.setFaxNumber(DEFAULT_FAX_NUMBER);
         supplierDetails.setGstRegistered(DEFAULT_GST_REGISTERED);
         supplierDetails.setGstRegistrationNumber(DEFAULT_GST_REGISTRATION_NUMBER);
-        supplierDetails.setLogoId(DEFAULT_LOGO_ID);
         supplierDetails.setPublicPricingVisible(DEFAULT_PUBLIC_PRICING_VISIBLE);
-        supplierDetails.setMainPictureId(DEFAULT_MAIN_PICTURE_ID);
     }
 
     @Test
@@ -115,9 +119,7 @@ public class SupplierDetailsResourceTest {
         assertThat(testSupplierDetails.getFaxNumber()).isEqualTo(DEFAULT_FAX_NUMBER);
         assertThat(testSupplierDetails.getGstRegistered()).isEqualTo(DEFAULT_GST_REGISTERED);
         assertThat(testSupplierDetails.getGstRegistrationNumber()).isEqualTo(DEFAULT_GST_REGISTRATION_NUMBER);
-        assertThat(testSupplierDetails.getLogoId()).isEqualTo(DEFAULT_LOGO_ID);
         assertThat(testSupplierDetails.getPublicPricingVisible()).isEqualTo(DEFAULT_PUBLIC_PRICING_VISIBLE);
-        assertThat(testSupplierDetails.getMainPictureId()).isEqualTo(DEFAULT_MAIN_PICTURE_ID);
     }
 
     @Test
@@ -190,9 +192,7 @@ public class SupplierDetailsResourceTest {
         supplierDetails.setFaxNumber(UPDATED_FAX_NUMBER);
         supplierDetails.setGstRegistered(UPDATED_GST_REGISTERED);
         supplierDetails.setGstRegistrationNumber(UPDATED_GST_REGISTRATION_NUMBER);
-        supplierDetails.setLogoId(UPDATED_LOGO_ID);
         supplierDetails.setPublicPricingVisible(UPDATED_PUBLIC_PRICING_VISIBLE);
-        supplierDetails.setMainPictureId(UPDATED_MAIN_PICTURE_ID);
         restSupplierDetailsMockMvc.perform(put("/api/supplierDetailss")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(supplierDetails)))
@@ -209,9 +209,7 @@ public class SupplierDetailsResourceTest {
         assertThat(testSupplierDetails.getFaxNumber()).isEqualTo(UPDATED_FAX_NUMBER);
         assertThat(testSupplierDetails.getGstRegistered()).isEqualTo(UPDATED_GST_REGISTERED);
         assertThat(testSupplierDetails.getGstRegistrationNumber()).isEqualTo(UPDATED_GST_REGISTRATION_NUMBER);
-        assertThat(testSupplierDetails.getLogoId()).isEqualTo(UPDATED_LOGO_ID);
         assertThat(testSupplierDetails.getPublicPricingVisible()).isEqualTo(UPDATED_PUBLIC_PRICING_VISIBLE);
-        assertThat(testSupplierDetails.getMainPictureId()).isEqualTo(UPDATED_MAIN_PICTURE_ID);
     }
 
     @Test

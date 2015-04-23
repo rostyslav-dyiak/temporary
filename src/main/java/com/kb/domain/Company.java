@@ -6,13 +6,15 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.kb.domain.company.BusinessType;
 
 /**
  * A Company.
@@ -27,8 +29,10 @@ public class Company implements Serializable {
     private Long id;
 
 	@OneToOne(mappedBy = "eatery")
-	@JsonIgnore
 	private EateryDetails eateryDetails;
+	
+	@OneToOne(mappedBy = "supplier")
+	private SupplierDetails supplierDetails;
 	
     @Column(name = "name")
     private String name;
@@ -39,8 +43,9 @@ public class Company implements Serializable {
     @Column(name = "contact_number")
     private String contactNumber;
 
-    @Column(name = "business_type")
-    private String businessType;
+	@Column(name = "business_type")
+    @Enumerated(EnumType.STRING)
+    private BusinessType businessType;
 
     @Column(name = "status")
     private String status;
@@ -77,11 +82,11 @@ public class Company implements Serializable {
         this.contactNumber = contactNumber;
     }
 
-    public String getBusinessType() {
+    public BusinessType getBusinessType() {
         return businessType;
     }
 
-    public void setBusinessType(final String businessType) {
+    public void setBusinessType(final BusinessType businessType) {
         this.businessType = businessType;
     }
 
@@ -99,6 +104,14 @@ public class Company implements Serializable {
 
 	public void setEateryDetails(final EateryDetails eateryDetails) {
 		this.eateryDetails = eateryDetails;
+	}
+
+	public SupplierDetails getSupplierDetails() {
+		return supplierDetails;
+	}
+
+	public void setSupplierDetails(final SupplierDetails supplierDetails) {
+		this.supplierDetails = supplierDetails;
 	}
 
 	@Override

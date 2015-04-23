@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -23,11 +26,17 @@ public class SupplierDetails implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "logo_id")
-    private Long logoId;
+	@OneToOne
+	@JoinColumn(name = "supplier_id")
+	private Company supplier;
 
-    @Column(name = "main_picture_id")
-    private Long mainPictureId;
+    @ManyToOne
+    @JoinColumn(name = "logo_id")
+    private Picture logo;
+	
+    @ManyToOne
+    @JoinColumn(name = "main_picture_id")
+    private Picture mainPicture;
 	
     @Column(name = "code")
     private String code;
@@ -54,94 +63,102 @@ public class SupplierDetails implements Serializable {
     private Boolean publicPricingVisible;
 
     public Long getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
+	public void setId(final Long id) {
+		this.id = id;
+	}
 
-    public String getCode() {
-        return code;
-    }
+	public Company getSupplier() {
+		return supplier;
+	}
 
-    public void setCode(final String code) {
-        this.code = code;
-    }
+	public void setSupplier(final Company supplier) {
+		this.supplier = supplier;
+	}
 
-    public String getBusRegNumber() {
-        return busRegNumber;
-    }
+	public Picture getLogo() {
+		return logo;
+	}
 
-    public void setBusRegNumber(final String busRegNumber) {
-        this.busRegNumber = busRegNumber;
-    }
+	public void setLogo(final Picture logo) {
+		this.logo = logo;
+	}
 
-    public String getBusDescription() {
-        return busDescription;
-    }
+	public Picture getMainPicture() {
+		return mainPicture;
+	}
 
-    public void setBusDescription(final String busDescription) {
-        this.busDescription = busDescription;
-    }
+	public void setMainPicture(final Picture mainPicture) {
+		this.mainPicture = mainPicture;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public String getCode() {
+		return code;
+	}
 
-    public void setAddress(final String address) {
-        this.address = address;
-    }
+	public void setCode(final String code) {
+		this.code = code;
+	}
 
-    public String getFaxNumber() {
-        return faxNumber;
-    }
+	public String getBusRegNumber() {
+		return busRegNumber;
+	}
 
-    public void setFaxNumber(final String faxNumber) {
-        this.faxNumber = faxNumber;
-    }
+	public void setBusRegNumber(final String busRegNumber) {
+		this.busRegNumber = busRegNumber;
+	}
 
-    public Boolean getGstRegistered() {
-        return gstRegistered;
-    }
+	public String getBusDescription() {
+		return busDescription;
+	}
 
-    public void setGstRegistered(final Boolean gstRegistered) {
-        this.gstRegistered = gstRegistered;
-    }
+	public void setBusDescription(final String busDescription) {
+		this.busDescription = busDescription;
+	}
 
-    public String getGstRegistrationNumber() {
-        return gstRegistrationNumber;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public void setGstRegistrationNumber(final String gstRegistrationNumber) {
-        this.gstRegistrationNumber = gstRegistrationNumber;
-    }
+	public void setAddress(final String address) {
+		this.address = address;
+	}
 
-    public Long getLogoId() {
-        return logoId;
-    }
+	public String getFaxNumber() {
+		return faxNumber;
+	}
 
-    public void setLogoId(final Long logoId) {
-        this.logoId = logoId;
-    }
+	public void setFaxNumber(final String faxNumber) {
+		this.faxNumber = faxNumber;
+	}
 
-    public Boolean getPublicPricingVisible() {
-        return publicPricingVisible;
-    }
+	public Boolean getGstRegistered() {
+		return gstRegistered;
+	}
 
-    public void setPublicPricingVisible(final Boolean publicPricingVisible) {
-        this.publicPricingVisible = publicPricingVisible;
-    }
+	public void setGstRegistered(final Boolean gstRegistered) {
+		this.gstRegistered = gstRegistered;
+	}
 
-    public Long getMainPictureId() {
-        return mainPictureId;
-    }
+	public String getGstRegistrationNumber() {
+		return gstRegistrationNumber;
+	}
 
-    public void setMainPictureId(final Long mainPictureId) {
-        this.mainPictureId = mainPictureId;
-    }
+	public void setGstRegistrationNumber(final String gstRegistrationNumber) {
+		this.gstRegistrationNumber = gstRegistrationNumber;
+	}
 
-    @Override
+	public Boolean getPublicPricingVisible() {
+		return publicPricingVisible;
+	}
+
+	public void setPublicPricingVisible(final Boolean publicPricingVisible) {
+		this.publicPricingVisible = publicPricingVisible;
+	}
+
+	@Override
     public boolean equals(final Object o) {
         if (this == o) {
             return true;
@@ -173,9 +190,7 @@ public class SupplierDetails implements Serializable {
                 ", faxNumber='" + faxNumber + "'" +
                 ", gstRegistered='" + gstRegistered + "'" +
                 ", gstRegistrationNumber='" + gstRegistrationNumber + "'" +
-                ", logoId='" + logoId + "'" +
                 ", publicPricingVisible='" + publicPricingVisible + "'" +
-                ", mainPictureId='" + mainPictureId + "'" +
                 '}';
     }
 }

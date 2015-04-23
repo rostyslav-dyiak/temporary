@@ -1,13 +1,23 @@
 package com.kb.web.rest;
 
-import com.kb.Application;
-import com.kb.domain.EateryDetails;
-import com.kb.repository.EateryDetailsRepository;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -19,13 +29,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.kb.Application;
+import com.kb.domain.EateryDetails;
+import com.kb.repository.EateryDetailsRepository;
 
 /**
  * Test class for the EateryDetailsResource REST controller.
@@ -81,9 +87,6 @@ public class EateryDetailsResourceTest {
         eateryDetails.setBillingAddress(DEFAULT_BILLING_ADDRESS);
         eateryDetails.setPostalCode(DEFAULT_POSTAL_CODE);
         eateryDetails.setFaxNumber(DEFAULT_FAX_NUMBER);
-        eateryDetails.setLogoId(DEFAULT_LOGO_ID);
-        eateryDetails.setTopRightPictureId(DEFAULT_TOP_RIGHT_PICTURE_ID);
-        eateryDetails.setContactPersonId(DEFAULT_CONTACT_PERSON_ID);
     }
 
     @Test
@@ -106,9 +109,6 @@ public class EateryDetailsResourceTest {
         assertThat(testEateryDetails.getBillingAddress()).isEqualTo(DEFAULT_BILLING_ADDRESS);
         assertThat(testEateryDetails.getPostalCode()).isEqualTo(DEFAULT_POSTAL_CODE);
         assertThat(testEateryDetails.getFaxNumber()).isEqualTo(DEFAULT_FAX_NUMBER);
-        assertThat(testEateryDetails.getLogoId()).isEqualTo(DEFAULT_LOGO_ID);
-        assertThat(testEateryDetails.getTopRightPictureId()).isEqualTo(DEFAULT_TOP_RIGHT_PICTURE_ID);
-        assertThat(testEateryDetails.getContactPersonId()).isEqualTo(DEFAULT_CONTACT_PERSON_ID);
     }
 
     @Test
@@ -175,9 +175,6 @@ public class EateryDetailsResourceTest {
         eateryDetails.setBillingAddress(UPDATED_BILLING_ADDRESS);
         eateryDetails.setPostalCode(UPDATED_POSTAL_CODE);
         eateryDetails.setFaxNumber(UPDATED_FAX_NUMBER);
-        eateryDetails.setLogoId(UPDATED_LOGO_ID);
-        eateryDetails.setTopRightPictureId(UPDATED_TOP_RIGHT_PICTURE_ID);
-        eateryDetails.setContactPersonId(UPDATED_CONTACT_PERSON_ID);
         restEateryDetailsMockMvc.perform(put("/api/eateryDetailss")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(eateryDetails)))
@@ -192,9 +189,6 @@ public class EateryDetailsResourceTest {
         assertThat(testEateryDetails.getBillingAddress()).isEqualTo(UPDATED_BILLING_ADDRESS);
         assertThat(testEateryDetails.getPostalCode()).isEqualTo(UPDATED_POSTAL_CODE);
         assertThat(testEateryDetails.getFaxNumber()).isEqualTo(UPDATED_FAX_NUMBER);
-        assertThat(testEateryDetails.getLogoId()).isEqualTo(UPDATED_LOGO_ID);
-        assertThat(testEateryDetails.getTopRightPictureId()).isEqualTo(UPDATED_TOP_RIGHT_PICTURE_ID);
-        assertThat(testEateryDetails.getContactPersonId()).isEqualTo(UPDATED_CONTACT_PERSON_ID);
     }
 
     @Test
