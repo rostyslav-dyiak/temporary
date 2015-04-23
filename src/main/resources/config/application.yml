@@ -15,14 +15,14 @@ async:
 
 spring:
     mail:
-        host: localhost
-        port: 25
-        user:
-        password:
+        host: smtp.gmail.com
+        port: 465
+        user: optigrasmtp@gmail.com
+        password: optigrasoft
         protocol: smtp
-        tls: false
+        tls: true
         auth: false
-        from: kbapp@localhost
+        from: optigrasmtp@gmail.com
 
     messageSource:
         cacheSeconds: 1
