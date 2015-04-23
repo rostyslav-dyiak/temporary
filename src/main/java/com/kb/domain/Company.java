@@ -2,15 +2,19 @@ package com.kb.domain;
 
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -50,6 +54,9 @@ public class Company implements Serializable {
     @Column(name = "status")
     private String status;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
+    private Set<User> users = new HashSet<>();
+    
     public Long getId() {
         return id;
     }
@@ -112,6 +119,14 @@ public class Company implements Serializable {
 
 	public void setSupplierDetails(final SupplierDetails supplierDetails) {
 		this.supplierDetails = supplierDetails;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 	@Override
