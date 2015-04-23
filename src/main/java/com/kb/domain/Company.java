@@ -1,9 +1,18 @@
 package com.kb.domain;
 
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * A Company.
@@ -11,11 +20,16 @@ import java.util.Objects;
 @Entity
 @Table(name = "T_COMPANY")
 public class Company implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+	@OneToOne(mappedBy = "eatery")
+	@JsonIgnore
+	private EateryDetails eateryDetails;
+	
     @Column(name = "name")
     private String name;
 
@@ -35,7 +49,7 @@ public class Company implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -43,7 +57,7 @@ public class Company implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -51,7 +65,7 @@ public class Company implements Serializable {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -59,7 +73,7 @@ public class Company implements Serializable {
         return contactNumber;
     }
 
-    public void setContactNumber(String contactNumber) {
+    public void setContactNumber(final String contactNumber) {
         this.contactNumber = contactNumber;
     }
 
@@ -67,7 +81,7 @@ public class Company implements Serializable {
         return businessType;
     }
 
-    public void setBusinessType(String businessType) {
+    public void setBusinessType(final String businessType) {
         this.businessType = businessType;
     }
 
@@ -75,12 +89,20 @@ public class Company implements Serializable {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(final String status) {
         this.status = status;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    public EateryDetails getEateryDetails() {
+		return eateryDetails;
+	}
+
+	public void setEateryDetails(final EateryDetails eateryDetails) {
+		this.eateryDetails = eateryDetails;
+	}
+
+	@Override
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }

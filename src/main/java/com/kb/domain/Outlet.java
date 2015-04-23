@@ -1,11 +1,21 @@
 package com.kb.domain;
 
 
-import com.kb.domain.status.OutletStatus;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.kb.domain.status.OutletStatus;
 
 /**
  * A Outlet.
@@ -13,8 +23,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "T_OUTLET")
 public class Outlet implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -45,7 +56,7 @@ public class Outlet implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -53,7 +64,7 @@ public class Outlet implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -61,7 +72,7 @@ public class Outlet implements Serializable {
         return deliveryAddress;
     }
 
-    public void setDeliveryAddress(String deliveryAddress) {
+    public void setDeliveryAddress(final String deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
     }
 
@@ -69,7 +80,7 @@ public class Outlet implements Serializable {
         return postalCode;
     }
 
-    public void setPostalCode(String postalCode) {
+    public void setPostalCode(final String postalCode) {
         this.postalCode = postalCode;
     }
 
@@ -77,7 +88,7 @@ public class Outlet implements Serializable {
         return contactNumber;
     }
 
-    public void setContactNumber(String contactNumber) {
+    public void setContactNumber(final String contactNumber) {
         this.contactNumber = contactNumber;
     }
 
@@ -85,11 +96,11 @@ public class Outlet implements Serializable {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
-    public void setStatus(OutletStatus status) {
+    public void setStatus(final OutletStatus status) {
         this.status = status;
     }
 
@@ -97,7 +108,7 @@ public class Outlet implements Serializable {
         return status;
     }
 
-    public void setCompany(Company company) {
+    public void setCompany(final Company company) {
         this.company = company;
     }
 
@@ -106,7 +117,7 @@ public class Outlet implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }

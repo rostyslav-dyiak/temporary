@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,7 +30,7 @@ public class EateryDetails implements Serializable {
 	@Column(name = "eatery_id")
 	private Long eateryId;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "eatery_id", insertable = false, updatable = false)
 	@JsonIgnore
 	private Company eatery;
