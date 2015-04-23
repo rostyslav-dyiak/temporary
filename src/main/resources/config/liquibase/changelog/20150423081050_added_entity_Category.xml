@@ -18,6 +18,19 @@
             <column name="parent_id" type="bigint"/>
             <column name="title" type="varchar(255)"/>
         </createTable>
-        
     </changeSet>
+
+	<changeSet id="adding_fk_for_category_entity" author="ivanursul">
+		<addForeignKeyConstraint 
+			baseTableName="T_CATEGORY" 
+			baseColumnNames="parent_id"
+			constraintName="fk_t_category_parent_id"
+			deferrable="false" 
+			initiallyDeferred="false" 
+			onDelete="CASCADE"
+			onUpdate="CASCADE" 
+			referencedColumnNames="id" 
+			referencedTableName="T_CATEGORY" />  	
+	</changeSet>    
+    
 </databaseChangeLog>
