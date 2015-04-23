@@ -1,0 +1,146 @@
+<div>
+
+    <h2 translate="kbappApp.company.home.title">Company</h2>
+
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#saveCompanyModal" ng-click="clear()">
+        <span class="glyphicon glyphicon-flash"></span> <span translate="kbappApp.company.home.createLabel">Create a new Company</span>
+    </button>
+    <div class="modal fade" id="saveCompanyModal" tabindex="-1" role="dialog" aria-labelledby="myCompanyLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="editForm" role="form" novalidate ng-submit="create()">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" id="myCompanyLabel" translate="kbappApp.company.home.createOrEditLabel">Create or edit a Company</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>ID</label>
+                            <input type="text" class="form-control" name="id"
+                                   ng-model="company.id" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label translate="kbappApp.company.name">Name</label>
+                            <input type="text" class="form-control" name="name"
+                                   ng-model="company.name">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="kbappApp.company.email">Email</label>
+                            <input type="text" class="form-control" name="email"
+                                   ng-model="company.email">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="kbappApp.company.contactNumber">ContactNumber</label>
+                            <input type="text" class="form-control" name="contactNumber"
+                                   ng-model="company.contactNumber">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="kbappApp.company.businessType">BusinessType</label>
+                            <input type="text" class="form-control" name="businessType"
+                                   ng-model="company.businessType">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="kbappApp.company.status">Status</label>
+                            <input type="text" class="form-control" name="status"
+                                   ng-model="company.status">
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteCompanyConfirmation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="deleteForm" ng-submit="confirmDelete(company.id)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p translate="kbappApp.company.delete.question" translate-values="{id: '{{company.id}}'}">Are you sure you want to delete this Company?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th translate="kbappApp.company.name">Name</th>
+                    <th translate="kbappApp.company.email">Email</th>
+                    <th translate="kbappApp.company.contactNumber">ContactNumber</th>
+                    <th translate="kbappApp.company.businessType">BusinessType</th>
+                    <th translate="kbappApp.company.status">Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="company in companys">
+                    <td><a ui-sref="companyDetail({id:company.id})">{{company.id}}</a></td>
+                    <td>{{company.name}}</td>
+                    <td>{{company.email}}</td>
+                    <td>{{company.contactNumber}}</td>
+                    <td>{{company.businessType}}</td>
+                    <td>{{company.status}}</td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="companyDetail({id:company.id})"
+                                class="btn btn-info">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span translate="entity.action.view"> View</span>
+                        </button>
+                        <button type="submit"
+                                ng-click="update(company.id)"
+                                class="btn btn-primary">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ng-click="delete(company.id)"
+                                class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete"> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pager">
+                <li ng-show="links['first']" ng-click="loadPage(links['first'])"><a href="#">&lt;&lt;</a></li>
+                <li ng-show="links['prev']" ng-click="loadPage(links['prev'])"><a href="#">&lt;</a></li>
+                <li ng-show="links['next']" ng-click="loadPage(links['next'])"><a href="#">&gt;</a></li>
+                <li ng-show="links['last']" ng-click="loadPage(links['last'])"><a href="#">&gt;&gt;</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
