@@ -1,5 +1,30 @@
 package com.kb.web.rest;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.text.MessageFormat;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.codahale.metrics.annotation.Timed;
 import com.kb.domain.Authority;
 import com.kb.domain.PersistentToken;
@@ -10,21 +35,6 @@ import com.kb.security.SecurityUtils;
 import com.kb.service.MailService;
 import com.kb.service.UserService;
 import com.kb.web.rest.dto.UserDTO;
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * REST controller for managing the current user's account.
@@ -54,7 +64,7 @@ public class AccountResource {
             method = RequestMethod.POST,
             produces = MediaType.TEXT_PLAIN_VALUE)
     @Timed
-    public ResponseEntity<?> registerAccount(@Valid @RequestBody UserDTO userDTO, HttpServletRequest request) {
+    public ResponseEntity<?> registerAccount(@Valid @RequestBody final UserDTO userDTO, final HttpServletRequest request) {
         return userRepository.findOneByLogin(userDTO.getLogin())
             .map(user -> new ResponseEntity<>("login already in use", HttpStatus.BAD_REQUEST))
             .orElseGet(() -> userRepository.findOneByEmail(userDTO.getEmail())
@@ -63,11 +73,7 @@ public class AccountResource {
                     User user = userService.createUserInformation(userDTO.getLogin(), userDTO.getPassword(),
                     userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail().toLowerCase(),
                     userDTO.getLangKey());
-                    String baseUrl = request.getScheme() + // "http"
-                    "://" +                                // "://"
-                    request.getServerName() +              // "myhost"
-                    ":" +                                  // ":"
-                    request.getServerPort();               // "80"
+                    String baseUrl = MessageFormat.format("{0}://{1}:{2}", request.getScheme(), request.getServerName(), request.getServerPort());               
 
                     mailService.sendActivationEmail(user, baseUrl);
                     return new ResponseEntity<>(HttpStatus.CREATED);
@@ -81,7 +87,7 @@ public class AccountResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<String> activateAccount(@RequestParam(value = "key") String key) {
+    public ResponseEntity<String> activateAccount(@RequestParam(value = "key") final String key) {
         return Optional.ofNullable(userService.activateRegistration(key))
             .map(user -> new ResponseEntity<String>(HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
@@ -94,7 +100,7 @@ public class AccountResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public String isAuthenticated(HttpServletRequest request) {
+    public String isAuthenticated(final HttpServletRequest request) {
         log.debug("REST request to check if the current user is authenticated");
         return request.getRemoteUser();
     }
@@ -128,7 +134,7 @@ public class AccountResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<String> saveAccount(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<String> saveAccount(@RequestBody final UserDTO userDTO) {
         return userRepository
             .findOneByLogin(userDTO.getLogin())
             .filter(u -> u.getLogin().equals(SecurityUtils.getCurrentLogin()))
@@ -146,7 +152,7 @@ public class AccountResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<?> changePassword(@RequestBody String password) {
+    public ResponseEntity<?> changePassword(@RequestBody final String password) {
         if (StringUtils.isEmpty(password) || password.length() < 5 || password.length() > 50) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -185,7 +191,7 @@ public class AccountResource {
     @RequestMapping(value = "/account/sessions/{series}",
             method = RequestMethod.DELETE)
     @Timed
-    public void invalidateSession(@PathVariable String series) throws UnsupportedEncodingException {
+    public void invalidateSession(@PathVariable final String series) throws UnsupportedEncodingException {
         String decodedSeries = URLDecoder.decode(series, "UTF-8");
         userRepository.findOneByLogin(SecurityUtils.getCurrentLogin()).ifPresent(u -> {
             persistentTokenRepository.findByUser(u).stream()

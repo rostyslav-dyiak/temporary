@@ -1,0 +1,105 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "code",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Code",
+            "fieldNameUnderscored": "code",
+            "fieldInJavaBeanMethod": "Code",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "busRegNumber",
+            "fieldType": "String",
+            "fieldNameCapitalized": "BusRegNumber",
+            "fieldNameUnderscored": "bus_reg_number",
+            "fieldInJavaBeanMethod": "BusRegNumber",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "busDescription",
+            "fieldType": "String",
+            "fieldNameCapitalized": "BusDescription",
+            "fieldNameUnderscored": "bus_description",
+            "fieldInJavaBeanMethod": "BusDescription",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "address",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Address",
+            "fieldNameUnderscored": "address",
+            "fieldInJavaBeanMethod": "Address",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "faxNumber",
+            "fieldType": "String",
+            "fieldNameCapitalized": "FaxNumber",
+            "fieldNameUnderscored": "fax_number",
+            "fieldInJavaBeanMethod": "FaxNumber",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "gstRegistered",
+            "fieldType": "Boolean",
+            "fieldNameCapitalized": "GstRegistered",
+            "fieldNameUnderscored": "gst_registered",
+            "fieldInJavaBeanMethod": "GstRegistered",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "gstRegistrationNumber",
+            "fieldType": "String",
+            "fieldNameCapitalized": "GstRegistrationNumber",
+            "fieldNameUnderscored": "gst_registration_number",
+            "fieldInJavaBeanMethod": "GstRegistrationNumber",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "logoId",
+            "fieldType": "Long",
+            "fieldNameCapitalized": "LogoId",
+            "fieldNameUnderscored": "logo_id",
+            "fieldInJavaBeanMethod": "LogoId",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "publicPricingVisible",
+            "fieldType": "Boolean",
+            "fieldNameCapitalized": "PublicPricingVisible",
+            "fieldNameUnderscored": "public_pricing_visible",
+            "fieldInJavaBeanMethod": "PublicPricingVisible",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "mainPictureId",
+            "fieldType": "Long",
+            "fieldNameCapitalized": "MainPictureId",
+            "fieldNameUnderscored": "main_picture_id",
+            "fieldInJavaBeanMethod": "MainPictureId",
+            "fieldValidate": false
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOneToMany": false,
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": false,
+    "fieldsContainBigDecimal": false,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "changelogDate": "20150423130745",
+    "pagination": "pager",
+    "validation": false
+}
