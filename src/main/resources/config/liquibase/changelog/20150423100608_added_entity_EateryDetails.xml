@@ -25,6 +25,43 @@
             <column name="top_right_picture_id" type="bigint"/>
             <column name="contact_person_id" type="bigint"/>
         </createTable>
+
+		<addForeignKeyConstraint 
+			constraintName="fk_t_eaterydetails_eatery_id" 
+			referencedTableName="T_COMPANY" 
+			referencedColumnNames="id"
+			baseTableName="T_EATERYDETAILS" 
+			baseColumnNames="eatery_id"
+			onDelete="CASCADE"
+			onUpdate="CASCADE" />        
+
+		<addForeignKeyConstraint 
+			constraintName="fk_t_eaterydetails_logo_id" 
+			referencedTableName="T_PICTURE" 
+			referencedColumnNames="id"
+			baseTableName="T_EATERYDETAILS" 
+			baseColumnNames="logo_id"
+			onDelete="CASCADE"
+			onUpdate="CASCADE" />        
+
+		<addForeignKeyConstraint 
+			constraintName="fk_t_eaterydetails_top_right_picture_id" 
+			referencedTableName="T_PICTURE" 
+			referencedColumnNames="id"
+			baseTableName="T_EATERYDETAILS" 
+			baseColumnNames="top_right_picture_id"
+			onDelete="CASCADE"
+			onUpdate="CASCADE" />        
+
+		<addForeignKeyConstraint 
+			constraintName="fk_t_eaterydetails_contact_person_id" 
+			referencedTableName="T_USER" 
+			referencedColumnNames="id"
+			baseTableName="T_EATERYDETAILS" 
+			baseColumnNames="contact_person_id"
+			onDelete="CASCADE"
+			onUpdate="CASCADE" />        
         
     </changeSet>
+    
 </databaseChangeLog>
