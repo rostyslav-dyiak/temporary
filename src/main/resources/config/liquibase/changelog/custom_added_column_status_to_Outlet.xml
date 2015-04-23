@@ -22,5 +22,20 @@
                                  referencedColumnNames="id"
                                  referencedTableName="T_COMPANY"/>
     </changeSet>
-
+    <changeSet author="rostyslav_dyyak" id="renameColumn-company_id">
+        <renameColumn
+            columnDataType="bigint"
+            newColumnName="company_id"
+            oldColumnName="outlet_id"
+            schemaName="public"
+            tableName="T_OUTLET"/>
+        <dropForeignKeyConstraint baseTableName="T_OUTLET" constraintName="fk_outlet_company"/>
+        <addForeignKeyConstraint baseColumnNames="company_id"
+                                 baseTableName="T_OUTLET"
+                                 constraintName="fk_outlet_company"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="T_COMPANY"/>
+    </changeSet>
 </databaseChangeLog>
