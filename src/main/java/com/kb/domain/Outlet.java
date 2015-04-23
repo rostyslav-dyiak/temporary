@@ -1,6 +1,8 @@
 package com.kb.domain;
 
 
+import com.kb.domain.status.OutletStatus;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -30,6 +32,14 @@ public class Outlet implements Serializable {
 
     @Column(name = "email")
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private OutletStatus status;
+
+    @ManyToOne
+    @JoinColumn(name = "outlet_id")
+    private Company company;
 
     public Long getId() {
         return id;
@@ -77,6 +87,22 @@ public class Outlet implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setStatus(OutletStatus status) {
+        this.status = status;
+    }
+
+    public OutletStatus getStatus() {
+        return status;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Company getCompany() {
+        return company;
     }
 
     @Override
