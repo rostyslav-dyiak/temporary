@@ -137,7 +137,7 @@ public class AccountResource {
     public ResponseEntity<String> saveAccount(@RequestBody final UserDTO userDTO) {
         return userRepository
             .findOneByLogin(userDTO.getLogin())
-            .filter(u -> u.getLogin().equals(SecurityUtils.getCurrentLogin()))
+            .filter(u -> u.getLogin().equals(SecurityUtils.getCurrentLogin())) // Restricting 
             .map(u -> {
                 userService.updateUserInformation(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail());
                 return new ResponseEntity<String>(HttpStatus.OK);
