@@ -1,0 +1,86 @@
+
+<div>
+    <h2><span translate="kbappApp.eateryDetails.detail.title">EateryDetails</span> {{eateryDetails.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th translate="entity.detail.field">Field</th>
+                    <th translate="entity.detail.value">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span translate="kbappApp.eateryDetails.code">Code</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{eateryDetails.code}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="kbappApp.eateryDetails.BusRegNumber">BusRegNumber</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{eateryDetails.BusRegNumber}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="kbappApp.eateryDetails.BillingAddress">BillingAddress</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{eateryDetails.BillingAddress}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="kbappApp.eateryDetails.PostalCode">PostalCode</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{eateryDetails.PostalCode}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="kbappApp.eateryDetails.FaxNumber">FaxNumber</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{eateryDetails.FaxNumber}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="kbappApp.eateryDetails.logoId">LogoId</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{eateryDetails.logoId}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="kbappApp.eateryDetails.topRightPictureId">TopRightPictureId</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{eateryDetails.topRightPictureId}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="kbappApp.eateryDetails.contactPersonId">ContactPersonId</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{eateryDetails.contactPersonId}}" readonly>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ui-sref="eateryDetails"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

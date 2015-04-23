@@ -1,0 +1,87 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "code",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Code",
+            "fieldNameUnderscored": "code",
+            "fieldInJavaBeanMethod": "Code",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "BusRegNumber",
+            "fieldType": "String",
+            "fieldNameCapitalized": "BusRegNumber",
+            "fieldNameUnderscored": "bus_reg_number",
+            "fieldInJavaBeanMethod": "BusRegNumber",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "BillingAddress",
+            "fieldType": "String",
+            "fieldNameCapitalized": "BillingAddress",
+            "fieldNameUnderscored": "billing_address",
+            "fieldInJavaBeanMethod": "BillingAddress",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "PostalCode",
+            "fieldType": "String",
+            "fieldNameCapitalized": "PostalCode",
+            "fieldNameUnderscored": "postal_code",
+            "fieldInJavaBeanMethod": "PostalCode",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "FaxNumber",
+            "fieldType": "String",
+            "fieldNameCapitalized": "FaxNumber",
+            "fieldNameUnderscored": "fax_number",
+            "fieldInJavaBeanMethod": "FaxNumber",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "logoId",
+            "fieldType": "Long",
+            "fieldNameCapitalized": "LogoId",
+            "fieldNameUnderscored": "logo_id",
+            "fieldInJavaBeanMethod": "LogoId",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "topRightPictureId",
+            "fieldType": "Long",
+            "fieldNameCapitalized": "TopRightPictureId",
+            "fieldNameUnderscored": "top_right_picture_id",
+            "fieldInJavaBeanMethod": "TopRightPictureId",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "contactPersonId",
+            "fieldType": "Long",
+            "fieldNameCapitalized": "ContactPersonId",
+            "fieldNameUnderscored": "contact_person_id",
+            "fieldInJavaBeanMethod": "ContactPersonId",
+            "fieldValidate": false
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOneToMany": false,
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": false,
+    "fieldsContainBigDecimal": false,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "changelogDate": "20150423100608",
+    "pagination": "pager",
+    "validation": false
+}

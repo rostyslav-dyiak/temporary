@@ -1,0 +1,170 @@
+<div>
+
+    <h2 translate="kbappApp.eateryDetails.home.title">EateryDetails</h2>
+
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#saveEateryDetailsModal" ng-click="clear()">
+        <span class="glyphicon glyphicon-flash"></span> <span translate="kbappApp.eateryDetails.home.createLabel">Create a new EateryDetails</span>
+    </button>
+    <div class="modal fade" id="saveEateryDetailsModal" tabindex="-1" role="dialog" aria-labelledby="myEateryDetailsLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="editForm" role="form" novalidate ng-submit="create()">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" id="myEateryDetailsLabel" translate="kbappApp.eateryDetails.home.createOrEditLabel">Create or edit a EateryDetails</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>ID</label>
+                            <input type="text" class="form-control" name="id"
+                                   ng-model="eateryDetails.id" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label translate="kbappApp.eateryDetails.code">Code</label>
+                            <input type="text" class="form-control" name="code"
+                                   ng-model="eateryDetails.code">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="kbappApp.eateryDetails.BusRegNumber">BusRegNumber</label>
+                            <input type="text" class="form-control" name="BusRegNumber"
+                                   ng-model="eateryDetails.BusRegNumber">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="kbappApp.eateryDetails.BillingAddress">BillingAddress</label>
+                            <input type="text" class="form-control" name="BillingAddress"
+                                   ng-model="eateryDetails.BillingAddress">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="kbappApp.eateryDetails.PostalCode">PostalCode</label>
+                            <input type="text" class="form-control" name="PostalCode"
+                                   ng-model="eateryDetails.PostalCode">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="kbappApp.eateryDetails.FaxNumber">FaxNumber</label>
+                            <input type="text" class="form-control" name="FaxNumber"
+                                   ng-model="eateryDetails.FaxNumber">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="kbappApp.eateryDetails.logoId">LogoId</label>
+                            <input type="number" class="form-control" name="logoId"
+                                   ng-model="eateryDetails.logoId">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="kbappApp.eateryDetails.topRightPictureId">TopRightPictureId</label>
+                            <input type="number" class="form-control" name="topRightPictureId"
+                                   ng-model="eateryDetails.topRightPictureId">
+
+                        </div>
+                        <div class="form-group">
+                            <label translate="kbappApp.eateryDetails.contactPersonId">ContactPersonId</label>
+                            <input type="number" class="form-control" name="contactPersonId"
+                                   ng-model="eateryDetails.contactPersonId">
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteEateryDetailsConfirmation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="deleteForm" ng-submit="confirmDelete(eateryDetails.id)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="clear()">&times;</button>
+                        <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p translate="kbappApp.eateryDetails.delete.question" translate-values="{id: '{{eateryDetails.id}}'}">Are you sure you want to delete this EateryDetails?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th translate="kbappApp.eateryDetails.code">Code</th>
+                    <th translate="kbappApp.eateryDetails.BusRegNumber">BusRegNumber</th>
+                    <th translate="kbappApp.eateryDetails.BillingAddress">BillingAddress</th>
+                    <th translate="kbappApp.eateryDetails.PostalCode">PostalCode</th>
+                    <th translate="kbappApp.eateryDetails.FaxNumber">FaxNumber</th>
+                    <th translate="kbappApp.eateryDetails.logoId">LogoId</th>
+                    <th translate="kbappApp.eateryDetails.topRightPictureId">TopRightPictureId</th>
+                    <th translate="kbappApp.eateryDetails.contactPersonId">ContactPersonId</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="eateryDetails in eateryDetailss">
+                    <td><a ui-sref="eateryDetailsDetail({id:eateryDetails.id})">{{eateryDetails.id}}</a></td>
+                    <td>{{eateryDetails.code}}</td>
+                    <td>{{eateryDetails.BusRegNumber}}</td>
+                    <td>{{eateryDetails.BillingAddress}}</td>
+                    <td>{{eateryDetails.PostalCode}}</td>
+                    <td>{{eateryDetails.FaxNumber}}</td>
+                    <td>{{eateryDetails.logoId}}</td>
+                    <td>{{eateryDetails.topRightPictureId}}</td>
+                    <td>{{eateryDetails.contactPersonId}}</td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="eateryDetailsDetail({id:eateryDetails.id})"
+                                class="btn btn-info">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span translate="entity.action.view"> View</span>
+                        </button>
+                        <button type="submit"
+                                ng-click="update(eateryDetails.id)"
+                                class="btn btn-primary">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span translate="entity.action.edit"> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ng-click="delete(eateryDetails.id)"
+                                class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete"> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pager">
+                <li ng-show="links['first']" ng-click="loadPage(links['first'])"><a href="#">&lt;&lt;</a></li>
+                <li ng-show="links['prev']" ng-click="loadPage(links['prev'])"><a href="#">&lt;</a></li>
+                <li ng-show="links['next']" ng-click="loadPage(links['next'])"><a href="#">&gt;</a></li>
+                <li ng-show="links['last']" ng-click="loadPage(links['last'])"><a href="#">&gt;&gt;</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
