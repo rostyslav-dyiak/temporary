@@ -11,8 +11,8 @@
         ]
     )
         .config(
-        ['$stateProvider', '$urlRouterProvider', 'JQ_CONFIG',
-            function ($stateProvider, $urlRouterProvider, JQ_CONFIG) {
+        ['$stateProvider', '$urlRouterProvider',
+            function ($stateProvider, $urlRouterProvider) {
 
                 $urlRouterProvider
                     .otherwise('/super_admin/manage_company/list');
@@ -20,7 +20,7 @@
                     .state('app', {
                         abstract: true,
                         url: '/super_admin',
-                        templateUrl: 'tpl/app.html',
+                        templateUrl: 'templates/app.html',
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
@@ -35,7 +35,7 @@
                     })
                     .state('app.manageCompany.add', {
                         url: '/add',
-                        templateUrl: 'tpl/manage_company/add_edit.html',
+                        templateUrl: 'templates/manage_company/add_edit.html',
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
@@ -50,7 +50,7 @@
                     })
                     .state('app.manageCompany.edit', {
                         url: '/edit/:id',
-                        templateUrl: 'tpl/manage_company/add_edit.html',
+                        templateUrl: 'templates/manage_company/add_edit.html',
                         controller: function ($stateParams) {
                             $stateParams.id
                         },
@@ -68,7 +68,7 @@
                     })
                     .state('app.manageCompany.list', {
                         url: '/list',
-                        templateUrl: 'tpl/manage_company/list.html',
+                        templateUrl: 'templates/manage_company/list.html',
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
@@ -82,7 +82,7 @@
                     })
                     .state('app.manageCompany.outlets', {
                         url: '/outlets',
-                        templateUrl: 'tpl/manage_company/outlets.html',
+                        templateUrl: 'templates/manage_company/outlets.html',
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
@@ -96,7 +96,7 @@
                     })
                     .state('app.manageCompany.outletsAdd', {
                         url: '/outlets/add',
-                        templateUrl: 'tpl/manage_company/outlets_add_edit.html',
+                        templateUrl: 'templates/manage_company/outlets_add_edit.html',
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
@@ -107,7 +107,7 @@
                     })
                     .state('app.manageCompany.outletsEdit', {
                         url: '/outlets/:id',
-                        templateUrl: 'tpl/manage_company/outlets_add_edit.html',
+                        templateUrl: 'templates/manage_company/outlets_add_edit.html',
                         controller: function ($stateParams) {
                             $stateParams.id
                         },
@@ -121,7 +121,7 @@
                     })
                     .state('app.manageCompany.employees', {
                         url: '/employees',
-                        templateUrl: 'tpl/manage_company/employees.html',
+                        templateUrl: 'templates/manage_company/employees.html',
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
@@ -135,11 +135,11 @@
                     })
                     .state('app.order', {
                         url: '/order',
-                        templateUrl: 'tpl/order.html'
+                        templateUrl: 'templates/order.html'
                     })
                     .state('app.productType', {
                         url: '/product_type',
-                        templateUrl: 'tpl/product_type.html',
+                        templateUrl: 'templates/product_type.html',
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
@@ -153,19 +153,19 @@
                     })
                     .state('app.taxType', {
                         url: '/tax_type',
-                        templateUrl: 'tpl/tax_type.html'
+                        templateUrl: 'templates/tax_type.html'
                     })
                     .state('app.publicHoliday', {
                         url: '/public_holiday',
-                        templateUrl: 'tpl/public_holiday.html'
+                        templateUrl: 'templates/public_holiday.html'
                     })
                     .state('app.systemAnnouncement', {
                         url: '/system_announcement',
-                        templateUrl: 'tpl/system_announcement.html'
+                        templateUrl: 'templates/system_announcement.html'
                     })
                     .state('app.businessType', {
                         url: '/business_type',
-                        templateUrl: 'tpl/business_type.html',
+                        templateUrl: 'templates/business_type.html',
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
@@ -179,27 +179,27 @@
                     })
                     .state('app.unit', {
                         url: '/unit',
-                        templateUrl: 'tpl/unit.html'
+                        templateUrl: 'templates/unit.html'
                     })
                     .state('app.paymentTerms', {
                         url: '/payment_terms',
-                        templateUrl: 'tpl/payment_terms.html'
+                        templateUrl: 'templates/payment_terms.html'
                     })
                     .state('app.eateryInvitation', {
                         url: '/eatery_invitation',
-                        templateUrl: 'tpl/eatery_invitation.html'
+                        templateUrl: 'templates/eatery_invitation.html'
                     })
                     .state('app.standingOrderConvertion', {
                         url: '/standing_order_convertion',
-                        templateUrl: 'tpl/standing_order_convertion.html'
+                        templateUrl: 'templates/standing_order_convertion.html'
                     })
                     .state('app.currency', {
                         url: '/currency',
-                        templateUrl: 'tpl/currency.html'
+                        templateUrl: 'templates/currency.html'
                     })
                     .state('app.deliveryLocation', {
                         url: '/delivery_location',
-                        templateUrl: 'tpl/delivery_location.html'
+                        templateUrl: 'templates/delivery_location.html'
                     })
             }
         ]

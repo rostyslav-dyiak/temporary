@@ -22,71 +22,71 @@ angular.module('app')
                     .state('app', {
                         abstract: true,
                         url: '/supplier',
-                        templateUrl: 'tpl/app.html'
+                        templateUrl: 'templates/app.html'
                     })
                     .state('app.overview', {
                         url: '/overview',
-                        templateUrl: 'tpl/overview.html'
+                        templateUrl: 'templates/overview.html'
                     })
                     .state('app.order', {
                         url: '/order',
-                        templateUrl: 'tpl/order.html'
+                        templateUrl: 'templates/order.html'
                     })
                     .state('app.standingOrder', {
                         url: '/standing_order',
-                        templateUrl: 'tpl/standing_order.html'
+                        templateUrl: 'templates/standing_order.html'
                     })
                     .state('app.paymentSchedule', {
                         url: '/payment_schedule',
-                        templateUrl: 'tpl/payment_schedule.html'
+                        templateUrl: 'templates/payment_schedule.html'
                     })
                     .state('app.deliverySchedule', {
                         url: '/delivery_schedule',
-                        templateUrl: 'tpl/delivery_schedule.html'
+                        templateUrl: 'templates/delivery_schedule.html'
                     })
                     .state('app.customer', {
                         url: '/customer',
-                        templateUrl: 'tpl/customer.html'
+                        templateUrl: 'templates/customer.html'
                     })
                     .state('app.product', {
                         url: '/product',
-                        templateUrl: 'tpl/product.html'
+                        templateUrl: 'templates/product.html'
                     })
                     .state('app.pricing', {
                         url: '/pricing',
-                        templateUrl: 'tpl/pricing.html'
+                        templateUrl: 'templates/pricing.html'
                     })
                     .state('app.setting', {
                         url: '/setting',
-                        templateUrl: 'tpl/setting.html'
+                        templateUrl: 'templates/setting.html'
                     })
                     .state('app.personalProfile', {
                         url: '/personal_profile',
-                        templateUrl: 'tpl/personal_profile.html'
+                        templateUrl: 'templates/personal_profile.html'
                     })
                     .state('app.activityLog', {
                         url: '/activity_log',
-                        templateUrl: 'tpl/activity_log.html'
+                        templateUrl: 'templates/activity_log.html'
                     })
                     .state('app.dashboard', {
                         url: '/dashboard',
-                        templateUrl: 'tpl/admin/dashboard.html'
+                        templateUrl: 'templates/admin/dashboard.html'
                     })
                     .state('app.inquiry', {
                         url: '/inquiry',
-                        templateUrl: 'tpl/admin/inquiry.html'
+                        templateUrl: 'templates/admin/inquiry.html'
                     })
                     .state('app.companySettings', {
                         url: '/company_settings',
-                        templateUrl: 'tpl/admin/company_settings.html'
+                        templateUrl: 'templates/admin/company_settings.html'
                     })
                     .state('app.profileSettings', {
                         url: '/profile_settings',
-                        templateUrl: 'tpl/admin/profile_settings.html'
+                        templateUrl: 'templates/admin/profile_settings.html'
                     })
                     .state('app.teamMember', {
                         url: '/team_member',
-                        templateUrl: 'tpl/admin/team_member.html'
+                        templateUrl: 'templates/admin/team_member.html'
                     })
 
             }

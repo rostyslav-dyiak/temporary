@@ -1,0 +1,16 @@
+{
+    "company": {
+        "id": 1,
+        "code": "FX",
+        "name": "Name",
+        "busRegNumber": "675421943",
+        "billingAddress": "My Adress",
+        "postalCode": "73291",
+        "contactNumber": "8492 7426 23",
+        "faxNumber": "3345 2352 54",
+        "email": "text@test.com",
+        "logo": "https://www.edubuntu.org/sites/default/files/images/ubuntu-logo-only_32.png",
+        "optionalImage": "https://pbs.twimg.com/profile_images/458746137621454848/hMTavgm1_400x400.jpeg",
+        "contactPersonId": "2"
+    }
+}

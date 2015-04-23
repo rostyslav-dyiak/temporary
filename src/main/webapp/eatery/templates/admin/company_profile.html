@@ -1,0 +1,116 @@
+<div class="bg-light lter b-b wrapper-md clearfix">
+    <h1 class="m-n font-thin h3 pull-left">Company profile</h1>
+</div>
+<div class="wrapper-md" ng-controller="CompanyProfileCompanyController">
+    <div class="panel panel-default">
+        <tabset class="tab-container">
+            <tab>
+                <tab-heading>
+                    Company
+                </tab-heading>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Company Code</label>
+                        <div class="col-lg-10">
+                            <input type="text" ng-model="company.code" class="form-control" placeholder="Company Code" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Company Name</label>
+                        <div class="col-lg-10">
+                            <input type="text" ng-model="company.name" class="form-control" placeholder="Company Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Business Registration No.</label>
+                        <div class="col-lg-10">
+                            <input type="text" ng-model="company.busRegNumber" class="form-control" placeholder="Business Registration No.">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Billing Address</label>
+                        <div class="col-lg-10">
+                            <input type="text" ng-model="company.billingAddress" class="form-control" placeholder="Billing Address">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Company Contact Number</label>
+                        <div class="col-lg-10">
+                            <input type="text" ng-model="company.contactNumber" class="form-control" placeholder="Company Contact Number">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Company Email Address</label>
+                        <div class="col-lg-10">
+                            <input type="email" ng-model="company.email" class="form-control" placeholder="Company Email Address">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Logo</label>
+
+                        <div class="col-lg-10">
+                            <img id="logo" class="mc-logo image-preview" src="img/logo_placeholder.png"
+                                 ng-src="{{company.logo}}"/>
+
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default" click-selector="#upload-logo">Upload
+                                    Image
+                                </button>
+                                <input id="upload-logo" type="file" file-model="logo" accept="image/*"
+                                       style="display: none;">
+                                <button type="button" class="btn btn-default" ng-click="removeLogo()">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Optional Image to Appear at Top-Right Corner of Purchase Orders</label>
+
+                        <div class="col-lg-10">
+                            <img id="optionalImage" class="mc-logo image-preview" src="img/logo_placeholder.png"
+                                 ng-src="{{company.optionalImage}}"/>
+
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default" click-selector="#upload-optional-image">Upload
+                                    Image
+                                </button>
+                                <input id="upload-optional-image" type="file" file-model="optionalImage" accept="image/*"
+                                       style="display: none;">
+                                <button type="button" class="btn btn-default" ng-click="removeOptionalImage()">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <label class="col-lg-2 control-label">Main Contact person for Supplier</label>
+
+                        <div class="col-lg-10">
+                            <select class="form-control" ng-model="company.contactPerson">
+                                <option ng-repeat="contactPerson in contactPersons"
+                                        value="{{contactPerson.id}}"
+                                        ng-selected="contactPerson.id == company.contactPersonId">
+                                    {{contactPerson.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-lg-2">
+                            <button type="submit" class="btn btn-sm">View Purchase Order Template</button>
+                        </div>
+                        <div class="col-lg-9 col-lg-offset-1">
+                            <button type="submit" class="btn btn-sm btn-info">Save Changes</button>
+                            <button class="btn btn-sm btn-danger">Revert Changes</button>
+                        </div>
+                    </div>
+                </form>
+            </tab>
+            <tab>
+                <tab-heading>
+                    Outlet
+                </tab-heading>
+                     <h1>Outlet</h1>
+            </tab>
+        </tabset>
+    </div>
+</div>

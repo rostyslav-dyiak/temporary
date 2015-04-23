@@ -1,0 +1,50 @@
+<div class="container w-xxl w-auto-xs" ng-controller="SignUpController">
+    <a href class="navbar-brand block m-t">{{app.name}}</a>
+
+    <div class="m-b-lg" ng-hide="expired || created">
+        <div class="wrapper text-center">
+            <strong>Welcome to Kitchen Boost! A simple setup to confirm your company and personal details</strong>
+        </div>
+        <form name="form" class="form-validation">
+            <div class="text-danger wrapper text-center" ng-show="authError">
+                {{authError}}
+            </div>
+            <div class="list-group list-group-sm">
+                <div class="list-group-item">
+                    <input type="password" placeholder="New Password" class="form-control no-border"
+                           ng-model="user.password" required>
+                </div>
+                <div class="list-group-item">
+                    <input type="password" placeholder="Confirm Password" class="form-control no-border"
+                           ng-model="user.confirmPassword" required>
+                </div>
+                <div class="list-group-item">
+                    <input placeholder="Name" class="form-control no-border" ng-model="user.name" required>
+                </div>
+                <div class="list-group-item">
+                    <input type="text" placeholder="Contact Number" class="form-control no-border"
+                           ng-model="user.contactNumber" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="signup()"
+                    ng-disabled='form.$invalid && !form.expired'>Create Account
+            </button>
+        </form>
+    </div>
+    <div class="m-b-lg" ng-show="expired">
+        <div class="wrapper text-center">
+            <strong>Your invitation link has expired.</strong>
+        </div>
+    </div>
+    <div class="m-b-lg" ng-show="created">
+        <div class="wrapper text-center">
+            <strong>Your account has been created!<br> Congratulations and Welcome Onboard!</strong>
+            <a ng-href="/supplier/index.html" class="btn btn-info btn-rounded additional-padding" ng-show="user.role == 'Supplier'">Great! Take me to the App!</a>
+        </div>
+    </div>
+    <div class="text-center">
+        <p>
+            <small class="text-muted">KbApp &copy; 2015</small>
+        </p>
+    </div>
+</div>
