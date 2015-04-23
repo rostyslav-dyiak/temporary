@@ -1,13 +1,23 @@
 package com.kb.web.rest;
 
-import com.kb.Application;
-import com.kb.domain.Category;
-import com.kb.repository.CategoryRepository;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -19,13 +29,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.kb.Application;
+import com.kb.domain.Category;
+import com.kb.repository.CategoryRepository;
 
 /**
  * Test class for the CategoryResource REST controller.
@@ -39,8 +45,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class CategoryResourceTest {
 
 
-    private static final Long DEFAULT_PARENT_ID = 0L;
-    private static final Long UPDATED_PARENT_ID = 1L;
     private static final String DEFAULT_TITLE = "SAMPLE_TEXT";
     private static final String UPDATED_TITLE = "UPDATED_TEXT";
 
@@ -62,7 +66,6 @@ public class CategoryResourceTest {
     @Before
     public void initTest() {
         category = new Category();
-        category.setParentId(DEFAULT_PARENT_ID);
         category.setTitle(DEFAULT_TITLE);
     }
 
@@ -81,7 +84,6 @@ public class CategoryResourceTest {
         List<Category> categorys = categoryRepository.findAll();
         assertThat(categorys).hasSize(databaseSizeBeforeCreate + 1);
         Category testCategory = categorys.get(categorys.size() - 1);
-        assertThat(testCategory.getParentId()).isEqualTo(DEFAULT_PARENT_ID);
         assertThat(testCategory.getTitle()).isEqualTo(DEFAULT_TITLE);
     }
 
@@ -96,7 +98,6 @@ public class CategoryResourceTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(category.getId().intValue())))
-                .andExpect(jsonPath("$.[*].parentId").value(hasItem(DEFAULT_PARENT_ID.intValue())))
                 .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())));
     }
 
@@ -111,7 +112,6 @@ public class CategoryResourceTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(category.getId().intValue()))
-            .andExpect(jsonPath("$.parentId").value(DEFAULT_PARENT_ID.intValue()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()));
     }
 
@@ -132,7 +132,6 @@ public class CategoryResourceTest {
 		int databaseSizeBeforeUpdate = categoryRepository.findAll().size();
 
         // Update the category
-        category.setParentId(UPDATED_PARENT_ID);
         category.setTitle(UPDATED_TITLE);
         restCategoryMockMvc.perform(put("/api/categorys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -143,7 +142,6 @@ public class CategoryResourceTest {
         List<Category> categorys = categoryRepository.findAll();
         assertThat(categorys).hasSize(databaseSizeBeforeUpdate);
         Category testCategory = categorys.get(categorys.size() - 1);
-        assertThat(testCategory.getParentId()).isEqualTo(UPDATED_PARENT_ID);
         assertThat(testCategory.getTitle()).isEqualTo(UPDATED_TITLE);
     }
 
