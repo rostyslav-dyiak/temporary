@@ -15,5 +15,5 @@
     <include file="classpath:config/liquibase/changelog/supplier_pictures.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/custom_user_to_company_relation.xml" relativeToChangelogFile="false"/>
     <!-- JHipster will add liquibase changelogs here -->
-    
+
 </databaseChangeLog>

@@ -1,16 +1,16 @@
-(function() {
+(function () {
     'use strict';
 
     app.controller('ManageCompanyListController', ManageCompanyListController);
     ManageCompanyListController
         .$inject = [
-            '$scope',
-            'ManageCompanyListFactory'
-        ];
+        '$scope',
+        'ManageCompanyListFactory'
+    ];
 
     function ManageCompanyListController($scope, ManageCompanyListFactory) {
         activate();
-
+        $scope.company = {};
         function activate() {
             ManageCompanyListFactory.get({},
                 function (data) {

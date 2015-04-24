@@ -16,12 +16,12 @@ async:
 spring:
     mail:
         host: smtp.gmail.com
-        port: 465
+        port: 587
         user: optigrasmtp@gmail.com
         password: optigrasoft
         protocol: smtp
         tls: true
-        auth: false
+        auth: true
         from: optigrasmtp@gmail.com
 
     messageSource:

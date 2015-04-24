@@ -6,14 +6,16 @@
     ManageCompanyAddUpdateController
         .$inject = [
         '$scope',
-        '$stateParams'
+        '$stateParams',
+        '$http'
     ];
 
-    function ManageCompanyAddUpdateController($scope, $stateParams) {
+    function ManageCompanyAddUpdateController($scope, $stateParams, $http) {
         var companyId = $stateParams.id;
         $scope.company = {};
         $scope.removeImage = removeImage;
 
+        $scope.addCompany =addCompany;
         if (companyId == 0) {
             $scope.company = {
                 id: 3,
@@ -76,6 +78,15 @@
         function removeImage() {
             $scope.company.logo = 'img/logo_placeholder.png';
         }
+        function addCompany() {
+            $http.post('/api/register', $scope.company)
+                .success(function (data, status, headers, config) {
+                    console.log(data + " " + status + " " + headers + " ");
+                }).
+                error(function (data, status, headers, config) {
+                    console.log(data + " " + status + " " + headers + " ");
+                });
+        };
     }
 })
 ();
