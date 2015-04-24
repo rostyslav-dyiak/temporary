@@ -3,6 +3,7 @@ package com.kb.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -62,6 +65,12 @@ public class SupplierDetails implements Serializable {
     @Column(name = "public_pricing_visible")
     private Boolean publicPricingVisible;
 
+    @ManyToMany
+    @JoinTable(name = "t_supplier_details_picture",
+    	joinColumns = @JoinColumn(name = "supplier_details_picture_id", referencedColumnName = "id"),
+    	inverseJoinColumns = @JoinColumn(name = "picture_id", referencedColumnName = "id"))
+    private Set<Picture> pictures;
+    
     public Long getId() {
 		return id;
 	}
@@ -156,6 +165,14 @@ public class SupplierDetails implements Serializable {
 
 	public void setPublicPricingVisible(final Boolean publicPricingVisible) {
 		this.publicPricingVisible = publicPricingVisible;
+	}
+
+	public Set<Picture> getPictures() {
+		return pictures;
+	}
+
+	public void setPictures(final Set<Picture> pictures) {
+		this.pictures = pictures;
 	}
 
 	@Override
