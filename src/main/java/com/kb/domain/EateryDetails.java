@@ -19,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "T_EATERYDETAILS")
-public class EateryDetails implements Serializable {
+public class EateryDetails extends AbstractAuditingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

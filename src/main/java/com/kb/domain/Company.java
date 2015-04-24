@@ -25,7 +25,7 @@ import com.kb.domain.company.BusinessType;
  */
 @Entity
 @Table(name = "T_COMPANY")
-public class Company implements Serializable {
+public class Company extends AbstractAuditingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -125,7 +125,7 @@ public class Company implements Serializable {
 		return users;
 	}
 
-	public void setUsers(Set<User> users) {
+	public void setUsers(final Set<User> users) {
 		this.users = users;
 	}
 

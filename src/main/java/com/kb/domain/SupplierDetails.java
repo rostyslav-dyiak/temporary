@@ -22,7 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "T_SUPPLIERDETAILS")
-public class SupplierDetails implements Serializable {
+public class SupplierDetails extends AbstractAuditingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

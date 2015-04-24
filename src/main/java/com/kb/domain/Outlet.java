@@ -22,7 +22,7 @@ import com.kb.domain.status.OutletStatus;
  */
 @Entity
 @Table(name = "T_OUTLET")
-public class Outlet implements Serializable {
+public class Outlet extends AbstractAuditingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
