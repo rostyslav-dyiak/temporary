@@ -38,4 +38,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="T_COMPANY"/>
     </changeSet>
+
 </databaseChangeLog>

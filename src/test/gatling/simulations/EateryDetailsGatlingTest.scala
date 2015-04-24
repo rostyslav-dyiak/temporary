@@ -60,12 +60,12 @@ class EateryDetailsGatlingTest extends Simulation {
         .pause(10)
         .repeat(2) {
             exec(http("Get all eateryDetailss")
-            .get("/api/eateryDetailss")
+            .get("/api/eatery/details")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
             .exec(http("Create new eateryDetails")
-            .put("/api/eateryDetailss")
+            .put("/api/eatery/details")
             .headers(headers_http_authenticated)
             .body(StringBody("""{"id":null, "code":"SAMPLE_TEXT", "BusRegNumber":"SAMPLE_TEXT", "BillingAddress":"SAMPLE_TEXT", "PostalCode":"SAMPLE_TEXT", "FaxNumber":"SAMPLE_TEXT", "logoId":null, "topRightPictureId":null, "contactPersonId":null}""")).asJSON
             .check(status.is(201))

@@ -95,7 +95,7 @@ public class EateryDetailsResourceTest {
         int databaseSizeBeforeCreate = eateryDetailsRepository.findAll().size();
 
         // Create the EateryDetails
-        restEateryDetailsMockMvc.perform(post("/api/eateryDetailss")
+        restEateryDetailsMockMvc.perform(post("/api/eatery/details")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(eateryDetails)))
                 .andExpect(status().isCreated());
@@ -118,18 +118,18 @@ public class EateryDetailsResourceTest {
         eateryDetailsRepository.saveAndFlush(eateryDetails);
 
         // Get all the eateryDetailss
-        restEateryDetailsMockMvc.perform(get("/api/eateryDetailss"))
+        restEateryDetailsMockMvc.perform(get("/api/eatery/details"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(eateryDetails.getId().intValue())))
                 .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
-                .andExpect(jsonPath("$.[*].BusRegNumber").value(hasItem(DEFAULT_BUS_REG_NUMBER.toString())))
-                .andExpect(jsonPath("$.[*].BillingAddress").value(hasItem(DEFAULT_BILLING_ADDRESS.toString())))
-                .andExpect(jsonPath("$.[*].PostalCode").value(hasItem(DEFAULT_POSTAL_CODE.toString())))
-                .andExpect(jsonPath("$.[*].FaxNumber").value(hasItem(DEFAULT_FAX_NUMBER.toString())))
-                .andExpect(jsonPath("$.[*].logoId").value(hasItem(DEFAULT_LOGO_ID.intValue())))
-                .andExpect(jsonPath("$.[*].topRightPictureId").value(hasItem(DEFAULT_TOP_RIGHT_PICTURE_ID.intValue())))
-                .andExpect(jsonPath("$.[*].contactPersonId").value(hasItem(DEFAULT_CONTACT_PERSON_ID.intValue())));
+                .andExpect(jsonPath("$.[*].busRegNumber").value(hasItem(DEFAULT_BUS_REG_NUMBER.toString())))
+                .andExpect(jsonPath("$.[*].billingAddress").value(hasItem(DEFAULT_BILLING_ADDRESS.toString())))
+                .andExpect(jsonPath("$.[*].postalCode").value(hasItem(DEFAULT_POSTAL_CODE.toString())))
+                .andExpect(jsonPath("$.[*].faxNumber").value(hasItem(DEFAULT_FAX_NUMBER.toString())))
+                .andExpect(jsonPath("$.[*].logo").value(hasItem(DEFAULT_LOGO_ID.intValue())))
+                .andExpect(jsonPath("$.[*].topRightPicture").value(hasItem(DEFAULT_TOP_RIGHT_PICTURE_ID.intValue())))
+                .andExpect(jsonPath("$.[*].contactPerson").value(hasItem(DEFAULT_CONTACT_PERSON_ID.intValue())));
     }
 
     @Test
@@ -139,25 +139,25 @@ public class EateryDetailsResourceTest {
         eateryDetailsRepository.saveAndFlush(eateryDetails);
 
         // Get the eateryDetails
-        restEateryDetailsMockMvc.perform(get("/api/eateryDetailss/{id}", eateryDetails.getId()))
+        restEateryDetailsMockMvc.perform(get("/api/eatery/{id}/details", eateryDetails.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(eateryDetails.getId().intValue()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()))
-            .andExpect(jsonPath("$.BusRegNumber").value(DEFAULT_BUS_REG_NUMBER.toString()))
-            .andExpect(jsonPath("$.BillingAddress").value(DEFAULT_BILLING_ADDRESS.toString()))
-            .andExpect(jsonPath("$.PostalCode").value(DEFAULT_POSTAL_CODE.toString()))
-            .andExpect(jsonPath("$.FaxNumber").value(DEFAULT_FAX_NUMBER.toString()))
-            .andExpect(jsonPath("$.logoId").value(DEFAULT_LOGO_ID.intValue()))
-            .andExpect(jsonPath("$.topRightPictureId").value(DEFAULT_TOP_RIGHT_PICTURE_ID.intValue()))
-            .andExpect(jsonPath("$.contactPersonId").value(DEFAULT_CONTACT_PERSON_ID.intValue()));
+            .andExpect(jsonPath("$.busRegNumber").value(DEFAULT_BUS_REG_NUMBER.toString()))
+            .andExpect(jsonPath("$.billingAddress").value(DEFAULT_BILLING_ADDRESS.toString()))
+            .andExpect(jsonPath("$.postalCode").value(DEFAULT_POSTAL_CODE.toString()))
+            .andExpect(jsonPath("$.faxNumber").value(DEFAULT_FAX_NUMBER.toString()))
+            .andExpect(jsonPath("$.logo").value(DEFAULT_LOGO_ID.intValue()))
+            .andExpect(jsonPath("$.topRightPicture").value(DEFAULT_TOP_RIGHT_PICTURE_ID.intValue()))
+            .andExpect(jsonPath("$.contactPerson").value(DEFAULT_CONTACT_PERSON_ID.intValue()));
     }
 
     @Test
     @Transactional
     public void getNonExistingEateryDetails() throws Exception {
         // Get the eateryDetails
-        restEateryDetailsMockMvc.perform(get("/api/eateryDetailss/{id}", Long.MAX_VALUE))
+        restEateryDetailsMockMvc.perform(get("/api/eatery/{id}/details", Long.MAX_VALUE))
                 .andExpect(status().isNotFound());
     }
 
@@ -175,7 +175,7 @@ public class EateryDetailsResourceTest {
         eateryDetails.setBillingAddress(UPDATED_BILLING_ADDRESS);
         eateryDetails.setPostalCode(UPDATED_POSTAL_CODE);
         eateryDetails.setFaxNumber(UPDATED_FAX_NUMBER);
-        restEateryDetailsMockMvc.perform(put("/api/eateryDetailss")
+        restEateryDetailsMockMvc.perform(put("/api/eatery/details")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(eateryDetails)))
                 .andExpect(status().isOk());
@@ -200,7 +200,7 @@ public class EateryDetailsResourceTest {
 		int databaseSizeBeforeDelete = eateryDetailsRepository.findAll().size();
 
         // Get the eateryDetails
-        restEateryDetailsMockMvc.perform(delete("/api/eateryDetailss/{id}", eateryDetails.getId())
+        restEateryDetailsMockMvc.perform(delete("/api/eatery/{id}/details", eateryDetails.getId())
                 .accept(TestUtil.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk());
 

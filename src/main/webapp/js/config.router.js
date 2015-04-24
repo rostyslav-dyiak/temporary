@@ -24,7 +24,17 @@
                     })
                     .state('app.signIn', {
                         url: '/sign_in',
-                        templateUrl: 'templates/sign_in.html'
+                        templateUrl: 'templates/sign_in.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/auth/auth.xauth.service.js',
+                                        'js/sign-in.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
                     })
                     .state('app.signUp', {
                         url: '/sign_up',

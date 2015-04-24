@@ -13,8 +13,8 @@ angular.module('app')
         ]
     )
     .config(
-        ['$stateProvider', '$urlRouterProvider', 'JQ_CONFIG',
-            function($stateProvider, $urlRouterProvider, JQ_CONFIG) {
+        ['$stateProvider', '$urlRouterProvider',
+            function($stateProvider, $urlRouterProvider) {
 
                 $urlRouterProvider
                     .otherwise('/eatery/overview');
@@ -22,7 +22,14 @@ angular.module('app')
                     .state('app', {
                         abstract: true,
                         url: '/eatery',
-                        templateUrl: 'templates/app.html'
+                        templateUrl: 'templates/app.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load('js/directives/back-button.directive.js');
+                                }
+                            ]
+                        }
                     })
                     .state('app.overview', {
                         url: '/overview',
@@ -101,7 +108,50 @@ angular.module('app')
                     })
                     .state('app.teamMember', {
                         url: '/team_member',
-                        templateUrl: 'templates/admin/team_member.html'
+                        templateUrl: 'templates/admin/team_member/team_members.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/team_member/team.factory.js',
+                                        'js/team_member/team-member.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
+                    })
+                    .state('app.teamMemberAdd', {
+                        url: '/add',
+                        templateUrl: 'templates/admin/team_member/team_member_add_edit.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/team_member/team.factory.js',
+                                        'js/company_profile/outlets.factory.js',
+                                        'js/team_member/team-member-add-edit.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
+                    })
+                    .state('app.teamMemberEdit', {
+                        url: '/edit/:id',
+                        templateUrl: 'templates/admin/team_member/team_member_add_edit.html',
+                        controller: function ($stateParams) {
+                            $stateParams.id
+                        },
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/team_member/team.factory.js',
+                                        'js/company_profile/outlets.factory.js',
+                                        'js/team_member/team-member-add-edit.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
                     })
                     .state('app.activityLog', {
                         url: '/activity_log',

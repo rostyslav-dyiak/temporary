@@ -18,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.kb.domain.company.BusinessType;
 
 /**
  * A Company.
@@ -34,10 +33,10 @@ public class Company extends AbstractAuditingEntity implements Serializable {
 
 	@OneToOne(mappedBy = "eatery")
 	private EateryDetails eateryDetails;
-	
+
 	@OneToOne(mappedBy = "supplier")
 	private SupplierDetails supplierDetails;
-	
+
     @Column(name = "name")
     private String name;
 
@@ -47,16 +46,16 @@ public class Company extends AbstractAuditingEntity implements Serializable {
     @Column(name = "contact_number")
     private String contactNumber;
 
-	@Column(name = "business_type")
+	@Column(name = "company_type")
     @Enumerated(EnumType.STRING)
-    private BusinessType businessType;
+    private CompanyType companyType;
 
     @Column(name = "status")
     private String status;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
     private Set<User> users = new HashSet<>();
-    
+
     public Long getId() {
         return id;
     }
@@ -89,12 +88,12 @@ public class Company extends AbstractAuditingEntity implements Serializable {
         this.contactNumber = contactNumber;
     }
 
-    public BusinessType getBusinessType() {
-        return businessType;
+    public CompanyType getCompanyType() {
+        return companyType;
     }
 
-    public void setBusinessType(final BusinessType businessType) {
-        this.businessType = businessType;
+    public void setCompanyType(final CompanyType companyType) {
+        this.companyType = companyType;
     }
 
     public String getStatus() {
@@ -157,7 +156,7 @@ public class Company extends AbstractAuditingEntity implements Serializable {
                 ", name='" + name + "'" +
                 ", email='" + email + "'" +
                 ", contactNumber='" + contactNumber + "'" +
-                ", businessType='" + businessType + "'" +
+                ", companyType='" + companyType + "'" +
                 ", status='" + status + "'" +
                 '}';
     }

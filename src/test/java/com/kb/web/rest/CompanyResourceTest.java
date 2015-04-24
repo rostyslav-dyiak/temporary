@@ -15,6 +15,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import com.kb.domain.CompanyType;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +32,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kb.Application;
 import com.kb.domain.Company;
-import com.kb.domain.company.BusinessType;
 import com.kb.repository.CompanyRepository;
 
 /**
@@ -51,8 +51,8 @@ public class CompanyResourceTest {
     private static final String UPDATED_EMAIL = "UPDATED_TEXT";
     private static final String DEFAULT_CONTACT_NUMBER = "SAMPLE_TEXT";
     private static final String UPDATED_CONTACT_NUMBER = "UPDATED_TEXT";
-    private static final BusinessType DEFAULT_BUSINESS_TYPE = BusinessType.EATERY;
-    private static final BusinessType UPDATED_BUSINESS_TYPE = BusinessType.SUPPLIER;
+    private static final CompanyType DEFAULT_BUSINESS_TYPE = CompanyType.EATERY;
+    private static final CompanyType UPDATED_BUSINESS_TYPE = CompanyType.SUPPLIER;
     private static final String DEFAULT_STATUS = "SAMPLE_TEXT";
     private static final String UPDATED_STATUS = "UPDATED_TEXT";
 
@@ -77,7 +77,7 @@ public class CompanyResourceTest {
         company.setName(DEFAULT_NAME);
         company.setEmail(DEFAULT_EMAIL);
         company.setContactNumber(DEFAULT_CONTACT_NUMBER);
-        company.setBusinessType(DEFAULT_BUSINESS_TYPE);
+        company.setCompanyType(DEFAULT_BUSINESS_TYPE);
         company.setStatus(DEFAULT_STATUS);
     }
 
@@ -99,7 +99,7 @@ public class CompanyResourceTest {
         assertThat(testCompany.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testCompany.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testCompany.getContactNumber()).isEqualTo(DEFAULT_CONTACT_NUMBER);
-        assertThat(testCompany.getBusinessType()).isEqualTo(DEFAULT_BUSINESS_TYPE);
+        assertThat(testCompany.getCompanyType()).isEqualTo(DEFAULT_BUSINESS_TYPE);
         assertThat(testCompany.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
@@ -152,14 +152,14 @@ public class CompanyResourceTest {
     public void updateCompany() throws Exception {
         // Initialize the database
         companyRepository.saveAndFlush(company);
-		
+
 		int databaseSizeBeforeUpdate = companyRepository.findAll().size();
 
         // Update the company
         company.setName(UPDATED_NAME);
         company.setEmail(UPDATED_EMAIL);
         company.setContactNumber(UPDATED_CONTACT_NUMBER);
-        company.setBusinessType(UPDATED_BUSINESS_TYPE);
+        company.setCompanyType(UPDATED_BUSINESS_TYPE);
         company.setStatus(UPDATED_STATUS);
         restCompanyMockMvc.perform(put("/api/companys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -173,7 +173,7 @@ public class CompanyResourceTest {
         assertThat(testCompany.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCompany.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testCompany.getContactNumber()).isEqualTo(UPDATED_CONTACT_NUMBER);
-        assertThat(testCompany.getBusinessType()).isEqualTo(UPDATED_BUSINESS_TYPE);
+        assertThat(testCompany.getCompanyType()).isEqualTo(UPDATED_BUSINESS_TYPE);
         assertThat(testCompany.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
@@ -182,7 +182,7 @@ public class CompanyResourceTest {
     public void deleteCompany() throws Exception {
         // Initialize the database
         companyRepository.saveAndFlush(company);
-		
+
 		int databaseSizeBeforeDelete = companyRepository.findAll().size();
 
         // Get the company
