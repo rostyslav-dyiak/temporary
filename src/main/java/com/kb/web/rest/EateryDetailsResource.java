@@ -23,7 +23,7 @@ import java.util.Optional;
  * REST controller for managing EateryDetails.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/eatery")
 public class EateryDetailsResource {
 
     private final Logger log = LoggerFactory.getLogger(EateryDetailsResource.class);
@@ -34,7 +34,7 @@ public class EateryDetailsResource {
     /**
      * POST  /eateryDetailss -> Create a new eateryDetails.
      */
-    @RequestMapping(value = "/eateryDetailss",
+    @RequestMapping(value = "/details",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -44,13 +44,13 @@ public class EateryDetailsResource {
             return ResponseEntity.badRequest().header("Failure", "A new eateryDetails cannot already have an ID").build();
         }
         eateryDetailsRepository.save(eateryDetails);
-        return ResponseEntity.created(new URI("/api/eateryDetailss/" + eateryDetails.getId())).build();
+        return ResponseEntity.created(new URI("/api/eatery/details" + eateryDetails.getId())).build();
     }
 
     /**
      * PUT  /eateryDetailss -> Updates an existing eateryDetails.
      */
-    @RequestMapping(value = "/eateryDetailss",
+    @RequestMapping(value = "/details",
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -66,7 +66,7 @@ public class EateryDetailsResource {
     /**
      * GET  /eateryDetailss -> get all the eateryDetailss.
      */
-    @RequestMapping(value = "/eateryDetailss",
+    @RequestMapping(value = "/details",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -74,14 +74,14 @@ public class EateryDetailsResource {
                                   @RequestParam(value = "per_page", required = false) Integer limit)
         throws URISyntaxException {
         Page<EateryDetails> page = eateryDetailsRepository.findAll(PaginationUtil.generatePageRequest(offset, limit));
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/eateryDetailss", offset, limit);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/eatery/details", offset, limit);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
      * GET  /eateryDetailss/:id -> get the "id" eateryDetails.
      */
-    @RequestMapping(value = "/eateryDetailss/{id}",
+    @RequestMapping(value = "/{id}/details",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -97,7 +97,7 @@ public class EateryDetailsResource {
     /**
      * DELETE  /eateryDetailss/:id -> delete the "id" eateryDetails.
      */
-    @RequestMapping(value = "/eateryDetailss/{id}",
+    @RequestMapping(value = "/{id}/details",
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
