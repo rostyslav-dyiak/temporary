@@ -1,5 +1,6 @@
 package com.kb.web.rest.dto;
 
+import com.kb.domain.Company;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.NotNull;
@@ -32,6 +33,8 @@ public class UserDTO {
     private String langKey;
 
     private List<String> roles;
+
+    private Company company;
 
     public UserDTO() {
     }
@@ -73,6 +76,42 @@ public class UserDTO {
 
     public List<String> getRoles() {
         return roles;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setLangKey(String langKey) {
+        this.langKey = langKey;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 
     @Override

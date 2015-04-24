@@ -38,7 +38,7 @@ public class MailService {
 
     @Inject
     private MessageSource messageSource;
-    
+
     @Inject
     private SpringTemplateEngine templateEngine;
 
@@ -75,7 +75,7 @@ public class MailService {
     @Async
     public void sendActivationEmail(User user, String baseUrl) {
         log.debug("Sending activation e-mail to '{}'", user.getEmail());
-        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Locale locale = Locale.forLanguageTag("uk");
         Context context = new Context(locale);
         context.setVariable("user", user);
         context.setVariable("baseUrl", baseUrl);

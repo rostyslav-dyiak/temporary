@@ -25,7 +25,7 @@ import com.kb.domain.status.OutletStatus;
 public class Outlet extends AbstractAuditingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -51,6 +51,10 @@ public class Outlet extends AbstractAuditingEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
+
+    public Outlet() {
+
+    }
 
     public Long getId() {
         return id;
@@ -127,7 +131,7 @@ public class Outlet extends AbstractAuditingEntity implements Serializable {
 
         Outlet outlet = (Outlet) o;
 
-        if ( ! Objects.equals(id, outlet.id)) return false;
+        if (!Objects.equals(id, outlet.id)) return false;
 
         return true;
     }
@@ -140,12 +144,12 @@ public class Outlet extends AbstractAuditingEntity implements Serializable {
     @Override
     public String toString() {
         return "Outlet{" +
-                "id=" + id +
-                ", name='" + name + "'" +
-                ", deliveryAddress='" + deliveryAddress + "'" +
-                ", postalCode='" + postalCode + "'" +
-                ", contactNumber='" + contactNumber + "'" +
-                ", email='" + email + "'" +
-                '}';
+            "id=" + id +
+            ", name='" + name + "'" +
+            ", deliveryAddress='" + deliveryAddress + "'" +
+            ", postalCode='" + postalCode + "'" +
+            ", contactNumber='" + contactNumber + "'" +
+            ", email='" + email + "'" +
+            '}';
     }
 }
