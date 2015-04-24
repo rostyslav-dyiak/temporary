@@ -65,6 +65,9 @@ public class AccountResource {
             produces = MediaType.TEXT_PLAIN_VALUE)
     @Timed
     public ResponseEntity<?> registerAccount(@Valid @RequestBody final UserDTO userDTO, final HttpServletRequest request) {
+        String serverName = request.getServerName();
+        String scheme = request.getScheme();
+        String serverPort = Integer.toString(request.getServerPort());
         return userRepository.findOneByLogin(userDTO.getLogin())
             .map(user -> new ResponseEntity<>("login already in use", HttpStatus.BAD_REQUEST))
             .orElseGet(() -> userRepository.findOneByEmail(userDTO.getEmail())
@@ -73,7 +76,7 @@ public class AccountResource {
                     User user = userService.createUserInformation(userDTO.getLogin(), userDTO.getPassword(),
                     userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail().toLowerCase(),
                     userDTO.getLangKey());
-                    String baseUrl = MessageFormat.format("{0}://{1}:{2}", request.getScheme(), request.getServerName(), request.getServerPort());               
+                    String baseUrl = MessageFormat.format("{0}://{1}:{2}", scheme, serverName, serverPort);
 
                     mailService.sendActivationEmail(user, baseUrl);
                     return new ResponseEntity<>(HttpStatus.CREATED);
@@ -137,7 +140,7 @@ public class AccountResource {
     public ResponseEntity<String> saveAccount(@RequestBody final UserDTO userDTO) {
         return userRepository
             .findOneByLogin(userDTO.getLogin())
-            .filter(u -> u.getLogin().equals(SecurityUtils.getCurrentLogin())) // Restricting 
+            .filter(u -> u.getLogin().equals(SecurityUtils.getCurrentLogin())) // Restricting
             .map(u -> {
                 userService.updateUserInformation(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail());
                 return new ResponseEntity<String>(HttpStatus.OK);

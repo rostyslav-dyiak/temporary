@@ -6,7 +6,7 @@
         <div class="col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" >
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Logo</label>
 
@@ -112,7 +112,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <button type="submit" class="btn btn-sm btn-info" ng-hide="company.id">Save</button>
+                                <button type="submit" class="btn btn-sm btn-info" ng-hide="company.id" ng-click="addCompany()">Save</button>
                                 <button type="submit" class="btn btn-sm btn-info" ng-hide="!company.id">Update and
                                     Send
                                 </button>
