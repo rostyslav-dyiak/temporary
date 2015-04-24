@@ -1,48 +1,59 @@
 <div class="bg-light lter b-b wrapper-md clearfix">
-    <h1 class="m-n font-thin h3 pull-left">Company profile</h1>
+    <h1 class="m-n font-thin h3 pull-left">Company Profile</h1>
 </div>
-<div class="wrapper-md" ng-controller="CompanyProfileCompanyController">
+<div class="wrapper-md">
     <div class="panel panel-default">
         <tabset class="tab-container">
-            <tab>
+            <tab ng-controller="CompanyProfileCompanyController">
                 <tab-heading>
                     Company
                 </tab-heading>
                 <form class="form-horizontal">
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Company Code</label>
+
                         <div class="col-lg-10">
-                            <input type="text" ng-model="company.code" class="form-control" placeholder="Company Code" disabled>
+                            <input type="text" ng-model="company.code" class="form-control" placeholder="Company Code"
+                                   disabled>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Company Name</label>
+
                         <div class="col-lg-10">
                             <input type="text" ng-model="company.name" class="form-control" placeholder="Company Name">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Business Registration No.</label>
+
                         <div class="col-lg-10">
-                            <input type="text" ng-model="company.busRegNumber" class="form-control" placeholder="Business Registration No.">
+                            <input type="text" ng-model="company.busRegNumber" class="form-control"
+                                   placeholder="Business Registration No.">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Billing Address</label>
+
                         <div class="col-lg-10">
-                            <input type="text" ng-model="company.billingAddress" class="form-control" placeholder="Billing Address">
+                            <input type="text" ng-model="company.billingAddress" class="form-control"
+                                   placeholder="Billing Address">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Company Contact Number</label>
+
                         <div class="col-lg-10">
-                            <input type="text" ng-model="company.contactNumber" class="form-control" placeholder="Company Contact Number">
+                            <input type="text" ng-model="company.contactNumber" class="form-control"
+                                   placeholder="Company Contact Number">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Company Email Address</label>
+
                         <div class="col-lg-10">
-                            <input type="email" ng-model="company.email" class="form-control" placeholder="Company Email Address">
+                            <input type="email" ng-model="company.email" class="form-control"
+                                   placeholder="Company Email Address">
                         </div>
                     </div>
                     <div class="form-group">
@@ -63,23 +74,27 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Optional Image to Appear at Top-Right Corner of Purchase Orders</label>
+                        <label class="col-lg-2 control-label">Optional Image to Appear at Top-Right Corner of Purchase
+                            Orders</label>
 
                         <div class="col-lg-10">
                             <img id="optionalImage" class="mc-logo image-preview" src="img/logo_placeholder.png"
                                  ng-src="{{company.optionalImage}}"/>
 
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default" click-selector="#upload-optional-image">Upload
+                                <button type="button" class="btn btn-default" click-selector="#upload-optional-image">
+                                    Upload
                                     Image
                                 </button>
-                                <input id="upload-optional-image" type="file" file-model="optionalImage" accept="image/*"
+                                <input id="upload-optional-image" type="file" file-model="optionalImage"
+                                       accept="image/*"
                                        style="display: none;">
-                                <button type="button" class="btn btn-default" ng-click="removeOptionalImage()">Remove</button>
+                                <button type="button" class="btn btn-default" ng-click="removeOptionalImage()">Remove
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group" >
+                    <div class="form-group">
                         <label class="col-lg-2 control-label">Main Contact person for Supplier</label>
 
                         <div class="col-lg-10">
@@ -105,11 +120,63 @@
                     </div>
                 </form>
             </tab>
-            <tab>
+            <tab ng-controller="CompanyProfileOutletsController">
                 <tab-heading>
                     Outlet
                 </tab-heading>
-                     <h1>Outlet</h1>
+                <accordion close-others="true">
+                    <accordion-group heading="{{outlet.name}}" ng-repeat="outlet in outlets">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Outlet Name</label>
+
+                                <div class="col-lg-10">
+                                    <input type="text" ng-model="outlet.name" class="form-control"
+                                           placeholder="Outlet Name" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Delivery Address</label>
+
+                                <div class="col-lg-10">
+                                    <input type="text" ng-model="outlet.deliveryAddress" class="form-control"
+                                           placeholder="Delivery Address" required ng-disabled="currentOutlet.id != outlet.id">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Postal Code</label>
+
+                                <div class="col-lg-10">
+                                    <input type="number" ng-model="outlet.postalCode" min="1" max="999999"
+                                           class="form-control" placeholder="Postal Code" ng-disabled="currentOutlet.id != outlet.id">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Outlet Contact Number</label>
+
+                                <div class="col-lg-10">
+                                    <input type="text" ng-model="outlet.contactNumber" class="form-control"
+                                           placeholder="Outlet Contact Number" required ng-disabled="currentOutlet.id != outlet.id">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Outlet Email Address</label>
+
+                                <div class="col-lg-10">
+                                    <input type="email" ng-model="outlet.email" class="form-control"
+                                           placeholder="Outlet Email Address" required ng-disabled="currentOutlet.id != outlet.id">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button class="btn btn-sm btn-info" ng-click="edit(outlet)" ng-hide="currentOutlet.id == outlet.id">Edit</button>
+                                    <button type="submit" class="btn btn-sm btn-info" ng-click="save(outlet)" ng-show="currentOutlet.id == outlet.id">Save</button>
+                                    <button class="btn btn-sm btn-danger" ng-click="cancel()" ng-show="currentOutlet.id == outlet.id">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </accordion-group>
+                </accordion>
             </tab>
         </tabset>
     </div>

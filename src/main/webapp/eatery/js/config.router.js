@@ -56,9 +56,21 @@ angular.module('app')
                         url: '/setting',
                         templateUrl: 'templates/setting.html'
                     })
-                    .state('app.profile', {
+                    .state('app.personalProfile', {
                         url: '/profile',
-                        templateUrl: 'templates/profile.html'
+                        templateUrl: 'templates/personal_profile.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/directives/file-model.directive.js',
+                                        'js/directives/click-selector.directive.js',
+                                        'js/personal_profile/users.factory.js',
+                                        'js/personal_profile/personal-profile.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
                     })
                     .state('app.dashboard', {
                         url: '/dashboard',
@@ -78,8 +90,10 @@ angular.module('app')
                                         'js/directives/file-model.directive.js',
                                         'js/directives/click-selector.directive.js',
                                         'js/company_profile/companies.factory.js',
+                                        'js/company_profile/outlets.factory.js',
                                         'js/company_profile/contact-person.factory.js',
-                                        'js/company_profile/company-profile.company.controller.js'
+                                        'js/company_profile/company-profile.company.controller.js',
+                                        'js/company_profile/company-profile.outlets.controller.js'
                                     ]);
                                 }
                             ]

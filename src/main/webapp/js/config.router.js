@@ -33,7 +33,7 @@
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
-                                        'js/user.factory.js',
+                                        'js/users.factory.js',
                                         'js/sign-up.controller.js'
                                     ]);
                                 }

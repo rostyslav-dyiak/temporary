@@ -62,7 +62,19 @@ angular.module('app')
                     })
                     .state('app.personalProfile', {
                         url: '/personal_profile',
-                        templateUrl: 'templates/personal_profile.html'
+                        templateUrl: 'templates/personal_profile.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/directives/file-model.directive.js',
+                                        'js/directives/click-selector.directive.js',
+                                        'js/personal_profile/users.factory.js',
+                                        'js/personal_profile/personal-profile.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
                     })
                     .state('app.activityLog', {
                         url: '/activity_log',
@@ -79,10 +91,6 @@ angular.module('app')
                     .state('app.companySettings', {
                         url: '/company_settings',
                         templateUrl: 'templates/admin/company_settings.html'
-                    })
-                    .state('app.profileSettings', {
-                        url: '/profile_settings',
-                        templateUrl: 'templates/admin/profile_settings.html'
                     })
                     .state('app.teamMember', {
                         url: '/team_member',
