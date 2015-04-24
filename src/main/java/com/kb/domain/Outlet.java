@@ -49,7 +49,7 @@ public class Outlet implements Serializable {
     private OutletStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "outlet_id")
+    @JoinColumn(name = "company_id")
     private Company company;
 
     public Long getId() {
