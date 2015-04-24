@@ -29,19 +29,19 @@ public class EateryDetails implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "eatery_id")
 	private Company eatery;
-	
+
     @ManyToOne
     @JoinColumn(name = "logo_id")
     private Picture logo;
-    
+
     @ManyToOne
     @JoinColumn(name = "top_right_picture_id")
     private Picture topRightPicture;
-    
+
     @ManyToOne
     @JoinColumn(name = "contact_person_id")
-    private User contactPerson;	
-	
+    private User contactPerson;
+
     @Column(name = "code")
     private String code;
 
@@ -56,6 +56,10 @@ public class EateryDetails implements Serializable {
 
     @Column(name = "fax_number")
     private String faxNumber;
+
+    @OneToOne
+    @JoinColumn(name= "business_type_id")
+    private BusinessType businessType;
 
     public Long getId() {
         return id;
@@ -136,7 +140,15 @@ public class EateryDetails implements Serializable {
 	public void setContactPerson(final User contactPerson) {
 		this.contactPerson = contactPerson;
 	}
-	
+
+    public void setBusinessType(BusinessType businessType) {
+        this.businessType = businessType;
+    }
+
+    public BusinessType getBusinessType() {
+        return businessType;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
@@ -165,5 +177,5 @@ public class EateryDetails implements Serializable {
 				+ ", postalCode=" + postalCode + ", faxNumber=" + faxNumber
 				+ "]";
 	}
-    
+
 }

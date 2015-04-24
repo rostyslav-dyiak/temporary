@@ -20,4 +20,12 @@
                                  referencedColumnNames="id"
                                  referencedTableName="T_COMPANY"/>
     </changeSet>
+    <changeSet author="rostyslav_dyyak" id="renameColumn-business_type">
+        <renameColumn
+            columnDataType="varchar(255)"
+            newColumnName="company_type"
+            oldColumnName="business_type"
+            schemaName="public"
+            tableName="T_COMPANY"/>
+    </changeSet>
 </databaseChangeLog>
