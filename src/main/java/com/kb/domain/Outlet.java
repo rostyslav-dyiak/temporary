@@ -1,21 +1,11 @@
 package com.kb.domain;
 
 
+import com.kb.domain.status.OutletStatus;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import com.kb.domain.status.OutletStatus;
 
 /**
  * A Outlet.
@@ -23,9 +13,9 @@ import com.kb.domain.status.OutletStatus;
 @Entity
 @Table(name = "T_OUTLET")
 public class Outlet implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -51,6 +41,10 @@ public class Outlet implements Serializable {
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
+
+    public Outlet() {
+
+    }
 
     public Long getId() {
         return id;
@@ -127,7 +121,7 @@ public class Outlet implements Serializable {
 
         Outlet outlet = (Outlet) o;
 
-        if ( ! Objects.equals(id, outlet.id)) return false;
+        if (!Objects.equals(id, outlet.id)) return false;
 
         return true;
     }
@@ -140,12 +134,12 @@ public class Outlet implements Serializable {
     @Override
     public String toString() {
         return "Outlet{" +
-                "id=" + id +
-                ", name='" + name + "'" +
-                ", deliveryAddress='" + deliveryAddress + "'" +
-                ", postalCode='" + postalCode + "'" +
-                ", contactNumber='" + contactNumber + "'" +
-                ", email='" + email + "'" +
-                '}';
+            "id=" + id +
+            ", name='" + name + "'" +
+            ", deliveryAddress='" + deliveryAddress + "'" +
+            ", postalCode='" + postalCode + "'" +
+            ", contactNumber='" + contactNumber + "'" +
+            ", email='" + email + "'" +
+            '}';
     }
 }

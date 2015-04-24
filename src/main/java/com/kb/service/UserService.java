@@ -1,6 +1,7 @@
 package com.kb.service;
 
 import com.kb.domain.Authority;
+import com.kb.domain.Company;
 import com.kb.domain.PersistentToken;
 import com.kb.domain.User;
 import com.kb.repository.AuthorityRepository;
@@ -58,19 +59,20 @@ public class UserService {
         return Optional.empty();
     }
 
-    public User createUserInformation(String login, String password, String firstName, String lastName, String email,
-                                      String langKey) {
+    public User createUserInformation( String email, String password, String firstName, String lastName,
+                                      String langKey,Company company) {
         User newUser = new User();
         Authority authority = authorityRepository.findOne("ROLE_USER");
         Set<Authority> authorities = new HashSet<>();
         String encryptedPassword = passwordEncoder.encode(password);
-        newUser.setLogin(login);
+        newUser.setLogin(email);
         // new user gets initially a generated password
         newUser.setPassword(encryptedPassword);
         newUser.setFirstName(firstName);
         newUser.setLastName(lastName);
         newUser.setEmail(email);
         newUser.setLangKey(langKey);
+        newUser.setCompany(company);
         // new user is not active
         newUser.setActivated(false);
         // new user gets registration key
