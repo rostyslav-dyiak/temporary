@@ -1,6 +1,6 @@
 <div class="bg-light lter b-b wrapper-md clearfix">
     <button class="btn btn-default back-button pull-left" back-button>Back</button>
-    <a ui-sref="app.manageCompany.outletsAdd" class="btn btn-info btn-rounded pull-right">Add New Outlet</a>
+    <a ui-sref="app.manageCompany.outletsAdd({companyId: {{company}})" class="btn btn-info btn-rounded pull-right">Add New Outlet</a>
 </div>
 <div class="wrapper-md" ng-controller="ManageCompanyOutletsController">
     <div class="row">
@@ -22,7 +22,7 @@
                                 <td>{{row.created | date}}</td>
                                 <td>{{row.status}}</td>
                                 <td>
-                                    <a ui-sref="app.manageCompany.outletsEdit({id: {{row.id}} })" class="btn btn-default btn-rounded">
+                                    <a ui-sref="app.manageCompany.outletsEdit({companyId: {{companyId}}, id: {{row.id}} })" class="btn btn-default btn-rounded">
                                         Edit
                                     </a>
                                 </td>

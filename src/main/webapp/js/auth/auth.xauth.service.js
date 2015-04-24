@@ -1,13 +1,18 @@
-'use strict';
-app.factory('AuthServerProvider', AuthServerProvider);
+(function () {
+
+    'use strict';
+
+    angular.module('app').factory('AuthServerProvider', AuthServerProvider);
+
     AuthServerProvider
         .$inject = [
         '$http',
         'localStorageService'
     ];
-function AuthServerProvider($http,localStorageService){
+
+    function AuthServerProvider($http, localStorageService) {
         return {
-            login: function(email,password) {
+            login: function (email, password) {
                 var data = "email=" + email + "&password="
                     + password;
                 return $http.post('api/authenticate', data, {
@@ -20,16 +25,18 @@ function AuthServerProvider($http,localStorageService){
                     return response;
                 });
             },
-            logout: function() {
+            logout: function () {
                 //Stateless API : No server logout
                 localStorageService.clearAll();
             },
             getToken: function () {
-               return localStorageService.get('token');
+                return localStorageService.get('token');
             },
             hasValidToken: function () {
                 var token = this.getToken();
                 return token && token.expires && token.expires > new Date().getTime();
             }
         };
-    };
+    }
+
+})();

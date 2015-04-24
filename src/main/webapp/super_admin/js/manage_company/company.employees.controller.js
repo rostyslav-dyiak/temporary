@@ -5,16 +5,23 @@
     ManageCompanyEmployeesController
         .$inject = [
         '$scope',
-        'EmployeesFactory'
+        '$stateParams',
+        'CompanyFactory'
     ];
 
-    function ManageCompanyEmployeesController($scope, EmployeesFactory) {
+    function ManageCompanyEmployeesController($scope, $stateParams, CompanyFactory) {
+        var companyId = $stateParams.id;
+
+        $scope.employees = {};
+
         activate();
 
         function activate() {
-            EmployeesFactory.get({},
+            CompanyFactory.get({
+                    id: companyId
+                },
                 function (data) {
-                    $scope.employees = data.employees;
+                    $scope.employees = data.users;
                 }, function (e) {
                     console.error(e);
                 });

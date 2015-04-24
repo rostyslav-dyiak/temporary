@@ -17,6 +17,7 @@
     <include file="classpath:config/liquibase/changelog/create-update-date.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20150424132903_added_entity_BusinessType.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/custom_add_bussines_type_column_to_eatery_details.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/data_batch.xml" relativeToChangelogFile="false"/>
     <!-- JHipster will add liquibase changelogs here -->
 
 </databaseChangeLog>

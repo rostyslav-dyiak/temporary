@@ -1,25 +1,26 @@
-(function () {
+(function() {
     'use strict';
 
-    app.factory('OutletsFactory', OutletsFactory);
+    app.factory('CompanyFactory', CompanyFactory);
 
-    OutletsFactory
+    CompanyFactory
         .$inject = [
         '$resource',
         'AuthServerProvider'
     ];
 
-    function OutletsFactory($resource, AuthServerProvider) {
-        return $resource('/api/outlets', {}, {
+    function CompanyFactory($resource, AuthServerProvider) {
+        return $resource('/api/companies', {}, {
             'query': {
                 method: 'GET',
-                isArray: false,
+                isArray: true,
                 headers: {
                     'x-auth-token': AuthServerProvider.getToken().token
                 }
             },
-            'save': {
-                method: 'POST',
+            get: {
+                method: 'GET',
+                isArray: true,
                 headers: {
                     'x-auth-token': AuthServerProvider.getToken().token
                 }

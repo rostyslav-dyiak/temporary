@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <!--
+        JHipster core tables.
+        The initial schema has the '00000000000001' id, so that it is over-written if we re-generate it.
+    -->
+    <changeSet id="data-for-manage-company-part" author="Oleh">
+
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/companies.csv"
+                  separator=";"
+                  tableName="T_COMPANY">
+            <column name="created_date" type="timestamp"/>
+        </loadData>
+        <dropDefaultValue tableName="T_COMPANY" columnName="created_date" columnDataType="datetime"/>
+
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/pictures.csv"
+                  separator=";"
+                  tableName="T_PICTURE">
+            <column name="created_date" type="timestamp"/>
+        </loadData>
+        <dropDefaultValue tableName="T_PICTURE" columnName="created_date" columnDataType="datetime"/>
+
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/eatery-details.csv"
+                  separator=";"
+                  tableName="T_EATERYDETAILS">
+            <column name="created_date" type="timestamp"/>
+        </loadData>
+        <dropDefaultValue tableName="T_EATERYDETAILS" columnName="created_date" columnDataType="datetime"/>
+
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/outlets.csv"
+                  separator=";"
+                  tableName="T_OUTLET">
+            <column name="created_date" type="timestamp"/>
+        </loadData>
+        <dropDefaultValue tableName="T_OUTLET" columnName="created_date" columnDataType="datetime"/>
+
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/supplier-details.csv"
+                  separator=";"
+                  tableName="T_SUPPLIERDETAILS">
+            <column name="created_date" type="timestamp"/>
+        </loadData>
+        <dropDefaultValue tableName="T_SUPPLIERDETAILS" columnName="created_date" columnDataType="datetime"/>
+    </changeSet>
+
+</databaseChangeLog>

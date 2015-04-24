@@ -15,7 +15,7 @@
             function ($stateProvider, $urlRouterProvider) {
 
                 $urlRouterProvider
-                    .otherwise('/super_admin/manage_company/list');
+                    .otherwise('/super_admin/companies/list');
                 $stateProvider
                     .state('app', {
                         abstract: true,
@@ -30,7 +30,7 @@
                         }
                     })
                     .state('app.manageCompany', {
-                        url: '/manage_company',
+                        url: '/companies',
                         template: '<div ui-view></div>'
                     })
                     .state('app.manageCompany.add', {
@@ -42,7 +42,8 @@
                                     return $ocLazyLoad.load([
                                         'js/directives/file-model.directive.js',
                                         'js/directives/click-selector.directive.js',
-                                        'js/manage_company/add-edit.controller.js'
+                                        'js/manage_company/company.factory.js',
+                                        'js/manage_company/company.add-edit.controller.js'
                                     ]);
                                 }
                             ]
@@ -60,7 +61,8 @@
                                     return $ocLazyLoad.load([
                                         'js/directives/file-model.directive.js',
                                         'js/directives/click-selector.directive.js',
-                                        'js/manage_company/add-edit.controller.js'
+                                        'js/manage_company/company.factory.js',
+                                        'js/manage_company/company.add-edit.controller.js'
                                     ]);
                                 }
                             ]
@@ -73,61 +75,77 @@
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
-                                        'js/manage_company/manage-company-list.factory.js',
-                                        'js/manage_company/manage-company-list.controller.js'
+                                        'js/manage_company/company.factory.js',
+                                        'js/manage_company/company.list.controller.js'
                                     ]);
                                 }
                             ]
                         }
                     })
                     .state('app.manageCompany.outlets', {
-                        url: '/outlets',
+                        url: '/:id/outlets',
                         templateUrl: 'templates/manage_company/customers.html',
-                        resolve: {
-                            deps: ['$ocLazyLoad',
-                                function ($ocLazyLoad) {
-                                    return $ocLazyLoad.load([
-                                        'js/manage_company/outlets.factory.js',
-                                        'js/manage_company/outlets.controller.js'
-                                    ]);
-                                }
-                            ]
-                        }
-                    })
-                    .state('app.manageCompany.outletsAdd', {
-                        url: '/outlets/add',
-                        templateUrl: 'templates/manage_company/outlets_add_edit.html',
-                        resolve: {
-                            deps: ['$ocLazyLoad',
-                                function ($ocLazyLoad) {
-                                    return $ocLazyLoad.load('js/manage_company/outlets.add-edit.controller.js');
-                                }
-                            ]
-                        }
-                    })
-                    .state('app.manageCompany.outletsEdit', {
-                        url: '/outlets/:id',
-                        templateUrl: 'templates/manage_company/outlets_add_edit.html',
                         controller: function ($stateParams) {
                             $stateParams.id
                         },
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
-                                    return $ocLazyLoad.load('js/manage_company/outlets.add-edit.controller.js');
+                                    return $ocLazyLoad.load([
+                                        'js/manage_company/company.outlets.factory.js',
+                                        'js/manage_company/company.outlets.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
+                    })
+                    .state('app.manageCompany.outletsAdd', {
+                        url: '/:companyId/outlets/add',
+                        templateUrl: 'templates/manage_company/outlets_add_edit.html',
+                        controller: function ($stateParams) {
+                            $stateParams.companyId
+                        },
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/manage_company/outlets.factory.js',
+                                        'js/manage_company/outlets.company.add-edit.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
+                    })
+                    .state('app.manageCompany.outletsEdit', {
+                        url: '/:companyId/outlets/:id',
+                        templateUrl: 'templates/manage_company/outlets_add_edit.html',
+                        controller: function ($stateParams) {
+                            $stateParams.companyId,
+                            $stateParams.id
+                        },
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/manage_company/outlets.factory.js',
+                                        'js/manage_company/outlets.company.add-edit.controller.js'
+                                    ]);
                                 }
                             ]
                         }
                     })
                     .state('app.manageCompany.employees', {
-                        url: '/employees',
+                        url: '/:id/employees',
                         templateUrl: 'templates/manage_company/employees.html',
+                        controller: function ($stateParams) {
+                            $stateParams.id
+                        },
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
-                                        'js/manage_company/employees.factory.js',
-                                        'js/manage_company/employees.controller.js'
+                                        'js/manage_company/company.factory.js',
+                                        'js/manage_company/company.employees.controller.js'
                                     ]);
                                 }
                             ]

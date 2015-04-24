@@ -1,0 +1,4 @@
+id;name;email;contact_number;company_type;created_by;status
+1;Company1;test1@mail.com;74628734;SUPPLIER;3;ACTIVE
+2;Company2;test2@mail.com;43576565;EATERY;3;ACTIVE
+3;Company3;test3@mail.com;12748574;EATERY;3;INACTIVE

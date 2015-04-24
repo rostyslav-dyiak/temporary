@@ -112,11 +112,11 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <button type="submit" class="btn btn-sm btn-info" ng-hide="company.id" ng-click="addCompany()">Save</button>
-                                <button type="submit" class="btn btn-sm btn-info" ng-hide="!company.id">Update and
+                                <button type="submit" class="btn btn-sm btn-info" ng-hide="company.id" ng-click="addCompany(company)">Save</button>
+                                <button type="submit" class="btn btn-sm btn-info" ng-hide="!company.id" ng-click="save(company)">Update and
                                     Send
                                 </button>
-                                <button class="btn btn-sm btn-danger">Cancel</button>
+                                <span class="btn btn-sm btn-danger" ng-click="cancel()">Cancel</span>
                             </div>
                         </div>
                     </form>
@@ -137,7 +137,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="row in rowCollection">
+                        <tr ng-repeat="row in invitationHistory">
                             <td>{{row.email}}</td>
                             <td>{{row.sent | date}}</td>
                             <td>{{row.status}}</td>

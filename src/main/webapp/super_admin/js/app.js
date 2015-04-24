@@ -15,5 +15,6 @@ angular.module('app', [
     'ui.jq',
     'ui.sortable',
     'oc.lazyLoad',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'LocalStorageModule'
 ]);

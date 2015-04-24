@@ -26,11 +26,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="row in companies">
-                    <td>{{row.code | uppercase}}</td>
-                    <td><img ng-src="{{row.logo}}" alt="{{row.name}}"></td>
+                <tr ng-switch="row.businessType" ng-repeat="row in companies">
+                    <td ng-switch-when="EATERY">{{row.eateryDetails.code}}</td>
+                    <td ng-switch-when="SUPPLIER">{{row.supplierDetails.code}}</td>
+                    <td ng-switch-when="EATERY"><img ng-src="{{row.eateryDetails.logo}}" alt="{{row.name}}"></td>
+                    <td ng-switch-when="SUPPLIER"><img ng-src="{{row.supplierDetails.logo}}" alt="{{row.name}}"></td>
                     <td>{{row.name}}</td>
-                    <td>{{row.type}}</td>
+                    <td>{{row.businessType}}</td>
                     <td>{{row.created | date}}</td>
                     <td>{{row.status}}</td>
                     <td>
@@ -39,12 +41,12 @@
                         </a>
                     </td>
                     <td>
-                        <a ui-sref="app.manageCompany.outlets" class="btn btn-default btn-rounded" ng-show="row.type == 'Eatery' && row.status == 'Active'">
+                        <a ui-sref="app.manageCompany.outlets({id: {{row.id}} })" class="btn btn-default btn-rounded" ng-show="row.businessType == 'EATERY' && row.status == 'Active'">
                             View Outlets
                         </a>
                     </td>
                     <td>
-                        <a ui-sref="app.manageCompany.employees" class="btn btn-default btn-rounded" ng-show="row.status == 'Active'">
+                        <a ui-sref="app.manageCompany.employees({id: {{row.id}} })" class="btn btn-default btn-rounded" ng-show="row.status == 'Active'">
                             View Employees
                         </a>
                     </td>
