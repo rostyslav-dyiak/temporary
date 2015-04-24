@@ -16,7 +16,7 @@
 
         $scope.rememberMe = true;
         $scope.login = function () {
-            AuthServerProvider.login($scope.username,$scope.password).then(function (data) {
+            AuthServerProvider.login($scope.email,$scope.password).then(function (data) {
 
             });
             //var data = "username=" + $scope.username + "&password="

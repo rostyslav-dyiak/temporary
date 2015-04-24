@@ -7,8 +7,8 @@ app.factory('AuthServerProvider', AuthServerProvider);
     ];
 function AuthServerProvider($http,localStorageService){
         return {
-            login: function(username,password) {
-                var data = "username=" + username + "&password="
+            login: function(email,password) {
+                var data = "email=" + email + "&password="
                     + password;
                 return $http.post('api/authenticate', data, {
                     headers: {
@@ -25,7 +25,6 @@ function AuthServerProvider($http,localStorageService){
                 localStorageService.clearAll();
             },
             getToken: function () {
-                return ''
                return localStorageService.get('token');
             },
             hasValidToken: function () {
