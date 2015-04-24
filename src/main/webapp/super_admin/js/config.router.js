@@ -82,7 +82,7 @@
                     })
                     .state('app.manageCompany.outlets', {
                         url: '/outlets',
-                        templateUrl: 'templates/manage_company/outlets.html',
+                        templateUrl: 'templates/manage_company/customers.html',
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {

@@ -1,0 +1,32 @@
+<div class="bg-light lter b-b wrapper-md">
+    <button class="btn btn-default back-button" back-button>Back</button>
+</div>
+<div class="wrapper-md" ng-controller="TeamMemberCustomersController">
+    <div class="panel panel-default">
+        <p class="table-count-label">List of Customers({{ customers.length }})</p>
+        <div class="table-responsive">
+            <table st-table="rowCollectionPage" class="table table-striped text-center">
+                <thead>
+                <tr>
+                    <th class="text-center" st-sort="name">Name</th>
+                    <th class="text-center" st-sort="outletsNumber">Number of Outlets</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in customers">
+                    <td>{{row.name}}</td>
+                    <td>{{row.outletsNumber}} outlets</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="5" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="5"
+                             class="no-margin"></div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="bg-light lter b-b wrapper-md clearfix">
+    <h1 class="m-n font-thin h3 pull-left">Team Members</h1>
+    <a ui-sref="app.teamMemberAdd" class="btn btn-info btn-rounded pull-right">Invite New Member</a>
+</div>
+<div class="wrapper-md" ng-controller="TeamMembersController">
+    <div class="panel panel-default">
+        <div class="table-responsive">
+            <table st-table="rowCollectionPage" class="table table-striped text-center">
+                <thead>
+                <tr>
+                    <th class="text-center" st-sort="email">Email</th>
+                    <th class="text-center" st-sort="name">Name</th>
+                    <th class="text-center" st-sort="title">Title</th>
+                    <th class="text-center" st-sort="contactNumber">Contact Number</th>
+                    <th class="text-center" st-sort="access">Access</th>
+                    <th class="text-center" st-sort="status">Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in teamMembers"  ui-sref="app.teamMemberEdit({id: {{row.id}} })">
+                    <td>{{row.email}}</td>
+                    <td>{{row.salutation}} {{row.name}}</td>
+                    <td>{{row.title}}</td>
+                    <td>{{row.contactNumber}}</td>
+                    <td>{{row.access}}</td>
+                    <td>{{row.status}}</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="5" class="text-center">
+                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="5"
+                             class="no-margin"></div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

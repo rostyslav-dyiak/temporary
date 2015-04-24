@@ -1,0 +1,24 @@
+{
+    "customers": [
+        {
+            "id": 0,
+            "name": "Mr Bean",
+            "outletsNumber": 6
+        },
+        {
+            "id": 1,
+            "name": "Cafe AA",
+            "outletsNumber": 1
+        },
+        {
+            "id": 2,
+            "name": "Cafe BB",
+            "outletsNumber": 2
+        },
+        {
+            "id": 3,
+            "name": "Cafe CC",
+            "outletsNumber": 1
+        }
+    ]
+}

@@ -5172,6 +5172,9 @@ a.text-#000000:hover {
 .form-horizontal .control-label {
     line-height: 1;
 }
+[ui-sref]:hover {
+    cursor: pointer;
+}
 
 .additional-padding {
     padding: 10px 0;
@@ -5196,4 +5199,9 @@ a.text-#000000:hover {
 }
 .type-name:hover {
     cursor: pointer;
+}
+
+/* Supplier */
+.table-count-label {
+    margin: 20px 15px 10px
 }

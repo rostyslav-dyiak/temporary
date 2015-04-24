@@ -1,0 +1,36 @@
+{
+    "teamMembers": [{
+        "id": 0,
+        "salutation": "Mr",
+        "name": "Niles",
+        "title": "Manager",
+        "contactNumber": "482 364 23",
+        "email": "test@email.com",
+        "outlet": "Bugins",
+        "access": "Company Admin",
+        "status": "Active",
+        "customersNumber": 8
+    },{
+        "id": 1,
+        "salutation": "Mrs",
+        "name": "Sabrina",
+        "title": "CEO",
+        "contactNumber": "482 364 23",
+        "email": "test@email.com",
+        "outlet": "Orchard Outlet",
+        "access": "Normal User",
+        "status": "Active",
+        "customersNumber": 0
+    },{
+        "id": 2,
+        "salutation": "Mrs",
+        "name": "Sabrina",
+        "title": "Manager",
+        "contactNumber": "482 364 23",
+        "email": "test@email.com",
+        "outlet": "HQ",
+        "access": "Normal User",
+        "status": "Inactive",
+        "customersNumber": 4
+    }]
+}
