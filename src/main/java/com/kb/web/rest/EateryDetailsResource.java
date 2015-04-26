@@ -23,7 +23,7 @@ import java.util.Optional;
  * REST controller for managing EateryDetails.
  */
 @RestController
-@RequestMapping("/api/eatery")
+@RequestMapping("/api")
 public class EateryDetailsResource {
 
     private final Logger log = LoggerFactory.getLogger(EateryDetailsResource.class);
@@ -34,7 +34,7 @@ public class EateryDetailsResource {
     /**
      * POST  /eateryDetailss -> Create a new eateryDetails.
      */
-    @RequestMapping(value = "/details",
+    @RequestMapping(value = "/eateryDetails",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -50,7 +50,7 @@ public class EateryDetailsResource {
     /**
      * PUT  /eateryDetailss -> Updates an existing eateryDetails.
      */
-    @RequestMapping(value = "/details",
+    @RequestMapping(value = "/eateryDetails",
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -66,7 +66,7 @@ public class EateryDetailsResource {
     /**
      * GET  /eateryDetailss -> get all the eateryDetailss.
      */
-    @RequestMapping(value = "/details",
+    @RequestMapping(value = "/eateryDetails",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -81,7 +81,7 @@ public class EateryDetailsResource {
     /**
      * GET  /eateryDetailss/:id -> get the "id" eateryDetails.
      */
-    @RequestMapping(value = "/{id}/details",
+    @RequestMapping(value = "/{id}/eateryDetails",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -97,7 +97,7 @@ public class EateryDetailsResource {
     /**
      * DELETE  /eateryDetailss/:id -> delete the "id" eateryDetails.
      */
-    @RequestMapping(value = "/{id}/details",
+    @RequestMapping(value = "/{id}/eateryDetails",
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed

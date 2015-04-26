@@ -34,7 +34,7 @@ public class SupplierDetailsResource {
     /**
      * POST  /supplierDetailss -> Create a new supplierDetails.
      */
-    @RequestMapping(value = "/supplierDetailss",
+    @RequestMapping(value = "/supplierDetails",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -50,7 +50,7 @@ public class SupplierDetailsResource {
     /**
      * PUT  /supplierDetailss -> Updates an existing supplierDetails.
      */
-    @RequestMapping(value = "/supplierDetailss",
+    @RequestMapping(value = "/supplierDetails",
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -66,7 +66,7 @@ public class SupplierDetailsResource {
     /**
      * GET  /supplierDetailss -> get all the supplierDetailss.
      */
-    @RequestMapping(value = "/supplierDetailss",
+    @RequestMapping(value = "/supplierDetails",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -81,7 +81,7 @@ public class SupplierDetailsResource {
     /**
      * GET  /supplierDetailss/:id -> get the "id" supplierDetails.
      */
-    @RequestMapping(value = "/supplierDetailss/{id}",
+    @RequestMapping(value = "/supplierDetails/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -97,7 +97,7 @@ public class SupplierDetailsResource {
     /**
      * DELETE  /supplierDetailss/:id -> delete the "id" supplierDetails.
      */
-    @RequestMapping(value = "/supplierDetailss/{id}",
+    @RequestMapping(value = "/supplierDetails/{id}",
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
