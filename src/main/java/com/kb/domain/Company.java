@@ -55,6 +55,12 @@ public class Company extends AbstractAuditingEntity implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
     private Set<User> users = new HashSet<>();
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
+    private Set<Outlet> outlets = new HashSet<>();
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
+    private Set<Contact> contacts = new HashSet<>();
 
     public Long getId() {
         return id;

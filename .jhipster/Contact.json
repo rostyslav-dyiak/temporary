@@ -1,0 +1,62 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "contactName",
+            "fieldType": "String",
+            "fieldNameCapitalized": "ContactName",
+            "fieldNameUnderscored": "contact_name",
+            "fieldInJavaBeanMethod": "ContactName",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Title",
+            "fieldNameUnderscored": "title",
+            "fieldInJavaBeanMethod": "Title",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "phoneNumber",
+            "fieldType": "String",
+            "fieldNameCapitalized": "PhoneNumber",
+            "fieldNameUnderscored": "phone_number",
+            "fieldInJavaBeanMethod": "PhoneNumber",
+            "fieldValidate": true,
+            "fieldValidateRules": []
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "email",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Email",
+            "fieldNameUnderscored": "email",
+            "fieldInJavaBeanMethod": "Email",
+            "fieldValidate": true,
+            "fieldValidateRules": []
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "remarks",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Remarks",
+            "fieldNameUnderscored": "remarks",
+            "fieldInJavaBeanMethod": "Remarks",
+            "fieldValidate": false
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOneToMany": false,
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": false,
+    "fieldsContainBigDecimal": false,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "changelogDate": "20150426091606",
+    "pagination": "pagination",
+    "validation": true
+}
