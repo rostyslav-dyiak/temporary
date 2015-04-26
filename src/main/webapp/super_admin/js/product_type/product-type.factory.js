@@ -5,14 +5,18 @@
 
     ProductTypeFactory
         .$inject = [
-        '$resource'
+        '$resource',
+        'AuthServerProvider'
     ];
 
-    function ProductTypeFactory($resource) {
-        return $resource('api/product-type.json', {}, {
+    function ProductTypeFactory($resource,AuthServerProvider) {
+        return $resource('http://127.0.0.1:8080/api/productTypes', {}, {
             'query': {
                 method: 'GET',
-                isArray: false
+                isArray: true,
+                headers: {
+                    'x-auth-token': AuthServerProvider.getToken().token
+                }
             }
         });
     }

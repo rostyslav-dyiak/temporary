@@ -10,8 +10,7 @@
     ];
 
     function ProductTypeController($scope, ProductTypeFactory) {
-        $scope.type = {};
-
+        $scope.types = [];
         $scope.save = save;
         $scope.editType = editType;
         $scope.removeType = removeType;
@@ -19,7 +18,7 @@
         activate();
 
         function activate() {
-            ProductTypeFactory.get({},
+            ProductTypeFactory.query({},
                 function (data) {
                     $scope.types = data.types;
                 }, function (e) {
@@ -44,49 +43,26 @@
         }
 
         function editType(id) {
-            //ProductTypeFactory.get({
-            //        id: id
-            //    },
-            //    function (data) {
-            //        $scope.types = data.types;
-            //    }, function (e) {
-            //        console.error(e);
-            //    });
-            if (id == 0) {
-                $scope.type = {
-                    id: 0,
-                    name: 'Staples',
-                    description: 'Some dummy text 0',
-                    value: 0
-                }
-            } else if (id == 1) {
-                $scope.type = {
-                    id: 1,
-                    name: 'Dried Stuff',
-                    description: 'Some dummy text 1',
-                    value: 2
-                }
-            } else if (id == 3) {
-                $scope.type = {
-                    id: 3,
-                    name: 'Frozen Stuff',
-                    description: 'Some dummy text 3',
-                    value: 4
-                }
-            }
+            ProductTypeFactory.get({
+                    id: id
+                },
+                function (data) {
+                    $scope.types = data.types;
+                }, function (e) {
+                    console.error(e);
+                });
 
         }
 
         function removeType(id) {
-            //ProductTypeFactory.delete({
-                //        id: id
-                //    },
-                //    function () {
-                //       console.log("Deleted type with id: " + id)
-                //    }, function (e) {
-                //        console.error(e);
-                //    });
-            console.log("Deleted type with id: " + id);
+            ProductTypeFactory.delete({
+                        id: id
+                    },
+                    function () {
+                       console.log("Deleted type with id: " + id)
+                    }, function (e) {
+                        console.error(e);
+                    });
         }
     }
 })();
