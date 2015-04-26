@@ -1,6 +1,8 @@
 package com.kb.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -26,6 +28,7 @@ public class EateryDetails extends AbstractAuditingEntity implements Serializabl
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "eatery_id")
 	private Company eatery;

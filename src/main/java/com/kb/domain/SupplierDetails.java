@@ -1,6 +1,8 @@
 package com.kb.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
@@ -29,6 +31,7 @@ public class SupplierDetails extends AbstractAuditingEntity implements Serializa
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "supplier_id")
 	private Company supplier;
@@ -36,11 +39,11 @@ public class SupplierDetails extends AbstractAuditingEntity implements Serializa
     @ManyToOne
     @JoinColumn(name = "logo_id")
     private Picture logo;
-	
+
     @ManyToOne
     @JoinColumn(name = "main_picture_id")
     private Picture mainPicture;
-	
+
     @Column(name = "code")
     private String code;
 
@@ -70,7 +73,7 @@ public class SupplierDetails extends AbstractAuditingEntity implements Serializa
     	joinColumns = @JoinColumn(name = "supplier_details_picture_id", referencedColumnName = "id"),
     	inverseJoinColumns = @JoinColumn(name = "picture_id", referencedColumnName = "id"))
     private Set<Picture> pictures;
-    
+
     public Long getId() {
 		return id;
 	}

@@ -10,17 +10,19 @@
     ];
 
     function ProductTypeController($scope, ProductTypeFactory) {
+        $scope.type = {};
         $scope.types = [];
-        $scope.save = save;
+        $scope.saveType = saveType;
         $scope.editType = editType;
         $scope.removeType = removeType;
+        $scope.newProductType = newProductType;
 
         activate();
 
         function activate() {
             ProductTypeFactory.query({},
                 function (data) {
-                    $scope.types = data.types;
+                    $scope.types = data;
                 }, function (e) {
                     console.error(e);
                 });
@@ -38,31 +40,41 @@
         };
 
 
-        function save(id) {
-            console.log("Saved type with id: " + id);
-        }
-
-        function editType(id) {
-            ProductTypeFactory.get({
-                    id: id
-                },
-                function (data) {
-                    $scope.types = data.types;
-                }, function (e) {
-                    console.error(e);
-                });
+        function saveType() {
+            ProductTypeFactory.update({
+                id: $scope.type.id,
+                name: $scope.type.name,
+                description: $scope.type.description
+            }, function (data) {
+                activate();
+            }, function (e) {
+                console.error(e);
+            });
 
         }
+
+        function newProductType() {
+            $scope.type = {};
+            $scope.newType = true;
+        }
+
 
         function removeType(id) {
             ProductTypeFactory.delete({
-                        id: id
-                    },
-                    function () {
-                       console.log("Deleted type with id: " + id)
-                    }, function (e) {
-                        console.error(e);
-                    });
+                    id: id
+                },
+                function () {
+                    activate();
+                }, function (e) {
+                    console.error(e);
+                });
         }
+
+        function editType(type) {
+            $scope.type.id = type.id;
+            $scope.type.name = type.name;
+            $scope.type.description = type.description;
+        }
+
     }
 })();

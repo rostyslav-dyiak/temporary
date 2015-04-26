@@ -15,7 +15,7 @@ var app =
                 app.value = $provide.value;
             }
         ])
-        .config(['$translateProvider', function ($translateProvider) {
+        .config(['$translateProvider','$httpProvider', function ($translateProvider) {
             // Register a loader for the static files
             // So, the module will search missing translation tables under the specified urls.
             // Those urls are [prefix][langKey][suffix].
