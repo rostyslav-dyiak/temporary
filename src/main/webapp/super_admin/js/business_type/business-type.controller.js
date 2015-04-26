@@ -10,7 +10,7 @@
     ];
 
     function BusinessTypeController($scope, BusinessTypeFactory) {
-        $scope.type = {};
+        $scope.types = {};
 
         $scope.save = save;
         $scope.editType = editType;
@@ -19,9 +19,9 @@
         activate();
 
         function activate() {
-            BusinessTypeFactory.get({},
+            BusinessTypeFactory.query({},
                 function (data) {
-                    $scope.types = data.types;
+                    $scope.types = data;
                 }, function (e) {
                     console.error(e);
                 });

@@ -5,14 +5,19 @@
 
     BusinessTypeFactory
         .$inject = [
-        '$resource'
+        '$resource',
+        'AuthServerProvider'
     ];
 
-    function BusinessTypeFactory($resource) {
-        return $resource('api/business-type.json', {}, {
-            'query': {
+    function BusinessTypeFactory($resource, AuthServerProvider) {
+    	
+        return $resource('http://127.0.0.1:8080/api/businessTypes', {}, {
+        	'query': {
                 method: 'GET',
-                isArray: false
+                isArray: true,
+                headers: {
+                    'x-auth-token': AuthServerProvider.getToken().token
+                }
             }
         });
     }

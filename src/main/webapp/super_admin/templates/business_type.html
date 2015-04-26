@@ -6,7 +6,7 @@
         <div class="col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <button class="btn btn-info btn-rounded">Add New Business Type</button>
+                    <button ng-click="save(1)" class="btn btn-info btn-rounded">Add New Business Type</button>
 
                     <ul ui-sortable="sortableOptions" class="list-group gutter list-group-lg list-group-sp types-list" ng-model="types">
                         <li class="list-group-item" ng-repeat="type in types">
