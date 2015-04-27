@@ -1,34 +1,34 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="MailCtrl">
+<div class="hbox hbox-auto-xs hbox-auto-sm">
     <div class="col w-md bg-light dk b-r bg-auto">
-        <div class="wrapper b-b bg">
-            <button class="btn btn-sm btn-default pull-right visible-sm visible-xs" ui-toggle-class="show"
-                    target="#email-menu"><i class="fa fa-bars"></i></button>
+        <div class="wrapper b-b bg visible-sm visible-xs">
+            <button class="btn btn-sm btn-default pull-right" ui-toggle-class="show"
+                    target="#company-menu"><i class="fa fa-bars"></i></button>
         </div>
-        <div class="wrapper hidden-sm hidden-xs" id="email-menu">
+        <div class="wrapper hidden-sm hidden-xs" id="company-menu">
             <ul class="nav nav-pills nav-stacked nav-sm">
                 <li ui-sref-active="active">
-                    <a ui-sref="app.mail.list({fold: 'profile'})">
+                    <a ui-sref="app.companySettings.profile">
                         Company Profile
                     </a>
                 </li>
                 <li ui-sref-active="active">
-                    <a ui-sref="app.mail.list({fold: 'publicHoliday'})">
+                    <a ui-sref="app.companySettings.publicHoliday">
                         Public Holiday
                     </a>
                 </li>
                 <li ui-sref-active="active">
-                    <a ui-sref="app.mail.list({fold: 'offDays'})">
+                    <a ui-sref="app.companySettings.offDays">
                         Company Off-Days
                     </a>
                 </li>
                 <li ui-sref-active="active">
-                    <a ui-sref="app.mail.list({fold: 'deliveryDays'})">
+                    <a ui-sref="app.companySettings.deliveryDays">
                         Delivery Days for Locations
                     </a>
                 </li>
                 <li ui-sref-active="active">
-                    <a ui-sref="app.mail.list({fold: 'deliveryDays'})">
-                        Delivery Days for Locations
+                    <a ui-sref="app.companySettings.deliveryTiming">
+                        Delivery Timing for orders
                     </a>
                 </li>
             </ul>

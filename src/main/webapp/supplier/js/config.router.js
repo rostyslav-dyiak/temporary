@@ -96,20 +96,19 @@ angular.module('app')
                     templateUrl: 'templates/admin/inquiry.html'
                 })
                 .state('app.companySettings', {
-                    abstract: true,
                     url: '/company_settings',
                     templateUrl: 'templates/company_settings/company.html',
                     resolve: {
                         deps: ['$ocLazyLoad',
                             function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
+                                    'js/company_settings/company.factory.js'
                                 ]);
                             }
                         ]
                     }
                 })
                 .state('app.companySettings.profile', {
-                    abstract: true,
                     url: '/profile',
                     templateUrl: 'templates/company_settings/company.profile.html',
                     resolve: {
@@ -121,6 +120,22 @@ angular.module('app')
                             }
                         ]
                     }
+                })
+                .state('app.companySettings.publicHoliday', {
+                    url: '/profile',
+                    templateUrl: 'templates/company_settings/public_holiday.html'
+                })
+                .state('app.companySettings.offDays', {
+                    url: '/profile',
+                    templateUrl: 'templates/company_settings/off_days.html'
+                })
+                .state('app.companySettings.deliveryDays', {
+                    url: '/profile',
+                    templateUrl: 'templates/company_settings/delivery_days.html'
+                })
+                .state('app.companySettings.deliveryTiming', {
+                    url: '/profile',
+                    templateUrl: 'templates/company_settings/delivery_timing.html'
                 })
                 .state('app.teamMember', {
                     url: '/team_member',
