@@ -1,15 +1,15 @@
 (function() {
     'use strict';
 
-    app.factory('UserFactory', UserFactory);
+    app.factory('AccountFactory', AccountFactory);
 
-    UserFactory
+    AccountFactory
         .$inject = [
         '$resource'
     ];
 
-    function UserFactory($resource) {
-        return $resource('', {}, {
+    function AccountFactory($resource) {
+        return $resource('/api/account', {}, {
             'query': {
                 method: 'GET',
                 isArray: false

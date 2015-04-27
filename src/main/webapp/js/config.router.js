@@ -11,8 +11,8 @@
         ]
     )
         .config(
-        ['$stateProvider', '$urlRouterProvider',
-            function ($stateProvider, $urlRouterProvider) {
+        ['$stateProvider', '$urlRouterProvider', '$httpProvider',
+            function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
                 $urlRouterProvider
                     .otherwise('/app/sign_in');
@@ -29,6 +29,7 @@
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
+                                        'js/account.factory.js',
                                         'js/sign-in.controller.js'
                                     ]);
                                 }
@@ -42,13 +43,31 @@
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
-                                        'js/users.factory.js',
+                                        'js/account.factory.js',
                                         'js/sign-up.controller.js'
                                     ]);
                                 }
                             ]
                         }
-                    })
+                    });
+
+                $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage) {
+                    return {
+                        'request': function (config) {
+                            config.headers = config.headers || {};
+                            if ($localStorage.token) {
+                                config.headers['x-auth-token'] = $localStorage.token;
+                            }
+                            return config;
+                        },
+                        'responseError': function (response) {
+                            if (response.status === 401 || response.status === 403) {
+                                $location.path('/sign_in');
+                            }
+                            return $q.reject(response);
+                        }
+                    };
+                }]);
             }
         ]
     );

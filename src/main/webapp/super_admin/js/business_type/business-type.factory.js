@@ -9,11 +9,13 @@
     ];
 
     function BusinessTypeFactory($resource) {
-
         return $resource('/api/businessTypes/:id', {}, {
         	'query': {
                 method: 'GET',
                 isArray: true
+            },
+            'update': {
+                method: 'PUT'
             }
         });
     }

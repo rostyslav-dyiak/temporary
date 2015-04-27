@@ -5,19 +5,18 @@
         <div class="wrapper text-center">
             <strong>Sign in to dashboard</strong>
         </div>
-        <form name="form" class="form-validation">
-            <div class="text-danger wrapper text-center">
-            </div>
+        <form name="loginForm" class="form-validation">
+            <div class="text-danger wrapper text-center">{{ error }}</div>
             <div class="list-group list-group-sm">
                 <div class="list-group-item">
-                    <input type="email" placeholder="Email" ng-model="email" class="form-control no-border" name="email" required>
+                    <input type="email" placeholder="Email" ng-model="credentials.email" class="form-control no-border" name="email" required>
                 </div>
                 <div class="list-group-item">
-                    <input type="password" placeholder="Password" ng-model="password" class="form-control no-border" password="password"
+                    <input type="password" placeholder="Password" ng-model="credentials.password" class="form-control no-border" password="password"
                            required>
                 </div>
             </div>
-            <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="login()">Log in</button>
+            <span class="btn btn-lg btn-primary btn-block" ng-click="login(credentials)" ng-disabled="!loginForm.$valid">Log in</span>
             <div class="text-center m-t m-b"><a href="#">Forgot password?</a></div>
             <div class="line line-dashed"></div>
         </form>

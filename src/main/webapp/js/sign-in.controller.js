@@ -7,18 +7,40 @@
         .$inject = [
         '$scope',
         '$window',
-        'AuthServerProvider'
+        'AuthServerProvider',
+        'AccountFactory'
     ];
 
-    function SignInController($scope, $window, AuthServerProvider) {
-        $scope.user = {};
+    function SignInController($scope, $window, AuthServerProvider, AccountFactory) {
         $scope.credentials = {};
+        $scope.error = '';
 
-        $scope.rememberMe = true;
-        $scope.login = function () {
-            AuthServerProvider.login($scope.email, $scope.password).then(function (data) {
-                $window.location.href = '/super_admin/index.html';
+        $scope.login = login;
+
+        function login(credentials) {
+            AuthServerProvider.login(credentials.email, credentials.password)
+                .then(function (data) {
+                    AccountFactory.get({},
+                        function (data) {
+                            redirectToApp(data.role);
+                        }, function (e) {
+                            console.error(e);
+                        });
+            },
+            function(e) {
+                $scope.error = 'Please try again.';
+                console.error(e);
             });
-        };
+        }
+
+        function redirectToApp(role) {
+            if(role == 'ROLE_SUPER_ADMIN') {
+                $window.location.href = '/super_admin/index.html';
+            } else if(role == 'ROLE_EATERY_ADMIN' || role == 'ROLE_EATERY') {
+                $window.location.href = '/eatery/index.html';
+            } else if(role == 'ROLE_SUPPLIER_ADMIN' || role == 'ROLE_SUPPLIER') {
+                $window.location.href = '/supplier/index.html';
+            }
+        }
     }
 })();
