@@ -96,8 +96,31 @@ angular.module('app')
                     templateUrl: 'templates/admin/inquiry.html'
                 })
                 .state('app.companySettings', {
+                    abstract: true,
                     url: '/company_settings',
-                    templateUrl: 'templates/admin/company_settings.html'
+                    templateUrl: 'templates/company_settings/company.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                ]);
+                            }
+                        ]
+                    }
+                })
+                .state('app.companySettings.profile', {
+                    abstract: true,
+                    url: '/profile',
+                    templateUrl: 'templates/company_settings/company.profile.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    'js/company_settings/company.profile.controller.js'
+                                ]);
+                            }
+                        ]
+                    }
                 })
                 .state('app.teamMember', {
                     url: '/team_member',

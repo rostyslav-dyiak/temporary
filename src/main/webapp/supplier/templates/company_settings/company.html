@@ -1,0 +1,40 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="MailCtrl">
+    <div class="col w-md bg-light dk b-r bg-auto">
+        <div class="wrapper b-b bg">
+            <button class="btn btn-sm btn-default pull-right visible-sm visible-xs" ui-toggle-class="show"
+                    target="#email-menu"><i class="fa fa-bars"></i></button>
+        </div>
+        <div class="wrapper hidden-sm hidden-xs" id="email-menu">
+            <ul class="nav nav-pills nav-stacked nav-sm">
+                <li ui-sref-active="active">
+                    <a ui-sref="app.mail.list({fold: 'profile'})">
+                        Company Profile
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="app.mail.list({fold: 'publicHoliday'})">
+                        Public Holiday
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="app.mail.list({fold: 'offDays'})">
+                        Company Off-Days
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="app.mail.list({fold: 'deliveryDays'})">
+                        Delivery Days for Locations
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="app.mail.list({fold: 'deliveryDays'})">
+                        Delivery Days for Locations
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col">
+        <div ui-view></div>
+    </div>
+</div>
