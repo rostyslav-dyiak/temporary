@@ -2,7 +2,6 @@ package com.kb.service;
 
 import com.kb.domain.Authority;
 import com.kb.domain.Company;
-import com.kb.domain.PersistentToken;
 import com.kb.domain.User;
 import com.kb.repository.AuthorityRepository;
 import com.kb.repository.PersistentTokenRepository;
@@ -105,7 +104,7 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public User getUserWithAuthorities() {
-        User currentUser = userRepository.findOneByLogin(SecurityUtils.getCurrentLogin()).get();
+        User currentUser = userRepository.findOneByEmail(SecurityUtils.getCurrentLogin()).get();
         currentUser.getAuthorities().size(); // eagerly load the association
         return currentUser;
     }
