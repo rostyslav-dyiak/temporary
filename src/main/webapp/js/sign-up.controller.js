@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     app.controller('SignUpController', SignUpController);
@@ -7,12 +7,12 @@
         .$inject = [
         '$scope',
         '$http',
-        '$location',
-        'UserFactory'
+        '$location'
     ];
 
-    function SignUpController($scope, $http, $location, UserFactory) {
+    function SignUpController($scope, $http, $location) {
         $scope.user = {};
+        $scope.authError = '';
 
         $scope.expired = false;
         $scope.created = false;
@@ -22,19 +22,18 @@
         activate();
 
         function activate() {
-            $http.post('/api/check', {
-                key: $location.search().key
-            })
-                .success(function(data) {
-                    $scope.expired = data;
-                })
-                .error(function(e) {
-                    console.error(e);
-                });
+            $http.get('/api/activate', {
+                params: {
+                    key: $location.search().key
+                }
+            }).error(function (e) {
+                $scope.expired = true;
+                console.error(e);
+            });
         }
 
-        function signup() {
-            //UserFactory.save($scope.user,
+        function signup(user) {
+            //UserFactory.save(user,
             //function(data) {
             //    $scope.created = true;
             //    $scope.user = data;
@@ -48,7 +47,7 @@
             $scope.created = true;
             $scope.user = {
                 id: 1,
-                role: "SUPPLIER"
+                role: "ROLE_SUPER_ADMIN"
             }
         }
     }

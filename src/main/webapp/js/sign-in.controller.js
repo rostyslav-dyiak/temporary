@@ -12,25 +12,35 @@
     ];
 
     function SignInController($scope, $window, AuthServerProvider, AccountFactory) {
-        $scope.user = {};
         $scope.credentials = {};
+        $scope.error = '';
 
-        $scope.rememberMe = true;
         $scope.login = login;
 
-        function login() {
-            AuthServerProvider.login($scope.email, $scope.password)
+        function login(credentials) {
+            AuthServerProvider.login(credentials.email, credentials.password)
                 .then(function (data) {
-                    console.log(data);
                     AccountFactory.get({},
                         function (data) {
-                            $scope.user = data;
-                            console.log($scope.user);
+                            redirectToApp(data.role);
                         }, function (e) {
                             console.error(e);
                         });
-                //$window.location.href = '/super_admin/index.html';
+            },
+            function(e) {
+                $scope.error = 'Please try again.';
+                console.error(e);
             });
+        }
+
+        function redirectToApp(role) {
+            if(role == 'ROLE_SUPER_ADMIN') {
+                $window.location.href = '/super_admin/index.html';
+            } else if(role == 'ROLE_EATERY_ADMIN' || role == 'ROLE_EATERY') {
+                $window.location.href = '/eatery/index.html';
+            } else if(role == 'ROLE_SUPPLIER_ADMIN' || role == 'ROLE_SUPPLIER') {
+                $window.location.href = '/supplier/index.html';
+            }
         }
     }
 })();
