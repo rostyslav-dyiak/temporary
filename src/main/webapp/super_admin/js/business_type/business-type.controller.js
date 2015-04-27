@@ -15,7 +15,8 @@
         $scope.saveType = saveType;
         $scope.editType = editType;
         $scope.removeType = removeType;
-        $scope.newProductType = newProductType;
+        $scope.newBusinessType = newBusinessType;
+        $scope.cancel = cancel;
 
         activate();
 
@@ -74,6 +75,10 @@
             $scope.type.id = type.id;
             $scope.type.name = type.name;
             $scope.type.description = type.description;
+        }
+
+        function cancel() {
+        	$scope.type = {};
         }
         
     }
