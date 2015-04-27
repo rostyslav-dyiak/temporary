@@ -9,10 +9,10 @@
     ];
 
     function CompanyOutletsFactory($resource) {
-        return $resource('/api/companies/:id/outlets', {}, {
+        return $resource('/api/companies/:companyId/outlets', {}, {
             'query': {
                 method: 'GET',
-                isArray: false
+                isArray: true
             }
         });
     }

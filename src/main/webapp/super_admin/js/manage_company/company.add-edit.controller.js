@@ -8,14 +8,16 @@
         '$scope',
         '$stateParams',
         '$http',
-        'CompanyFactory'
+        'CompanyFactory',
+        'BusinessTypeFactory'
     ];
 
-    function CompanyAddUpdateController($scope, $stateParams, $http, CompanyFactory) {
+    function CompanyAddUpdateController($scope, $stateParams, $http, CompanyFactory, BusinessTypeFactory) {
         var companyId = $stateParams.id;
 
         var master = {};
         $scope.company = {};
+        $scope.businessTypes = {};
         $scope.invitationHistory = [{
             id: 0,
             email: 'one@test.com',
@@ -52,7 +54,12 @@
                         console.error(e);
                     });
             }
-
+            BusinessTypeFactory.get({},
+                function (data) {
+                    $scope.businessTypes = angular.copy(data);
+                }, function (e) {
+                    console.error(e);
+                });
         }
 
         function removeImage() {

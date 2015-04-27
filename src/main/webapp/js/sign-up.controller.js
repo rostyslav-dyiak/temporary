@@ -22,7 +22,9 @@
         activate();
 
         function activate() {
-            $http.post('/api/check', {key: $location.search().key})
+            $http.post('/api/check', {
+                key: $location.search().key
+            })
                 .success(function(data) {
                     $scope.expired = data;
                 })
@@ -46,7 +48,7 @@
             $scope.created = true;
             $scope.user = {
                 id: 1,
-                role: "Supplier"
+                role: "SUPPLIER"
             }
         }
     }

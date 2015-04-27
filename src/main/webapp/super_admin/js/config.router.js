@@ -2,17 +2,14 @@
     'use strict';
 
     angular.module('app')
-        .run(
-        ['$rootScope', '$state', '$stateParams',
+        .run(['$rootScope', '$state', '$stateParams',
             function ($rootScope, $state, $stateParams) {
                 $rootScope.$state = $state;
                 $rootScope.$stateParams = $stateParams;
             }
-        ]
-    )
-        .config(
-        ['$stateProvider', '$urlRouterProvider',
-            function ($stateProvider, $urlRouterProvider) {
+        ])
+        .config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
+            function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
                 $urlRouterProvider
                     .otherwise('/super_admin/companies/list');
@@ -62,6 +59,7 @@
                                         'js/directives/file-model.directive.js',
                                         'js/directives/click-selector.directive.js',
                                         'js/manage_company/company.factory.js',
+                                        'js/business_type/business-type.factory.js',
                                         'js/manage_company/company.add-edit.controller.js'
                                     ]);
                                 }
@@ -83,10 +81,10 @@
                         }
                     })
                     .state('app.manageCompany.outlets', {
-                        url: '/:id/outlets',
-                        templateUrl: 'templates/manage_company/customers.html',
+                        url: '/:companyId/outlets',
+                        templateUrl: 'templates/manage_company/outlets.html',
                         controller: function ($stateParams) {
-                            $stateParams.id
+                            $stateParams.companyId
                         },
                         resolve: {
                             deps: ['$ocLazyLoad',
@@ -110,7 +108,7 @@
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
                                         'js/manage_company/outlets.factory.js',
-                                        'js/manage_company/outlets.company.add-edit.controller.js'
+                                        'js/manage_company/outlet.add-edit.controller.js'
                                     ]);
                                 }
                             ]
@@ -121,14 +119,14 @@
                         templateUrl: 'templates/manage_company/outlets_add_edit.html',
                         controller: function ($stateParams) {
                             $stateParams.companyId,
-                            $stateParams.id
+                                $stateParams.id
                         },
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
                                         'js/manage_company/outlets.factory.js',
-                                        'js/manage_company/outlets.company.add-edit.controller.js'
+                                        'js/manage_company/outlet.add-edit.controller.js'
                                     ]);
                                 }
                             ]
@@ -218,8 +216,25 @@
                     .state('app.deliveryLocation', {
                         url: '/delivery_location',
                         templateUrl: 'templates/delivery_location.html'
-                    })
-            }
-        ]
-    );
+                    });
+
+                $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage) {
+                    return {
+                        'request': function (config) {
+                            config.headers = config.headers || {};
+                            if ($localStorage.token) {
+                                config.headers['x-auth-token'] = $localStorage.token;
+                            }
+                            return config;
+                        },
+                        'responseError': function (response) {
+                            if (response.status === 401 || response.status === 403) {
+                                $location.path('/sign_in');
+                            }
+                            return $q.reject(response);
+                        }
+                    };
+                }]);
+
+            }]);
 })();

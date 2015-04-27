@@ -5,25 +5,14 @@
 
     CompanyFactory
         .$inject = [
-        '$resource',
-        'AuthServerProvider'
+        '$resource'
     ];
 
-    function CompanyFactory($resource, AuthServerProvider) {
-        return $resource('/api/companies', {}, {
+    function CompanyFactory($resource) {
+        return $resource('/api/companies/:id', {}, {
             'query': {
                 method: 'GET',
-                isArray: true,
-                headers: {
-                    'x-auth-token': AuthServerProvider.getToken().token
-                }
-            },
-            get: {
-                method: 'GET',
-                isArray: true,
-                headers: {
-                    'x-auth-token': AuthServerProvider.getToken().token
-                }
+                isArray: true
             }
         });
     }

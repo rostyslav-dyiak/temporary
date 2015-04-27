@@ -5,24 +5,14 @@
 
     OutletsFactory
         .$inject = [
-        '$resource',
-        'AuthServerProvider'
+        '$resource'
     ];
 
-    function OutletsFactory($resource, AuthServerProvider) {
-        return $resource('/api/outlets', {}, {
+    function OutletsFactory($resource) {
+        return $resource('/api/outlets/:id', {}, {
             'query': {
                 method: 'GET',
-                isArray: false,
-                headers: {
-                    'x-auth-token': AuthServerProvider.getToken().token
-                }
-            },
-            'save': {
-                method: 'POST',
-                headers: {
-                    'x-auth-token': AuthServerProvider.getToken().token
-                }
+                isArray: true
             }
         });
     }
