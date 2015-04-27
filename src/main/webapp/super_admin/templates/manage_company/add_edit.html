@@ -1,18 +1,20 @@
 <div class="bg-light lter b-b wrapper-md">
     <button class="btn btn-default back-button" back-button>Back</button>
 </div>
-<div class="wrapper-md" ng-controller="ManageCompanyAddUpdateController">
+<div class="wrapper-md" ng-controller="CompanyAddUpdateController">
     <div class="row">
         <div class="col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form class="form-horizontal" >
+                    <form class="form-horizontal" ng-switch="company.companyType">
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Logo</label>
 
                             <div class="col-lg-10">
                                 <img id="image-preview" class="mc-logo" src="img/logo_placeholder.png"
-                                     ng-src="{{company.logo}}"/>
+                                     ng-src="img/{{company.eateryDetails.logo.url}}" ng-switch-when="EATERY"/>
+                                <img id="image-preview" class="mc-logo" src="img/logo_placeholder.png"
+                                     ng-src="img/{{company.supplierDetails.logo.url}}" ng-switch-when="SUPPLIER"/>
 
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default" click-selector="#upload">Upload
@@ -28,17 +30,17 @@
                             <label class="col-lg-2 control-label">Type</label>
 
                             <div class="col-lg-10">
-                                <select name="type" ng-model="company.type" class="form-control">
-                                    <option value="Supplier">Supplier</option>
-                                    <option value="Eatery">Eatery</option>
+                                <select name="type" ng-model="company.companyType" class="form-control">
+                                    <option value="SUPPLIER">Supplier</option>
+                                    <option value="EATERY">Eatery</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group" ng-show="company.type == 'Eatery'">
+                        <div class="form-group" ng-show="company.companyType == 'EATERY'">
                             <label class="col-lg-2 control-label">Business Type</label>
 
                             <div class="col-lg-10">
-                                <select name="companyType" class="form-control" ng-model="company.companyType">
+                                <select name="companyType" class="form-control" ng-model="company.eateryDetails.businessType">
                                     <option value="Restaurant">Restaurant</option>
                                     <option value="Fast Food Restaurant">Fast Food Restaurant</option>
                                     <option value="Food Caterer">Food Caterer</option>
@@ -65,8 +67,10 @@
                             <label class="col-lg-2 control-label">Company Code</label>
 
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" ng-model="company.code"
-                                       placeholder="Company Name">
+                                <input type="text" class="form-control" ng-model="company.eateryDetails.code"
+                                       placeholder="Company Name" ng-switch-when="EATERY">
+                                <input type="text" class="form-control" ng-model="company.supplierDetails.code"
+                                       placeholder="Company Name" ng-switch-when="SUPPLIER">
                             </div>
                         </div>
                         <div class="form-group">
@@ -74,13 +78,6 @@
 
                             <div class="col-lg-10">
                                 <input type="email" class="form-control" ng-model="company.email" placeholder="Email">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">Password</label>
-
-                            <div class="col-lg-10">
-                                <input type="password" class="form-control" placeholder="Password">
                             </div>
                         </div>
                         <div class="form-group">
@@ -97,13 +94,13 @@
                             <div class="col-lg-10">
                                 <div class="radio">
                                     <label class="i-checks">
-                                        <input type="radio" ng-model="company.status" name="status" value="Active">
+                                        <input type="radio" ng-model="company.status" name="status" value="ACTIVE">
                                         <i></i> Active
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label class="i-checks">
-                                        <input type="radio" ng-model="company.status" name="status" value="Inactive"
+                                        <input type="radio" ng-model="company.status" name="status" value="INACTIVE"
                                                checked>
                                         <i></i> Inactive
                                     </label>

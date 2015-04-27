@@ -10,15 +10,15 @@
     ];
 
     function ManageCompanyOutletsController($scope, $stateParams, CompanyOutletsFactory) {
-        $scope.companyId = $stateParams.id;
+        $scope.companyId = $stateParams.companyId;
         $scope.outlets = {};
 
         $scope.itemsByPage = 5;
 
         activate();
         function activate() {
-            CompanyOutletsFactory.get({
-                    id: $scope.companyId
+            CompanyOutletsFactory.query({
+                    companyId: $scope.companyId
                 },
                 function (data) {
                     $scope.outlets = data;

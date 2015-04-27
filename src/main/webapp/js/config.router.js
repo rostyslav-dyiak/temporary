@@ -29,7 +29,6 @@
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
-                                        'js/auth/auth.xauth.service.js',
                                         'js/sign-in.controller.js'
                                     ]);
                                 }

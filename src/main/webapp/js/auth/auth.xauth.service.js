@@ -22,7 +22,6 @@
                     }
                 }).success(function (response) {
                     localStorageService.set('token', response);
-                   // $http.defaults.headers.common["x-auth-token"]= response.token;
                     return response;
                 });
             },

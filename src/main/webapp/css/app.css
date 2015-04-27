@@ -5183,7 +5183,10 @@ a.text-#000000:hover {
     margin-right: 20px;
 }
 /* Manage company */
-
+.company-logo-small {
+    max-width: 48px;
+    max-height: 48px;
+}
 .mc-logo {
     margin: 10px;
     max-width: 120px;
