@@ -40,6 +40,7 @@
                                         'js/directives/file-model.directive.js',
                                         'js/directives/click-selector.directive.js',
                                         'js/manage_company/company.factory.js',
+                                        'js/business_type/business-type.factory.js',
                                         'js/manage_company/company.add-edit.controller.js'
                                     ]);
                                 }

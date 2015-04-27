@@ -1,2 +1,2 @@
-id;code;bus_reg_number;bus_description;address;fax_number;gst_registered;gst_registration_number;logo_id;public_pricing_visible;main_picture_id;supplier_id;created_by
-1;KL;776574;blablabla;str.1;54376512;true;78263454;1;true;1;1;3
+id;bus_reg_number;bus_description;address;fax_number;gst_registered;gst_registration_number;public_pricing_visible;main_picture_id;supplier_id;created_by
+1;776574;blablabla;str.1;54376512;true;78263454;true;1;1;3

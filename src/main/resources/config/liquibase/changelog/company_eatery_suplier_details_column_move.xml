@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <changeSet author="rostyslav_dyyak" id="remove_code_and_logo_column_from_eatery_supplier">
+        <dropForeignKeyConstraint baseTableName="T_EATERYDETAILS" constraintName="fk_t_eaterydetails_logo_id"/>
+        <dropColumn columnName="logo_id"
+                    schemaName="public"
+                    tableName="T_SUPPLIERDETAILS"/>
+
+        <dropColumn columnName="code"
+                    schemaName="public"
+                    tableName="T_SUPPLIERDETAILS"/>
+
+        <dropColumn columnName="code"
+                    schemaName="public"
+                    tableName="T_EATERYDETAILS"/>
+
+        <dropColumn columnName="logo_id"
+                    schemaName="public"
+                    tableName="T_EATERYDETAILS"/>
+
+
+    </changeSet>
+    <changeSet author="rostyslav_dyyak" id="add columns code and logo_id to company">
+        <addColumn tableName="T_COMPANY">
+            <column name="code" type="varchar(255)"/>
+        </addColumn>
+        <addColumn tableName="T_COMPANY">
+            <column name="logo_id" type="bigint"/>
+        </addColumn>
+
+        <addForeignKeyConstraint baseColumnNames="logo_id"
+                                 baseTableName="T_COMPANY"
+                                 constraintName="fk_company_picture_logo"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="T_PICTURE"/>
+    </changeSet>
+</databaseChangeLog>

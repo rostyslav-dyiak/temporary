@@ -37,15 +37,8 @@ public class SupplierDetails extends AbstractAuditingEntity implements Serializa
 	private Company supplier;
 
     @ManyToOne
-    @JoinColumn(name = "logo_id")
-    private Picture logo;
-
-    @ManyToOne
     @JoinColumn(name = "main_picture_id")
     private Picture mainPicture;
-
-    @Column(name = "code")
-    private String code;
 
     @Column(name = "bus_reg_number")
     private String busRegNumber;
@@ -90,28 +83,12 @@ public class SupplierDetails extends AbstractAuditingEntity implements Serializa
 		this.supplier = supplier;
 	}
 
-	public Picture getLogo() {
-		return logo;
-	}
-
-	public void setLogo(final Picture logo) {
-		this.logo = logo;
-	}
-
 	public Picture getMainPicture() {
 		return mainPicture;
 	}
 
 	public void setMainPicture(final Picture mainPicture) {
 		this.mainPicture = mainPicture;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(final String code) {
-		this.code = code;
 	}
 
 	public String getBusRegNumber() {
@@ -203,7 +180,6 @@ public class SupplierDetails extends AbstractAuditingEntity implements Serializa
     public String toString() {
         return "SupplierDetails{" +
                 "id=" + id +
-                ", code='" + code + "'" +
                 ", busRegNumber='" + busRegNumber + "'" +
                 ", busDescription='" + busDescription + "'" +
                 ", address='" + address + "'" +

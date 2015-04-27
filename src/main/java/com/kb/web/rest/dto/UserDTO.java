@@ -32,7 +32,7 @@ public class UserDTO {
     @Size(min = 2, max = 5)
     private String langKey;
 
-    private List<String> roles;
+    private String role;
 
     private Company company;
 
@@ -40,14 +40,14 @@ public class UserDTO {
     }
 
     public UserDTO(String login, String password, String firstName, String lastName, String email, String langKey,
-                   List<String> roles) {
+                   String role) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.langKey = langKey;
-        this.roles = roles;
+        this.role = role;
     }
 
     public String getPassword() {
@@ -74,8 +74,8 @@ public class UserDTO {
         return langKey;
     }
 
-    public List<String> getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
     public void setCompany(Company company) {
@@ -110,8 +110,8 @@ public class UserDTO {
         this.langKey = langKey;
     }
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
@@ -123,7 +123,7 @@ public class UserDTO {
         ", lastName='" + lastName + '\'' +
         ", email='" + email + '\'' +
         ", langKey='" + langKey + '\'' +
-        ", roles=" + roles +
+        ", roles=" + role +
         '}';
     }
 }

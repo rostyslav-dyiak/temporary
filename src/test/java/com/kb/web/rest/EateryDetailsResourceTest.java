@@ -82,7 +82,6 @@ public class EateryDetailsResourceTest {
     @Before
     public void initTest() {
         eateryDetails = new EateryDetails();
-        eateryDetails.setCode(DEFAULT_CODE);
         eateryDetails.setBusRegNumber(DEFAULT_BUS_REG_NUMBER);
         eateryDetails.setBillingAddress(DEFAULT_BILLING_ADDRESS);
         eateryDetails.setPostalCode(DEFAULT_POSTAL_CODE);
@@ -104,7 +103,6 @@ public class EateryDetailsResourceTest {
         List<EateryDetails> eateryDetailss = eateryDetailsRepository.findAll();
         assertThat(eateryDetailss).hasSize(databaseSizeBeforeCreate + 1);
         EateryDetails testEateryDetails = eateryDetailss.get(eateryDetailss.size() - 1);
-        assertThat(testEateryDetails.getCode()).isEqualTo(DEFAULT_CODE);
         assertThat(testEateryDetails.getBusRegNumber()).isEqualTo(DEFAULT_BUS_REG_NUMBER);
         assertThat(testEateryDetails.getBillingAddress()).isEqualTo(DEFAULT_BILLING_ADDRESS);
         assertThat(testEateryDetails.getPostalCode()).isEqualTo(DEFAULT_POSTAL_CODE);
@@ -166,11 +164,10 @@ public class EateryDetailsResourceTest {
     public void updateEateryDetails() throws Exception {
         // Initialize the database
         eateryDetailsRepository.saveAndFlush(eateryDetails);
-		
+
 		int databaseSizeBeforeUpdate = eateryDetailsRepository.findAll().size();
 
         // Update the eateryDetails
-        eateryDetails.setCode(UPDATED_CODE);
         eateryDetails.setBusRegNumber(UPDATED_BUS_REG_NUMBER);
         eateryDetails.setBillingAddress(UPDATED_BILLING_ADDRESS);
         eateryDetails.setPostalCode(UPDATED_POSTAL_CODE);
@@ -184,7 +181,6 @@ public class EateryDetailsResourceTest {
         List<EateryDetails> eateryDetailss = eateryDetailsRepository.findAll();
         assertThat(eateryDetailss).hasSize(databaseSizeBeforeUpdate);
         EateryDetails testEateryDetails = eateryDetailss.get(eateryDetailss.size() - 1);
-        assertThat(testEateryDetails.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testEateryDetails.getBusRegNumber()).isEqualTo(UPDATED_BUS_REG_NUMBER);
         assertThat(testEateryDetails.getBillingAddress()).isEqualTo(UPDATED_BILLING_ADDRESS);
         assertThat(testEateryDetails.getPostalCode()).isEqualTo(UPDATED_POSTAL_CODE);
@@ -196,7 +192,7 @@ public class EateryDetailsResourceTest {
     public void deleteEateryDetails() throws Exception {
         // Initialize the database
         eateryDetailsRepository.saveAndFlush(eateryDetails);
-		
+
 		int databaseSizeBeforeDelete = eateryDetailsRepository.findAll().size();
 
         // Get the eateryDetails

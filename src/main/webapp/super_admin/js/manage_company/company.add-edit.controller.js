@@ -54,7 +54,7 @@
                         console.error(e);
                     });
             }
-            BusinessTypeFactory.get({},
+            BusinessTypeFactory.query({},
                 function (data) {
                     $scope.businessTypes = angular.copy(data);
                 }, function (e) {
@@ -68,16 +68,19 @@
 
         function addCompany() {
             $http.post('/api/register', $scope.company)
-                .success(function (data, status, headers, config) {
+                .success(function (data, status, headers) {
                     console.log(data + " " + status + " " + headers + " ");
                 }).
-                error(function (data, status, headers, config) {
+                error(function (data, status, headers) {
                     console.log(data + " " + status + " " + headers + " ");
                 });
         }
 
         function save(company) {
-            CompanyFactory.save(company,
+            if(company.companyType != 'EATERY') {
+                company.businessTypes = "";
+            }
+            CompanyFactory.update(company,
                 function (data) {
                     console.log('Saved ' + data.id)
                 }, function (e) {

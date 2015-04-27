@@ -22,6 +22,7 @@
     <include file="classpath:config/liquibase/changelog/supplier_pictures.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/custom_user_to_company_relation.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/custom_add_contact_company_relation.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/company_eatery_suplier_details_column_move.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/data_batch.xml" relativeToChangelogFile="false"/>
     <!-- JHipster will add liquibase changelogs here -->
 

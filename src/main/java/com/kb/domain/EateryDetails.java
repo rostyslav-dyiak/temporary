@@ -3,18 +3,9 @@ package com.kb.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 /**
  * A EateryDetails.
@@ -34,19 +25,12 @@ public class EateryDetails extends AbstractAuditingEntity implements Serializabl
 	private Company eatery;
 
     @ManyToOne
-    @JoinColumn(name = "logo_id")
-    private Picture logo;
-
-    @ManyToOne
     @JoinColumn(name = "top_right_picture_id")
     private Picture topRightPicture;
 
     @ManyToOne
     @JoinColumn(name = "contact_person_id")
     private User contactPerson;
-
-    @Column(name = "code")
-    private String code;
 
     @Column(name = "bus_reg_number")
     private String busRegNumber;
@@ -70,14 +54,6 @@ public class EateryDetails extends AbstractAuditingEntity implements Serializabl
 
     public void setId(final Long id) {
         this.id = id;
-    }
-
-	public String getCode() {
-        return code;
-    }
-
-    public void setCode(final String code) {
-        this.code = code;
     }
 
     public String getBusRegNumber() {
@@ -118,14 +94,6 @@ public class EateryDetails extends AbstractAuditingEntity implements Serializabl
 
 	public void setEatery(final Company eatery) {
 		this.eatery = eatery;
-	}
-
-	public Picture getLogo() {
-		return logo;
-	}
-
-	public void setLogo(final Picture logo) {
-		this.logo = logo;
 	}
 
 	public Picture getTopRightPicture() {
@@ -175,7 +143,7 @@ public class EateryDetails extends AbstractAuditingEntity implements Serializabl
 
 	@Override
 	public String toString() {
-		return "EateryDetails [id=" + id + ", code=" + code + ", busRegNumber="
+		return "EateryDetails [id=" + id  + ", busRegNumber="
 				+ busRegNumber + ", billingAddress=" + billingAddress
 				+ ", postalCode=" + postalCode + ", faxNumber=" + faxNumber
 				+ "]";

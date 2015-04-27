@@ -87,7 +87,6 @@ public class SupplierDetailsResourceTest {
     @Before
     public void initTest() {
         supplierDetails = new SupplierDetails();
-        supplierDetails.setCode(DEFAULT_CODE);
         supplierDetails.setBusRegNumber(DEFAULT_BUS_REG_NUMBER);
         supplierDetails.setBusDescription(DEFAULT_BUS_DESCRIPTION);
         supplierDetails.setAddress(DEFAULT_ADDRESS);
@@ -112,7 +111,6 @@ public class SupplierDetailsResourceTest {
         List<SupplierDetails> supplierDetailss = supplierDetailsRepository.findAll();
         assertThat(supplierDetailss).hasSize(databaseSizeBeforeCreate + 1);
         SupplierDetails testSupplierDetails = supplierDetailss.get(supplierDetailss.size() - 1);
-        assertThat(testSupplierDetails.getCode()).isEqualTo(DEFAULT_CODE);
         assertThat(testSupplierDetails.getBusRegNumber()).isEqualTo(DEFAULT_BUS_REG_NUMBER);
         assertThat(testSupplierDetails.getBusDescription()).isEqualTo(DEFAULT_BUS_DESCRIPTION);
         assertThat(testSupplierDetails.getAddress()).isEqualTo(DEFAULT_ADDRESS);
@@ -181,11 +179,10 @@ public class SupplierDetailsResourceTest {
     public void updateSupplierDetails() throws Exception {
         // Initialize the database
         supplierDetailsRepository.saveAndFlush(supplierDetails);
-		
+
 		int databaseSizeBeforeUpdate = supplierDetailsRepository.findAll().size();
 
         // Update the supplierDetails
-        supplierDetails.setCode(UPDATED_CODE);
         supplierDetails.setBusRegNumber(UPDATED_BUS_REG_NUMBER);
         supplierDetails.setBusDescription(UPDATED_BUS_DESCRIPTION);
         supplierDetails.setAddress(UPDATED_ADDRESS);
@@ -202,7 +199,6 @@ public class SupplierDetailsResourceTest {
         List<SupplierDetails> supplierDetailss = supplierDetailsRepository.findAll();
         assertThat(supplierDetailss).hasSize(databaseSizeBeforeUpdate);
         SupplierDetails testSupplierDetails = supplierDetailss.get(supplierDetailss.size() - 1);
-        assertThat(testSupplierDetails.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testSupplierDetails.getBusRegNumber()).isEqualTo(UPDATED_BUS_REG_NUMBER);
         assertThat(testSupplierDetails.getBusDescription()).isEqualTo(UPDATED_BUS_DESCRIPTION);
         assertThat(testSupplierDetails.getAddress()).isEqualTo(UPDATED_ADDRESS);
@@ -217,7 +213,7 @@ public class SupplierDetailsResourceTest {
     public void deleteSupplierDetails() throws Exception {
         // Initialize the database
         supplierDetailsRepository.saveAndFlush(supplierDetails);
-		
+
 		int databaseSizeBeforeDelete = supplierDetailsRepository.findAll().size();
 
         // Get the supplierDetails

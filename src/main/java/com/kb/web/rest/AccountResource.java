@@ -55,11 +55,12 @@ public class AccountResource {
 
     @Inject
     private CompanyRepository companyRepository;
+
     /**
      * POST  /register -> register the user.
      */
     @RequestMapping(value = "/register",
-        method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE,
+        method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.TEXT_PLAIN_VALUE)
     @Timed
     public ResponseEntity<?> registerAccount(@Valid @RequestBody final UserCompanyDTO userCompanyDTO, final HttpServletRequest request) {
@@ -68,9 +69,11 @@ public class AccountResource {
             .map(user -> new ResponseEntity<>("e-mail address already in use", HttpStatus.BAD_REQUEST))
             .orElseGet(() -> {
                 Company company = userCompanyDTO.getCompany();
-                companyRepository.save(company);{}
+                companyRepository.save(company);
+                {
+                }
                 User user = userService.createUserInformation(userDTO.getEmail().toLowerCase(), userDTO.getPassword(),
-                    userDTO.getFirstName(), userDTO.getLastName(), userDTO.getLangKey(),company);
+                    userDTO.getFirstName(), userDTO.getLastName(), userDTO.getLangKey(), company);
                 String baseUrl = MessageFormat.format("{0}://{1}:{2}", request.getServerName(), request.getScheme(), Integer.toString(request.getServerPort()));
 
                 mailService.sendActivationEmail(user, baseUrl);
@@ -102,6 +105,7 @@ public class AccountResource {
         log.debug("REST request to check if the current user is authenticated");
         return request.getRemoteUser();
     }
+//TODO: Changed User for only one Authority
 
     /**
      * GET  /account -> get the current user.
@@ -111,6 +115,7 @@ public class AccountResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<UserDTO> getAccount() {
+
         return Optional.ofNullable(userService.getUserWithAuthorities())
             .map(user -> new ResponseEntity<>(
                 new UserDTO(
@@ -120,7 +125,7 @@ public class AccountResource {
                     user.getLastName(),
                     user.getEmail(),
                     user.getLangKey(),
-                    user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toCollection(LinkedList::new))),
+                    user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toCollection(LinkedList::new)).get(0)),
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
     }
