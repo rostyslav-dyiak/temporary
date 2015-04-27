@@ -96,8 +96,31 @@ angular.module('app')
                     templateUrl: 'templates/admin/inquiry.html'
                 })
                 .state('app.companySettings', {
+                    abstract: true,
                     url: '/company_settings',
-                    templateUrl: 'templates/admin/company_settings.html'
+                    templateUrl: 'templates/company_settings/company.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                ]);
+                            }
+                        ]
+                    }
+                })
+                .state('app.companySettings.profile', {
+                    abstract: true,
+                    url: '/profile',
+                    templateUrl: 'templates/company_settings/company.profile.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    'js/company_settings/company.profile.controller.js'
+                                ]);
+                            }
+                        ]
+                    }
                 })
                 .state('app.teamMember', {
                     url: '/team_member',
@@ -107,6 +130,7 @@ angular.module('app')
                             function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
                                     'js/team_member/team.factory.js',
+                                    '../js/account.factory.js',
                                     'js/team_member/team-member.controller.js'
                                 ]);
                             }
@@ -121,7 +145,7 @@ angular.module('app')
                             function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
                                     'js/team_member/team.factory.js',
-                                    'js/team_member/team-member-company.add-edit.controller.js'
+                                    'js/team_member/team-member-add-edit.controller.js'
                                 ]);
                             }
                         ]
@@ -138,7 +162,7 @@ angular.module('app')
                             function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
                                     'js/team_member/team.factory.js',
-                                    'js/team_member/team-member-company.add-edit.controller.js'
+                                    'js/team_member/team-member-add-edit.controller.js'
                                 ]);
                             }
                         ]
