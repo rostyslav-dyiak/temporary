@@ -27,6 +27,9 @@ spring:
     messageSource:
         cacheSeconds: 1
 
+content:
+    location: ${user.home}/tmp/kbapp
+
 swagger:
     title: kbapp API
     description: kbapp applications and beyond!
