@@ -40,8 +40,8 @@ public class Company extends AbstractAuditingEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private CompanyType companyType;
 
-    @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private CompanyStatus status;
 
     @Column(name = "code")
     private String code;
@@ -99,11 +99,11 @@ public class Company extends AbstractAuditingEntity implements Serializable {
         this.companyType = companyType;
     }
 
-    public String getStatus() {
+    public CompanyStatus getStatus() {
         return status;
     }
 
-    public void setStatus(final String status) {
+    public void setStatus(final CompanyStatus status) {
         this.status = status;
     }
 

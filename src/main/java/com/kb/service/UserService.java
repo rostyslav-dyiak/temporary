@@ -59,9 +59,9 @@ public class UserService {
     }
 
     public User createUserInformation( String email, String password, String firstName, String lastName,
-                                      String langKey,Company company) {
+                                      String langKey,Company company,String role) {
         User newUser = new User();
-        Authority authority = authorityRepository.findOne("ROLE_USER");
+        Authority authority = authorityRepository.findOne(role);
         Set<Authority> authorities = new HashSet<>();
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setLogin(email);
@@ -107,6 +107,25 @@ public class UserService {
         User currentUser = userRepository.findOneByEmail(SecurityUtils.getCurrentLogin()).get();
         currentUser.getAuthorities().size(); // eagerly load the association
         return currentUser;
+    }
+
+    public User createInitialUserInformation( String email, Company company,String role) {
+        User newUser = new User();
+        Authority authority = authorityRepository.findOne(role);
+        Set<Authority> authorities = new HashSet<>();
+        newUser.setLogin(email);
+        // new user gets initially a generated password
+        newUser.setEmail(email);
+        newUser.setCompany(company);
+        // new user is not active
+        newUser.setActivated(false);
+        // new user gets registration key
+        newUser.setActivationKey(RandomUtil.generateActivationKey());
+        authorities.add(authority);
+        newUser.setAuthorities(authorities);
+        userRepository.save(newUser);
+        log.debug("Created Information for User: {}", newUser);
+        return newUser;
     }
 
     /**

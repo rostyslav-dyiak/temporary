@@ -16,7 +16,9 @@
         var companyId = $stateParams.id;
 
         var master = {};
-        $scope.company = {};
+        $scope.userCompanyDTO = {
+            company : {}
+        };
         $scope.businessTypes = {};
         $scope.invitationHistory = [{
             id: 0,
@@ -67,7 +69,9 @@
         }
 
         function addCompany() {
-            $http.post('/api/register', $scope.company)
+            $scope.userCompanyDTO.email = $scope.userCompanyDTO.company.email;
+            $scope.userCompanyDTO.role = "ROLE_SUPPLIER_ADMIN";
+            $http.post('/api/invite', $scope.userCompanyDTO)
                 .success(function (data, status, headers) {
                     console.log(data + " " + status + " " + headers + " ");
                 }).
