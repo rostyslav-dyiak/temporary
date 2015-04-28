@@ -27,7 +27,7 @@
                     key: $location.search().key
                 }
             }).error(function (e) {
-                $scope.expired = true;
+                $scope.expired = false;
                 console.error(e);
             });
         }
