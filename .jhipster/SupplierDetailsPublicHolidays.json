@@ -1,0 +1,44 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "fk_supplier_details_public_holiday",
+            "relationshipNameCapitalized": "Fk_supplier_details_public_holiday",
+            "relationshipFieldName": "fk_supplier_details_public_holiday",
+            "otherEntityName": "supplierDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityNameCapitalized": "SupplierDetails",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "supplierDetailsId",
+            "fieldType": "Long",
+            "fieldNameCapitalized": "SupplierDetailsId",
+            "fieldNameUnderscored": "supplier_details_id",
+            "fieldInJavaBeanMethod": "SupplierDetailsId",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "publicHolidayId",
+            "fieldType": "Long",
+            "fieldNameCapitalized": "PublicHolidayId",
+            "fieldNameUnderscored": "public_holiday_id",
+            "fieldInJavaBeanMethod": "PublicHolidayId",
+            "fieldValidate": false
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOneToMany": false,
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": false,
+    "fieldsContainBigDecimal": false,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "changelogDate": "20150428091942",
+    "pagination": "pager",
+    "validation": false
+}
