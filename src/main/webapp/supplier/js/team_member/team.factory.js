@@ -9,7 +9,7 @@
     ];
 
     function TeamFactory($resource) {
-        return $resource('/api/companies/:id/users', {}, {
+        return $resource('/api/companies/users', {}, {
             'query': {
                 method: 'GET',
                 isArray: false

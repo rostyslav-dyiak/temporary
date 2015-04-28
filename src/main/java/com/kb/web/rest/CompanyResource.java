@@ -9,6 +9,7 @@ import com.kb.repository.CompanyRepository;
 import com.kb.repository.ContactRepository;
 import com.kb.repository.OutletRepository;
 import com.kb.repository.UserRepository;
+import com.kb.security.SecurityUtils;
 import com.kb.web.rest.util.PaginationUtil;
 
 import org.slf4j.Logger;
@@ -148,14 +149,18 @@ public class CompanyResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}/users", 
+    @RequestMapping(value = "/users", 
     		method = RequestMethod.GET,
     		produces =MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<List<User>> getUsersForCompany(@RequestParam(value = "page" , required = false) Integer offset,
             @RequestParam(value = "per_page", required = false) Integer limit,
     		@PathVariable final Long id) throws URISyntaxException{
-    	Company company = companyRepository.findOne(id);
+    	
+    	String currentLogin = SecurityUtils.getCurrentLogin();
+    	Optional<User> currentUser = userRepository.findOneByEmail(currentLogin);
+    	Company company = companyRepository.findOne(currentUser.get().getCompany().getId());
+    	
     	Page<User> page = userRepository.findByCompany(company, PaginationUtil.generatePageRequest(offset, limit));
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/"+company.getId()+"/users", offset, limit);
         

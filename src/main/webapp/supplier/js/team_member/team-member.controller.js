@@ -19,24 +19,13 @@
         
         activate();
         function activate() {
-        	
-        	AccountFactory.get({},
-                     function(data) {
-							console.log(data);
-							TeamFactory.get({
-								id : data.company.id
-							}, function(data) {
-								$scope.teamMembers = data.teamMembers;
-							}, function(e) {
-								console.error(e);
-							});
-			}, function(e) {
+
+        	TeamFactory.get({}, function(data) {
+				$scope.teamMembers = data.teamMembers;
+				}, function(e) {
 				console.error(e);
-                    });
-        	
-            
+			});
         }
-        
     }
 
 })();
