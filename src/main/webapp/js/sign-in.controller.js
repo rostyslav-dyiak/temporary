@@ -12,7 +12,7 @@
         'AccountFactory'
     ];
 
-    function SignInController($scope, $window,$localStorage, AuthServerProvider, AccountFactory) {
+    function SignInController($scope, $window, $localStorage, AuthServerProvider, AccountFactory) {
         $scope.credentials = {};
         $scope.error = '';
 
@@ -21,7 +21,7 @@
         function login(credentials) {
             AuthServerProvider.login(credentials.email, credentials.password)
                 .then(function (data) {
-                    $localStorage.token = data.data.token;
+                    $localStorage.token = data.data;
                     AccountFactory.get({},
                         function (data) {
                             redirectToApp(data.role);

@@ -9,7 +9,7 @@
     ];
 
     function CompanyFactory($resource) {
-        return $resource('api/companies', {}, {
+        return $resource('api/companies/:id', {}, {
             'query': {
                 method: 'GET',
                 isArray: true

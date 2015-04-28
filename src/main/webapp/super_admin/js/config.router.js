@@ -223,8 +223,10 @@
                     return {
                         'request': function (config) {
                             config.headers = config.headers || {};
-                            if ($localStorage.token) {
-                                config.headers['x-auth-token'] = $localStorage.token;
+                            if ($localStorage.token && $localStorage.token.expires > new Date().getTime()) {
+                                config.headers['x-auth-token'] = $localStorage.token.token;
+                            } else {
+                                config.headers['x-auth-token'] = undefined;
                             }
                             return config;
                         },

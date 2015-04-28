@@ -13,8 +13,8 @@ angular.module('app')
         ]
     )
     .config(
-        ['$stateProvider', '$urlRouterProvider',
-            function($stateProvider, $urlRouterProvider) {
+        ['$stateProvider', '$urlRouterProvider', '$httpProvider',
+            function($stateProvider, $urlRouterProvider, $httpProvider) {
 
                 $urlRouterProvider
                     .otherwise('/eatery/overview');
@@ -156,8 +156,26 @@ angular.module('app')
                     .state('app.activityLog', {
                         url: '/activity_log',
                         templateUrl: 'templates/admin/activity_log.html'
-                    })
-
+                    });
+                $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage) {
+                    return {
+                        'request': function (config) {
+                            config.headers = config.headers || {};
+                            if ($localStorage.token && $localStorage.token.expires > new Date().getTime()) {
+                                config.headers['x-auth-token'] = $localStorage.token.token;
+                            } else {
+                                config.headers['x-auth-token'] = undefined;
+                            }
+                            return config;
+                        },
+                        'responseError': function (response) {
+                            if (response.status === 401 || response.status === 403) {
+                                $location.path('/sign_in');
+                            }
+                            return $q.reject(response);
+                        }
+                    };
+                }]);
             }
         ]
     );

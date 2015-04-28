@@ -3,15 +3,15 @@
 /* Controllers */
 
 angular.module('app')
-    .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window', 'AuthServerProvider',
-        function($scope, $translate, $localStorage, $window, AuthServerProvider) {
+    .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window', 'AuthServerProvider', 'localStorageService',
+        function($scope, $translate, $localStorage, $window, AuthServerProvider, localStorageService) {
             // add 'ie' classes to html
             var isIE = !!navigator.userAgent.match(/MSIE/i);
             isIE && angular.element($window.document.body).addClass('ie');
             isSmartDevice($window) && angular.element($window.document.body).addClass('smart');
 
             if(AuthServerProvider.getToken()) {
-                $localStorage.token = AuthServerProvider.getToken().token;
+                $localStorage.token = AuthServerProvider.getToken();
             }
 
             // config
