@@ -23,9 +23,10 @@
     <include file="classpath:config/liquibase/changelog/custom_user_to_company_relation.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/custom_add_contact_company_relation.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/company_eatery_suplier_details_column_move.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/data_batch.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20150428075846_added_entity_PublicHoliday.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20150428091942_added_entity_SupplierDetailsPublicHolidays.xml" relativeToChangelogFile="false"/>
     <!-- JHipster will add liquibase changelogs here -->
+
+    <include file="classpath:config/liquibase/changelog/data_batch.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>
