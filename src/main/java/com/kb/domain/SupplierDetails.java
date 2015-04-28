@@ -64,7 +64,7 @@ public class SupplierDetails extends AbstractAuditingEntity implements Serializa
 
     @OneToMany
     @JoinColumn(name = "supplier_details_id")
-    private Set<SupplierDetailsPublicHolidays> holidays; 
+    private Set<DayOff> holidays; 
     
     @ManyToMany
     @JoinTable(name = "t_supplier_details_picture",
@@ -160,11 +160,11 @@ public class SupplierDetails extends AbstractAuditingEntity implements Serializa
 		this.pictures = pictures;
 	}
 
-	public Set<SupplierDetailsPublicHolidays> getHolidays() {
+	public Set<DayOff> getHolidays() {
 		return holidays;
 	}
 
-	public void setHolidays(final Set<SupplierDetailsPublicHolidays> holidays) {
+	public void setHolidays(final Set<DayOff> holidays) {
 		this.holidays = holidays;
 	}
 

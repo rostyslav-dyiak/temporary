@@ -18,8 +18,6 @@
             <column name="supplier_details_id" type="bigint"/>
             <column name="public_holiday_id" type="bigint"/>
         </createTable>
-        
-
     </changeSet>
     
     <changeSet id="added common fields and fk to T_SUPPLIERDETAILSPUBLICHOLIDAYS" author="ivanursul">
@@ -48,5 +46,50 @@
 		</addColumn>
     
     </changeSet>
+    
+    <changeSet id="adding ebsence type to day off table" author="ivanursul">
+    	<addColumn tableName="T_SUPPLIERDETAILSPUBLICHOLIDAYS">
+    		<column name="absence_type" type="varchar(255)"/>
+    	</addColumn>
+    	<renameTable newTableName="T_DAY_OFF" oldTableName="T_SUPPLIERDETAILSPUBLICHOLIDAYS"/>
+    </changeSet>
+    
+	<changeSet id="create_absence_type_trigger" author="ivaursul">
+		<sql splitStatements="false">
+			<![CDATA[
+				create or replace function process_t_day_off_absence_type() returns trigger as $$
+						begin
+						if new.public_holiday_id IS NOT NULL then
+							raise notice 'Updating absence_type to HOLIDAY';
+							new.absence_type:='HOLIDAY';
+						else 
+							raise notice 'Updating absence_type to DAYOFF';
+							new.absence_type:='DAYOFF';
+						end if;
+						return new;
+				end
+				$$ language 'plpgsql';
+			]]>
+		</sql>
+		<rollback>
+			drop function if exists process_t_day_off_absence_type()
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="set_process_absence_type trigger" author="ivanursul">
+		<sql>
+			create trigger t_day_off_iutrig before insert or update on t_day_off for each row execute procedure process_t_day_off_absence_type();
+		</sql>
+		<rollback>
+			drop trigger if exists t_day_off_iutrig on t_day_off
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="added description and date fields into t_day_off table" author="ivanursul">
+		<addColumn tableName="t_day_off">
+            <column name="description" type="varchar(255)"/>
+            <column name="date" type="timestamp"/>			
+		</addColumn>
+	</changeSet>	    
     
 </databaseChangeLog>
