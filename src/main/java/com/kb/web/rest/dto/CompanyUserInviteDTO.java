@@ -5,13 +5,10 @@ import com.kb.domain.Company;
 /**
  * Created by rdyyak on 24.04.15.
  */
-public class UserCompanyDTO {
-    private UserDTO userDTO;
+public class CompanyUserInviteDTO {
+    private String email;
+    private String role;
     private Company company;
-
-    UserCompanyDTO() {
-
-    }
 
     public Company getCompany() {
         return company;
@@ -21,19 +18,28 @@ public class UserCompanyDTO {
         this.company = company;
     }
 
-    public UserDTO getUserDTO() {
-        return userDTO;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserDTO(UserDTO userDTO) {
-        this.userDTO = userDTO;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
     public String toString() {
         return "UserCompanyDTO{" +
-            "userDTO=" + userDTO +
             ", company=" + company +
+            ", email=" + email +
+            ", role=" + role +
             '}';
     }
 }

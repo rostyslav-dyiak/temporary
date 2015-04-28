@@ -6,15 +6,15 @@
         <div class="col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form class="form-horizontal" ng-switch="company.companyType">
+                    <form class="form-horizontal" ng-switch="userCompanyDTO.company.companyType">
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Logo</label>
 
                             <div class="col-lg-10">
                                 <img id="image-preview" class="mc-logo" src="img/logo_placeholder.png"
-                                     ng-src="img/{{company.eateryDetails.logo.url}}" ng-switch-when="EATERY"/>
+                                     ng-src="img/{{userCompanyDTO.logo.url}}" ng-switch-when="EATERY"/>
                                 <img id="image-preview" class="mc-logo" src="img/logo_placeholder.png"
-                                     ng-src="img/{{company.supplierDetails.logo.url}}" ng-switch-when="SUPPLIER"/>
+                                     ng-src="img/{{userCompanyDTO.logo.url}}" ng-switch-when="SUPPLIER"/>
 
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default" click-selector="#upload">Upload
@@ -22,7 +22,7 @@
                                     </button>
                                     <input id="upload" type="file" file-model="logo" accept="image/*"
                                            style="display: none;">
-                                    <button type="button" class="btn btn-default" ng-click="removeImage()">Remove</button>
+                                    <button type="button" class="btn  btn-default" ng-click="removeImage()">Remove</button>
                                 </div>
                             </div>
                         </div>
@@ -30,17 +30,17 @@
                             <label class="col-lg-2 control-label">Type</label>
 
                             <div class="col-lg-10">
-                                <select name="type" ng-model="company.companyType" class="form-control">
+                                <select name="type" ng-model="userCompanyDTO.company.companyType" class="form-control">
                                     <option value="SUPPLIER">Supplier</option>
                                     <option value="EATERY">Eatery</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group" ng-show="company.companyType == 'EATERY'">
+                        <div class="form-group" ng-show="userCompanyDTO.company.companyType == 'EATERY'">
                             <label class="col-lg-2 control-label">Business Type</label>
 
                             <div class="col-lg-10">
-                                <select name="companyType" class="form-control" ng-model="company.eateryDetails.businessType">
+                                <select name="companyType" class="form-control" ng-model="userCompanyDTO.company.eateryDetails.businessType">
                                     <option ng-repeat="type in businessTypes" value="{{type.name}}">{{type.name}}</option>
                                 </select>
                             </div>
@@ -49,7 +49,7 @@
                             <label class="col-lg-2 control-label">Company Name</label>
 
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" ng-model="company.name"
+                                <input type="text" class="form-control" ng-model="userCompanyDTO.company.name"
                                        placeholder="Company Name">
                             </div>
                         </div>
@@ -57,24 +57,22 @@
                             <label class="col-lg-2 control-label">Company Code</label>
 
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" ng-model="company.eateryDetails.code"
-                                       placeholder="Company Name" ng-switch-when="EATERY">
-                                <input type="text" class="form-control" ng-model="company.supplierDetails.code"
-                                       placeholder="Company Name" ng-switch-when="SUPPLIER">
+                                <input type="text" class="form-control" ng-model="userCompanyDTO.company.code"
+                                       placeholder="Company Code">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Email</label>
 
                             <div class="col-lg-10">
-                                <input type="email" class="form-control" ng-model="company.email" placeholder="Email">
+                                <input type="email" class="form-control" ng-model="userCompanyDTO.company.email" placeholder="Email">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Contact number</label>
 
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" ng-model="company.contactNumber"
+                                <input type="text" class="form-control" ng-model="userCompanyDTO.company.contactNumber"
                                        placeholder="Contact number">
                             </div>
                         </div>

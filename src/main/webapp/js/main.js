@@ -10,7 +10,7 @@ angular.module('app')
             isIE && angular.element($window.document.body).addClass('ie');
             isSmartDevice($window) && angular.element($window.document.body).addClass('smart');
 
-            if(AuthServerProvider.getToken().token) {
+            if(AuthServerProvider.getToken()) {
                 $localStorage.token = AuthServerProvider.getToken().token;
             }
 

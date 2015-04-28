@@ -15,6 +15,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import com.kb.domain.CompanyStatus;
 import com.kb.domain.CompanyType;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,8 +54,8 @@ public class CompanyResourceTest {
     private static final String UPDATED_CONTACT_NUMBER = "UPDATED_TEXT";
     private static final CompanyType DEFAULT_BUSINESS_TYPE = CompanyType.EATERY;
     private static final CompanyType UPDATED_BUSINESS_TYPE = CompanyType.SUPPLIER;
-    private static final String DEFAULT_STATUS = "SAMPLE_TEXT";
-    private static final String UPDATED_STATUS = "UPDATED_TEXT";
+    private static final CompanyStatus DEFAULT_STATUS = CompanyStatus.ACTIVE;
+    private static final CompanyStatus UPDATED_STATUS = CompanyStatus.INACTIVE;
 
     @Inject
     private CompanyRepository companyRepository;

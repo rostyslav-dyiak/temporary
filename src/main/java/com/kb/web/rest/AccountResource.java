@@ -11,6 +11,7 @@ import com.kb.repository.UserRepository;
 import com.kb.security.SecurityUtils;
 import com.kb.service.MailService;
 import com.kb.service.UserService;
+import com.kb.web.rest.dto.CompanyUserInviteDTO;
 import com.kb.web.rest.dto.UserCompanyDTO;
 import com.kb.web.rest.dto.UserDTO;
 import org.apache.commons.lang.StringUtils;
@@ -65,17 +66,35 @@ public class AccountResource {
     @Timed
     public ResponseEntity<?> registerAccount(@Valid @RequestBody final UserCompanyDTO userCompanyDTO, final HttpServletRequest request) {
         UserDTO userDTO = userCompanyDTO.getUserDTO();
-        return userRepository.findOneByLogin(userDTO.getEmail())
+        String role = "";
+        return userRepository.findOneByEmail(userDTO.getEmail())
             .map(user -> new ResponseEntity<>("e-mail address already in use", HttpStatus.BAD_REQUEST))
             .orElseGet(() -> {
                 Company company = userCompanyDTO.getCompany();
                 companyRepository.save(company);
-                {
-                }
                 User user = userService.createUserInformation(userDTO.getEmail().toLowerCase(), userDTO.getPassword(),
-                    userDTO.getFirstName(), userDTO.getLastName(), userDTO.getLangKey(), company);
+                    userDTO.getFirstName(), userDTO.getLastName(), userDTO.getLangKey(), company, role);
                 String baseUrl = MessageFormat.format("{0}://{1}:{2}", request.getServerName(), request.getScheme(), Integer.toString(request.getServerPort()));
 
+                mailService.sendActivationEmail(user, baseUrl);
+                return new ResponseEntity<>(HttpStatus.CREATED);
+            });
+    }
+
+    @RequestMapping(value = "/invite",
+        method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.TEXT_PLAIN_VALUE)
+    @Timed
+    public ResponseEntity<?> registerCompanyAndInvite(@Valid @RequestBody final CompanyUserInviteDTO userCompanyDTO, final HttpServletRequest request) {
+        String email = userCompanyDTO.getEmail();
+        Company company = userCompanyDTO.getCompany();
+        String role = userCompanyDTO.getRole();
+        return userRepository.findOneByEmail(email)
+            .map(user -> new ResponseEntity<>("e-mail address already in use", HttpStatus.BAD_REQUEST))
+            .orElseGet(() -> {
+                companyRepository.save(company);
+                User user = userService.createInitialUserInformation(email, company, role);
+                String baseUrl = MessageFormat.format("{0}://{1}:{2}", request.getServerName(), request.getScheme(), Integer.toString(request.getServerPort()));
                 mailService.sendActivationEmail(user, baseUrl);
                 return new ResponseEntity<>(HttpStatus.CREATED);
             });
