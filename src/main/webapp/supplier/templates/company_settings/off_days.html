@@ -1,1 +1,44 @@
-<h1>Off days</h1>
+<div class="wrapper-md" ng-controller="CompanyOffDaysController">
+    <div class="panel panel-default">
+        <div class="panel-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4>Off-days for every year</h4>
+                    <button class="btn m-b-xs w-xs btn-info btn-rounded">Create yearly off day</button>
+                    <div ng-controller="CompanyOffDaysCreateController" class="panel b-a">
+                        <script type="text/ng-template" id="myModalContent.html">
+                            <div ng-include="'templates/company_settings/off_days.create.modal.html'"></div>
+                        </script>
+                        <button class="btn btn-success" ng-click="open()">Create yearly off day</button>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <h4>Off-days for</h4>
+                    <select ng-model="selectedYear" ng-options="year for year in years">
+                    </select>
+                    <button class="btn m-b-xs w-xs btn-info btn-rounded">Create off day for this year</button>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="col">
+                <div class="wrapper">
+                    <ul class="timeline timeline-center">
+                        <li class="tl-item" ng-class="{'tl-left': item.value.yearly}" ng-repeat="item in holidays">
+                            <div class="tl-wrap">
+                                <span class="tl-date">{{ item.key }}</span>
+
+                                <div class="tl-content panel padder b-a">
+                                    <span class="arrow arrow-success left pull-up hidden-left"></span>
+                                    <span class="arrow arrow-success right pull-up visible-left"></span>
+
+                                    <div>{{ item.value.description }}</div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

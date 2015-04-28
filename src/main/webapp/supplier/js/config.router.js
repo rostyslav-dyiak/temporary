@@ -127,7 +127,17 @@ angular.module('app')
                 })
                 .state('app.companySettings.offDays', {
                     url: '/profile',
-                    templateUrl: 'templates/company_settings/off_days.html'
+                    templateUrl: 'templates/company_settings/off_days.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    'js/company_settings/company.off-days.controller.js',
+                                    'js/company_settings/company.off-days.create.controller.js'
+                                ]);
+                            }
+                        ]
+                    }
                 })
                 .state('app.companySettings.deliveryDays', {
                     url: '/profile',
@@ -204,8 +214,10 @@ angular.module('app')
                 return {
                     'request': function (config) {
                         config.headers = config.headers || {};
-                        if ($localStorage.token) {
-                            config.headers['x-auth-token'] = $localStorage.token;
+                        if ($localStorage.token && $localStorage.token.expires > new Date().getTime()) {
+                            config.headers['x-auth-token'] = $localStorage.token.token;
+                        } else {
+                            config.headers['x-auth-token'] = undefined;
                         }
                         return config;
                     },

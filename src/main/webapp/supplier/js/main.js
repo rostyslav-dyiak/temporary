@@ -11,7 +11,7 @@ angular.module('app')
             isSmartDevice($window) && angular.element($window.document.body).addClass('smart');
 
             if(AuthServerProvider.getToken()) {
-                $localStorage.token = AuthServerProvider.getToken().token;
+                $localStorage.token = AuthServerProvider.getToken();
             }
 
             // config
