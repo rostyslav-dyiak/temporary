@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.kb.converter.Converter;
 import com.kb.domain.DayOff;
-import com.kb.dto.DayOffDto;
 import com.kb.repository.DayOffRepository;
+import com.kb.web.rest.dto.DayOffDto;
 
 @Service("dayOffService")
 public class DefaultDayOffService implements DayOffService {

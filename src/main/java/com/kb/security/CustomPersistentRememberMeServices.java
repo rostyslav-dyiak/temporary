@@ -1,9 +1,12 @@
 package com.kb.security;
 
-import com.kb.domain.PersistentToken;
-import com.kb.domain.User;
-import com.kb.repository.PersistentTokenRepository;
-import com.kb.repository.UserRepository;
+import java.security.SecureRandom;
+import java.util.Arrays;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,11 +23,9 @@ import org.springframework.security.web.authentication.rememberme.RememberMeAuth
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.security.SecureRandom;
-import java.util.Arrays;
+import com.kb.domain.PersistentToken;
+import com.kb.repository.PersistentTokenRepository;
+import com.kb.repository.UserRepository;
 
 /**
  * Custom implementation of Spring Security's RememberMeServices.
@@ -74,14 +75,14 @@ public class CustomPersistentRememberMeServices extends
     private UserRepository userRepository;
 
     @Inject
-    public CustomPersistentRememberMeServices(Environment env, org.springframework.security.core.userdetails.UserDetailsService userDetailsService) {
+    public CustomPersistentRememberMeServices(final Environment env, final org.springframework.security.core.userdetails.UserDetailsService userDetailsService) {
         super(env.getProperty("jhipster.security.rememberme.key"), userDetailsService);
         random = new SecureRandom();
     }
 
     @Override
     @Transactional
-    protected UserDetails processAutoLoginCookie(String[] cookieTokens, HttpServletRequest request, HttpServletResponse response) {
+    protected UserDetails processAutoLoginCookie(final String[] cookieTokens, final HttpServletRequest request, final HttpServletResponse response) {
 
         PersistentToken token = getPersistentToken(cookieTokens);
         String login = token.getUser().getLogin();
@@ -103,7 +104,7 @@ public class CustomPersistentRememberMeServices extends
     }
 
     @Override
-    protected void onLoginSuccess(HttpServletRequest request, HttpServletResponse response, Authentication successfulAuthentication) {
+    protected void onLoginSuccess(final HttpServletRequest request, final HttpServletResponse response, final Authentication successfulAuthentication) {
         String login = successfulAuthentication.getName();
 
         log.debug("Creating new persistent login for user {}", login);
@@ -133,7 +134,7 @@ public class CustomPersistentRememberMeServices extends
      */
     @Override
     @Transactional
-    public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+    public void logout(final HttpServletRequest request, final HttpServletResponse response, final Authentication authentication) {
         String rememberMeCookie = extractRememberMeCookie(request);
         if (rememberMeCookie != null && rememberMeCookie.length() != 0) {
             try {
@@ -152,7 +153,7 @@ public class CustomPersistentRememberMeServices extends
     /**
      * Validate the token and return it.
      */
-    private PersistentToken getPersistentToken(String[] cookieTokens) {
+    private PersistentToken getPersistentToken(final String[] cookieTokens) {
         if (cookieTokens.length != 2) {
             throw new InvalidCookieException("Cookie token did not contain " + 2 +
                     " tokens, but contained '" + Arrays.asList(cookieTokens) + "'");
@@ -193,7 +194,7 @@ public class CustomPersistentRememberMeServices extends
         return new String(Base64.encode(newToken));
     }
 
-    private void addCookie(PersistentToken token, HttpServletRequest request, HttpServletResponse response) {
+    private void addCookie(final PersistentToken token, final HttpServletRequest request, final HttpServletResponse response) {
         setCookie(
                 new String[]{token.getSeries(), token.getTokenValue()},
                 TOKEN_VALIDITY_SECONDS, request, response);

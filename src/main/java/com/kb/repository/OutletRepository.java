@@ -1,13 +1,11 @@
 package com.kb.repository;
 
-import com.kb.domain.Company;
-import com.kb.domain.Outlet;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import com.kb.domain.Company;
+import com.kb.domain.Outlet;
 
 /**
  * Spring Data JPA repository for the Outlet entity.

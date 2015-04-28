@@ -1,11 +1,9 @@
 package com.kb.config;
 
-import com.kb.security.*;
-import com.kb.security.xauth.TokenProvider;
-import com.kb.security.xauth.XAuthTokenConfigurer;
+import javax.inject.Inject;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,16 +15,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension;
-import org.springframework.security.web.authentication.RememberMeServices;
 
-import javax.inject.Inject;
+import com.kb.security.AuthoritiesConstants;
+import com.kb.security.Http401UnauthorizedEntryPoint;
+import com.kb.security.xauth.TokenProvider;
+import com.kb.security.xauth.XAuthTokenConfigurer;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Inject
+/*    
+ 	@Inject
     private Environment env;
 
     @Inject
@@ -35,8 +36,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Inject
     private AjaxAuthenticationFailureHandler ajaxAuthenticationFailureHandler;
 
+	@Inject
+	private RememberMeServices rememberMeServices;
+
     @Inject
     private AjaxLogoutSuccessHandler ajaxLogoutSuccessHandler;
+    
+*/
 
     @Inject
     private Http401UnauthorizedEntryPoint authenticationEntryPoint;
@@ -44,8 +50,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Inject
     private UserDetailsService userDetailsService;
 
-    @Inject
-    private RememberMeServices rememberMeServices;
 
     @Inject
     private TokenProvider tokenProvider;
@@ -56,14 +60,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Inject
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    public void configureGlobal(final AuthenticationManagerBuilder auth) throws Exception {
         auth
             .userDetailsService(userDetailsService)
             .passwordEncoder(passwordEncoder());
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(final WebSecurity web) throws Exception {
         web.ignoring()
             .antMatchers("/scripts/**/*.{js,html}")
             .antMatchers("/bower_components/**")
@@ -74,7 +78,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception {
         http
             .exceptionHandling()
             .authenticationEntryPoint(authenticationEntryPoint)

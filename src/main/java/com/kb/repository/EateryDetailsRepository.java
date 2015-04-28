@@ -1,9 +1,8 @@
 package com.kb.repository;
 
-import com.kb.domain.EateryDetails;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import com.kb.domain.EateryDetails;
 
 /**
  * Spring Data JPA repository for the EateryDetails entity.

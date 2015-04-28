@@ -38,7 +38,7 @@ public class ContentResource {
 	@RequestMapping(value = "/content", method = RequestMethod.POST)
 	@Timed
 	public Content postContent(@RequestParam("content") final MultipartFile file) throws Exception {
-
+		log.info("Storing file");
 		InputStream istream = file.getInputStream();
 
 		MimeType mimeType = MimeType.fromType(file.getContentType());
@@ -53,6 +53,7 @@ public class ContentResource {
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "/content", method = RequestMethod.GET)
 	public void getContentByPath(final HttpServletResponse response, @RequestParam("contentPath") final String contentPath) throws Exception {
+		log.info("Getting file");
 		Content contentResource = contentService.getContent(contentPath);
 
 		InputStream in = contentResource.getContentStream();

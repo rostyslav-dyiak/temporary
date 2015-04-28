@@ -3,7 +3,7 @@ package com.kb.service.dayoff;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.kb.dto.DayOffDto;
+import com.kb.web.rest.dto.DayOffDto;
 
 public interface DayOffService {
 

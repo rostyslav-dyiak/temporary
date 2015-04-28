@@ -90,6 +90,10 @@
             <column name="description" type="varchar(255)"/>
             <column name="date" type="timestamp"/>			
 		</addColumn>
+	</changeSet>
+	
+	<changeSet id="added not null constraint for t_day_off.supplier_details_id" author="ivanursul">
+		<addNotNullConstraint tableName="t_day_off" columnName="supplier_details_id"/>
 	</changeSet>	    
     
 </databaseChangeLog>

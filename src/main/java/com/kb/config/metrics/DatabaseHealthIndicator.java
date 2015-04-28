@@ -16,7 +16,7 @@ import org.springframework.util.StringUtils;
  */
 public class DatabaseHealthIndicator extends AbstractHealthIndicator {
     
-    private DataSource dataSource;
+    //private DataSource dataSource;
 
     private JdbcTemplate jdbcTemplate;
 
@@ -37,7 +37,7 @@ public class DatabaseHealthIndicator extends AbstractHealthIndicator {
     private String query = null;
 
     public DatabaseHealthIndicator(final DataSource dataSource) {
-        this.dataSource = dataSource;
+        //this.dataSource = dataSource;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 

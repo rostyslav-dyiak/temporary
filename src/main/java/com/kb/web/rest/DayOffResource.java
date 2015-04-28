@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +23,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
-import com.kb.dto.DayOffDto;
 import com.kb.service.dayoff.DayOffService;
+import com.kb.web.rest.dto.DayOffDto;
 import com.kb.web.rest.util.PaginationUtil;
 
 /**
@@ -41,7 +42,7 @@ public class DayOffResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Void> create(@RequestBody final DayOffDto dto) throws URISyntaxException {
+    public ResponseEntity<Void> create(@Valid @RequestBody final DayOffDto dto) throws URISyntaxException {
         log.debug("REST request to save SupplierDetailsPublicHolidays : {}", dto);
         if (dto.getId() != null) {
             return ResponseEntity.badRequest().header("Failure", "A new Day Off cannot already have an ID").build();
@@ -54,7 +55,7 @@ public class DayOffResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Void> update(@RequestBody final DayOffDto dto) throws URISyntaxException {
+    public ResponseEntity<Void> update(@Valid @RequestBody final DayOffDto dto) throws URISyntaxException {
         log.debug("REST request to update Day Offs : {}", dto);
         if (dto.getId() == null) {
             return create(dto);

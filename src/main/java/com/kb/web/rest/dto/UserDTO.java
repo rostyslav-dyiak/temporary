@@ -1,12 +1,12 @@
 package com.kb.web.rest.dto;
 
-import com.kb.domain.Company;
-import org.hibernate.validator.constraints.Email;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.List;
+
+import org.hibernate.validator.constraints.Email;
+
+import com.kb.domain.Company;
 
 public class UserDTO {
 
@@ -39,8 +39,8 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(String login, String password, String firstName, String lastName, String email, String langKey, Company company,
-                   String role) {
+    public UserDTO(final String login, final String password, final String firstName, final String lastName, final String email, final String langKey, final Company company,
+                   final String role) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
@@ -79,7 +79,7 @@ public class UserDTO {
         return role;
     }
 
-    public void setCompany(Company company) {
+    public void setCompany(final Company company) {
         this.company = company;
     }
 
@@ -87,31 +87,31 @@ public class UserDTO {
         return company;
     }
 
-    public void setLogin(String login) {
+    public void setLogin(final String login) {
         this.login = login;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(final String firstName) {
         this.firstName = firstName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
-    public void setLangKey(String langKey) {
+    public void setLangKey(final String langKey) {
         this.langKey = langKey;
     }
 
-    public void setRole(String role) {
+    public void setRole(final String role) {
         this.role = role;
     }
 

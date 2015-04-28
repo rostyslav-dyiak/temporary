@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.kb.converter.AbstractConverter;
 import com.kb.domain.DayOff;
-import com.kb.dto.DayOffDto;
+import com.kb.web.rest.dto.DayOffDto;
 
 @Component("dayOffConverter")
 public class DayOffConverter extends AbstractConverter<DayOff, DayOffDto> {
