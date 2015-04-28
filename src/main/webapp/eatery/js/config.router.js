@@ -164,7 +164,7 @@ angular.module('app')
                             if ($localStorage.token && $localStorage.token.expires > new Date().getTime()) {
                                 config.headers['x-auth-token'] = $localStorage.token.token;
                             } else {
-                                config.headers['x-auth-token'] = undefined;
+                                delete config.headers['x-auth-token'];
                             }
                             return config;
                         },
