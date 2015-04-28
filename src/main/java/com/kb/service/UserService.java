@@ -4,10 +4,12 @@ import com.kb.domain.Authority;
 import com.kb.domain.Company;
 import com.kb.domain.User;
 import com.kb.repository.AuthorityRepository;
+import com.kb.repository.CompanyRepository;
 import com.kb.repository.PersistentTokenRepository;
 import com.kb.repository.UserRepository;
 import com.kb.security.SecurityUtils;
 import com.kb.service.util.RandomUtil;
+import com.kb.web.rest.dto.UserDTO;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
@@ -44,18 +46,18 @@ public class UserService {
     @Inject
     private AuthorityRepository authorityRepository;
 
-    public Optional<User> activateRegistration(String key) {
+    @Inject
+    private CompanyRepository companyRepository;
+
+    public User activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
-        userRepository.findOneByActivationKey(key)
-            .map(user -> {
-                // activate given user for the registration key.
-                user.setActivated(true);
-                user.setActivationKey(null);
-                userRepository.save(user);
-                log.debug("Activated user: {}", user);
-                return user;
-            });
-        return Optional.empty();
+        Optional<User> userOptional = userRepository.findOneByActivationKey(key);
+        User user = userOptional.get();
+        user.setActivated(true);
+        user.setActivationKey(null);
+        userRepository.save(user);
+        log.debug("Activated user: {}", user);
+        return user;
     }
 
     public User createUserInformation( String email, String password, String firstName, String lastName,
@@ -81,6 +83,21 @@ public class UserService {
         userRepository.save(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;
+    }
+//TODO:Check email
+    public UserDTO updateUserInformation(UserDTO userDTO,Long companyId) {
+        Company company = companyRepository.getOne(companyId);
+        company.setContactNumber(userDTO.getContactNumber());
+        String encryptedPassword = passwordEncoder.encode(userDTO.getPassword());
+        userRepository.findOneByEmail(userDTO.getEmail()).ifPresent(u -> {
+            u.setFirstName(userDTO.getFirstName());
+            u.setPassword(encryptedPassword);
+            userRepository.save(u);
+            log.debug("Changed Information for User: {}", u);
+
+        });
+        userDTO.setPassword(null);
+        return userDTO;
     }
 
     public void updateUserInformation(String firstName, String lastName, String email) {
@@ -109,7 +126,7 @@ public class UserService {
         return currentUser;
     }
 
-    public User createInitialUserInformation( String email, Company company,String role) {
+    public User createInitialUserInformation(String email, Company company,String role) {
         User newUser = new User();
         Authority authority = authorityRepository.findOne(role);
         Set<Authority> authorities = new HashSet<>();

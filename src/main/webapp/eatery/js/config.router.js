@@ -157,7 +157,7 @@ angular.module('app')
                         url: '/activity_log',
                         templateUrl: 'templates/admin/activity_log.html'
                     });
-                $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage) {
+                $httpProvider.interceptors.push(['$q', '$window', '$localStorage', function ($q, $window, $localStorage) {
                     return {
                         'request': function (config) {
                             config.headers = config.headers || {};
@@ -170,7 +170,7 @@ angular.module('app')
                         },
                         'responseError': function (response) {
                             if (response.status === 401 || response.status === 403) {
-                                $location.path('/sign_in');
+                                $window.location.href = '/index.html';
                             }
                             return $q.reject(response);
                         }

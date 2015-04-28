@@ -19,14 +19,14 @@
                            ng-model="user.confirmPassword" ui-validate="'$value==user.password'" ui-validate-watch="'user.password'" required>
                 </div>
                 <div class="list-group-item">
-                    <input placeholder="Name" class="form-control no-border" ng-model="user.name" required>
+                    <input placeholder="Name" class="form-control no-border" ng-model="user.firstName" required>
                 </div>
                 <div class="list-group-item">
                     <input type="text" placeholder="Contact Number" class="form-control no-border"
                            ng-model="user.contactNumber" required>
                 </div>
             </div>
-            <span class="btn btn-lg btn-primary btn-block" ng-click="signup(user)" ng-disabled="!signUpForm.$valid && !expired">Create Account
+            <span class="btn btn-lg btn-primary btn-block" ng-click="signup()" ng-disabled="!signUpForm.$valid && !expired">Create Account
             </span>
         </form>
     </div>

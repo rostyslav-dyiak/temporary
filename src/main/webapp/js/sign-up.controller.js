@@ -7,10 +7,12 @@
         .$inject = [
         '$scope',
         '$http',
-        '$location'
+        '$location',
+        '$localStorage',
+        'AuthServerProvider'
     ];
 
-    function SignUpController($scope, $http, $location) {
+    function SignUpController($scope, $http, $location, $localStorage, AuthServerProvider) {
         $scope.user = {};
         $scope.authError = '';
 
@@ -26,29 +28,31 @@
                 params: {
                     key: $location.search().key
                 }
-            }).error(function (e) {
-                $scope.expired = false;
-                console.error(e);
-            });
+            }).success(function (user) {
+                    $scope.user = user;
+                }
+            ).error(function (e) {
+                    $scope.expired = false;
+                    console.error(e);
+                });
         }
 
-        function signup(user) {
-            //UserFactory.save(user,
-            //function(data) {
-            //    $scope.created = true;
-            //    $scope.user = data;
-            //},
-            //function(e) {
-            //    $scope.authError = "Check your data";
-            //    console.error(e);
-            //});
-
-            console.log("Save");
-            $scope.created = true;
-            $scope.user = {
-                id: 1,
-                role: "ROLE_SUPER_ADMIN"
-            }
+        function signup() {
+            $http.post('/api/account/password', $scope.user
+            ).success(function (data) {
+                    AuthServerProvider.login($scope.user.email, $scope.user.password)
+                        .then(function (data) {
+                            $localStorage.token = data.data;
+                        }, function (e) {
+                            $scope.error = 'Please try again.';
+                            console.error(e);
+                        });
+                    $scope.created = true;
+                    $scope.user = data;
+                }).error(function (data) {
+                    $scope.authError = "Check your data";
+                    console.error(e);
+                });
         }
     }
 })();

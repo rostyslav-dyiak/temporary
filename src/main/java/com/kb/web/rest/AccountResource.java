@@ -94,7 +94,7 @@ public class AccountResource {
             .orElseGet(() -> {
                 companyRepository.save(company);
                 User user = userService.createInitialUserInformation(email, company, role);
-                String baseUrl = MessageFormat.format("{0}://{1}:{2}/{3}", request.getScheme(),request.getServerName(),  Integer.toString(request.getServerPort()),"#/app/sign_up");
+                String baseUrl = MessageFormat.format("{0}://{1}:{2}/{3}", request.getScheme(), request.getServerName(), Integer.toString(request.getServerPort()), "#/app/sign_up");
                 mailService.sendActivationEmail(user, baseUrl);
                 return new ResponseEntity<>(HttpStatus.CREATED);
             });
@@ -107,10 +107,12 @@ public class AccountResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<String> activateAccount(@RequestParam(value = "key") final String key) {
-        return Optional.ofNullable(userService.activateRegistration(key))
-            .map(user -> new ResponseEntity<String>(HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+    public ResponseEntity<User> activateAccount(@RequestParam(value = "key") final String key) {
+        User user = userService.activateRegistration(key);
+        if (user != null) {
+            return new ResponseEntity<User>(user, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     /**
@@ -164,6 +166,23 @@ public class AccountResource {
             .map(u -> {
                 userService.updateUserInformation(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail());
                 return new ResponseEntity<String>(HttpStatus.OK);
+            })
+            .orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+    }
+
+    /**
+     * POST  /account -> update the current user information.
+     */
+    @RequestMapping(value = "/account/password",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<UserDTO> changeAccountPasswordAndDetails(@RequestBody final UserDTO userDTO) {
+        return userRepository
+            .findOneByEmail(userDTO.getEmail().toLowerCase())
+            .map(u -> {
+                UserDTO result = userService.updateUserInformation(userDTO, u.getCompany().getId());
+                return new ResponseEntity<UserDTO>(result,HttpStatus.OK);
             })
             .orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
     }

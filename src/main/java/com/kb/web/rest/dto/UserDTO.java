@@ -36,11 +36,14 @@ public class UserDTO {
 
     private Company company;
 
+    private String contactNumber;
+
+
     public UserDTO() {
     }
 
-    public UserDTO(final String login, final String password, final String firstName, final String lastName, final String email, final String langKey, final Company company,
-                   final String role) {
+    public UserDTO(String login, String password, String firstName, String lastName, String email, String langKey, Company company,
+                   String role) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
@@ -115,16 +118,24 @@ public class UserDTO {
         this.role = role;
     }
 
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +
-        "login='" + login + '\'' +
-        ", password='" + password + '\'' +
-        ", firstName='" + firstName + '\'' +
-        ", lastName='" + lastName + '\'' +
-        ", email='" + email + '\'' +
-        ", langKey='" + langKey + '\'' +
-        ", roles=" + role +
-        '}';
+            "login='" + login + '\'' +
+            ", password='" + password + '\'' +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", email='" + email + '\'' +
+            ", langKey='" + langKey + '\'' +
+            ", roles=" + role +
+            '}';
     }
 }
