@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <!--
+        Added the entity SupplierDetailsPublicHolidays.
+    -->
+    <changeSet id="20150428091942" author="jhipster">
+        <createTable tableName="T_SUPPLIERDETAILSPUBLICHOLIDAYS">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="supplier_details_id" type="bigint"/>
+            <column name="public_holiday_id" type="bigint"/>
+        </createTable>
+        
+
+    </changeSet>
+    
+    <changeSet id="added common fields and fk to T_SUPPLIERDETAILSPUBLICHOLIDAYS" author="ivanursul">
+        <addForeignKeyConstraint baseColumnNames="supplier_details_id"
+                                 baseTableName="T_SUPPLIERDETAILSPUBLICHOLIDAYS"
+                                 constraintName="fk_supplierdetailspublicholidays_supplier_details_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="T_SUPPLIERDETAILS"/>
+
+        <addForeignKeyConstraint baseColumnNames="public_holiday_id"
+                                 baseTableName="T_SUPPLIERDETAILSPUBLICHOLIDAYS"
+                                 constraintName="fk_supplierdetailspublicholidays_public_holiday_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="T_PUBLICHOLIDAY"/>    
+
+
+		<addColumn tableName="T_SUPPLIERDETAILSPUBLICHOLIDAYS">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+		</addColumn>
+    
+    </changeSet>
+    
+</databaseChangeLog>

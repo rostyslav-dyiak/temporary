@@ -1,8 +1,6 @@
 package com.kb.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
@@ -16,8 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * A SupplierDetails.
@@ -61,6 +62,10 @@ public class SupplierDetails extends AbstractAuditingEntity implements Serializa
     @Column(name = "public_pricing_visible")
     private Boolean publicPricingVisible;
 
+    @OneToMany
+    @JoinColumn(name = "supplier_details_id")
+    private Set<SupplierDetailsPublicHolidays> holidays; 
+    
     @ManyToMany
     @JoinTable(name = "t_supplier_details_picture",
     	joinColumns = @JoinColumn(name = "supplier_details_picture_id", referencedColumnName = "id"),
@@ -153,6 +158,14 @@ public class SupplierDetails extends AbstractAuditingEntity implements Serializa
 
 	public void setPictures(final Set<Picture> pictures) {
 		this.pictures = pictures;
+	}
+
+	public Set<SupplierDetailsPublicHolidays> getHolidays() {
+		return holidays;
+	}
+
+	public void setHolidays(final Set<SupplierDetailsPublicHolidays> holidays) {
+		this.holidays = holidays;
 	}
 
 	@Override

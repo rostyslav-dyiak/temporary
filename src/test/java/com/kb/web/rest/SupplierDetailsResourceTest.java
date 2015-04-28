@@ -45,7 +45,6 @@ import com.kb.repository.SupplierDetailsRepository;
 public class SupplierDetailsResourceTest {
 
     private static final String DEFAULT_CODE = "SAMPLE_TEXT";
-    private static final String UPDATED_CODE = "UPDATED_TEXT";
     private static final String DEFAULT_BUS_REG_NUMBER = "SAMPLE_TEXT";
     private static final String UPDATED_BUS_REG_NUMBER = "UPDATED_TEXT";
     private static final String DEFAULT_BUS_DESCRIPTION = "SAMPLE_TEXT";
@@ -61,13 +60,11 @@ public class SupplierDetailsResourceTest {
     private static final String UPDATED_GST_REGISTRATION_NUMBER = "UPDATED_TEXT";
 
     private static final Long DEFAULT_LOGO_ID = 0L;
-    private static final Long UPDATED_LOGO_ID = 1L;
 
     private static final Boolean DEFAULT_PUBLIC_PRICING_VISIBLE = false;
     private static final Boolean UPDATED_PUBLIC_PRICING_VISIBLE = true;
 
     private static final Long DEFAULT_MAIN_PICTURE_ID = 0L;
-    private static final Long UPDATED_MAIN_PICTURE_ID = 1L;
 
     @Inject
     private SupplierDetailsRepository supplierDetailsRepository;
