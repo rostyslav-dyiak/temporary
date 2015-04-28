@@ -39,7 +39,7 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(String login, String password, String firstName, String lastName, String email, String langKey,
+    public UserDTO(String login, String password, String firstName, String lastName, String email, String langKey, Company company,
                    String role) {
         this.login = login;
         this.password = password;
@@ -48,6 +48,7 @@ public class UserDTO {
         this.email = email;
         this.langKey = langKey;
         this.role = role;
+        this.company = company;
     }
 
     public String getPassword() {

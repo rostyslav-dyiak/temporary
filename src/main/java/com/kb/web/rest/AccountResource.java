@@ -144,6 +144,7 @@ public class AccountResource {
                     user.getLastName(),
                     user.getEmail(),
                     user.getLangKey(),
+                    user.getCompany(),
                     user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toCollection(LinkedList::new)).get(0)),
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));

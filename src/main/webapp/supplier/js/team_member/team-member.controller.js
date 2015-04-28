@@ -5,23 +5,38 @@
     TeamMembersController
         .$inject = [
         '$scope',
-        'TeamFactory'
+        'TeamFactory',
+        'AccountFactory'
     ];
 
-    function TeamMembersController($scope, TeamFactory) {
+    function TeamMembersController($scope, TeamFactory, AccountFactory) {
         $scope.teamMembers = {};
 
         $scope.itemsByPage = 5;
+        
+        $scope.companyId;
 
+        
         activate();
         function activate() {
-            TeamFactory.get({},
-                function (data) {
-                    $scope.teamMembers = data.teamMembers;
-                }, function (e) {
-                    console.error(e);
-                });
+        	
+        	AccountFactory.get({},
+                     function(data) {
+							console.log(data);
+							TeamFactory.get({
+								id : data.company.id
+							}, function(data) {
+								$scope.teamMembers = data.teamMembers;
+							}, function(e) {
+								console.error(e);
+							});
+			}, function(e) {
+				console.error(e);
+                    });
+        	
+            
         }
+        
     }
 
 })();

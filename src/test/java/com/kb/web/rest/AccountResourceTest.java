@@ -1,14 +1,23 @@
 package com.kb.web.rest;
 
-import com.kb.Application;
-import com.kb.domain.Authority;
-import com.kb.domain.User;
-import com.kb.repository.AuthorityRepository;
-import com.kb.repository.UserRepository;
-import com.kb.security.AuthoritiesConstants;
-import com.kb.service.MailService;
-import com.kb.service.UserService;
-import com.kb.web.rest.dto.UserDTO;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
+import javax.inject.Inject;
+import javax.transaction.Transactional;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,21 +32,16 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.kb.Application;
+import com.kb.domain.Authority;
+import com.kb.domain.Company;
+import com.kb.domain.User;
+import com.kb.repository.AuthorityRepository;
+import com.kb.repository.UserRepository;
+import com.kb.security.AuthoritiesConstants;
+import com.kb.service.MailService;
+import com.kb.service.UserService;
+import com.kb.web.rest.dto.UserDTO;
 
 /**
  * Test class for the AccountResource REST controller.
@@ -153,6 +157,7 @@ public class AccountResourceTest {
             "Shmoe",                // lastName
             "joe@example.com",      // e-mail
             "en",                   // langKey
+            new Company(),                   // company
             AuthoritiesConstants.USER
         );
 
@@ -176,6 +181,7 @@ public class AccountResourceTest {
             "One",                  // lastName
             "funky@example.com",    // e-mail
             "en",                   // langKey
+            new Company(),                   // company
             AuthoritiesConstants.USER
         );
 
@@ -199,6 +205,7 @@ public class AccountResourceTest {
             "Green",            // lastName
             "invalid",          // e-mail <-- invalid
             "en",               // langKey
+            new Company(),                   // company
             AuthoritiesConstants.USER
         );
 
@@ -223,12 +230,13 @@ public class AccountResourceTest {
             "Something",            // lastName
             "alice@example.com",    // e-mail
             "en",                   // langKey
+            new Company(),                   // company
             AuthoritiesConstants.USER
         );
 
         // Duplicate login, different e-mail
         UserDTO dup = new UserDTO(u.getLogin(), u.getPassword(), u.getLogin(), u.getLastName(),
-            "alicejr@example.com", u.getLangKey(), u.getRole());
+            "alicejr@example.com", u.getLangKey(), u.getCompany(), u.getRole());
 
         // Good user
         restMvc.perform(
@@ -259,12 +267,13 @@ public class AccountResourceTest {
             "Doe",                  // lastName
             "john@example.com",     // e-mail
             "en",                   // langKey
+            new Company(),                   // company
             AuthoritiesConstants.USER
         );
 
         // Duplicate e-mail, different login
         UserDTO dup = new UserDTO("johnjr", u.getPassword(), u.getLogin(), u.getLastName(),
-            u.getEmail(), u.getLangKey(), u.getRole());
+            u.getEmail(), u.getLangKey(), u.getCompany(), u.getRole());
 
         // Good user
         restMvc.perform(
@@ -294,6 +303,7 @@ public class AccountResourceTest {
             "Guy",                  // lastName
             "badguy@example.com",   // e-mail
             "en",                   // langKey
+            new Company(),                   // company
             AuthoritiesConstants.ADMIN // <-- only admin should be able to do that
         );
 

@@ -4,9 +4,11 @@ import com.codahale.metrics.annotation.Timed;
 import com.kb.domain.Company;
 import com.kb.domain.Contact;
 import com.kb.domain.Outlet;
+import com.kb.domain.User;
 import com.kb.repository.CompanyRepository;
 import com.kb.repository.ContactRepository;
 import com.kb.repository.OutletRepository;
+import com.kb.repository.UserRepository;
 import com.kb.web.rest.util.PaginationUtil;
 
 import org.slf4j.Logger;
@@ -42,6 +44,9 @@ public class CompanyResource {
     
     @Inject
     private ContactRepository contactRepository;
+
+    @Inject
+    private UserRepository userRepository;
     
     /**
      * POST  /companies -> Create a new company.
@@ -139,6 +144,20 @@ public class CompanyResource {
     	Company company = companyRepository.findOne(id);
     	Page<Contact> page = contactRepository.findByCompany(company, PaginationUtil.generatePageRequest(offset, limit));
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/"+company.getId()+"/contacts", offset, limit);
+        
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}/users", 
+    		method = RequestMethod.GET,
+    		produces =MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<User>> getUsersForCompany(@RequestParam(value = "page" , required = false) Integer offset,
+            @RequestParam(value = "per_page", required = false) Integer limit,
+    		@PathVariable final Long id) throws URISyntaxException{
+    	Company company = companyRepository.findOne(id);
+    	Page<User> page = userRepository.findByCompany(company, PaginationUtil.generatePageRequest(offset, limit));
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/"+company.getId()+"/users", offset, limit);
         
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
