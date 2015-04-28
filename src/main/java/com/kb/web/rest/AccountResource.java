@@ -94,7 +94,7 @@ public class AccountResource {
             .orElseGet(() -> {
                 companyRepository.save(company);
                 User user = userService.createInitialUserInformation(email, company, role);
-                String baseUrl = MessageFormat.format("{0}://{1}:{2}/{3}", request.getScheme(),request.getServerName(),  Integer.toString(request.getServerPort()),"#/app/sing_up");
+                String baseUrl = MessageFormat.format("{0}://{1}:{2}/{3}", request.getScheme(),request.getServerName(),  Integer.toString(request.getServerPort()),"#/app/sign_up");
                 mailService.sendActivationEmail(user, baseUrl);
                 return new ResponseEntity<>(HttpStatus.CREATED);
             });
