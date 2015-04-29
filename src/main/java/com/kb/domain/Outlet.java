@@ -2,7 +2,9 @@ package com.kb.domain;
 
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -51,9 +54,11 @@ public class Outlet extends AbstractAuditingEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
+    
+    @ManyToMany(mappedBy="outlets")
+    Set<User> suppliers = new HashSet<>();
 
     public Outlet() {
-
     }
 
     public Long getId() {
@@ -120,7 +125,15 @@ public class Outlet extends AbstractAuditingEntity implements Serializable {
         return company;
     }
 
-    @Override
+    public Set<User> getSuppliers() {
+		return suppliers;
+	}
+
+	public void setSuppliers(Set<User> suppliers) {
+		this.suppliers = suppliers;
+	}
+
+	@Override
     public boolean equals(final Object o) {
         if (this == o) {
             return true;

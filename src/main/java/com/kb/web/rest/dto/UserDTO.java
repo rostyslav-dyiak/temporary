@@ -32,7 +32,11 @@ public class UserDTO {
     @Size(min = 2, max = 5)
     private String langKey;
 
+    private Integer outletCount;
+    
     private String role;
+
+    private String title;
 
     private Company company;
 
@@ -125,8 +129,24 @@ public class UserDTO {
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
+    
+    public Integer getOutletCount() {
+		return outletCount;
+	}
 
-    @Override
+	public void setOutletCount(Integer outletCount) {
+		this.outletCount = outletCount;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	@Override
     public String toString() {
         return "UserDTO{" +
             "login='" + login + '\'' +

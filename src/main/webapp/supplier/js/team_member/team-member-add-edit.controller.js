@@ -36,16 +36,15 @@
         }
 
         function save(teamMember) {
-            //TeamFactory.save({
-            //        id: teamMember.id
-            //    },
-            //    function (data) {
-            //        console.log(data);
-            //    }, function (e) {
-            //        console.error(e);
-            //    });
+            TeamFactory.save({
+                    id: teamMember.id
+                },
+                function (data) {
+                    console.log(data);
+                }, function (e) {
+                    console.error(e);
+                });
 
-            console.log("Saved type with id: " + teamMember.id);
         }
 
         function cancel() {

@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -69,8 +70,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "activation_key", length = 20)
     private String activationKey;
 
+    @Size(max = 100)
+    @Column(name = "title", length = 255)
+    private String title;
+
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "T_USER_AUTHORITY",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
@@ -84,6 +89,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
+    
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "T_SUPPLIER_OUTLET",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "outlet_id", referencedColumnName = "id")})
+    private Set<Outlet> outlets = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -179,6 +191,22 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
 	public void setCompany(final Company company) {
 		this.company = company;
+	}
+
+	public Set<Outlet> getOutlets() {
+		return outlets;
+	}
+
+	public void setOutlets(Set<Outlet> outlets) {
+		this.outlets = outlets;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	@Override

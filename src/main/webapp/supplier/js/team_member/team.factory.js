@@ -12,7 +12,14 @@
         return $resource('/api/companies/users', {}, {
             'query': {
                 method: 'GET',
-                isArray: false
+                isArray: true
+            },
+            'get': {
+                method: 'GET',
+                isArray: true
+            },
+            'save': {
+                method: 'PUT'
             }
         });
     }

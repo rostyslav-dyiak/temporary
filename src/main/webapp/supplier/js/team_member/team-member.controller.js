@@ -1,31 +1,25 @@
 (function() {
-    'use strict';
+	'use strict';
 
-    app.controller('TeamMembersController', TeamMembersController);
-    TeamMembersController
-        .$inject = [
-        '$scope',
-        'TeamFactory',
-        'AccountFactory'
-    ];
+	app.controller('TeamMembersController', TeamMembersController);
+	TeamMembersController.$inject = [ '$scope', 'TeamFactory', 'AccountFactory' ];
 
-    function TeamMembersController($scope, TeamFactory, AccountFactory) {
-        $scope.teamMembers = {};
+	function TeamMembersController($scope, TeamFactory, AccountFactory) {
+		$scope.teamMembers = [];
 
-        $scope.itemsByPage = 5;
-        
-        $scope.companyId;
+		$scope.itemsByPage = 5;
 
-        
-        activate();
-        function activate() {
+		$scope.companyId;
 
-        	TeamFactory.get({}, function(data) {
-				$scope.teamMembers = data.teamMembers;
-				}, function(e) {
+		activate();
+		
+		function activate() {
+			TeamFactory.query({}, function(data) {
+				$scope.teamMembers = data;
+			}, function(e) {
 				console.error(e);
 			});
-        }
-    }
+		}
+	}
 
 })();
