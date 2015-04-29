@@ -52,14 +52,14 @@
 
         function currentUser() {
             if(!user) {
-                localStorageService.get('user');
+               user =  localStorageService.get('user');
             }
             return user;
         }
 
         function currentUserCompany() {
             if(!user) {
-                localStorageService.get('user');
+                user =  localStorageService.get('user');
             }
             return user.company;
         }
