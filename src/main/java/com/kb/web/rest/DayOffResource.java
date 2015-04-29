@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.kb.service.dayoff.DayOffService;
-import com.kb.web.rest.dto.DayOffDto;
+import com.kb.web.rest.dto.dayoff.DayOffDto;
 import com.kb.web.rest.util.PaginationUtil;
 
 /**

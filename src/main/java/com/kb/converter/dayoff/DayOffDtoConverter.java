@@ -6,7 +6,7 @@ import com.kb.converter.AbstractConverter;
 import com.kb.domain.DayOff;
 import com.kb.domain.PublicHoliday;
 import com.kb.domain.SupplierDetails;
-import com.kb.web.rest.dto.DayOffDto;
+import com.kb.web.rest.dto.dayoff.DayOffDto;
 
 @Component("dayOffDtoConverter")
 public class DayOffDtoConverter extends AbstractConverter<DayOffDto, DayOff> {
