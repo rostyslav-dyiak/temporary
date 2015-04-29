@@ -7,11 +7,10 @@
     AuthServerProvider
         .$inject = [
         '$http',
-        '$q',
         'localStorageService'
     ];
 
-    function AuthServerProvider($http, $q, localStorageService) {
+    function AuthServerProvider($http, localStorageService) {
         var user;
 
         var service = {
@@ -33,7 +32,7 @@
                     "Accept": "application/json"
                 }
             }).success(function (response) {
-                localStorageService
+                localStorageService.set('token',response);
                 $http.get("/api/account")
                     .success(function (data) {
                         localStorageService.set('user', data);
@@ -52,7 +51,7 @@
 
         function currentUser() {
             if(!user) {
-               user =  localStorageService.get('user');
+                user =  localStorageService.get('user');
             }
             return user;
         }

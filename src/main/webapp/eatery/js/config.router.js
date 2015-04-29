@@ -157,12 +157,13 @@ angular.module('app')
                         url: '/activity_log',
                         templateUrl: 'templates/admin/activity_log.html'
                     });
-                $httpProvider.interceptors.push(['$q', '$window', '$localStorage', function ($q, $window, $localStorage) {
+                $httpProvider.interceptors.push(['$q', '$window', 'localStorageService', function ($q, $window, localStorageService) {
                     return {
                         'request': function (config) {
                             config.headers = config.headers || {};
-                            if ($localStorage.token && $localStorage.token.expires > new Date().getTime()) {
-                                config.headers['x-auth-token'] = $localStorage.token.token;
+                            var token = localStorageService.get('token');
+                            if (token.token && token.expires > new Date().getTime()) {
+                                config.headers['x-auth-token'] = token.token;
                             } else {
                                 delete config.headers['x-auth-token'];
                             }

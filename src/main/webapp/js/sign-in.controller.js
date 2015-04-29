@@ -7,12 +7,12 @@
         .$inject = [
         '$scope',
         '$window',
-        '$localStorage',
+        'localStorageService',
         'AuthServerProvider',
         'AccountFactory'
     ];
 
-    function SignInController($scope, $window, $localStorage, AuthServerProvider, AccountFactory) {
+    function SignInController($scope, $window, localStorageService, AuthServerProvider) {
         $scope.credentials = {};
         $scope.error = '';
 
@@ -21,26 +21,21 @@
         function login(credentials) {
             AuthServerProvider.login(credentials.email, credentials.password)
                 .then(function (data) {
-                    $localStorage.token = data.data;
-                    AccountFactory.get({},
-                        function (data) {
-                            redirectToApp(data.role);
-                        }, function (e) {
-                            console.error(e);
-                        });
-            },
-            function(e) {
-                $scope.error = 'Please try again.';
-                console.error(e);
-            });
+                    localStorageService.set('token', data.data);
+                    redirectToApp(AuthServerProvider.currentUser().role);
+                },
+                function (e) {
+                    $scope.error = 'Please try again.';
+                    console.error(e);
+                });
         }
 
         function redirectToApp(role) {
-            if(role == 'ROLE_SUPER_ADMIN') {
+            if (role == 'ROLE_SUPER_ADMIN') {
                 $window.location.href = '/super_admin/index.html';
-            } else if(role == 'ROLE_EATERY_ADMIN' || role == 'ROLE_EATERY') {
+            } else if (role == 'ROLE_EATERY_ADMIN' || role == 'ROLE_EATERY') {
                 $window.location.href = '/eatery/index.html';
-            } else if(role == 'ROLE_SUPPLIER_ADMIN' || role == 'ROLE_SUPPLIER') {
+            } else if (role == 'ROLE_SUPPLIER_ADMIN' || role == 'ROLE_SUPPLIER') {
                 $window.location.href = '/supplier/index.html';
             }
         }

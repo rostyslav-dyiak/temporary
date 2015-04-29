@@ -9,10 +9,11 @@
         '$stateParams',
         '$http',
         'CompanyFactory',
-        'BusinessTypeFactory'
+        'BusinessTypeFactory',
+        'AuthServerProvider'
     ];
 
-    function CompanyAddUpdateController($scope, $stateParams, $http, CompanyFactory, BusinessTypeFactory) {
+    function CompanyAddUpdateController($scope, $stateParams, $http, CompanyFactory, BusinessTypeFactory,AuthServerProvider) {
         var companyId = $stateParams.id;
 
         var master = {};
@@ -69,8 +70,11 @@
         }
 
         function addCompany() {
+            if($scope.userCompanyDTO.companyType != 'EATERY') {
+                $scope.userCompanyDTO.businessTypes = "";
+            }
             $scope.userCompanyDTO.email = $scope.userCompanyDTO.company.email;
-            $scope.userCompanyDTO.role = "ROLE_SUPPLIER_ADMIN";
+            $scope.userCompanyDTO.role = "ROLE_" + $scope.userCompanyDTO.company.companyType.toUpperCase() + "_ADMIN";
             $http.post('/api/invite', $scope.userCompanyDTO)
                 .success(function (data, status, headers) {
                     console.log(data + " " + status + " " + headers + " ");
