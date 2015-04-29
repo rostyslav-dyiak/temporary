@@ -39,7 +39,7 @@ public class CompanyResource {
     private final Logger log = LoggerFactory.getLogger(CompanyResource.class);
 
     @Inject
-    private CompanyRepository companyService;
+    private CompanyService companyService;
 
     @Inject
     private OutletRepository outletRepository;

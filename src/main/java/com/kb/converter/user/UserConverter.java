@@ -12,6 +12,7 @@ public class UserConverter extends AbstractConverter<User, UserCompanyDTO> {
 		
 		UserDTO userDTO = new UserDTO();
 		
+		userDTO.setId(source.getId());
 		userDTO.setCompany(source.getCompany());
 		userDTO.setEmail(source.getEmail());
 		userDTO.setFirstName(source.getFirstName());
@@ -34,6 +35,7 @@ public class UserConverter extends AbstractConverter<User, UserCompanyDTO> {
 		UserCompanyDTO userCompanyDTO = new UserCompanyDTO();
 		UserDTO userDTO = new UserDTO();
 		
+		userDTO.setId(source.getId());
 		userDTO.setCompany(source.getCompany());
 		userDTO.setEmail(source.getEmail());
 		userDTO.setFirstName(source.getFirstName());

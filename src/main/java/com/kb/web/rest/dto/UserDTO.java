@@ -10,6 +10,9 @@ import com.kb.domain.Company;
 
 public class UserDTO {
 
+	@NotNull
+	private Long id;
+	
     @Pattern(regexp = "^[a-z0-9]*$")
     @NotNull
     @Size(min = 1, max = 50)
@@ -58,7 +61,15 @@ public class UserDTO {
         this.company = company;
     }
 
-    public String getPassword() {
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getPassword() {
         return password;
     }
 
