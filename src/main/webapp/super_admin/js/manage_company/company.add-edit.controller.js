@@ -73,24 +73,24 @@
             var promiseFile = FileUploadService.uploadFileToUrl($scope.logo);
             promiseFile.then(function (response) {
                     var pictureObject = {
-                        name: $scope.logo,
+                        title: $scope.logo.name,
                         url: response.data.path
                     };
-                    console.log(pictureObject);
+                    $scope.userCompanyDTO.logo = pictureObject;
+                    if ($scope.userCompanyDTO.company.companyType != 'EATERY') {
+                        $scope.userCompanyDTO.company.businessType = {};
+                    }
+                    $scope.userCompanyDTO.email = $scope.userCompanyDTO.company.email;
+                    $scope.userCompanyDTO.role = "ROLE_" + $scope.userCompanyDTO.company.companyType.toUpperCase() + "_ADMIN";
+                    $http.post('/api/invite', $scope.userCompanyDTO)
+                        .success(function (data, status, headers) {
+                            console.log(data + " " + status + " " + headers + " ");
+                        }).
+                        error(function (data, status, headers) {
+                            console.log(data + " " + status + " " + headers + " ");
+                        });
                 }
             );
-            if ($scope.userCompanyDTO.company.companyType != 'EATERY') {
-                $scope.userCompanyDTO.company.businessType = {};
-            }
-            $scope.userCompanyDTO.email = $scope.userCompanyDTO.company.email;
-            $scope.userCompanyDTO.role = "ROLE_" + $scope.userCompanyDTO.company.companyType.toUpperCase() + "_ADMIN";
-            $http.post('/api/invite', $scope.userCompanyDTO)
-                .success(function (data, status, headers) {
-                    console.log(data + " " + status + " " + headers + " ");
-                }).
-                error(function (data, status, headers) {
-                    console.log(data + " " + status + " " + headers + " ");
-                });
         }
 
         function save(company) {
