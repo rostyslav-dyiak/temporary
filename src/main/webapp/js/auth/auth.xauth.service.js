@@ -18,6 +18,7 @@
             logout: logout,
             getToken: getToken,
             currentUser: currentUser,
+            setUser: setUser,
             currentUserCompany: currentUserCompany
         };
 
@@ -26,17 +27,15 @@
         function login(email, password) {
             var data = "email=" + email + "&password="
                 + password;
+
             return $http.post('api/authenticate', data, {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
                     "Accept": "application/json"
                 }
             }).success(function (response) {
-                localStorageService.set('token',response);
-                $http.get("/api/account")
-                    .success(function (data) {
-                        localStorageService.set('user', data);
-                    });
+                localStorageService.set('token', response);
+
                 return response;
             });
         }
@@ -45,20 +44,25 @@
             localStorageService.clearAll();
         }
 
+        function setUser(user) {
+            return localStorageService.set('user', user);
+        }
+
+
         function getToken() {
             return localStorageService.get('token');
         }
 
         function currentUser() {
-            if(!user) {
-                user =  localStorageService.get('user');
+            if (!user) {
+                user = localStorageService.get('user');
             }
             return user;
         }
 
         function currentUserCompany() {
-            if(!user) {
-                user =  localStorageService.get('user');
+            if (!user) {
+                user = localStorageService.get('user');
             }
             return user.company;
         }

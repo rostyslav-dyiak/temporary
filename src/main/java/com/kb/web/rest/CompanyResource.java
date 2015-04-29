@@ -10,8 +10,8 @@ import com.kb.repository.ContactRepository;
 import com.kb.repository.OutletRepository;
 import com.kb.repository.UserRepository;
 import com.kb.security.SecurityUtils;
+import com.kb.service.company.CompanyService;
 import com.kb.web.rest.util.PaginationUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -22,7 +22,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -38,29 +37,29 @@ public class CompanyResource {
     private final Logger log = LoggerFactory.getLogger(CompanyResource.class);
 
     @Inject
-    private CompanyRepository companyRepository;
+    private CompanyService companyService;
 
     @Inject
     private OutletRepository outletRepository;
-    
+
     @Inject
     private ContactRepository contactRepository;
 
     @Inject
     private UserRepository userRepository;
-    
+
     /**
      * POST  /companies -> Create a new company.
      */
     @RequestMapping(method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<Void> create(@RequestBody final Company company) throws URISyntaxException {
         log.debug("REST request to save Company : {}", company);
         if (company.getId() != null) {
             return ResponseEntity.badRequest().header("Failure", "A new company cannot already have an ID").build();
         }
-        companyRepository.save(company);
+        companyService.save(company);
         return ResponseEntity.created(new URI("/api/companies/" + company.getId())).build();
     }
 
@@ -75,7 +74,7 @@ public class CompanyResource {
         if (company.getId() == null) {
             return create(company);
         }
-        companyRepository.save(company);
+        companyService.save(company);
         return ResponseEntity.ok().build();
     }
 
@@ -83,12 +82,13 @@ public class CompanyResource {
      * GET  /companies -> get all the companies.
      */
     @RequestMapping(method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Company>> getAll(@RequestParam(value = "page" , required = false) final Integer offset,
-                                  @RequestParam(value = "per_page", required = false) final Integer limit)
+    public ResponseEntity<List<Company>> getAll(@RequestParam(value = "page", required = false) final Integer offset,
+                                                @RequestParam(value = "per_page", required = false) final Integer limit)
         throws URISyntaxException {
-        Page<Company> page = companyRepository.findAll(PaginationUtil.generatePageRequest(offset, limit));
+        log.debug("REST request to get all Companeies : ");
+        Page<Company> page = companyService.findAll(PaginationUtil.generatePageRequest(offset, limit));
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies", offset, limit);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -97,12 +97,12 @@ public class CompanyResource {
      * GET  /companies/:id -> get the "id" company.
      */
     @RequestMapping(value = "/{id}",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<Company> get(@PathVariable final Long id) {
         log.debug("REST request to get Company : {}", id);
-        return Optional.ofNullable(companyRepository.findOne(id))
+        return Optional.ofNullable(companyService.find(id))
             .map(company -> new ResponseEntity<>(
                 company,
                 HttpStatus.OK))
@@ -113,57 +113,57 @@ public class CompanyResource {
      * DELETE  /companies/:id -> delete the "id" company.
      */
     @RequestMapping(value = "/{id}",
-            method = RequestMethod.DELETE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+        method = RequestMethod.DELETE,
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public void delete(@PathVariable final Long id) {
         log.debug("REST request to delete Company : {}", id);
-        companyRepository.delete(id);
+        companyService.delete(id);
     }
-    
-    @RequestMapping(value = "/{id}/outlets", 
-    		method = RequestMethod.GET,
-    		produces =MediaType.APPLICATION_JSON_VALUE)
+
+    @RequestMapping(value = "/{id}/outlets",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Outlet>> getOutletsForCompany(@RequestParam(value = "page" , required = false) Integer offset,
-            @RequestParam(value = "per_page", required = false) Integer limit,
-    		@PathVariable final Long id) throws URISyntaxException{
-    	Company company = companyRepository.findOne(id);
-    	Page<Outlet> page = outletRepository.findByCompany(company, PaginationUtil.generatePageRequest(offset, limit));
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/"+company.getId()+"/outlets", offset, limit);
-        
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-    }
-    
-    @RequestMapping(value = "/{id}/contacts", 
-    		method = RequestMethod.GET,
-    		produces =MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<List<Contact>> getContactsForCompany(@RequestParam(value = "page" , required = false) Integer offset,
-            @RequestParam(value = "per_page", required = false) Integer limit,
-    		@PathVariable final Long id) throws URISyntaxException{
-    	Company company = companyRepository.findOne(id);
-    	Page<Contact> page = contactRepository.findByCompany(company, PaginationUtil.generatePageRequest(offset, limit));
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/"+company.getId()+"/contacts", offset, limit);
-        
+    public ResponseEntity<List<Outlet>> getOutletsForCompany(@RequestParam(value = "page", required = false) Integer offset,
+                                                             @RequestParam(value = "per_page", required = false) Integer limit,
+                                                             @PathVariable final Long id) throws URISyntaxException {
+        Company company = companyService.find(id);
+        Page<Outlet> page = outletRepository.findByCompany(company, PaginationUtil.generatePageRequest(offset, limit));
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/" + company.getId() + "/outlets", offset, limit);
+
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/users", 
-    		method = RequestMethod.GET,
-    		produces =MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{id}/contacts",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<User>> getUsersForCompany(@RequestParam(value = "page" , required = false) Integer offset,
-            @RequestParam(value = "per_page", required = false) Integer limit,
-    		@PathVariable final Long id) throws URISyntaxException{
-    	
-    	String currentLogin = SecurityUtils.getCurrentLogin();
-    	Optional<User> currentUser = userRepository.findOneByEmail(currentLogin);
-    	Company company = companyRepository.findOne(currentUser.get().getCompany().getId());
-    	
-    	Page<User> page = userRepository.findByCompany(company, PaginationUtil.generatePageRequest(offset, limit));
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/"+company.getId()+"/users", offset, limit);
-        
+    public ResponseEntity<List<Contact>> getContactsForCompany(@RequestParam(value = "page", required = false) Integer offset,
+                                                               @RequestParam(value = "per_page", required = false) Integer limit,
+                                                               @PathVariable final Long id) throws URISyntaxException {
+        Company company = companyService.find(id);
+        Page<Contact> page = contactRepository.findByCompany(company, PaginationUtil.generatePageRequest(offset, limit));
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/" + company.getId() + "/contacts", offset, limit);
+
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/users",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<User>> getUsersForCompany(@RequestParam(value = "page", required = false) Integer offset,
+                                                         @RequestParam(value = "per_page", required = false) Integer limit,
+                                                         @PathVariable final Long id) throws URISyntaxException {
+
+        String currentLogin = SecurityUtils.getCurrentLogin();
+        Optional<User> currentUser = userRepository.findOneByEmail(currentLogin);
+        Company company = companyService.find(currentUser.get().getCompany().getId());
+
+        Page<User> page = userRepository.findByCompany(company, PaginationUtil.generatePageRequest(offset, limit));
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/" + company.getId() + "/users", offset, limit);
+
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 }

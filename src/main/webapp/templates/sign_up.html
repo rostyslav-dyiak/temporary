@@ -11,12 +11,12 @@
             </div>
             <div class="list-group list-group-sm">
                 <div class="list-group-item">
-                    <input type="password" name="password" placeholder="New Password" class="form-control no-border"
-                           ng-model="user.password" required>
+                    <input  type="password" name="password" placeholder="New Password" class="form-control no-border"
+                           ng-model="user.password" ng-minlength="5" required>
                 </div>
                 <div class="list-group-item">
                     <input type="password" name="confirmPassword" placeholder="Confirm Password" class="form-control no-border"
-                           ng-model="user.confirmPassword" ui-validate="'$value==user.password'" ui-validate-watch="'user.password'" required>
+                           ng-model="user.confirmPassword" ng-minlength="5" ui-validate="'$value==user.password'" ui-validate-watch="'user.password'" required>
                 </div>
                 <div class="list-group-item">
                     <input placeholder="Name" class="form-control no-border" ng-model="user.firstName" required>
