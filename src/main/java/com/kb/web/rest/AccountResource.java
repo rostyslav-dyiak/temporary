@@ -1,11 +1,9 @@
 package com.kb.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.kb.domain.Authority;
-import com.kb.domain.Company;
-import com.kb.domain.PersistentToken;
-import com.kb.domain.User;
+import com.kb.domain.*;
 import com.kb.repository.CompanyRepository;
+import com.kb.repository.EateryDetailsRepository;
 import com.kb.repository.PersistentTokenRepository;
 import com.kb.repository.UserRepository;
 import com.kb.security.SecurityUtils;
@@ -49,6 +47,8 @@ public class AccountResource {
     private UserService userService;
 
     @Inject
+    private EateryDetailsRepository eateryDetailsRepository;
+    @Inject
     private PersistentTokenRepository persistentTokenRepository;
 
     @Inject
@@ -88,6 +88,10 @@ public class AccountResource {
     public ResponseEntity<?> registerCompanyAndInvite(@Valid @RequestBody final CompanyUserInviteDTO userCompanyDTO, final HttpServletRequest request) {
         String email = userCompanyDTO.getEmail();
         Company company = userCompanyDTO.getCompany();
+        EateryDetails eateryDetails = company.getEateryDetails();
+        if (eateryDetails != null) {
+            eateryDetailsRepository.save(eateryDetails);
+        }
         String role = userCompanyDTO.getRole();
         return userRepository.findOneByEmail(email)
             .map(user -> new ResponseEntity<>("e-mail address already in use", HttpStatus.BAD_REQUEST))
@@ -182,7 +186,7 @@ public class AccountResource {
             .findOneByEmail(userDTO.getEmail().toLowerCase())
             .map(u -> {
                 UserDTO result = userService.updateUserInformation(userDTO, u.getCompany().getId());
-                return new ResponseEntity<UserDTO>(result,HttpStatus.OK);
+                return new ResponseEntity<UserDTO>(result, HttpStatus.OK);
             })
             .orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
     }

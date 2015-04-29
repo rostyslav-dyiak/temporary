@@ -21,7 +21,6 @@
         function login(credentials) {
             AuthServerProvider.login(credentials.email, credentials.password)
                 .then(function (data) {
-                    localStorageService.set('token', data.data);
                     redirectToApp(AuthServerProvider.currentUser().role);
                 },
                 function (e) {

@@ -70,8 +70,8 @@
         }
 
         function addCompany() {
-            if($scope.userCompanyDTO.companyType != 'EATERY') {
-                $scope.userCompanyDTO.businessTypes = "";
+            if($scope.userCompanyDTO.company.companyType != 'EATERY') {
+                $scope.userCompanyDTO.company.businessType = {};
             }
             $scope.userCompanyDTO.email = $scope.userCompanyDTO.company.email;
             $scope.userCompanyDTO.role = "ROLE_" + $scope.userCompanyDTO.company.companyType.toUpperCase() + "_ADMIN";

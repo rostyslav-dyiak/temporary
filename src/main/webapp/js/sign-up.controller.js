@@ -8,11 +8,11 @@
         '$scope',
         '$http',
         '$location',
-        '$localStorage',
+        'localStorageService',
         'AuthServerProvider'
     ];
 
-    function SignUpController($scope, $http, $location, $localStorage, AuthServerProvider) {
+    function SignUpController($scope, $http, $location, localStorageService, AuthServerProvider) {
         $scope.user = {};
         $scope.authError = '';
 
@@ -42,13 +42,12 @@
             ).success(function (data) {
                     AuthServerProvider.login($scope.user.email, $scope.user.password)
                         .then(function (data) {
-                            $localStorage.token = data.data;
                         }, function (e) {
                             $scope.error = 'Please try again.';
                             console.error(e);
                         });
                     $scope.created = true;
-                    $scope.user = data;
+                    $scope.user = AuthServerProvider.currentUser();
                 }).error(function (data) {
                     $scope.authError = "Check your data";
                     console.error(e);
