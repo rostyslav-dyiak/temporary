@@ -1,13 +1,13 @@
 package com.kb.service.dayoff;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.kb.web.rest.dto.dayoff.AggregatedDayOffDto;
 import com.kb.web.rest.dto.dayoff.DayOffDto;
 
 public interface DayOffService {
 
-	Page<DayOffDto> findAll(Pageable generatePageRequest);
+	AggregatedDayOffDto findAll(Pageable generatePageRequest);
 
 	void save(DayOffDto dto);
 
