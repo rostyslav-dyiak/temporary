@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 /**
  * Created by rdyyak on 29.04.15.
@@ -35,11 +36,13 @@ public class DefaultCompanyService implements CompanyService {
     }
 
     @Override
+    @Transactional
     public Page<Company> findAll(Pageable page) {
         return companyRepository.findAll(page);
     }
 
     @Override
+    @Transactional
     public Company find(Long id) {
         return companyRepository.getOne(id);
     }

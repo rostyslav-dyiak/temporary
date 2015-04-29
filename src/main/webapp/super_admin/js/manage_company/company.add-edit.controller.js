@@ -10,15 +10,15 @@
         '$http',
         'CompanyFactory',
         'BusinessTypeFactory',
-        'AuthServerProvider'
+        'FileUploadService'
     ];
 
-    function CompanyAddUpdateController($scope, $stateParams, $http, CompanyFactory, BusinessTypeFactory,AuthServerProvider) {
+    function CompanyAddUpdateController($scope, $stateParams, $http, CompanyFactory, BusinessTypeFactory, FileUploadService) {
         var companyId = $stateParams.id;
 
         var master = {};
         $scope.userCompanyDTO = {
-            company : {}
+            company: {}
         };
         $scope.businessTypes = {};
         $scope.invitationHistory = [{
@@ -70,7 +70,16 @@
         }
 
         function addCompany() {
-            if($scope.userCompanyDTO.company.companyType != 'EATERY') {
+            var promiseFile = FileUploadService.uploadFileToUrl($scope.logo);
+            promiseFile.then(function (response) {
+                    var pictureObject = {
+                        name: $scope.logo,
+                        url: response.data.path
+                    };
+                    console.log(pictureObject);
+                }
+            );
+            if ($scope.userCompanyDTO.company.companyType != 'EATERY') {
                 $scope.userCompanyDTO.company.businessType = {};
             }
             $scope.userCompanyDTO.email = $scope.userCompanyDTO.company.email;
@@ -85,7 +94,7 @@
         }
 
         function save(company) {
-            if(company.companyType != 'EATERY') {
+            if (company.companyType != 'EATERY') {
                 company.businessTypes = "";
             }
             CompanyFactory.update(company,
