@@ -1,0 +1,25 @@
+[
+    {
+        "id": 1,
+        "orderNumber": "ghfsd87346",
+        "eatery": {
+            "name": "Mr Bean"
+        },
+        "status": "ACCEPTED"
+    },{
+        "id": 2,
+        "orderNumber": "9034574",
+        "eatery": {
+            "name": "Cafe AA"
+        },
+        "status": "-"
+    },
+    {
+        "id": 3,
+        "orderNumber": "82753254",
+        "eatery": {
+            "name": "Mr Bean"
+        },
+        "status": "Awaiting for acceptance"
+    }
+]

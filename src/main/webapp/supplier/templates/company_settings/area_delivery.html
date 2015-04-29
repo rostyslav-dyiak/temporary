@@ -1,0 +1,51 @@
+<div class="wrapper-md" ng-controller="AreaDeliveryController">
+    <div class="panel panel-default">
+        <div class="panel-body text-center">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h4>Postal Sector <br> (1st 2 digits of 6-digit postal codes)</h4>
+                </div>
+                <div class="col-sm-7">
+                    <h4>Delivery Days</h4>
+                </div>
+            </div>
+            <div class="row delivery-row" ng-repeat="district in districts">
+                <div class="delivery-col-right col-sm-5 text-center">
+                    <h5>{{ district.name }} <span>{{ district.shortDescrз тимiption }}</span></h5>
+                    <p class="delivery-codes">
+                        <span class="label bg-info" ng-repeat="code in district.postalCodes">{{ code }}</span>
+                    </p>
+                    <p>
+                        <span class="delivery-description" ng-repeat="description in district.longDescription">{{ description }}</span>
+                    </p>
+                </div>
+                <div class="col-sm-7 text-center">
+                    <div class="row delivery-radios">
+                        <div class="col-sm-12">
+                            <div class="radio">
+                                <label class="radio-inline i-checks">
+                                    <input type="radio" ng-model="district.deliver" ng-value="true" ng-change="saveDistrict(district)">
+                                    <i></i> Deliver
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label class="radio-inline i-checks">
+                                    <input type="radio" ng-model="district.deliver" ng-value="false" ng-change="saveDistrict(district)">
+                                    <i></i> Don't Deliver
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label class="checkbox-inline i-checks" ng-repeat="day in district.deliverDays">
+                                <input type="checkbox" ng-value="true" ng-model="day.deliver" ng-change="saveDistrict(district)" ng-disabled="!district.deliver"><i></i> {{ day.day }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

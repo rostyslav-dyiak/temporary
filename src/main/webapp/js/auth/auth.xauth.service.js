@@ -19,7 +19,8 @@
             getToken: getToken,
             currentUser: currentUser,
             setUser: setUser,
-            currentUserCompany: currentUserCompany
+            currentUserCompany: currentUserCompany,
+            userRole: userRole
         };
 
         return service;
@@ -65,6 +66,10 @@
                 user = localStorageService.get('user');
             }
             return user.company;
+        }
+
+        function userRole() {
+            return currentUser().role;
         }
     }
 })();

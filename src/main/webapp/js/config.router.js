@@ -56,13 +56,10 @@
                         'request': function (config) {
                             config.headers = config.headers || {};
                             var token = localStorageService.get('token');
-                            if (token) {
-                                if (token.token && token.expires > new Date().getTime()) {
-                                    config.headers['x-auth-token'] = token.token;
-                                } else {
-                                    delete config.headers['x-auth-token'];
-                                }
-
+                            if (token && token.expires > new Date().getTime()) {
+                                config.headers['x-auth-token'] = token.token;
+                            } else {
+                                delete config.headers['x-auth-token'];
                             }
                             return config;
                         },

@@ -2,7 +2,47 @@
     <h3 class="modal-title">Create Off-day</h3>
 </div>
 <div class="modal-body">
+    <div class="additional-padding text-center">
+        <div sb-date-select sb-select-class="form-control select-date" ng-model="dayOff.date"></div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="additional-padding">
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Reason for closing</label>
 
+            <div class="col-lg-10">
+                <input type="text" ng-model="dayOff.description" class="form-control"
+                       placeholder="Reason for closing">
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="table-responsive">
+        <table st-table="rowCollectionPage" class="table table-striped text-center">
+            <thead>
+            <tr>
+                <th class="text-center" st-sort="orderNumber">Order No.</th>
+                <th class="text-center" st-sort="eatery">Eatery</th>
+                <th class="text-center" st-sort="status">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in orders">
+                <td>{{row.orderNumber}}</td>
+                <td>{{row.eatery.name}}</td>
+                <td>{{row.status}}</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5" class="text-center">
+                    <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"
+                         class="no-margin"></div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
 </div>
 <div class="modal-footer">
     <button class="btn btn-default" ng-click="cancel()">Cancel</button>

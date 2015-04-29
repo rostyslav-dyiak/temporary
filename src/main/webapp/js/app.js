@@ -14,5 +14,6 @@ angular.module('app', [
     'ui.jq',
     'oc.lazyLoad',
     'pascalprecht.translate',
-    'LocalStorageModule'
+    'LocalStorageModule',
+    'sbDateSelect'
 ]);

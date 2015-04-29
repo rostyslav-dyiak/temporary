@@ -5208,3 +5208,36 @@ a.text-#000000:hover {
 .table-count-label {
     margin: 20px 15px 10px
 }
+.select-date {
+    width: 33.333333%;
+    float: left;
+    position: relative;
+     min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+/* Delivery Days */
+.delivery-row {
+    padding: 10px 0 20px;
+    border-top: 1px solid #E4E4E4;
+}
+.delivery-col-right {
+    border-right: 1px solid #E4E4E4;
+}
+.delivery-codes {
+    margin: 10px 0;
+}
+.delivery-codes .label {
+    margin: 0 2px;
+    font-size: 100%;
+}
+.delivery-description {
+    display: block;
+}
+.delivery-radios  {
+    margin-bottom: 10px;
+}
+.delivery-row .checkbox-inline {
+    line-height: 1.8;
+}

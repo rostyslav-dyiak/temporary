@@ -6,10 +6,11 @@
     CompanyProfileController
         .$inject = [
         '$scope',
+        'AuthServerProvider',
         'CompanyFactory'
     ];
 
-    function CompanyProfileController($scope, CompanyFactory) {
+    function CompanyProfileController($scope, AuthServerProvider, CompanyFactory) {
         var master = {};
         $scope.company = {};
 
@@ -20,17 +21,9 @@
         activate();
 
         function activate() {
-            CompanyFactory.get({
-                    id: 1
-                },
-                function (data) {
-                    master = angular.copy(data);
-                    $scope.company = angular.copy(data);
-                }, function (e) {
-                    console.log(e);
-                });
+            master = angular.copy(AuthServerProvider.currentUserCompany());
+            $scope.company = angular.copy(AuthServerProvider.currentUserCompany());
         }
-
 
         function removeImage(image) {
             console.log("Saved type with id: " + company.id);
@@ -43,7 +36,6 @@
                 }, function (e) {
                     console.log(e);
                 });
-            console.log("Saved type with id: " + company.id);
         }
 
         function cancel() {
