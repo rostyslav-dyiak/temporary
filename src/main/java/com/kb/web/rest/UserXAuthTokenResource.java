@@ -24,9 +24,9 @@ import com.kb.security.xauth.TokenProvider;
  */
 @RestController
 @RequestMapping("/api")
-public class UserXAuthTokenController {
-    private final Logger log = LoggerFactory.getLogger(UserXAuthTokenController.class);
-	
+public class UserXAuthTokenResource {
+    private final Logger log = LoggerFactory.getLogger(UserXAuthTokenResource.class);
+
     @Inject
     private TokenProvider tokenProvider;
 
@@ -41,7 +41,7 @@ public class UserXAuthTokenController {
     @Timed
     public Token authorize(@RequestParam final String email, @RequestParam final String password) {
     	log.info("Authenticating user:", email);
-    	
+
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(email, password);
         Authentication authentication = this.authenticationManager.authenticate(token);
         SecurityContextHolder.getContext().setAuthentication(authentication);

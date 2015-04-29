@@ -2,7 +2,6 @@ package com.kb.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -10,8 +9,6 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.kb.service.dayoff.DayOffService;
+import com.kb.web.rest.dto.dayoff.AggregatedDayOffDto;
 import com.kb.web.rest.dto.dayoff.DayOffDto;
 import com.kb.web.rest.util.PaginationUtil;
 
@@ -68,12 +66,13 @@ public class DayOffResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<DayOffDto>> getAll(@RequestParam(value = "page" , required = false) final Integer offset,
+    public ResponseEntity<AggregatedDayOffDto> getAll(@RequestParam(value = "page" , required = false) final Integer offset,
                                   @RequestParam(value = "per_page", required = false) final Integer limit)
         throws URISyntaxException {
-    	Page<DayOffDto> page = service.findAll(PaginationUtil.generatePageRequest(offset, limit));
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/dayoffs", offset, limit);
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    	
+    	AggregatedDayOffDto page = service.findAll(PaginationUtil.generatePageRequest(offset, limit));
+    	
+        return new ResponseEntity<>(page, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/dayoffs/{id}",

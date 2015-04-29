@@ -14,7 +14,6 @@ import com.kb.security.SecurityUtils;
 import com.kb.web.rest.dto.UserCompanyDTO;
 import com.kb.service.company.CompanyService;
 import com.kb.web.rest.util.PaginationUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -25,7 +24,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -45,7 +43,7 @@ public class CompanyResource {
 
     @Inject
     private OutletRepository outletRepository;
-    
+
     @Inject
     private ContactRepository contactRepository;
 
@@ -53,12 +51,12 @@ public class CompanyResource {
     private UserRepository userRepository;
     
     private UserConverter userConverter = new UserConverter();
-    
+
     /**
      * POST  /companies -> Create a new company.
      */
     @RequestMapping(method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<Void> create(@RequestBody final Company company) throws URISyntaxException {
         log.debug("REST request to save Company : {}", company);
@@ -88,11 +86,12 @@ public class CompanyResource {
      * GET  /companies -> get all the companies.
      */
     @RequestMapping(method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Company>> getAll(@RequestParam(value = "page" , required = false) final Integer offset,
-                                  @RequestParam(value = "per_page", required = false) final Integer limit)
+    public ResponseEntity<List<Company>> getAll(@RequestParam(value = "page", required = false) final Integer offset,
+                                                @RequestParam(value = "per_page", required = false) final Integer limit)
         throws URISyntaxException {
+        log.debug("REST request to get all Companeies : ");
         Page<Company> page = companyService.findAll(PaginationUtil.generatePageRequest(offset, limit));
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/companies", offset, limit);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
@@ -102,8 +101,8 @@ public class CompanyResource {
      * GET  /companies/:id -> get the "id" company.
      */
     @RequestMapping(value = "/{id}",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<Company> get(@PathVariable final Long id) {
         log.debug("REST request to get Company : {}", id);
@@ -118,17 +117,17 @@ public class CompanyResource {
      * DELETE  /companies/:id -> delete the "id" company.
      */
     @RequestMapping(value = "/{id}",
-            method = RequestMethod.DELETE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+        method = RequestMethod.DELETE,
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public void delete(@PathVariable final Long id) {
         log.debug("REST request to delete Company : {}", id);
-        companyRepository.delete(id);
+        companyService.delete(id);
     }
-    
-    @RequestMapping(value = "/{id}/outlets", 
-    		method = RequestMethod.GET,
-    		produces =MediaType.APPLICATION_JSON_VALUE)
+
+    @RequestMapping(value = "/{id}/outlets",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<List<Outlet>> getOutletsForCompany(@RequestParam(value = "page" , required = false) Integer offset,
             @RequestParam(value = "per_page", required = false) Integer limit,
@@ -142,10 +141,10 @@ public class CompanyResource {
         
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-    
-    @RequestMapping(value = "/{id}/contacts", 
-    		method = RequestMethod.GET,
-    		produces =MediaType.APPLICATION_JSON_VALUE)
+
+    @RequestMapping(value = "/{id}/contacts",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<List<Contact>> getContactsForCompany(@RequestParam(value = "page" , required = false) Integer offset,
             @RequestParam(value = "per_page", required = false) Integer limit,
@@ -160,9 +159,9 @@ public class CompanyResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/users", 
-    		method = RequestMethod.GET,
-    		produces =MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/users",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<List<UserCompanyDTO>> getUsersForCompany(@RequestParam(value = "page" , required = false) Integer offset,
             @RequestParam(value = "per_page", required = false) Integer limit) throws URISyntaxException{

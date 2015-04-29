@@ -7,12 +7,12 @@
         .$inject = [
         '$scope',
         '$window',
-        'localStorageService',
+        '$http',
         'AuthServerProvider',
         'AccountFactory'
     ];
 
-    function SignInController($scope, $window, localStorageService, AuthServerProvider) {
+    function SignInController($scope, $window,$http, AuthServerProvider) {
         $scope.credentials = {};
         $scope.error = '';
 
@@ -20,8 +20,15 @@
 
         function login(credentials) {
             AuthServerProvider.login(credentials.email, credentials.password)
-                .then(function (data) {
-                    redirectToApp(AuthServerProvider.currentUser().role);
+                .then(function () {
+                    $http.get("/api/account")
+                        .success(function (data) {
+                            AuthServerProvider.setUser(data);
+                            redirectToApp(AuthServerProvider.currentUser().role);
+                        })
+                        .error(function (data) {
+                            console.log(data);
+                        });
                 },
                 function (e) {
                     $scope.error = 'Please try again.';

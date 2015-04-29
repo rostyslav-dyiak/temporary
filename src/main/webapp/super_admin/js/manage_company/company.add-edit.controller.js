@@ -10,15 +10,15 @@
         '$http',
         'CompanyFactory',
         'BusinessTypeFactory',
-        'AuthServerProvider'
+        'FileUploadService'
     ];
 
-    function CompanyAddUpdateController($scope, $stateParams, $http, CompanyFactory, BusinessTypeFactory,AuthServerProvider) {
+    function CompanyAddUpdateController($scope, $stateParams, $http, CompanyFactory, BusinessTypeFactory, FileUploadService) {
         var companyId = $stateParams.id;
 
         var master = {};
         $scope.userCompanyDTO = {
-            company : {}
+            company: {}
         };
         $scope.businessTypes = {};
         $scope.invitationHistory = [{
@@ -70,22 +70,31 @@
         }
 
         function addCompany() {
-            if($scope.userCompanyDTO.company.companyType != 'EATERY') {
-                $scope.userCompanyDTO.company.businessType = {};
-            }
-            $scope.userCompanyDTO.email = $scope.userCompanyDTO.company.email;
-            $scope.userCompanyDTO.role = "ROLE_" + $scope.userCompanyDTO.company.companyType.toUpperCase() + "_ADMIN";
-            $http.post('/api/invite', $scope.userCompanyDTO)
-                .success(function (data, status, headers) {
-                    console.log(data + " " + status + " " + headers + " ");
-                }).
-                error(function (data, status, headers) {
-                    console.log(data + " " + status + " " + headers + " ");
-                });
+            var promiseFile = FileUploadService.uploadFileToUrl($scope.logo);
+            promiseFile.then(function (response) {
+                    var pictureObject = {
+                        title: $scope.logo.name,
+                        url: response.data.path
+                    };
+                    $scope.userCompanyDTO.logo = pictureObject;
+                    if ($scope.userCompanyDTO.company.companyType != 'EATERY') {
+                        $scope.userCompanyDTO.company.businessType = {};
+                    }
+                    $scope.userCompanyDTO.email = $scope.userCompanyDTO.company.email;
+                    $scope.userCompanyDTO.role = "ROLE_" + $scope.userCompanyDTO.company.companyType.toUpperCase() + "_ADMIN";
+                    $http.post('/api/invite', $scope.userCompanyDTO)
+                        .success(function (data, status, headers) {
+                            console.log(data + " " + status + " " + headers + " ");
+                        }).
+                        error(function (data, status, headers) {
+                            console.log(data + " " + status + " " + headers + " ");
+                        });
+                }
+            );
         }
 
         function save(company) {
-            if(company.companyType != 'EATERY') {
+            if (company.companyType != 'EATERY') {
                 company.businessTypes = "";
             }
             CompanyFactory.update(company,

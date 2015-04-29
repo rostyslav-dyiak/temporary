@@ -1,14 +1,17 @@
 package com.kb.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.kb.domain.*;
-import com.kb.repository.CompanyRepository;
-import com.kb.repository.EateryDetailsRepository;
+import com.kb.domain.Authority;
+import com.kb.domain.Company;
+import com.kb.domain.PersistentToken;
+import com.kb.domain.User;
 import com.kb.repository.PersistentTokenRepository;
 import com.kb.repository.UserRepository;
 import com.kb.security.SecurityUtils;
 import com.kb.service.MailService;
 import com.kb.service.UserService;
+import com.kb.service.company.CompanyService;
+import com.kb.service.company.DefaultCompanyService;
 import com.kb.web.rest.dto.CompanyUserInviteDTO;
 import com.kb.web.rest.dto.UserCompanyDTO;
 import com.kb.web.rest.dto.UserDTO;
@@ -47,15 +50,13 @@ public class AccountResource {
     private UserService userService;
 
     @Inject
-    private EateryDetailsRepository eateryDetailsRepository;
-    @Inject
     private PersistentTokenRepository persistentTokenRepository;
 
     @Inject
     private MailService mailService;
 
     @Inject
-    private CompanyRepository companyRepository;
+    private CompanyService companyService;
 
     /**
      * POST  /register -> register the user.
@@ -71,7 +72,7 @@ public class AccountResource {
             .map(user -> new ResponseEntity<>("e-mail address already in use", HttpStatus.BAD_REQUEST))
             .orElseGet(() -> {
                 Company company = userCompanyDTO.getCompany();
-                companyRepository.save(company);
+                companyService.save(company);
                 User user = userService.createUserInformation(userDTO.getEmail().toLowerCase(), userDTO.getPassword(),
                     userDTO.getFirstName(), userDTO.getLastName(), userDTO.getLangKey(), company, role);
                 String baseUrl = MessageFormat.format("{0}://{1}:{2}", request.getServerName(), request.getScheme(), Integer.toString(request.getServerPort()));
@@ -88,15 +89,11 @@ public class AccountResource {
     public ResponseEntity<?> registerCompanyAndInvite(@Valid @RequestBody final CompanyUserInviteDTO userCompanyDTO, final HttpServletRequest request) {
         String email = userCompanyDTO.getEmail();
         Company company = userCompanyDTO.getCompany();
-        EateryDetails eateryDetails = company.getEateryDetails();
-        if (eateryDetails != null) {
-            eateryDetailsRepository.save(eateryDetails);
-        }
         String role = userCompanyDTO.getRole();
         return userRepository.findOneByEmail(email)
             .map(user -> new ResponseEntity<>("e-mail address already in use", HttpStatus.BAD_REQUEST))
             .orElseGet(() -> {
-                companyRepository.save(company);
+                companyService.saveCompanyWithEateryDetails(company);
                 User user = userService.createInitialUserInformation(email, company, role);
                 String baseUrl = MessageFormat.format("{0}://{1}:{2}/{3}", request.getScheme(), request.getServerName(), Integer.toString(request.getServerPort()), "#/app/sign_up");
                 mailService.sendActivationEmail(user, baseUrl);
@@ -245,4 +242,6 @@ public class AccountResource {
                 .findAny().ifPresent(t -> persistentTokenRepository.delete(decodedSeries));
         });
     }
+
+
 }

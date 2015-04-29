@@ -7,12 +7,11 @@
 
     FileUploadService
         .$inject = [
-        '$http',
-        'constants'
+        '$http'
     ];
 
-    function FileUploadService($http, constants) {
-        var uploadUrl = constants.apiUrl + "/content";
+    function FileUploadService($http) {
+        var uploadUrl = "http://localhost:8080/api/content";
 
         this.uploadFileToUrl = function (file) {
             var fd = new FormData();
@@ -25,19 +24,6 @@
                 }
             });
         };
-
-        this.uploadFileUrlToUrl = function (urlToFile) {
-            return $http({
-                url: uploadUrl,
-                method: "POST",
-                headers: {
-                    'content': 'url'
-                },
-                params: {
-                    url: urlToFile
-                }
-            });
-        }
     }
 
 })();
