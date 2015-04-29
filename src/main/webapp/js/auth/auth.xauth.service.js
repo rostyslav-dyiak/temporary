@@ -33,16 +33,10 @@
                     "Accept": "application/json"
                 }
             }).success(function (response) {
-                localStorageService.set('token', response);
-                fetchUser().then(
-                    function(data) {
-                        user = data;
-                    }
-                );
+                localStorageService
                 $http.get("/api/account")
                     .success(function (data) {
-                        user = data;
-                        def.resolve(data);
+                        localStorageService.set('user', data);
                     });
                 return response;
             });
@@ -57,25 +51,17 @@
         }
 
         function currentUser() {
+            if(!user) {
+                localStorageService.get('user');
+            }
             return user;
         }
 
         function currentUserCompany() {
+            if(!user) {
+                localStorageService.get('user');
+            }
             return user.company;
-        }
-
-        function fetchUser() {
-            var def = $q.defer();
-
-            $http.get("/api/account")
-                .success(function (data) {
-                    user = data;
-                    def.resolve(data);
-                })
-                .error(function () {
-                    def.reject("Failed to get user");
-                });
-            return def.promise;
         }
     }
 })();

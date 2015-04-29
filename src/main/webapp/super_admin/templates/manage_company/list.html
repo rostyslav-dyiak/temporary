@@ -27,10 +27,8 @@
                 </thead>
                 <tbody>
                 <tr ng-switch="row.companyType" ng-repeat="row in companies">
-                    <td ng-switch-when="EATERY">{{row.eateryDetails.code}}</td>
-                    <td ng-switch-when="SUPPLIER">{{row.supplierDetails.code}}</td>
-                    <td ng-switch-when="EATERY"><img class="company-logo-small" ng-src="img/{{row.eateryDetails.logo.url}}" alt="{{row.name}}"></td>
-                    <td ng-switch-when="SUPPLIER"><img class="company-logo-small" ng-src="img/{{row.supplierDetails.logo.url}}" alt="{{row.name}}"></td>
+                    <td>{{row.code}}</td>
+                    <td><img class="company-logo-small" ng-src="img/{{row.logo.url}}" alt="{{row.name}}"></td>
                     <td>{{row.name}}</td>
                     <td>{{row.companyType}}</td>
                     <td>{{row.createdDate | date}}</td>

@@ -5,13 +5,11 @@
     ManageCompanyListController
         .$inject = [
         '$scope',
-        'CompanyFactory',
-        '$localStorage'
+        'CompanyFactory'
     ];
 
-    function ManageCompanyListController($scope, CompanyFactory, $localStorage) {
+    function ManageCompanyListController($scope, CompanyFactory) {
         $scope.companies = {};
-        var test = $localStorage['token'].token;
 
         $scope.itemsByPage = 10;
         activate();
