@@ -1,0 +1,110 @@
+[
+    {
+        "id": 1,
+        "name": "District 1",
+        "shortDescription": "Central Region",
+        "postalCodes": [
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06"
+        ],
+        "longDescription": [
+            "Battery Road",
+            "Cecil Street",
+            "Cross Street",
+            "Eu Tong Sen Street",
+            "Havelock Road",
+            "Marina Bay",
+            "Maxwell",
+            "New Bridge",
+            "Raffles Link/ Place",
+            "Republic Blvd",
+            "Robinson",
+            "South Bridge Road",
+            "Telok Ayer",
+            "Temasek Ave",
+            "Temasek Blvd",
+            "Upper Cross St",
+            "Upper Pickering St.",
+            "People's Park",
+            "Boat Quay",
+            "Chinatown",
+            "Marina Square",
+            "Suntec City"
+        ],
+        "deliver": true,
+        "deliverDays": [
+            {
+                "day": "Monday",
+                "deliver": true
+            },{
+                "day": "Tuesday",
+                "deliver": true
+            },{
+                "day": "Wednesday",
+                "deliver": false
+            },{
+                "day": "Thursday",
+                "deliver": true
+            },{
+                "day": "Friday",
+                "deliver": true
+            },{
+                "day": "Saturday",
+                "deliver": false
+            },{
+                "day": "Sunday",
+                "deliver": true
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "District 2",
+        "shortDescription": "Central Region",
+        "postalCodes": [
+            "07",
+            "08"
+        ],
+        "longDescription": [
+            "Anson",
+            "Keppel",
+            "Prince Edward Rd",
+            "New Bridge Road",
+            "Shenton Way",
+            "Tanjong Pagar",
+            "Tras St",
+            "Chinatown",
+            "Neil Road",
+            "Raffles Place"
+        ],
+        "deliver": false,
+        "deliverDays": [
+            {
+                "day": "Monday",
+                "deliver": false
+            },{
+                "day": "Tuesday",
+                "deliver": false
+            },{
+                "day": "Wednesday",
+                "deliver": false
+            },{
+                "day": "Thursday",
+                "deliver": false
+            },{
+                "day": "Friday",
+                "deliver": false
+            },{
+                "day": "Saturday",
+                "deliver": false
+            },{
+                "day": "Sunday",
+                "deliver": false
+            }
+        ]
+    }
+]

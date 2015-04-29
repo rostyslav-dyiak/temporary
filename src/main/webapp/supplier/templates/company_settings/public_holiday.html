@@ -1,1 +1,48 @@
-<h1>Holidays</h1>
+<div class="wrapper-md" ng-controller="CompanyPublicHolidayController">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table st-table="rowCollectionPage" class="table table-striped text-center">
+                    <thead>
+                    <tr>
+                        <th class="text-center" st-sort="name">Name</th>
+                        <th class="text-center" st-sort="date">Date</th>
+                        <th class="text-center" st-sort="status">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="row in holidays">
+                        <td>{{row.name}}</td>
+                        <td>{{row.date}}</td>
+                        <td>
+                            <div class="radio">
+                                <label class="i-checks">
+                                    <input type="radio" ng-model="row.status"
+                                           name="gstRegistered" value="true" ng-value="true" selected>
+                                    <i></i> Open
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label class="i-checks">
+                                    <input type="radio" ng-model="row.status"
+                                           name="gstRegistered" value="false" ng-value="false">
+                                    <i></i> Closed
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="5" class="text-center">
+                            <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="5"
+                                 class="no-margin"></div>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

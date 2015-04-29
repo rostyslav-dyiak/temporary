@@ -1,15 +1,15 @@
 (function() {
     'use strict';
 
-    app.factory('CompanyFactory', CompanyFactory);
+    app.factory('DistrictFactory', DistrictFactory);
 
-    CompanyFactory
+    DistrictFactory
         .$inject = [
         '$resource'
     ];
 
-    function CompanyFactory($resource) {
-        return $resource('/api/companies/:id', {}, {
+    function DistrictFactory($resource) {
+        return $resource('api/districts.json', {}, {
             'query': {
                 method: 'GET',
                 isArray: true

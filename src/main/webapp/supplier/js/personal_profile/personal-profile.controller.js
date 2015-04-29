@@ -6,10 +6,11 @@
     PersonalProfileController
         .$inject = [
         '$scope',
-        'UserFactory'
+        'UserFactory',
+        'AuthServerProvider'
     ];
 
-    function PersonalProfileController($scope, UserFactory) {
+    function PersonalProfileController($scope, UserFactory, AuthServerProvider) {
         $scope.master = {};
         $scope.user = {};
         $scope.confirmPassword = '';
@@ -23,15 +24,8 @@
         activate();
 
         function activate() {
-            UserFactory.get({
-                    id: 1
-                },
-                function (data) {
-                    $scope.master = angular.copy(data.user);
-                    $scope.user = angular.copy(data.user);
-                }, function (e) {
-                    console.error(e);
-                });
+            $scope.master = angular.copy(AuthServerProvider.currentUser());
+            $scope.user = angular.copy(AuthServerProvider.currentUser());
         }
 
 
