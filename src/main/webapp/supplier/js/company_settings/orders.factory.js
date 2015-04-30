@@ -1,15 +1,15 @@
 (function() {
     'use strict';
 
-    app.factory('CompanyFactory', CompanyFactory);
+    app.factory('OrdersFactory', OrdersFactory);
 
-    CompanyFactory
+    OrdersFactory
         .$inject = [
         '$resource'
     ];
 
-    function CompanyFactory($resource) {
-        return $resource('/api/companies/:id', {}, {
+    function OrdersFactory($resource) {
+        return $resource('api/orders.json', {}, {
             'query': {
                 method: 'GET',
                 isArray: true

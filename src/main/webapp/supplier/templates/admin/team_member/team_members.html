@@ -12,7 +12,6 @@
                     <th class="text-center" st-sort="name">Name</th>
                     <th class="text-center" st-sort="title">Title</th>
                     <th class="text-center" st-sort="contactNumber">Contact Number</th>
-                    <th class="text-center" st-sort="outlet">Outlet</th>
                     <th class="text-center" st-sort="access">Access</th>
                     <th class="text-center" st-sort="status">Status</th>
                     <th class="text-center" st-sort="customersNumber">Number of Customers Under Charge</th>
@@ -21,17 +20,16 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="row in teamMembers">
-                    <td ui-sref="app.teamMemberEdit({id: {{row.id}} })">{{row.email}}</td>
-                    <td ui-sref="app.teamMemberEdit({id: {{row.id}} })">{{row.salutation}} {{row.name}}</td>
-                    <td ui-sref="app.teamMemberEdit({id: {{row.id}} })">{{row.title}}</td>
-                    <td ui-sref="app.teamMemberEdit({id: {{row.id}} })">{{row.contactNumber}}</td>
-                    <td ui-sref="app.teamMemberEdit({id: {{row.id}} })">{{row.outlet}}</td>
-                    <td ui-sref="app.teamMemberEdit({id: {{row.id}} })">{{row.access}}</td>
-                    <td ui-sref="app.teamMemberEdit({id: {{row.id}} })">{{row.status}}</td>
-                    <td ui-sref="app.teamMemberEdit({id: {{row.id}} })">{{row.customersNumber}}</td>
+                    <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.userDTO.email}}</td>
+                    <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.salutation}} {{row.userDTO.firstName}}</td>
+                    <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.userDTO.title}}</td>
+                    <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.company.contactNumber}}</td>
+                    <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.userDTO.role}}</td>
+                    <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.company.status}}</td>
+                    <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.userDTO.outletCount}}</td>
                     <td>
-                        <a ui-sref="app.teamMemberCustomers({id: {{row.id}} })" class="btn btn-default btn-rounded"
-                           ng-show="row.customersNumber > 0">
+                        <a ui-sref="app.teamMemberCustomers({id: {{row.userDTO.id}} })" class="btn btn-default btn-rounded"
+                           ng-show="row.userDTO.outletCount > 0">
                             View Customers
                         </a>
                     </td>

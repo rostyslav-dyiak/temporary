@@ -29,14 +29,14 @@
                     <label class="col-lg-2 control-label">Name</label>
 
                     <div class="col-lg-10">
-                        <input type="text" ng-model="teamMember.name" class="form-control" placeholder="Name">
+                        <input type="text" ng-model="teamMember.userDTO.firstName" class="form-control" placeholder="Name">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Contact Number</label>
 
                     <div class="col-lg-10">
-                        <input type="text" ng-model="teamMember.contactNumber" class="form-control"
+                        <input type="text" ng-model="teamMember.company.contactNumber" class="form-control"
                                placeholder="Contact Number">
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                     <label class="col-lg-2 control-label">Email Address</label>
 
                     <div class="col-lg-10">
-                        <input type="email" ng-model="teamMember.email" class="form-control"
+                        <input type="email" ng-model="teamMember.userDTO.email" class="form-control"
                                placeholder="Contact Number">
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                     <label class="col-lg-2 control-label">Title</label>
 
                     <div class="col-lg-10">
-                        <input type="text" ng-model="teamMember.title" class="form-control"
+                        <input type="text" ng-model="teamMember.userDTO.title" class="form-control"
                                placeholder="Title">
                     </div>
                 </div>
@@ -60,11 +60,11 @@
                     <label class="col-lg-2 control-label">Access</label>
 
                     <div class="col-lg-10">
-                        <select class="form-control" ng-model="teamMember.access">
-                            <option value="Company Admin">
+                        <select class="form-control" ng-model="teamMember.userDTO.role">
+                            <option value="ROLE_SUPPLIER_ADMIN" value="ROLE_SUPPLIER_ADMIN"">
                                 Company Admin
                             </option>
-                            <option value="Normal User">
+                            <option value="ROLE_SUPPLIER" value="ROLE_SUPPLIER"">
                                 Normal User
                             </option>
                         </select>
@@ -76,13 +76,13 @@
                     <div class="col-lg-10">
                         <div class="radio">
                             <label class="i-checks">
-                                <input type="radio" ng-model="teamMember.status" name="status" value="Active">
+                                <input type="radio" ng-model="teamMember.company.status" name="status"  value="ACTIVE">
                                 <i></i> Active
                             </label>
                         </div>
                         <div class="radio">
                             <label class="i-checks">
-                                <input type="radio" ng-model="teamMember.status" name="status" value="Inactive">
+                                <input type="radio" ng-model="teamMember.company.status" name="status" value="INACTIVE">
                                 <i></i> Inactive
                             </label>
                         </div>

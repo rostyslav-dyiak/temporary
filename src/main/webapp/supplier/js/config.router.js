@@ -4,17 +4,21 @@
  * Config for the router
  */
 angular.module('app')
-    .run(
-    ['$rootScope', '$state', '$stateParams',
-        function ($rootScope, $state, $stateParams) {
+    .run(['$rootScope', '$state', '$stateParams', '$window', 'AuthServerProvider',
+        function ($rootScope, $state, $stateParams, $window, AuthServerProvider) {
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
+            $rootScope.$on('$stateChangeStart', function (event, next) {
+                var authorizedRoles = next.data.authorizedRoles;
+                if (!AuthServerProvider.hasRole(authorizedRoles)) {
+                    event.preventDefault();
+                    $window.location.href = '/index.html';
+                }
+            });
         }
-    ]
-)
-    .config(
-    ['$stateProvider', '$urlRouterProvider', '$httpProvider',
-        function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    ])
+    .config(['$stateProvider', '$urlRouterProvider', 'USER_ROLES',
+        function ($stateProvider, $urlRouterProvider, USER_ROLES) {
 
             $urlRouterProvider
                 .otherwise('/supplier/overview');
@@ -29,6 +33,9 @@ angular.module('app')
                                 return $ocLazyLoad.load('js/directives/back-button.directive.js');
                             }
                         ]
+                    },
+                    data: {
+                        authorizedRoles: [USER_ROLES.supplier, USER_ROLES.supplierAdmin]
                     }
                 })
                 .state('app.overview', {
@@ -93,7 +100,10 @@ angular.module('app')
                 })
                 .state('app.inquiry', {
                     url: '/inquiry',
-                    templateUrl: 'templates/admin/inquiry.html'
+                    templateUrl: 'templates/admin/inquiry.html',
+                    data: {
+                        authorizedRoles: [USER_ROLES.supplierAdmin]
+                    }
                 })
                 .state('app.companySettings', {
                     url: '/company_settings',
@@ -106,6 +116,9 @@ angular.module('app')
                                 ]);
                             }
                         ]
+                    }   ,
+                    data: {
+                        authorizedRoles: [USER_ROLES.supplierAdmin]
                     }
                 })
                 .state('app.companySettings.profile', {
@@ -119,11 +132,17 @@ angular.module('app')
                                 ]);
                             }
                         ]
+                    }  ,
+                    data: {
+                        authorizedRoles: [USER_ROLES.supplierAdmin]
                     }
                 })
                 .state('app.companySettings.publicHoliday', {
                     url: '/profile',
-                    templateUrl: 'templates/company_settings/public_holiday.html'
+                    templateUrl: 'templates/company_settings/public_holiday.html',
+                    data: {
+                        authorizedRoles: [USER_ROLES.supplierAdmin]
+                    }
                 })
                 .state('app.companySettings.offDays', {
                     url: '/profile',
@@ -137,15 +156,24 @@ angular.module('app')
                                 ]);
                             }
                         ]
+                    }  ,
+                    data: {
+                        authorizedRoles: [USER_ROLES.supplierAdmin]
                     }
                 })
                 .state('app.companySettings.deliveryDays', {
                     url: '/profile',
-                    templateUrl: 'templates/company_settings/delivery_days.html'
+                    templateUrl: 'templates/company_settings/delivery_days.html' ,
+                    data: {
+                        authorizedRoles: [USER_ROLES.supplierAdmin]
+                    }
                 })
                 .state('app.companySettings.deliveryTiming', {
                     url: '/profile',
-                    templateUrl: 'templates/company_settings/delivery_timing.html'
+                    templateUrl: 'templates/company_settings/delivery_timing.html',
+                    data: {
+                        authorizedRoles: [USER_ROLES.supplierAdmin]
+                    }
                 })
                 .state('app.teamMember', {
                     url: '/team_member',
@@ -160,6 +188,9 @@ angular.module('app')
                                 ]);
                             }
                         ]
+                    },
+                    data: {
+                        authorizedRoles: [USER_ROLES.supplierAdmin]
                     }
                 })
                 .state('app.teamMemberAdd', {
@@ -174,6 +205,9 @@ angular.module('app')
                                 ]);
                             }
                         ]
+                    },
+                    data: {
+                        authorizedRoles: [USER_ROLES.supplierAdmin]
                     }
                 })
                 .state('app.teamMemberEdit', {
@@ -191,6 +225,9 @@ angular.module('app')
                                 ]);
                             }
                         ]
+                    },
+                    data: {
+                        authorizedRoles: [USER_ROLES.supplierAdmin]
                     }
                 })
                 .state('app.teamMemberCustomers', {
@@ -208,30 +245,11 @@ angular.module('app')
                                 ]);
                             }
                         ]
+                    },
+                    data: {
+                        authorizedRoles: [USER_ROLES.supplierAdmin]
                     }
                 });
-            $httpProvider.interceptors.push(['$q', '$window', 'localStorageService', function ($q, $window, localStorageService) {
-                return {
-                    'request': function (config) {
-                        config.headers = config.headers || {};
-                        var token = localStorageService.get('token');
-                        if (token) {
-                            if (token.token && token.expires > new Date().getTime()) {
-                                config.headers['x-auth-token'] = token.token;
-                            } else {
-                                delete config.headers['x-auth-token'];
-                            }
-                        }
-                        return config;
-                    },
-                    'responseError': function (response) {
-                        if (response.status === 401 || response.status === 403) {
-                            $window.location.href = '/index.html';
-                        }
-                        return $q.reject(response);
-                    }
-                };
-            }]);
         }
     ]
 );

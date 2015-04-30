@@ -19,7 +19,9 @@
             getToken: getToken,
             currentUser: currentUser,
             setUser: setUser,
-            currentUserCompany: currentUserCompany
+            currentUserCompany: currentUserCompany,
+            userRole: userRole,
+            hasRole: hasRole
         };
 
         return service;
@@ -65,6 +67,17 @@
                 user = localStorageService.get('user');
             }
             return user.company;
+        }
+
+        function userRole() {
+            return currentUser().role;
+        }
+
+        function hasRole(authorizedRoles) {
+            if (!angular.isArray(authorizedRoles)) {
+                authorizedRoles = [authorizedRoles];
+            }
+            return user && authorizedRoles.indexOf(userRole()) !== -1;
         }
     }
 })();

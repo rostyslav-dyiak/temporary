@@ -1,18 +1,16 @@
 (function () {
+
     'use strict';
 
     angular.module('app')
-        .run(
-        ['$rootScope', '$state', '$stateParams',
+        .run(['$rootScope', '$state', '$stateParams',
             function ($rootScope, $state, $stateParams) {
                 $rootScope.$state = $state;
                 $rootScope.$stateParams = $stateParams;
             }
-        ]
-    )
-        .config(
-        ['$stateProvider', '$urlRouterProvider', '$httpProvider',
-            function ($stateProvider, $urlRouterProvider, $httpProvider) {
+        ])
+        .config(['$stateProvider', '$urlRouterProvider',
+            function ($stateProvider, $urlRouterProvider) {
 
                 $urlRouterProvider
                     .otherwise('/app/sign_in');
@@ -50,30 +48,6 @@
                             ]
                         }
                     });
-
-                $httpProvider.interceptors.push(['$q', '$window', 'localStorageService', function ($q, $window, localStorageService) {
-                    return {
-                        'request': function (config) {
-                            config.headers = config.headers || {};
-                            var token = localStorageService.get('token');
-                            if (token) {
-                                if (token.token && token.expires > new Date().getTime()) {
-                                    config.headers['x-auth-token'] = token.token;
-                                } else {
-                                    delete config.headers['x-auth-token'];
-                                }
-
-                            }
-                            return config;
-                        },
-                        'responseError': function (response) {
-                            if (response.status === 401 || response.status === 403) {
-                                $window.location.href = '/index.html';
-                            }
-                            return $q.reject(response);
-                        }
-                    };
-                }]);
             }
         ]
     );

@@ -1,15 +1,15 @@
 (function() {
     'use strict';
 
-    app.factory('CompanyFactory', CompanyFactory);
+    app.factory('OffDayFactory', OffDayFactory);
 
-    CompanyFactory
+    OffDayFactory
         .$inject = [
         '$resource'
     ];
 
-    function CompanyFactory($resource) {
-        return $resource('/api/companies/:id', {}, {
+    function OffDayFactory($resource) {
+        return $resource('/api/dayoffs/:id', {}, {
             'query': {
                 method: 'GET',
                 isArray: true

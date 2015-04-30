@@ -24,7 +24,7 @@
                     $http.get("/api/account")
                         .success(function (data) {
                             AuthServerProvider.setUser(data);
-                            redirectToApp(AuthServerProvider.currentUser().role);
+                            redirectToApp();
                         })
                         .error(function (data) {
                             console.log(data);
@@ -36,12 +36,12 @@
                 });
         }
 
-        function redirectToApp(role) {
-            if (role == 'ROLE_SUPER_ADMIN') {
+        function redirectToApp() {
+            if (AuthServerProvider.hasRole('ROLE_SUPER_ADMIN')) {
                 $window.location.href = '/super_admin/index.html';
-            } else if (role == 'ROLE_EATERY_ADMIN' || role == 'ROLE_EATERY') {
+            } else if (AuthServerProvider.hasRole(['ROLE_EATERY_ADMIN', 'ROLE_EATERY'])) {
                 $window.location.href = '/eatery/index.html';
-            } else if (role == 'ROLE_SUPPLIER_ADMIN' || role == 'ROLE_SUPPLIER') {
+            } else if (AuthServerProvider.hasRole(['ROLE_SUPPLIER_ADMIN', 'ROLE_SUPPLIER'])) {
                 $window.location.href = '/supplier/index.html';
             }
         }

@@ -9,7 +9,7 @@ public class UserCompanyDTO {
     private UserDTO userDTO;
     private Company company;
 
-    UserCompanyDTO() {
+    public UserCompanyDTO() {
 
     }
 

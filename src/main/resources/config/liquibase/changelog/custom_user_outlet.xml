@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <changeSet author="oleh_yatskiv" id="addColumn-company_id">
+        
+        <createTable tableName="T_SUPPLIER_OUTLET">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="outlet_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addForeignKeyConstraint baseColumnNames="outlet_id"
+                                 baseTableName="T_SUPPLIER_OUTLET"
+                                 constraintName="fk_outlet_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="T_OUTLET"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="T_SUPPLIER_OUTLET"
+                                 constraintName="fk_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="T_USER"/>
+        
+        
+    </changeSet>
+    
+    <changeSet author="liquibase-docs" id="addColumn-example">
+    	<addColumn tableName="T_SUPPLIER_OUTLET">
+	        <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+	    </addColumn>
+	</changeSet>
+
+</databaseChangeLog>

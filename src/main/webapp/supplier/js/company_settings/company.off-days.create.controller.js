@@ -5,47 +5,57 @@
 
     CompanyOffDaysCreateController
         .$inject = [
-        '$scope'
+        '$scope',
+        '$modalInstance',
+        'dayOff',
+        'OffDayFactory',
+        'OrdersFactory'
     ];
 
-    function CompanyOffDaysCreateController($scope) {
-        var range = [];
-        for (var i = 2014; i < 2016; i++) {
-            range.push(i);
-        }
-        $scope.years = range;
+    function CompanyOffDaysCreateController($scope, $modalInstance, dayOff, OffDayFactory, OrdersFactory) {
+        $scope.dayOff = {};
+        $scope.orders = {};
+
+        $scope.refreshOrders = refreshOrders;
         $scope.save = save;
         $scope.cancel = cancel;
+
 
         activate();
 
         function activate() {
-
+            if (dayOff) {
+                $scope.dayOff = dayOff;
+            } else {
+                $scope.dayOff = {date: new Date()};
+            }
+            refreshOrders();
         }
 
-        function addOffDays(offdays) {
-            for (var i = 0; i < offdays.length; i++) {
-                holidays[offdays[i].date] = offdays[i];
-            }
-        }
-
-        function addOYearlyHolidays(yearly) {
-            for (var i = 0; i < yearly.length; i++) {
-                yearly[i].yearly = true;
-                if(holidays[yearly[i].date].length > 0) {
-                    holidays[yearly[i].date] = holidays[yearly[i].date].push(yearly[i]);
-                } else {
-                    holidays[yearly[i].date] = yearly[i];
-                }
-            }
+        function refreshOrders() {
+            OrdersFactory.query({
+                    date: $scope.dayOff.date
+                },
+                function (data) {
+                    $scope.orders = data;
+                },
+                function (e) {
+                    console.error(e);
+                });
         }
 
         function save() {
-
+            //OffDayFactory.save($scope.dayOff,
+            //    function () {
+            //        $modalInstance.close();
+            //    }, function (e) {
+            //        console.error(e);
+            //    });
+            $modalInstance.close();
         }
 
         function cancel() {
-
+            $modalInstance.dismiss('cancel');
         }
     }
 })();
