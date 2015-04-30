@@ -96,12 +96,9 @@
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
-                                        'js/directives/file-model.directive.js',
-                                        'js/directives/click-selector.directive.js',
                                         'js/services/file-upload.service.js',
                                         'js/company_profile/company.factory.js',
                                         'js/company_profile/outlets.factory.js',
-                                        'js/company_profile/contact-person.factory.js',
                                         'js/company_profile/company-profile.company.controller.js',
                                         'js/company_profile/company-profile.outlets.controller.js'
                                     ]);

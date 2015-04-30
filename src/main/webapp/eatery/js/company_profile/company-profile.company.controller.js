@@ -17,14 +17,16 @@
         $scope.optionalImage = {};
 
         $scope.save = save;
-        $scope.removeLogo = removeLogo;
+        $scope.uploadPhoto = uploadPhoto;
+        $scope.uploadOptionalImage = uploadOptionalImage;
+        $scope.removePhoto = removePhoto;
         $scope.removeOptionalImage = removeOptionalImage;
-        $scope.upload = upload;
 
         activate();
 
         function activate() {
             $scope.company = AuthServerProvider.currentUserCompany();
+            console.log($scope.company);
         }
 
         function save() {
@@ -37,27 +39,42 @@
             console.log("Saved type with id: " + id);
         }
 
-        function removeLogo() {
-            $scope.company.logo.url = 'placeholder.png';
-            $scope.logo = {};
-        }
-
-        function removeOptionalImage() {
-            $scope.company.optionalImage.url = 'placeholder.png'
-            $scope.optionalImage = {};
-        }
-
-        function upload(image) {
-            console.log(image);
+        function uploadPhoto(image) {
             if ($scope.logo && image.length > 0) {
                 FileUploadService.uploadFileToUrl(image[0])
                     .then(function (response) {
-                        $scope.pictureObject = {
-                            title: $scope.logo.name,
+                        $scope.company.logo = {
+                            title: image[0].name,
                             url: response.data.path
                         };
                     });
             }
+        }
+
+        function removePhoto() {
+            $scope.company.logo = {
+                title: 'logo_placeholder',
+                url: '/logo_placeholder.png'
+            };
+        }
+
+        function uploadOptionalImage(image) {
+            if ($scope.optionalImage && image.length > 0) {
+                FileUploadService.uploadFileToUrl(image[0])
+                    .then(function (response) {
+                        $scope.company.eateryDetails.topRightPicture = {
+                            title: image[0].name,
+                            url: response.data.path
+                        };
+                    });
+            }
+        }
+
+        function removeOptionalImage() {
+            $scope.company.eateryDetails.topRightPicture = {
+                title: 'logo_placeholder',
+                url: '/logo_placeholder.png'
+            };
         }
     }
 })();

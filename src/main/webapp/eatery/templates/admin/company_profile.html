@@ -60,13 +60,13 @@
                         <label class="col-lg-2 control-label">Logo</label>
 
                         <div class="col-lg-10">
-                            <img ngf-thumbnail="logo[0]" class="mc-logo" ng-src="/img/{{company.logo.url}}">
+                            <img ngf-thumbnail="logo[0]" class="mc-logo" ng-src="/api/content?contentPath={{company.logo.url}}">
 
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default" ng-model="logo" ngf-select ngf-change="upload(logo)">Upload
+                                <button type="button" class="btn btn-default" ng-model="logo" ngf-select ngf-change="uploadPhoto(logo)">Upload
                                     Image
                                 </button>
-                                <button type="button" class="btn btn-default" ng-click="remove()">Remove</button>
+                                <button type="button" class="btn btn-default" ng-click="removePhoto()">Remove</button>
                             </div>
                         </div>
                     </div>
@@ -75,10 +75,10 @@
                             Orders</label>
 
                         <div class="col-lg-10">
-                            <img ngf-thumbnail="optionalImage[0]" class="mc-logo" ng-src="/img/{{company.optionalImage.url}}">
+                            <img ngf-thumbnail="optionalImage[0]" class="mc-logo" ng-src="/api/content?contentPath={{company.optionalImage.url}}">
 
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default" ng-model="optionalImage" ngf-select ngf-change="upload(optionalImage)">Upload
+                                <button type="button" class="btn btn-default" ng-model="optionalImage" ngf-select ngf-change="uploadOptionalImage(optionalImage)">Upload
                                     Image
                                 </button>
                                 <button type="button" class="btn btn-default" ng-click="removeOptionalImage()">Remove</button>
@@ -162,7 +162,7 @@
                                 <div class="col-lg-10 col-lg-offset-2">
                                     <button class="btn btn-sm btn-info" ng-click="edit(outlet)" ng-hide="currentOutlet.id == outlet.id">Edit</button>
                                     <button type="submit" class="btn btn-sm btn-info" ng-click="save(outlet)" ng-show="currentOutlet.id == outlet.id">Save</button>
-                                    <button class="btn btn-sm btn-danger" ng-click="cancel()" ng-show="currentOutlet.id == outlet.id">Cancel</button>
+                                    <button class="btn btn-sm btn-danger" back-button>Cancel</button>
                                 </div>
                             </div>
                         </form>
