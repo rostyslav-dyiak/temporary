@@ -37,7 +37,6 @@
                 }
             }).success(function (response) {
                 localStorageService.set('token', response);
-
                 return response;
             });
         }
@@ -63,10 +62,7 @@
         }
 
         function currentUserCompany() {
-            if (!user) {
-                user = localStorageService.get('user');
-            }
-            return user.company;
+            return currentUser().company;
         }
 
         function userRole() {
@@ -77,7 +73,7 @@
             if (!angular.isArray(authorizedRoles)) {
                 authorizedRoles = [authorizedRoles];
             }
-            return user && authorizedRoles.indexOf(userRole()) !== -1;
+            return currentUser() && authorizedRoles.indexOf(userRole()) !== -1;
         }
     }
 })();
