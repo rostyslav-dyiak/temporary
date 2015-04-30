@@ -27,8 +27,8 @@
                         id: teamMemberId
                     },
                     function (data) {
-                        master = angular.copy(data.teamMembers[0]);
-                        $scope.teamMember = angular.copy(data.teamMembers[0]);
+                        master = angular.copy(data);
+                        $scope.teamMember = angular.copy(data);
                     }, function (e) {
                         console.error(e);
                     });
@@ -36,14 +36,22 @@
         }
 
         function save(teamMember) {
-            TeamFactory.save({
-                    id: teamMember.id
-                },
-                function (data) {
-                    console.log(data);
-                }, function (e) {
-                    console.error(e);
-                });
+        	if (teamMemberId) {
+	            TeamFactory.update(teamMember,
+	                function (data) {
+	                    console.log(data);
+	                }, function (e) {
+	                    console.error(e);
+	                });
+        	}
+        	else{
+        		TeamFactory.save(teamMember,
+                        function (data) {
+                            console.log(data);
+                        }, function (e) {
+                            console.error(e);
+                        });	
+        	}
 
         }
 

@@ -1,19 +1,12 @@
 package com.kb.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.kb.converter.user.UserConverter;
-import com.kb.domain.Company;
-import com.kb.domain.Contact;
-import com.kb.domain.Outlet;
-import com.kb.domain.User;
-import com.kb.repository.CompanyRepository;
-import com.kb.repository.ContactRepository;
-import com.kb.repository.OutletRepository;
-import com.kb.repository.UserRepository;
-import com.kb.security.SecurityUtils;
-import com.kb.web.rest.dto.UserCompanyDTO;
-import com.kb.service.company.CompanyService;
-import com.kb.web.rest.util.PaginationUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -21,13 +14,26 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
+import com.codahale.metrics.annotation.Timed;
+import com.kb.converter.user.UserConverter;
+import com.kb.domain.Company;
+import com.kb.domain.Contact;
+import com.kb.domain.Outlet;
+import com.kb.domain.User;
+import com.kb.repository.ContactRepository;
+import com.kb.repository.OutletRepository;
+import com.kb.repository.UserRepository;
+import com.kb.security.SecurityUtils;
+import com.kb.service.company.CompanyService;
+import com.kb.web.rest.dto.UserCompanyDTO;
+import com.kb.web.rest.util.PaginationUtil;
 
 /**
  * REST controller for managing Company.
@@ -180,4 +186,24 @@ public class CompanyResource {
         
         return new ResponseEntity<>(convertedDtoList, headers, HttpStatus.OK);
     }
+    
+    @RequestMapping(value = "/users/{id}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+        @Timed
+        public ResponseEntity<UserCompanyDTO> getUserById(@RequestParam(value = "page" , required = false) Integer offset,
+                @RequestParam(value = "per_page", required = false) Integer limit,
+                @PathVariable final Long id) throws URISyntaxException{
+        	
+        	log.debug("REST request to get User by id");
+        	
+        	User userById = userRepository.findOne(id);
+        	
+        	UserCompanyDTO convertedDto = userConverter.convert(userById);
+        	
+        	//HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/users", offset, limit);
+            
+            return new ResponseEntity<UserCompanyDTO>(convertedDto, HttpStatus.OK);
+    }
+    
 }
