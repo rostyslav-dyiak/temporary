@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -62,6 +64,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(nullable = false)
     private boolean activated = false;
 
+    @Column(name = "salutation")
+    @Enumerated(EnumType.STRING)
+    private Salutation salutation;
+    
     @Size(min = 2, max = 5)
     @Column(name = "lang_key", length = 5)
     private String langKey;
@@ -207,6 +213,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public Salutation getSalutation() {
+		return salutation;
+	}
+
+	public void setSalutation(Salutation salutation) {
+		this.salutation = salutation;
 	}
 
 	@Override
