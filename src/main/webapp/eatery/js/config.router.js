@@ -106,7 +106,7 @@
                                         'js/directives/file-model.directive.js',
                                         'js/directives/click-selector.directive.js',
                                         'js/company_profile/companies.factory.js',
-                                        'js/company_profile/company.outlets.factory.js',
+                                        'js/company_profile/company-profile.outlets.controller.js',
                                         'js/company_profile/contact-person.factory.js',
                                         'js/company_profile/company-profile.company.controller.js',
                                         'js/company_profile/company-profile.outlets.controller.js'
@@ -143,7 +143,7 @@
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
                                         'js/team_member/team.factory.js',
-                                        'js/company_profile/company.outlets.factory.js',
+                                        'js/company_profile/company-profile.outlets.controller.js',
                                         'js/team_member/team-member-company.add-edit.controller.js'
                                     ]);
                                 }
@@ -164,7 +164,7 @@
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
                                         'js/team_member/team.factory.js',
-                                        'js/company_profile/company.outlets.factory.js',
+                                        'js/company_profile/company-profile.outlets.controller.js',
                                         'js/team_member/team-member-company.add-edit.controller.js'
                                     ]);
                                 }

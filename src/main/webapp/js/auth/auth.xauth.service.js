@@ -30,7 +30,7 @@
             var data = "email=" + email + "&password="
                 + password;
 
-            return $http.post('api/authenticate', data, {
+            return $http.post('http://localhost:8080/api/authenticate', data, {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
                     "Accept": "application/json"

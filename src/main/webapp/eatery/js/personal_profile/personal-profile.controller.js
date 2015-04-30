@@ -6,11 +6,11 @@
     PersonalProfileController
         .$inject = [
         '$scope',
-        'UserFactory',
+        '$http',
         'AuthServerProvider'
     ];
 
-    function PersonalProfileController($scope, UserFactory, AuthServerProvider) {
+    function PersonalProfileController($scope, $http, AuthServerProvider) {
         $scope.master = {};
         $scope.user = {};
         $scope.confirmPassword = '';
@@ -46,15 +46,26 @@
             $scope.user = angular.copy($scope.master);
         }
 
-        function changePassword(user) {
-            //UserFactory.save({
-            //        id: user.id
-            //    },
-            //    function (data) {
-            //        console.log(data);
-            //    }, function (e) {
-            //        console.error(e);
-            //    });
+        function changePassword() {
+            var data = {
+                oldPassword: $scope.user.currentPassword,
+                newPassword: $scope.user.newPassword
+            }
+            $http.post('http://localhost:8080/api/account/change_password', data)
+                .success(function (response) {
+                    AuthServerProvider.login(AuthServerProvider.currentUser().email, $scope.user.newPassword)
+                        .then(function () {
+                            console.log("User changed.");
+                        },
+                        function (e) {
+                            console.error(e);
+                        });
+                    $scope.user = {};
+                    console.log(response);
+                }).error(function (response) {
+                    console.log(response);
+                    $scope.user = {};
+                });
         }
 
         function cancelChangePassword() {
