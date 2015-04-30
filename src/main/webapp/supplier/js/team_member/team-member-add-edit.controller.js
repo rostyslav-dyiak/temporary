@@ -21,11 +21,11 @@
         $scope.supplierInviteDTO = {
                 user: {}
         };
-        
+
         $scope.save = save;
         $scope.addUser = addUser;
-        $scope.createUser = addUser;
-        $scope.updateUser = addUser;
+        $scope.createUser = createUser;
+        $scope.updateUser = updateUser;
         $scope.cancel = cancel;
 
         activate();
@@ -61,7 +61,7 @@
                             console.log(data);
                         }, function (e) {
                             console.error(e);
-                        });	
+                        });
         	}
 
         }
@@ -84,7 +84,7 @@
             $scope.supplierInviteDTO.email = $scope.teamMember.userDTO.email;
             $scope.supplierInviteDTO.role = $scope.teamMember.userDTO.role;
             $scope.supplierInviteDTO.contactNumber = $scope.teamMember.company.contactNumber;
-            
+
             $http.post("/api/invite_supplier_member",
                 $scope.supplierInviteDTO)
                 .success(function (data) {
@@ -104,7 +104,7 @@
             $scope.supplierInviteDTO.email = $scope.teamMember.userDTO.email;
             $scope.supplierInviteDTO.role = $scope.teamMember.userDTO.role;
             $scope.supplierInviteDTO.contactNumber = $scope.teamMember.company.contactNumber;
-            
+
             MemberFactory.update($scope.supplierInviteDTO,
                 function (data) {
                     console.log('Saved ' + data.id)

@@ -2,7 +2,6 @@
     'use strict';
 
     app.controller('TeamMembersController', TeamMembersController);
-
     TeamMembersController
         .$inject = [
         '$scope',
@@ -15,7 +14,6 @@
         $scope.itemsByPage = 5;
 
         activate();
-
         function activate() {
             TeamFactory.query({},
                 function (data) {
@@ -24,6 +22,7 @@
                     console.error(e);
                 });
         }
+
     }
 
 })();

@@ -1,10 +1,7 @@
 package com.kb.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.kb.domain.Authority;
-import com.kb.domain.Company;
-import com.kb.domain.PersistentToken;
-import com.kb.domain.User;
+import com.kb.domain.*;
 import com.kb.repository.PersistentTokenRepository;
 import com.kb.repository.UserRepository;
 import com.kb.security.SecurityUtils;
@@ -175,6 +172,29 @@ public class AccountResource {
                 return new ResponseEntity<String>(HttpStatus.OK);
             })
             .orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+    }
+
+    @RequestMapping(value = "/invite_supplier_member",
+        method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.TEXT_PLAIN_VALUE)
+    @Timed
+    public ResponseEntity<?> registerCompanyAndInvite(@Valid @RequestBody final SupplierInviteDTO supplierInviteDTO, final HttpServletRequest request) {
+        Salutation salutation = supplierInviteDTO.getSalutation();
+        String firstName = supplierInviteDTO.getFirstName();
+        String title = supplierInviteDTO.getTitle();
+        String status = supplierInviteDTO.getStatus();
+        String email = supplierInviteDTO.getEmail();
+        String role = supplierInviteDTO.getRole();
+        String contactNumber = supplierInviteDTO.getContactNumber();
+        Company company = supplierInviteDTO.getCompany();
+        return userRepository.findOneByEmail(email)
+            .map(user -> new ResponseEntity<>("e-mail address already in use", HttpStatus.BAD_REQUEST))
+            .orElseGet(() -> {
+                User user = userService.createUserInformation(salutation, firstName, title, status, email, role, contactNumber, company);
+                String baseUrl = MessageFormat.format("{0}://{1}:{2}/{3}", request.getScheme(), request.getServerName(), Integer.toString(request.getServerPort()), "#/app/sign_up");
+                mailService.sendActivationEmail(user, baseUrl);
+                return new ResponseEntity<>(HttpStatus.CREATED);
+            });
     }
 
     /**

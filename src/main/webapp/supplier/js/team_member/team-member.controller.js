@@ -1,5 +1,5 @@
-(function () {
-    'use strict';
+(function() {
+	'use strict';
 
     app.controller('TeamMembersController', TeamMembersController);
 
