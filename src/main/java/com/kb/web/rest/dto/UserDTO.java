@@ -7,6 +7,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 
 import com.kb.domain.Company;
+import com.kb.domain.Salutation;
 
 public class UserDTO {
 
@@ -32,6 +33,8 @@ public class UserDTO {
     @Size(min = 5, max = 100)
     private String email;
 
+    private Salutation salutation;
+    
     @Size(min = 2, max = 5)
     private String langKey;
 
@@ -155,6 +158,14 @@ public class UserDTO {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public Salutation getSalutation() {
+		return salutation;
+	}
+
+	public void setSalutation(Salutation salutation) {
+		this.salutation = salutation;
 	}
 
 	@Override
