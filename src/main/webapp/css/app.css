@@ -5241,3 +5241,7 @@ a.text-#000000:hover {
 .delivery-row .checkbox-inline {
     line-height: 1.8;
 }
+.tl-content.panel.holiday-wrap {
+    display: block;
+    margin-bottom: 10px;
+}

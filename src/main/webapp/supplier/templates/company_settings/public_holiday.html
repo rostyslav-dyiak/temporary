@@ -12,20 +12,20 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="row in holidays">
-                        <td>{{row.name}}</td>
+                        <td>{{row.description}}</td>
                         <td>{{row.date}}</td>
                         <td>
                             <div class="radio">
-                                <label class="i-checks">
-                                    <input type="radio" ng-model="row.status"
-                                           name="gstRegistered" value="true" ng-value="true" selected>
+                                <label class="radio-inline i-checks">
+                                    <input type="radio" ng-model="row.status" ng-change="toggle(row)"
+                                           name="gstRegistered" ng-value="true">
                                     <i></i> Open
                                 </label>
                             </div>
                             <div class="radio">
-                                <label class="i-checks">
-                                    <input type="radio" ng-model="row.status"
-                                           name="gstRegistered" value="false" ng-value="false">
+                                <label class="radio-inline i-checks">
+                                    <input type="radio" ng-model="row.status" ng-change="toggle(row)"
+                                           name="gstRegistered" ng-value="false" selected>
                                     <i></i> Closed
                                 </label>
                             </div>

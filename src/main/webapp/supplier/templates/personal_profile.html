@@ -69,9 +69,9 @@
                     </div>
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
-                            <button type="submit" class="btn btn-sm btn-info" ng-click="save(user)">Save Changes
+                            <button type="submit" class="btn btn-sm btn-info" ng-click="save(user)">Save
                             </button>
-                            <button class="btn btn-sm btn-danger" ng-click="cancel()">Cancel</button>
+                            <button class="btn btn-sm btn-danger" back-button>Cancel</button>
                         </div>
                     </div>
                 </form>
@@ -85,29 +85,29 @@
                         <label class="col-lg-2 control-label">Current Password</label>
 
                         <div class="col-lg-10">
-                            <input type="password" ng-model="user.currentPassword" class="form-control" placeholder="Current Password" required>
+                            <input type="password" ng-model="user.currentPassword" class="form-control" placeholder="Current Password" ng-minlength="5" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label">New Password</label>
 
                         <div class="col-lg-10">
-                            <input name="password" type="password" ng-model="user.newPassword" class="form-control" placeholder="New Password" required>
+                            <input name="password" type="password" ng-model="user.newPassword" class="form-control" placeholder="New Password" ng-minlength="5" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Confirm New Password</label>
 
                         <div class="col-lg-10">
-                            <input name="confirmPassword" type="password" class="form-control" placeholder="Confirm New Password"
+                            <input name="confirmPassword" type="password" class="form-control" placeholder="Confirm New Password" ng-minlength="5"
                                    ng-model="user.confirmPassword" ui-validate="'$value==user.newPassword'" ui-validate-watch="'user.newPassword'" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
-                            <button type="submit" class="btn btn-sm btn-info" ng-click="changePassword(user)" ng-disabled="!changePasswordForm.$valid">Save Changes
+                            <button type="submit" class="btn btn-sm btn-info" ng-click="changePassword()" ng-disabled="!changePasswordForm.$valid">Save
                             </button>
-                            <span class="btn btn-sm btn-danger" ng-click="cancelChangePassword()">Cancel</span>
+                            <span class="btn btn-sm btn-danger" back-button>Cancel</span>
                         </div>
                     </div>
                 </form>

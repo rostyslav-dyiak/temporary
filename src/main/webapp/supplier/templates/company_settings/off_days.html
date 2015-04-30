@@ -20,23 +20,27 @@
             </div>
         </div>
         <div class="panel-body">
-            <div class="col">
-                <div class="wrapper">
-                    <ul class="timeline timeline-center">
-                        <li class="tl-item" ng-class="{'tl-left': item.value.yearly}" ng-repeat="item in holidays">
-                            <div class="tl-wrap">
-                                <span class="tl-date">{{ item.key }}</span>
+            <div class="wrapper">
+                <ul class="timeline timeline-center">
+                    <li class="tl-header timeline-center">
+                        <div class="btn">Now</div>
+                    </li>
+                    <li class="tl-item" ng-repeat="(key, value) in holidays">
+                        <div class="tl-wrap">
+                            <span class="tl-date">{{ key }}</span>
 
-                                <div class="tl-content panel padder b-a">
-                                    <span class="arrow arrow-success left pull-up hidden-left"></span>
-                                    <span class="arrow arrow-success right pull-up visible-left"></span>
+                            <div class="tl-content panel padder b-a holiday-wrap" ng-repeat="day in value">
+                                <!--<span class="arrow left pull-up hidden-left"-->
+                                      <!--ng-show="day.absenceType == 'HOLIDAY'"></span>-->
+                                <!--<span class="arrow right pull-up visible-left"-->
+                                      <!--ng-show="day.absenceType == 'DAYOFF'"></span>-->
+                                <span class="arrow left pull-up"></span>
 
-                                    <div>{{ item.value.description }}</div>
-                                </div>
+                                <div>{{ day.description }}</div>
                             </div>
-                        </li>
-                    </ul>
-                </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

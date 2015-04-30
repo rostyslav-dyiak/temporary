@@ -167,7 +167,16 @@ angular.module('app')
                 })
                 .state('app.companySettings.deliveryDays', {
                     url: '/profile',
-                    templateUrl: 'templates/company_settings/delivery_days.html' ,
+                    templateUrl: 'templates/company_settings/delivery_days.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    'js/company_settings/company.area-delivery.controller.js'
+                                ]);
+                            }
+                        ]
+                    },
                     data: {
                         authorizedRoles: [USER_ROLES.supplierAdmin]
                     }
@@ -175,6 +184,15 @@ angular.module('app')
                 .state('app.companySettings.deliveryTiming', {
                     url: '/profile',
                     templateUrl: 'templates/company_settings/delivery_timing.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    'js/company_settings/company.order-timing.controller.js'
+                                ]);
+                            }
+                        ]
+                    },
                     data: {
                         authorizedRoles: [USER_ROLES.supplierAdmin]
                     }

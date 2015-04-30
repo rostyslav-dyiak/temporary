@@ -7,10 +7,10 @@
         .$inject = [
         '$scope',
         '$modal',
-        'AuthServerProvider'
+        'OffDayFactory'
     ];
 
-    function CompanyOffDaysController($scope, $modal, AuthServerProvider) {
+    function CompanyOffDaysController($scope, $modal, OffDayFactory) {
         var range = [];
         for (var i = 2014; i < 2016; i++) {
             range.push(i);
@@ -24,10 +24,10 @@
         activate();
 
         function activate() {
-            $scope.company = AuthServerProvider.currentUserCompany();
-            PublicHolidayFactory.query({},
+            OffDayFactory.get({},
                 function (data) {
-                    $scope.holidays = data;
+                    $scope.holidays = data.dates;
+                    console.log($scope.holidays);
                 },
                 function (e) {
                     console.log(e);
@@ -39,7 +39,7 @@
                 templateUrl: 'myModalContent.html',
                 controller: 'CompanyOffDaysCreateController',
                 resolve: {
-                    dayOff: function() {
+                    dayOff: function () {
                         return dayOff;
                     },
                     deps: ['$ocLazyLoad',
@@ -53,23 +53,6 @@
                     ]
                 }
             });
-        }
-
-        function addOffDays(offdays) {
-            for (var i = 0; i < offdays.length; i++) {
-                holidays[offdays[i].date] = offdays[i];
-            }
-        }
-
-        function addOYearlyHolidays(yearly) {
-            for (var i = 0; i < yearly.length; i++) {
-                yearly[i].yearly = true;
-                if(holidays[yearly[i].date].length > 0) {
-                    holidays[yearly[i].date] = holidays[yearly[i].date].push(yearly[i]);
-                } else {
-                    holidays[yearly[i].date] = yearly[i];
-                }
-            }
         }
     }
 })();

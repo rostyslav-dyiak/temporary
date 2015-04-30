@@ -20,10 +20,17 @@
         activate();
 
         function activate() {
-            $scope.holidays = AuthServerProvider.currentUserCompany();
+            $scope.company = AuthServerProvider.currentUserCompany();
+            PublicHolidayFactory.query({},
+                function (data) {
+                    $scope.holidays = data;
+                },
+                function (e) {
+                    console.error(e);
+                });
         }
 
-        function toggle() {
+        function toggle(holiday) {
 
         }
     }
