@@ -16,7 +16,7 @@
         $scope.logo = {};
         $scope.optionalImage = {};
 
-        $scope.save = save;
+        $scope.saveCompany = saveCompany;
         $scope.uploadPhoto = uploadPhoto;
         $scope.uploadOptionalImage = uploadOptionalImage;
         $scope.removePhoto = removePhoto;
@@ -29,14 +29,13 @@
             console.log($scope.company);
         }
 
-        function save() {
+        function saveCompany() {
             CompanyFactory.update($scope.company,
                 function (data) {
                     activate();
                 }, function (e) {
                     console.error(e);
                 });
-            console.log("Saved type with id: " + id);
         }
 
         function uploadPhoto(image) {

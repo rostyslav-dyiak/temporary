@@ -18,6 +18,7 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
+import com.kb.domain.Salutation;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -158,7 +159,11 @@ public class AccountResourceTest {
             "joe@example.com",      // e-mail
             "en",                   // langKey
             new Company(),                   // company
-            AuthoritiesConstants.USER
+            AuthoritiesConstants.USER,
+            "One",
+            Salutation.Mrs,
+            "09333414"
+
         );
 
         restMvc.perform(
@@ -182,7 +187,10 @@ public class AccountResourceTest {
             "funky@example.com",    // e-mail
             "en",                   // langKey
             new Company(),                   // company
-            AuthoritiesConstants.USER
+            AuthoritiesConstants.USER,
+            "One",
+            Salutation.Mrs,
+            "09333414"
         );
 
         restUserMockMvc.perform(
@@ -206,7 +214,10 @@ public class AccountResourceTest {
             "invalid",          // e-mail <-- invalid
             "en",               // langKey
             new Company(),                   // company
-            AuthoritiesConstants.USER
+            AuthoritiesConstants.USER,
+            "One",
+            Salutation.Mrs,
+            "09333414"
         );
 
         restUserMockMvc.perform(
@@ -231,12 +242,15 @@ public class AccountResourceTest {
             "alice@example.com",    // e-mail
             "en",                   // langKey
             new Company(),                   // company
-            AuthoritiesConstants.USER
+            AuthoritiesConstants.USER,
+            "One",
+            Salutation.Mrs,
+            "09333414"
         );
 
         // Duplicate login, different e-mail
         UserDTO dup = new UserDTO(u.getLogin(), u.getPassword(), u.getLogin(), u.getLastName(),
-            "alicejr@example.com", u.getLangKey(), u.getCompany(), u.getRole());
+            "alicejr@example.com", u.getLangKey(), u.getCompany(), u.getRole(),u.getTitle(),u.getSalutation(),u.getContactNumber());
 
         // Good user
         restMvc.perform(
@@ -268,12 +282,15 @@ public class AccountResourceTest {
             "john@example.com",     // e-mail
             "en",                   // langKey
             new Company(),                   // company
-            AuthoritiesConstants.USER
+            AuthoritiesConstants.USER,
+            "One",
+            Salutation.Mrs,
+            "09333414"
         );
 
         // Duplicate e-mail, different login
         UserDTO dup = new UserDTO("johnjr", u.getPassword(), u.getLogin(), u.getLastName(),
-            u.getEmail(), u.getLangKey(), u.getCompany(), u.getRole());
+            u.getEmail(), u.getLangKey(), u.getCompany(), u.getRole(),u.getTitle(),u.getSalutation(),u.getContactNumber());
 
         // Good user
         restMvc.perform(
@@ -304,7 +321,10 @@ public class AccountResourceTest {
             "badguy@example.com",   // e-mail
             "en",                   // langKey
             new Company(),                   // company
-            AuthoritiesConstants.ADMIN // <-- only admin should be able to do that
+            AuthoritiesConstants.ADMIN, // <-- only admin should be able to do that
+            "One",
+            Salutation.Mrs,
+            "09333414"
         );
 
         restMvc.perform(

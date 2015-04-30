@@ -9,10 +9,13 @@
     ];
 
     function UserFactory($resource) {
-        return $resource('/api/account/:id', {}, {
+        return $resource('/api/users/:id', {}, {
             'query': {
                 method: 'GET',
                 isArray: false
+            },
+            'update': {
+                method: 'PUT'
             }
         });
     }

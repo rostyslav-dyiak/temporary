@@ -99,6 +99,7 @@
                                         'js/services/file-upload.service.js',
                                         'js/company_profile/company.factory.js',
                                         'js/company_profile/outlets.factory.js',
+                                        'js/company_profile/outlets.company.factory.js',
                                         'js/company_profile/company-profile.company.controller.js',
                                         'js/company_profile/company-profile.outlets.controller.js'
                                     ]);

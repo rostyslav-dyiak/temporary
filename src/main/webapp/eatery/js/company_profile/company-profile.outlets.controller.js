@@ -6,10 +6,11 @@
     CompanyProfileOutletsController
         .$inject = [
         '$scope',
-        'OutletsFactory'
+        'OutletsFactory',
+        'OutletsCompanyFactory'
     ];
 
-    function CompanyProfileOutletsController($scope, OutletsFactory) {
+    function CompanyProfileOutletsController($scope, OutletsFactory,OutletsCompanyFactory) {
         $scope.outlets = {};
         $scope.currentOutlet = {};
 
@@ -20,9 +21,9 @@
         activate();
 
         function activate() {
-            OutletsFactory.get({},
+            OutletsCompanyFactory.query({},
                 function (data) {
-                    $scope.outlets = data.outlets;
+                    $scope.outlets = data;
                 }, function (e) {
                     console.error(e);
                 });
@@ -34,14 +35,14 @@
         }
 
         function save(outlet) {
-            //OutletsFactory.save({
-            //        id: outlet.id
-            //    },
-            //    function (data) {
-            //        console.log(data);
-            //    }, function (e) {
-            //        console.error(e);
-            //    });
+            OutletsFactory.update({
+                    outlet: $scope.currentOutlet
+                },
+                function (data) {
+                    console.log(data);
+                }, function (e) {
+                    console.error(e);
+                });
 
             console.log("Saved type with id: " + outlet.id);
         }

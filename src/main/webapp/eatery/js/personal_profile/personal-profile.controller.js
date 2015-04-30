@@ -7,10 +7,11 @@
         .$inject = [
         '$scope',
         '$http',
+        'UserFactory',
         'AuthServerProvider'
     ];
 
-    function PersonalProfileController($scope, $http, AuthServerProvider) {
+    function PersonalProfileController($scope, $http, UserFactory, AuthServerProvider) {
         $scope.master = {};
         $scope.user = {};
         $scope.confirmPassword = '';
@@ -29,17 +30,19 @@
         }
 
 
-        function save(user) {
-            //UserFactory.save({
-            //        id: user.id
-            //    },
-            //    function (data) {
-            //        console.log(data);
-            //    }, function (e) {
-            //        console.error(e);
-            //    });
-
-            console.log("Saved type with id: " + user.id);
+        function save() {
+            UserFactory.update($scope.user,
+                function (data) {
+                    $http.get("/api/account")
+                        .success(function (data) {
+                            AuthServerProvider.setUser(data);
+                        })
+                        .error(function (data) {
+                            console.log(data);
+                        });
+                }, function (e) {
+                    console.error(e);
+                });
         }
 
         function cancel() {

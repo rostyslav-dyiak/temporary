@@ -9,10 +9,9 @@
     ];
 
     function OutletsFactory($resource) {
-        return $resource('api/outlets.json', {}, {
-            'query': {
-                method: 'GET',
-                isArray: false
+        return $resource('/api/outlets', {}, {
+            'update': {
+                method: 'PUT'
             }
         });
     }

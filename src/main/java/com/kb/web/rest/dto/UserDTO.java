@@ -1,25 +1,20 @@
 package com.kb.web.rest.dto;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.Email;
-
 import com.kb.domain.Company;
 import com.kb.domain.Salutation;
+import org.hibernate.validator.constraints.Email;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class UserDTO {
 
-	@NotNull
-	private Long id;
-	
-    @Pattern(regexp = "^[a-z0-9]*$")
     @NotNull
+    private Long id;
+
     @Size(min = 1, max = 50)
     private String login;
 
-    @NotNull
     @Size(min = 5, max = 100)
     private String password;
 
@@ -34,12 +29,12 @@ public class UserDTO {
     private String email;
 
     private Salutation salutation;
-    
+
     @Size(min = 2, max = 5)
     private String langKey;
 
     private Integer outletCount;
-    
+
     private String role;
 
     private String title;
@@ -55,7 +50,7 @@ public class UserDTO {
     }
 
     public UserDTO(String login, String password, String firstName, String lastName, String email, String langKey, Company company,
-                   String role) {
+                   String role, String title, Salutation salutation, String contactNumber) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
@@ -64,17 +59,20 @@ public class UserDTO {
         this.langKey = langKey;
         this.role = role;
         this.company = company;
+        this.title = title;
+        this.salutation = salutation;
+        this.contactNumber = contactNumber;
     }
 
     public Long getId() {
-		return id;
-	}
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getPassword() {
+    public String getPassword() {
         return password;
     }
 
@@ -145,40 +143,40 @@ public class UserDTO {
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
-    
+
     public Integer getOutletCount() {
-		return outletCount;
-	}
+        return outletCount;
+    }
 
-	public void setOutletCount(Integer outletCount) {
-		this.outletCount = outletCount;
-	}
+    public void setOutletCount(Integer outletCount) {
+        this.outletCount = outletCount;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public Salutation getSalutation() {
-		return salutation;
-	}
+    public Salutation getSalutation() {
+        return salutation;
+    }
 
-	public void setSalutation(Salutation salutation) {
-		this.salutation = salutation;
-	}
-	
-	public String getStatus() {
-		return status;
-	}
+    public void setSalutation(Salutation salutation) {
+        this.salutation = salutation;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	@Override
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
     public String toString() {
         return "UserDTO{" +
             "login='" + login + '\'' +
