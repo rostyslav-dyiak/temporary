@@ -60,16 +60,13 @@
                         <label class="col-lg-2 control-label">Logo</label>
 
                         <div class="col-lg-10">
-                            <img id="logo" class="mc-logo image-preview" src="img/logo_placeholder.png"
-                                 ng-src="{{company.logo}}"/>
+                            <img ngf-thumbnail="logo[0]" class="mc-logo" ng-src="/img/{{company.logo.url}}">
 
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default" click-selector="#upload-logo">Upload
+                                <button type="button" class="btn btn-default" ng-model="logo" ngf-select ngf-change="upload(logo)">Upload
                                     Image
                                 </button>
-                                <input id="upload-logo" type="file" file-model="logo" accept="image/*"
-                                       style="display: none;">
-                                <button type="button" class="btn btn-default" ng-click="removeLogo()">Remove</button>
+                                <button type="button" class="btn btn-default" ng-click="remove()">Remove</button>
                             </div>
                         </div>
                     </div>
@@ -78,19 +75,13 @@
                             Orders</label>
 
                         <div class="col-lg-10">
-                            <img id="optionalImage" class="mc-logo image-preview" src="img/logo_placeholder.png"
-                                 ng-src="{{company.optionalImage}}"/>
+                            <img ngf-thumbnail="optionalImage[0]" class="mc-logo" ng-src="/img/{{company.optionalImage.url}}">
 
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default" click-selector="#upload-optional-image">
-                                    Upload
+                                <button type="button" class="btn btn-default" ng-model="optionalImage" ngf-select ngf-change="upload(optionalImage)">Upload
                                     Image
                                 </button>
-                                <input id="upload-optional-image" type="file" file-model="optionalImage"
-                                       accept="image/*"
-                                       style="display: none;">
-                                <button type="button" class="btn btn-default" ng-click="removeOptionalImage()">Remove
-                                </button>
+                                <button type="button" class="btn btn-default" ng-click="removeOptionalImage()">Remove</button>
                             </div>
                         </div>
                     </div>
@@ -99,9 +90,9 @@
 
                         <div class="col-lg-10">
                             <select class="form-control" ng-model="company.contactPerson">
-                                <option ng-repeat="contactPerson in contactPersons"
-                                        value="{{contactPerson.id}}"
-                                        ng-selected="contactPerson.id == company.contactPersonId">
+                                <option ng-repeat="contactPerson in company.users"
+                                        value="{{contactPerson}}"
+                                        ng-selected="contactPerson.id == company.contactPerson.id">
                                     {{contactPerson.name}}
                                 </option>
                             </select>

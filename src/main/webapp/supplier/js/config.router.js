@@ -27,13 +27,6 @@ angular.module('app')
                     abstract: true,
                     url: '/supplier',
                     templateUrl: 'templates/app.html',
-                    resolve: {
-                        deps: ['$ocLazyLoad',
-                            function ($ocLazyLoad) {
-                                return $ocLazyLoad.load('js/directives/back-button.directive.js');
-                            }
-                        ]
-                    },
                     data: {
                         authorizedRoles: [USER_ROLES.supplier, USER_ROLES.supplierAdmin]
                     }

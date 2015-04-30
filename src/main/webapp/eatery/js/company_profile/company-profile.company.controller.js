@@ -6,48 +6,58 @@
     CompanyProfileCompanyController
         .$inject = [
         '$scope',
+        'AuthServerProvider',
         'CompanyFactory',
-        'ContactPersonFactory'
+        'FileUploadService'
     ];
 
-    function CompanyProfileCompanyController($scope, CompanyFactory, ContactPersonFactory) {
+    function CompanyProfileCompanyController($scope, AuthServerProvider, CompanyFactory, FileUploadService) {
         $scope.company = {};
-        $scope.contactPersons = {};
+        $scope.logo = {};
+        $scope.optionalImage = {};
 
         $scope.save = save;
         $scope.removeLogo = removeLogo;
         $scope.removeOptionalImage = removeOptionalImage;
+        $scope.upload = upload;
 
         activate();
 
         function activate() {
-            CompanyFactory.get({
-                    id: 1
-                },
-                function (data) {
-                    $scope.company = data.company;
-                }, function (e) {
-                    console.error(e);
-                });
-            ContactPersonFactory.get({},
-                function (data) {
-                    $scope.contactPersons = data.contactPersons;
-                }, function (e) {
-                    console.error(e);
-                });
+            $scope.company = AuthServerProvider.currentUserCompany();
         }
 
-
-        function save(id) {
+        function save() {
+            CompanyFactory.update($scope.company,
+                function (data) {
+                    activate();
+                }, function (e) {
+                    console.error(e);
+                });
             console.log("Saved type with id: " + id);
         }
 
         function removeLogo() {
-            console.log("Removed logo");
+            $scope.company.logo.url = 'placeholder.png';
+            $scope.logo = {};
         }
 
         function removeOptionalImage() {
-            console.log("Removed logo");
+            $scope.company.optionalImage.url = 'placeholder.png'
+            $scope.optionalImage = {};
+        }
+
+        function upload(image) {
+            console.log(image);
+            if ($scope.logo && image.length > 0) {
+                FileUploadService.uploadFileToUrl(image[0])
+                    .then(function (response) {
+                        $scope.pictureObject = {
+                            title: $scope.logo.name,
+                            url: response.data.path
+                        };
+                    });
+            }
         }
     }
 })();

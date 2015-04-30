@@ -9,10 +9,13 @@
     ];
 
     function CompanyFactory($resource) {
-        return $resource('api/company.json', {}, {
+        return $resource('/api/companies/:id', {}, {
             'query': {
                 method: 'GET',
-                isArray: false
+                isArray: true
+            },
+            'update': {
+                method: 'PUT'
             }
         });
     }

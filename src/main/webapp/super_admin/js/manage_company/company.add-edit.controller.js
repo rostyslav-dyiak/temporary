@@ -16,17 +16,14 @@
     function CompanyAddUpdateController($scope, $stateParams, $http, CompanyFactory, BusinessTypeFactory, FileUploadService) {
         var companyId = $stateParams.id;
 
-        var master = {};
         $scope.businessTypes = {};
-        $scope.pictureObject = {};
         $scope.userCompanyDTO = {
             company: {}
         };
 
-        $scope.removeImage = removeImage;
+        $scope.removePhoto = removePhoto;
         $scope.addCompany = addCompany;
         $scope.uploadPhoto = uploadPhoto;
-        $scope.cancel = cancel;
         $scope.changeBusinessType = changeBusinessType;
 
         activate();
@@ -37,7 +34,6 @@
                         id: companyId
                     },
                     function (data) {
-                        master = angular.copy(data);
                         $scope.userCompanyDTO.company = angular.copy(data);
                     }, function (e) {
                         console.error(e);
@@ -51,10 +47,6 @@
                 });
         }
 
-        function removeImage() {
-            $scope.company.logo = 'img/logo_placeholder.png';
-        }
-
         function addCompany() {
             if (!companyId) {
                 createCompany();
@@ -64,15 +56,9 @@
 
         }
 
-        function cancel() {
-            $scope.company = master;
-            $scope.company.logo = 'img/logo_placeholder.png';
-        }
-
         function createCompany() {
             $scope.userCompanyDTO.email = $scope.userCompanyDTO.company.email;
             $scope.userCompanyDTO.role = "ROLE_" + $scope.userCompanyDTO.company.companyType.toUpperCase() + "_ADMIN";
-            $scope.userCompanyDTO.company.logo = $scope.pictureObject;
             $http.post("/api/invite",
                 $scope.userCompanyDTO)
                 .success(function (data) {
@@ -84,7 +70,6 @@
         }
 
         function updateCompany() {
-            $scope.userCompanyDTO.company.logo = $scope.pictureObject;
             CompanyFactory.update($scope.userCompanyDTO.company,
                 function (data) {
                     console.log('Saved ' + data.id)
@@ -99,16 +84,24 @@
             }
         }
 
-        function uploadPhoto() {
-            //var promiseFile = FileUploadService.uploadFileToUrl($scope.logo);
-            //promiseFile.then(function (response) {
-            //    $scope.pictureObject = {
-            //        title: $scope.logo.name,
-            //        url: response.data.path
-            //    };
-            //});
+        function uploadPhoto(image) {
+            if ($scope.logo && image.length > 0) {
+                FileUploadService.uploadFileToUrl(image[0])
+                    .then(function (response) {
+                        $scope.userCompanyDTO.company.logo = {
+                            title: image[0].name,
+                            url: response.data.path
+                        };
+                    });
+            }
         }
 
+        function removePhoto() {
+            $scope.userCompanyDTO.company.logo = {
+                title: 'logo_placeholder',
+                url: '/logo_placeholder.png'
+            };
+        }
 
         $scope.invitationHistory = [{
             id: 0,

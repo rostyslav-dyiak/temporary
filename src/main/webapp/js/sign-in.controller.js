@@ -8,11 +8,10 @@
         '$scope',
         '$window',
         '$http',
-        'AuthServerProvider',
-        'AccountFactory'
+        'AuthServerProvider'
     ];
 
-    function SignInController($scope, $window,$http, AuthServerProvider) {
+    function SignInController($scope, $window, $http, AuthServerProvider) {
         $scope.credentials = {};
         $scope.error = '';
 
