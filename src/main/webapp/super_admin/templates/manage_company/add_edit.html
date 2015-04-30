@@ -11,15 +11,13 @@
                             <label class="col-lg-2 control-label">Logo</label>
 
                             <div class="col-lg-10">
-                                <img id="image-preview" class="mc-logo" src="img/logo_placeholder.png"
-                                     ng-src="http://localhost:8080/api/content?contentPath={{userCompanyDTO.company.logo.url}}" />
+                                <img ngf-thumbnail="logo[0]" class="mc-logo" ng-src="/api/content?contentPath={{userCompanyDTO.company.logo.url}}">
+
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-default" click-selector="#upload">Upload
+                                    <button type="button" class="btn btn-default" ng-model="logo" ngf-max-size='1000000' accept="'image/*'" ngf-select ngf-change="uploadPhoto(logo)">Upload
                                         Image
                                     </button>
-                                    <input id="upload" type="file" file-model="logo" accept="image/*"
-                                           style="display: none;" onchange="angular.element(this).scope().uploadPhoto()">
-                                    <button type="button" class="btn  btn-default" ng-click="removeImage()">Remove</button>
+                                    <button type="button" class="btn btn-default" ng-click="removePhoto()">Remove</button>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +95,7 @@
                                 <span type="submit" class="btn btn-sm btn-info" ng-hide="!company.id" ng-click="save(company)">Update and
                                     Send
                                 </span>
-                                <span class="btn btn-sm btn-danger" ng-click="cancel()">Cancel</span>
+                                <span class="btn btn-sm btn-danger" back-button>Cancel</span>
                             </div>
                         </div>
                     </form>

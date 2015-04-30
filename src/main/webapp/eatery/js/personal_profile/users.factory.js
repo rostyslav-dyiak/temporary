@@ -9,7 +9,7 @@
     ];
 
     function UserFactory($resource) {
-        return $resource('/api/users/:id', {}, {
+        return $resource('/api/account/:id', {}, {
             'query': {
                 method: 'GET',
                 isArray: false

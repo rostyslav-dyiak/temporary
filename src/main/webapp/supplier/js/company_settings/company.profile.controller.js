@@ -14,7 +14,7 @@
         var master = {};
         $scope.company = {};
 
-        $scope.removeImage = removeImage;
+        $scope.removePhoto = removeImage;
         $scope.save = save;
         $scope.cancel = cancel;
 

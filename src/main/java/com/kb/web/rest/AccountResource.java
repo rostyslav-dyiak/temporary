@@ -11,8 +11,8 @@ import com.kb.security.SecurityUtils;
 import com.kb.service.MailService;
 import com.kb.service.UserService;
 import com.kb.service.company.CompanyService;
-import com.kb.service.company.DefaultCompanyService;
 import com.kb.web.rest.dto.CompanyUserInviteDTO;
+import com.kb.web.rest.dto.PasswordDTO;
 import com.kb.web.rest.dto.UserCompanyDTO;
 import com.kb.web.rest.dto.UserDTO;
 import org.apache.commons.lang.StringUtils;
@@ -195,11 +195,16 @@ public class AccountResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<?> changePassword(@RequestBody final String password) {
-        if (StringUtils.isEmpty(password) || password.length() < 5 || password.length() > 50) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> changePassword(@RequestBody final PasswordDTO passwordDTO) {
+        if (userService.checkUserPassword(passwordDTO.getOldPassword())) {
+            String newPassword = passwordDTO.getNewPassword();
+            if (StringUtils.isEmpty(newPassword) || newPassword.length() < 5 || newPassword.length() > 50) {
+                return new ResponseEntity<>("Invalid new password for user can't be < 5 or > 50 symbols", HttpStatus.BAD_REQUEST);
+            }
+            userService.changePassword(newPassword);
+        } else {
+            return new ResponseEntity<>("Invalid password for user", HttpStatus.BAD_REQUEST);
         }
-        userService.changePassword(password);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

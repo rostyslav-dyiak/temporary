@@ -6,48 +6,75 @@
     CompanyProfileCompanyController
         .$inject = [
         '$scope',
+        'AuthServerProvider',
         'CompanyFactory',
-        'ContactPersonFactory'
+        'FileUploadService'
     ];
 
-    function CompanyProfileCompanyController($scope, CompanyFactory, ContactPersonFactory) {
+    function CompanyProfileCompanyController($scope, AuthServerProvider, CompanyFactory, FileUploadService) {
         $scope.company = {};
-        $scope.contactPersons = {};
+        $scope.logo = {};
+        $scope.optionalImage = {};
 
         $scope.save = save;
-        $scope.removeLogo = removeLogo;
+        $scope.uploadPhoto = uploadPhoto;
+        $scope.uploadOptionalImage = uploadOptionalImage;
+        $scope.removePhoto = removePhoto;
         $scope.removeOptionalImage = removeOptionalImage;
 
         activate();
 
         function activate() {
-            CompanyFactory.get({
-                    id: 1
-                },
-                function (data) {
-                    $scope.company = data.company;
-                }, function (e) {
-                    console.error(e);
-                });
-            ContactPersonFactory.get({},
-                function (data) {
-                    $scope.contactPersons = data.contactPersons;
-                }, function (e) {
-                    console.error(e);
-                });
+            $scope.company = AuthServerProvider.currentUserCompany();
+            console.log($scope.company);
         }
 
-
-        function save(id) {
+        function save() {
+            CompanyFactory.update($scope.company,
+                function (data) {
+                    activate();
+                }, function (e) {
+                    console.error(e);
+                });
             console.log("Saved type with id: " + id);
         }
 
-        function removeLogo() {
-            console.log("Removed logo");
+        function uploadPhoto(image) {
+            if ($scope.logo && image.length > 0) {
+                FileUploadService.uploadFileToUrl(image[0])
+                    .then(function (response) {
+                        $scope.company.logo = {
+                            title: image[0].name,
+                            url: response.data.path
+                        };
+                    });
+            }
+        }
+
+        function removePhoto() {
+            $scope.company.logo = {
+                title: 'logo_placeholder',
+                url: '/logo_placeholder.png'
+            };
+        }
+
+        function uploadOptionalImage(image) {
+            if ($scope.optionalImage && image.length > 0) {
+                FileUploadService.uploadFileToUrl(image[0])
+                    .then(function (response) {
+                        $scope.company.eateryDetails.topRightPicture = {
+                            title: image[0].name,
+                            url: response.data.path
+                        };
+                    });
+            }
         }
 
         function removeOptionalImage() {
-            console.log("Removed logo");
+            $scope.company.eateryDetails.topRightPicture = {
+                title: 'logo_placeholder',
+                url: '/logo_placeholder.png'
+            };
         }
     }
 })();

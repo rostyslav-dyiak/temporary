@@ -17,7 +17,8 @@
         'oc.lazyLoad',
         'pascalprecht.translate',
         'LocalStorageModule',
-        'sbDateSelect'
+        'sbDateSelect',
+        'ngFileUpload'
     ]);
 
 })();
