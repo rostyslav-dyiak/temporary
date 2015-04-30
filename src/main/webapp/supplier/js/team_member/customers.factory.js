@@ -9,10 +9,10 @@
     ];
 
     function CustomersFactory($resource) {
-        return $resource('api/customers.json', {}, {
+        return $resource('api/companies/:id/outlets', {}, {
             'query': {
                 method: 'GET',
-                isArray: false
+                isArray: true
             }
         });
     }

@@ -23,6 +23,8 @@ public class UserConverter extends AbstractConverter<User, UserCompanyDTO> {
 		userDTO.setOutletCount(source.getOutlets().size());
 		userDTO.setTitle(source.getTitle());
 		userDTO.setSalutation(source.getSalutation());
+		userDTO.setStatus(source.getStatus());
+		userDTO.setContactNumber(source.getContactNumber());
 		
 		target.setUserDTO(userDTO);
 		target.setCompany(source.getCompany());
@@ -47,6 +49,8 @@ public class UserConverter extends AbstractConverter<User, UserCompanyDTO> {
 		userDTO.setOutletCount(source.getOutlets().size());
 		userDTO.setTitle(source.getTitle());
 		userDTO.setSalutation(source.getSalutation());
+		userDTO.setStatus(source.getStatus());
+		userDTO.setContactNumber(source.getContactNumber());
 		
 		userCompanyDTO.setUserDTO(userDTO);
 		userCompanyDTO.setCompany(source.getCompany());

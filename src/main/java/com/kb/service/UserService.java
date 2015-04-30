@@ -60,8 +60,8 @@ public class UserService {
         return user;
     }
 
-    public User createUserInformation( String email, String password, String firstName, String lastName,
-                                      String langKey,Company company,String role) {
+    public User createUserInformation(String email, String password, String firstName, String lastName,
+                                      String langKey, Company company, String role) {
         User newUser = new User();
         Authority authority = authorityRepository.findOne(role);
         Set<Authority> authorities = new HashSet<>();
@@ -84,8 +84,9 @@ public class UserService {
         log.debug("Created Information for User: {}", newUser);
         return newUser;
     }
-//TODO:Check email
-    public UserDTO updateUserInformation(UserDTO userDTO,Long companyId) {
+
+    //TODO:Check email
+    public UserDTO updateUserInformation(UserDTO userDTO, Long companyId) {
         Company company = companyRepository.getOne(companyId);
         company.setContactNumber(userDTO.getContactNumber());
         String encryptedPassword = passwordEncoder.encode(userDTO.getPassword());
@@ -101,7 +102,7 @@ public class UserService {
     }
 
     public void updateUserInformation(String firstName, String lastName, String email) {
-        userRepository.findOneByLogin(SecurityUtils.getCurrentLogin()).ifPresent(u -> {
+        userRepository.findOneByEmail(SecurityUtils.getCurrentLogin()).ifPresent(u -> {
             u.setFirstName(firstName);
             u.setLastName(lastName);
             u.setEmail(email);
@@ -111,12 +112,24 @@ public class UserService {
     }
 
     public void changePassword(String password) {
-        userRepository.findOneByLogin(SecurityUtils.getCurrentLogin()).ifPresent(u-> {
+        userRepository.findOneByEmail(SecurityUtils.getCurrentLogin()).ifPresent(u -> {
             String encryptedPassword = passwordEncoder.encode(password);
             u.setPassword(encryptedPassword);
             userRepository.save(u);
             log.debug("Changed password for User: {}", u);
         });
+    }
+
+    public boolean checkUserPassword(String password) {
+        Optional<User> optionalUser = userRepository.findOneByEmail(SecurityUtils.getCurrentLogin());
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            log.debug("Check user password for User: {}", user);
+            return passwordEncoder.matches(password, user.getPassword());
+        } else {
+            log.debug("Password doesn't match for User: ");
+            return false;
+        }
     }
 
     @Transactional(readOnly = true)
@@ -126,7 +139,7 @@ public class UserService {
         return currentUser;
     }
 
-    public User createInitialUserInformation(String email, Company company,String role) {
+    public User createInitialUserInformation(String email, Company company, String role) {
         User newUser = new User();
         Authority authority = authorityRepository.findOne(role);
         Set<Authority> authorities = new HashSet<>();
@@ -156,7 +169,7 @@ public class UserService {
     @Scheduled(cron = "0 0 0 * * ?")
     public void removeOldPersistentTokens() {
         LocalDate now = new LocalDate();
-        persistentTokenRepository.findByTokenDateBefore(now.minusMonths(1)).stream().forEach(token ->{
+        persistentTokenRepository.findByTokenDateBefore(now.minusMonths(1)).stream().forEach(token -> {
             log.debug("Deleting token {}", token.getSeries());
             User user = token.getUser();
             user.getPersistentTokens().remove(token);

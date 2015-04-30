@@ -2,6 +2,7 @@ package com.kb.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,12 +27,14 @@ import com.kb.converter.user.UserConverter;
 import com.kb.domain.Company;
 import com.kb.domain.Contact;
 import com.kb.domain.Outlet;
+import com.kb.domain.Salutation;
 import com.kb.domain.User;
 import com.kb.repository.ContactRepository;
 import com.kb.repository.OutletRepository;
 import com.kb.repository.UserRepository;
 import com.kb.security.SecurityUtils;
 import com.kb.service.company.CompanyService;
+import com.kb.web.rest.dto.SupplierInviteDTO;
 import com.kb.web.rest.dto.UserCompanyDTO;
 import com.kb.web.rest.util.PaginationUtil;
 
@@ -204,6 +207,37 @@ public class CompanyResource {
         	//HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/users", offset, limit);
             
             return new ResponseEntity<UserCompanyDTO>(convertedDto, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/users",
+            method = RequestMethod.PUT,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+        @Timed
+        public ResponseEntity<?> getUserById(@RequestBody final SupplierInviteDTO invitedUser) throws URISyntaxException{
+        	
+        	log.debug("REST request to update User");
+        	
+        	Optional<User> userById = userRepository.findOneByEmail(invitedUser.getEmail());
+        	User userToUpdate = userById.get();
+        	
+        	Salutation salutation = invitedUser.getSalutation();
+        	String firstName = invitedUser.getFirstName();
+        	String title = invitedUser.getTitle();
+        	String status = invitedUser.getStatus();
+        	String email = invitedUser.getEmail(); 
+            String role = invitedUser.getRole();
+            String contactNumber = invitedUser.getContactNumber();
+
+            userToUpdate.setSalutation(salutation);
+            userToUpdate.setFirstName(firstName);
+            userToUpdate.setTitle(title);
+            userToUpdate.setStatus(status);
+            userToUpdate.setEmail(email);
+            userToUpdate.setContactNumber(contactNumber);
+            
+            userRepository.save(userToUpdate);
+            
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
     
 }

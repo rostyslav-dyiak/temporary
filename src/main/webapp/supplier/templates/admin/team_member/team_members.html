@@ -28,7 +28,7 @@
                     <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.company.status}}</td>
                     <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.userDTO.outletCount}}</td>
                     <td>
-                        <a ui-sref="app.teamMemberCustomers({id: {{row.userDTO.id}} })" class="btn btn-default btn-rounded"
+                        <a ui-sref="app.teamMemberCustomers({id: {{row.company.id}} })" class="btn btn-default btn-rounded"
                            ng-show="row.userDTO.outletCount > 0">
                             View Customers
                         </a>

@@ -48,6 +48,8 @@ public class UserDTO {
 
     private String contactNumber;
 
+    private String status;
+
 
     public UserDTO() {
     }
@@ -166,6 +168,14 @@ public class UserDTO {
 
 	public void setSalutation(Salutation salutation) {
 		this.salutation = salutation;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override
