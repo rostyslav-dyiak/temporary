@@ -135,8 +135,7 @@
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
                                         'js/team_member/team.factory.js',
-                                        'js/company_profile/company.outlets.factory.js',
-                                        'js/team_member/team-member-company.add-edit.controller.js'
+                                        'js/team_member/team-member-add-edit.controller.js'
                                     ]);
                                 }
                             ]
@@ -156,8 +155,7 @@
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
                                         'js/team_member/team.factory.js',
-                                        'js/company_profile/company.outlets.factory.js',
-                                        'js/team_member/team-member-company.add-edit.controller.js'
+                                        'js/team_member/team-member-add-edit.controller.js'
                                     ]);
                                 }
                             ]

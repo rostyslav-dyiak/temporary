@@ -53,8 +53,8 @@
             var data = {
                 oldPassword: $scope.user.currentPassword,
                 newPassword: $scope.user.newPassword
-            }
-            $http.post('http://localhost:8080/api/account/change_password', data)
+            };
+            $http.post('/api/account/change_password', data)
                 .success(function (response) {
                     AuthServerProvider.login(AuthServerProvider.currentUser().email, $scope.user.newPassword)
                         .then(function () {

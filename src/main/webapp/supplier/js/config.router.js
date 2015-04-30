@@ -133,6 +133,16 @@ angular.module('app')
                 .state('app.companySettings.publicHoliday', {
                     url: '/profile',
                     templateUrl: 'templates/company_settings/public_holiday.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    'js/company_settings/public-holiday.factory.js',
+                                    'js/company_settings/company.public-holiday.controller.js'
+                                ]);
+                            }
+                        ]
+                    },
                     data: {
                         authorizedRoles: [USER_ROLES.supplierAdmin]
                     }
@@ -144,12 +154,13 @@ angular.module('app')
                         deps: ['$ocLazyLoad',
                             function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
+                                    'js/company_settings/off-day.factory.js',
                                     'js/company_settings/company.off-days.controller.js',
                                     'js/company_settings/company.off-days.create.controller.js'
                                 ]);
                             }
                         ]
-                    }  ,
+                    },
                     data: {
                         authorizedRoles: [USER_ROLES.supplierAdmin]
                     }

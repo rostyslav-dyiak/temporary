@@ -17,13 +17,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="row in teamMembers"  ui-sref="app.teamMemberEdit({id: {{row.id}} })">
-                    <td>{{row.email}}</td>
-                    <td>{{row.salutation}} {{row.name}}</td>
-                    <td>{{row.title}}</td>
-                    <td>{{row.contactNumber}}</td>
-                    <td>{{row.access}}</td>
-                    <td>{{row.status}}</td>
+                <tr ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })" ng-repeat="row in teamMembers">
+                    <td>{{row.userDTO.email}}</td>
+                    <td>{{row.salutation}} {{row.userDTO.firstName}}</td>
+                    <td>{{row.userDTO.title}}</td>
+                    <td>{{row.company.contactNumber}}</td>
+                    <td>{{row.userDTO.role}}</td>
+                    <td>{{row.company.status}}</td>
                 </tr>
                 </tbody>
                 <tfoot>
