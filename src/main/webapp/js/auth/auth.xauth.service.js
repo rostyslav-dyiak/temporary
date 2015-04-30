@@ -20,7 +20,8 @@
             currentUser: currentUser,
             setUser: setUser,
             currentUserCompany: currentUserCompany,
-            userRole: userRole
+            userRole: userRole,
+            hasRole: hasRole
         };
 
         return service;
@@ -70,6 +71,13 @@
 
         function userRole() {
             return currentUser().role;
+        }
+
+        function hasRole(authorizedRoles) {
+            if (!angular.isArray(authorizedRoles)) {
+                authorizedRoles = [authorizedRoles];
+            }
+            return user && authorizedRoles.indexOf(userRole()) !== -1;
         }
     }
 })();

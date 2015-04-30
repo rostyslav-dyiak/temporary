@@ -2,8 +2,7 @@
 
     'use strict';
 
-    angular.module('app')
-        .controller('AppCtrl', AppCtrl);
+    app.controller('AppCtrl', AppCtrl);
 
     AppCtrl
         .$inject = [

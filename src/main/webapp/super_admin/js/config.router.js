@@ -2,14 +2,21 @@
     'use strict';
 
     angular.module('app')
-        .run(['$rootScope', '$state', '$stateParams',
-            function ($rootScope, $state, $stateParams) {
+        .run(['$rootScope', '$state', '$stateParams', '$window', 'AuthServerProvider',
+            function ($rootScope, $state, $stateParams, $window, AuthServerProvider) {
                 $rootScope.$state = $state;
                 $rootScope.$stateParams = $stateParams;
+                $rootScope.$on('$stateChangeStart', function (event, next) {
+                    var authorizedRoles = next.data.authorizedRoles;
+                    if (!AuthServerProvider.hasRole(authorizedRoles)) {
+                        event.preventDefault();
+                        $window.location.href = '/index.html';
+                    }
+                });
             }
         ])
-        .config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
-            function ($stateProvider, $urlRouterProvider, $httpProvider) {
+        .config(['$stateProvider', '$urlRouterProvider', 'USER_ROLES',
+            function ($stateProvider, $urlRouterProvider, USER_ROLES) {
 
                 $urlRouterProvider
                     .otherwise('/super_admin/companies/list');
@@ -24,6 +31,9 @@
                                     return $ocLazyLoad.load('js/directives/back-button.directive.js');
                                 }
                             ]
+                        },
+                        data: {
+                            authorizedRoles: [USER_ROLES.superAdmin]
                         }
                     })
                     .state('app.manageCompany', {
@@ -220,29 +230,5 @@
                         url: '/delivery_location',
                         templateUrl: 'templates/delivery_location.html'
                     });
-
-                $httpProvider.interceptors.push(['$q', '$window', 'localStorageService', function ($q, $window, localStorageService) {
-                    return {
-                        'request': function (config) {
-                            config.headers = config.headers || {};
-                            var token = localStorageService.get('token');
-                            if (token) {
-                                if (token.token && token.expires > new Date().getTime()) {
-                                    config.headers['x-auth-token'] = token.token;
-                                } else {
-                                    delete config.headers['x-auth-token'];
-                                }
-                            }
-                            return config;
-                        },
-                        'responseError': function (response) {
-                            if (response.status === 401 || response.status === 403) {
-                                $window.location.href = '/index.html';
-                            }
-                            return $q.reject(response);
-                        }
-                    };
-                }]);
-
             }]);
 })();
