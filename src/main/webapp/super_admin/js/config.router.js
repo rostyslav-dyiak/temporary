@@ -25,13 +25,6 @@
                         abstract: true,
                         url: '/super_admin',
                         templateUrl: 'templates/app.html',
-                        resolve: {
-                            deps: ['$ocLazyLoad',
-                                function ($ocLazyLoad) {
-                                    return $ocLazyLoad.load('js/directives/back-button.directive.js');
-                                }
-                            ]
-                        },
                         data: {
                             authorizedRoles: [USER_ROLES.superAdmin]
                         }
@@ -68,12 +61,10 @@
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
-                                        'js/directives/file-model.directive.js',
-                                        'js/directives/click-selector.directive.js',
+                                        'js/services/file-upload.service.js',
                                         'js/manage_company/company.factory.js',
                                         'js/business_type/business-type.factory.js',
-                                        'js/manage_company/company.add-edit.controller.js',
-                                        'js/services/file-upload.service.js'
+                                        'js/manage_company/company.add-edit.controller.js'
                                     ]);
                                 }
                             ]

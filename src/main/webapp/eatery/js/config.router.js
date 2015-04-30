@@ -26,13 +26,6 @@
                         abstract: true,
                         url: '/eatery',
                         templateUrl: 'templates/app.html',
-                        resolve: {
-                            deps: ['$ocLazyLoad',
-                                function ($ocLazyLoad) {
-                                    return $ocLazyLoad.load('js/directives/back-button.directive.js');
-                                }
-                            ]
-                        },
                         data: {
                             authorizedRoles: [USER_ROLES.eatery, USER_ROLES.eateryAdmin]
                         }
@@ -103,11 +96,9 @@
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
-                                        'js/directives/file-model.directive.js',
-                                        'js/directives/click-selector.directive.js',
-                                        'js/company_profile/companies.factory.js',
-                                        'js/company_profile/company.outlets.factory.js',
-                                        'js/company_profile/contact-person.factory.js',
+                                        'js/services/file-upload.service.js',
+                                        'js/company_profile/company.factory.js',
+                                        'js/company_profile/outlets.factory.js',
                                         'js/company_profile/company-profile.company.controller.js',
                                         'js/company_profile/company-profile.outlets.controller.js'
                                     ]);

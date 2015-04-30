@@ -17,7 +17,7 @@
 
         $scope.save = save;
         $scope.cancel = cancel;
-        $scope.removeImage = removeImage;
+        $scope.removePhoto = removeImage;
         $scope.changePassword = changePassword;
         $scope.cancelChangePassword = cancelChangePassword;
 
