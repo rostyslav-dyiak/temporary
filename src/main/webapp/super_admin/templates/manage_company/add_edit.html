@@ -12,13 +12,13 @@
 
                             <div class="col-lg-10">
                                 <img id="image-preview" class="mc-logo" src="img/logo_placeholder.png"
-                                     ng-src="img/{{userCompanyDTO.logo.url}}" />
+                                     ng-src="http://localhost:8080/api/content?contentPath={{userCompanyDTO.company.logo.url}}" />
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default" click-selector="#upload">Upload
                                         Image
                                     </button>
                                     <input id="upload" type="file" file-model="logo" accept="image/*"
-                                           style="display: none;">
+                                           style="display: none;" onchange="angular.element(this).scope().uploadPhoto()">
                                     <button type="button" class="btn  btn-default" ng-click="removeImage()">Remove</button>
                                 </div>
                             </div>
@@ -27,17 +27,17 @@
                             <label class="col-lg-2 control-label">Type</label>
 
                             <div class="col-lg-10">
-                                <select name="type" ng-model="userCompanyDTO.company.companyType" class="form-control">
+                                <select name="type" ng-model="userCompanyDTO.company.companyType" class="form-control" ng-change="changeBusinessType()">
                                     <option value="SUPPLIER">Supplier</option>
                                     <option value="EATERY">Eatery</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group" ng-show="userCompanyDTO.company.companyType == 'EATERY'">
+                        <div class="form-group" ng-show="userCompanyDTO.company.companyType == 'EATERY'" >
                             <label class="col-lg-2 control-label">Business Type</label>
 
                             <div class="col-lg-10">
-                                <select name="companyType" class="form-control" ng-model="userCompanyDTO.company.eateryDetails.businessType" ng-options="type.name for type in businessTypes" >
+                                <select name="companyType" class="form-control"  ng-model="userCompanyDTO.company.eateryDetails.businessType" ng-options="type.name for type in businessTypes" >
                                 </select>
                             </div>
                         </div>

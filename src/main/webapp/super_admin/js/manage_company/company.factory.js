@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     app.factory('CompanyFactory', CompanyFactory);
@@ -19,5 +19,6 @@
             }
         });
     }
-
 })();
+
+

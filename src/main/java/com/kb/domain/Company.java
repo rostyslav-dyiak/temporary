@@ -21,10 +21,10 @@ public class Company extends AbstractAuditingEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-	@OneToOne(mappedBy = "eatery")
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "eatery")
 	private EateryDetails eateryDetails;
 
-	@OneToOne(mappedBy = "supplier")
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "supplier")
 	private SupplierDetails supplierDetails;
 
     @Column(name = "name")
@@ -55,7 +55,7 @@ public class Company extends AbstractAuditingEntity implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
     private Set<Contact> contacts = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "logo_id")
     private Picture logo;
 
