@@ -37,7 +37,7 @@
 
         function save(outlet) {
             outlet.company = {id: companyId};
-            OutletsFactory.save(outlet,
+            OutletsFactory.update(outlet,
                 function (data) {
                     console.log('Saved ' + data.id)
                 }, function (e) {

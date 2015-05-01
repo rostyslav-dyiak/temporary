@@ -146,6 +146,7 @@
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
+                                        'js/manage_company/company.users.factory.js',
                                         'js/manage_company/company.factory.js',
                                         'js/manage_company/company.employees.controller.js'
                                     ]);

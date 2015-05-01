@@ -9,7 +9,7 @@
                     <label class="col-lg-2 control-label">Salutation</label>
 
                     <div class="col-lg-10">
-                        <select class="form-control" ng-model="teamMember.contactPerson">
+                        <select class="form-control" ng-model="teamMember.userDTO.salutation">
                             <option value="Mr" ng-selected="teamMember.userDTO.salutation == 'Mr'">
                                 Mr
                             </option>
@@ -61,10 +61,10 @@
 
                     <div class="col-lg-10">
                         <select class="form-control" ng-model="teamMember.userDTO.role">
-                            <option value="ROLE_SUPPLIER_ADMIN" value="ROLE_SUPPLIER_ADMIN"">
+                            <option value="ROLE_SUPPLIER_ADMIN" value="ROLE_SUPPLIER_ADMIN">
                                 Company Admin
                             </option>
-                            <option value="ROLE_SUPPLIER" value="ROLE_SUPPLIER"">
+                            <option value="ROLE_SUPPLIER" value="ROLE_SUPPLIER">
                                 Normal User
                             </option>
                         </select>

@@ -4,14 +4,16 @@ import com.kb.converter.AbstractConverter;
 import com.kb.domain.User;
 import com.kb.web.rest.dto.UserCompanyDTO;
 import com.kb.web.rest.dto.UserDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserConverter extends AbstractConverter<User, UserCompanyDTO> {
 
 	@Override
 	public UserCompanyDTO convert(User source, UserCompanyDTO target) {
-		
+
 		UserDTO userDTO = new UserDTO();
-		
+
 		userDTO.setId(source.getId());
 		userDTO.setCompany(source.getCompany());
 		userDTO.setEmail(source.getEmail());
@@ -25,19 +27,19 @@ public class UserConverter extends AbstractConverter<User, UserCompanyDTO> {
 		userDTO.setSalutation(source.getSalutation());
 		userDTO.setStatus(source.getStatus());
 		userDTO.setContactNumber(source.getContactNumber());
-		
+
 		target.setUserDTO(userDTO);
 		target.setCompany(source.getCompany());
-		
+
 		return target;
 	}
 
 	@Override
 	public UserCompanyDTO convert(User source) {
-		
+
 		UserCompanyDTO userCompanyDTO = new UserCompanyDTO();
 		UserDTO userDTO = new UserDTO();
-		
+
 		userDTO.setId(source.getId());
 		userDTO.setCompany(source.getCompany());
 		userDTO.setEmail(source.getEmail());
@@ -51,10 +53,10 @@ public class UserConverter extends AbstractConverter<User, UserCompanyDTO> {
 		userDTO.setSalutation(source.getSalutation());
 		userDTO.setStatus(source.getStatus());
 		userDTO.setContactNumber(source.getContactNumber());
-		
+
 		userCompanyDTO.setUserDTO(userDTO);
 		userCompanyDTO.setCompany(source.getCompany());
-		
+
 		return userCompanyDTO;
 	}
 

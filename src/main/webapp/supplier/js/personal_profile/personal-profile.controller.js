@@ -22,21 +22,31 @@
         activate();
 
         function activate() {
-            $scope.user = AuthServerProvider.currentUser();
+            $scope.master = angular.copy(AuthServerProvider.currentUser());
+            AuthServerProvider.updateUserInfo()
+                .then(function () {
+                    $scope.user = angular.copy(AuthServerProvider.currentUser());
+                },
+                function (e) {
+                    $scope.error = 'Please try again.';
+                    console.error(e);
+                });
         }
 
 
         function save(user) {
-            //UserFactory.save({
-            //        id: user.id
-            //    },
-            //    function (data) {
-            //        console.log(data);
-            //    }, function (e) {
-            //        console.error(e);
-            //    });
-
-            console.log("Saved type with id: " + user.id);
+            UserFactory.update($scope.user,
+                function (data) {
+                    $http.get("/api/account")
+                        .success(function (data) {
+                            AuthServerProvider.setUser(data);
+                        })
+                        .error(function (data) {
+                            console.log(data);
+                        });
+                }, function (e) {
+                    console.error(e);
+                });
         }
 
         function changePassword() {
@@ -44,7 +54,7 @@
                 oldPassword: $scope.user.currentPassword,
                 newPassword: $scope.user.newPassword
             };
-            $http.post('http://localhost:8080/api/account/change_password', data)
+            $http.post('/api/account/change_password', data)
                 .success(function (response) {
                     AuthServerProvider.login(AuthServerProvider.currentUser().email, $scope.user.newPassword)
                         .then(function () {
@@ -53,6 +63,7 @@
                         function (e) {
                             console.error(e);
                         });
+                    $scope.user = {};
                 }).error(function (response) {
                     console.log(response);
                 });

@@ -72,7 +72,6 @@
                             console.error(e);
                         });
                     $scope.user = {};
-                    console.log(response);
                 }).error(function (response) {
                     console.log(response);
                     $scope.user = {};

@@ -3,6 +3,7 @@ package com.kb.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.kb.domain.User;
 import com.kb.repository.UserRepository;
+import com.kb.security.SecurityUtils;
 import com.kb.web.rest.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,7 +63,7 @@ public class UserResource {
     @Timed
     public ResponseEntity<User> update(@RequestBody final UserDTO userDTO) {
         log.debug("REST request to update User");
-        Optional<User> optionalUser = userRepository.findOneByEmail(userDTO.getEmail());
+        Optional<User> optionalUser = userRepository.findOneByEmail(SecurityUtils.getCurrentLogin());
         if(optionalUser.isPresent()) {
             User user = optionalUser.get();
             user.setSalutation(userDTO.getSalutation());

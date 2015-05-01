@@ -1,17 +1,20 @@
 (function () {
     'use strict';
 
-    app.factory('OutletsFactory', OutletsFactory);
+    app.factory('CompanyUsersFactory', CompanyUsersFactory);
 
-    OutletsFactory
+    CompanyUsersFactory
         .$inject = [
         '$resource'
     ];
 
-    function OutletsFactory($resource) {
-        return $resource('/api/outlets/:id', {}, {
+    function CompanyUsersFactory($resource) {
+        return $resource('/api/companies/:companyId/users', {}, {
             'query': {
                 method: 'GET',
+                isArray: true
+            },
+            'get': {
                 isArray: true
             },
             'update': {
@@ -19,5 +22,6 @@
             }
         });
     }
-
 })();
+
+

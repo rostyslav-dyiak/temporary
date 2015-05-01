@@ -20,7 +20,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findAllByActivatedIsFalseAndCreatedDateBefore(DateTime dateTime);
 
-    Page<User> findByCompany(Company companym, Pageable page);
+    Page<User> findByCompany(Company company, Pageable page);
 
     Optional<User> findOneByEmail(String email);
 
