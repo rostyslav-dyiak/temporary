@@ -6,16 +6,17 @@
     CompanyProfileController
         .$inject = [
         '$scope',
+        '$http',
         'AuthServerProvider',
         'CompanyFactory'
     ];
 
-    function CompanyProfileController($scope, AuthServerProvider, CompanyFactory) {
+    function CompanyProfileController($scope,$http, AuthServerProvider, CompanyFactory) {
         var master = {};
         $scope.company = {};
 
         $scope.removePhoto = removeImage;
-        $scope.save = save;
+        $scope.update = update;
         $scope.cancel = cancel;
 
         activate();
@@ -26,13 +27,19 @@
         }
 
         function removeImage(image) {
-            console.log("Saved type with id: " + company.id);
+            console.log("Saved type with id: " + image);
         }
 
-        function save(company) {
-            CompanyFactory.save(company,
+        function update() {
+            CompanyFactory.update($scope.company,
                 function (data) {
-                    activate();
+                    $http.get("/api/account")
+                        .success(function (data) {
+                            AuthServerProvider.setUser(data);
+                        })
+                        .error(function (data) {
+                            console.log(data);
+                        });
                 }, function (e) {
                     console.log(e);
                 });

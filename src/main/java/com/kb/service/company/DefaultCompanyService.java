@@ -2,6 +2,7 @@ package com.kb.service.company;
 
 import com.kb.domain.Company;
 import com.kb.domain.EateryDetails;
+import com.kb.domain.SupplierDetails;
 import com.kb.repository.CompanyRepository;
 import com.kb.repository.EateryDetailsRepository;
 import org.springframework.data.domain.Page;
@@ -32,7 +33,7 @@ public class DefaultCompanyService implements CompanyService {
 
     @Override
     public void save(Company company) {
-        companyRepository.save(company);
+        companyRepository.save(initializeDetails(company));
     }
 
     @Override
@@ -52,4 +53,15 @@ public class DefaultCompanyService implements CompanyService {
         companyRepository.delete(id);
     }
 
+    private Company initializeDetails(Company company) {
+        EateryDetails eateryDetails = company.getEateryDetails();
+        SupplierDetails supplierDetails = company.getSupplierDetails();
+        if (eateryDetails != null && eateryDetails.getEatery() == null) {
+            eateryDetails.setEatery(company);
+        }
+        if (supplierDetails != null && supplierDetails.getSupplier() == null) {
+            supplierDetails.setSupplier(company);
+        }
+        return company;
+    }
 }

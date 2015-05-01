@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     app.factory('CompanyFactory', CompanyFactory);
@@ -9,10 +9,12 @@
     ];
 
     function CompanyFactory($resource) {
-        return $resource('/api/companies/:id', {}, {
+        return $resource('/api/users/:id', {}, {
             'query': {
                 method: 'GET',
                 isArray: true
+            }, 'update': {
+                method: 'PUT'
             }
         });
     }
