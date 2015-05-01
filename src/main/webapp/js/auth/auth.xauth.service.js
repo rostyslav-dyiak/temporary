@@ -21,7 +21,8 @@
             setUser: setUser,
             currentUserCompany: currentUserCompany,
             userRole: userRole,
-            hasRole: hasRole
+            hasRole: hasRole,
+            updateUserInfo: updateUserInfo
         };
 
         return service;
@@ -55,8 +56,9 @@
         }
 
         function currentUser() {
-            if (!user) {
-                user = localStorageService.get('user');
+            var newUser = localStorageService.get('user');
+            if (!user || user != newUser) {
+                user = newUser;
             }
             return user;
         }
@@ -67,6 +69,14 @@
 
         function userRole() {
             return currentUser().role;
+        }
+
+        function updateUserInfo() {
+            return $http.get("/api/account")
+                .success(function (data) {
+                    localStorageService.set('user', data)
+                    return data;
+                })
         }
 
         function hasRole(authorizedRoles) {

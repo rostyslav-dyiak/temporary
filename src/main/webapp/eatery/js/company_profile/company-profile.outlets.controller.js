@@ -35,9 +35,7 @@
         }
 
         function save(outlet) {
-            OutletsFactory.update({
-                    outlet: $scope.currentOutlet
-                },
+            OutletsFactory.update($scope.currentOutlet,
                 function (data) {
                     console.log(data);
                 }, function (e) {

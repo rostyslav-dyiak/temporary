@@ -178,7 +178,7 @@ public class AccountResource {
         method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.TEXT_PLAIN_VALUE)
     @Timed
-    public ResponseEntity<?> registerCompanyAndInvite(@Valid @RequestBody final SupplierInviteDTO supplierInviteDTO, final HttpServletRequest request) {
+    public ResponseEntity<?> registerCompanyAndInvite(@RequestBody final SupplierInviteDTO supplierInviteDTO, final HttpServletRequest request) {
         Salutation salutation = supplierInviteDTO.getSalutation();
         String firstName = supplierInviteDTO.getFirstName();
         String title = supplierInviteDTO.getTitle();

@@ -11,7 +11,7 @@
                             <label class="col-lg-2 control-label">Salutation</label>
 
                             <div class="col-lg-10">
-                                <select class="form-control" ng-model="teamMember.contactPerson">
+                                <select class="form-control" ng-model="teamMember.userDTO.salutation">
                                     <option value="Mr" ng-selected="teamMember.userDTO.salutation == 'Mr'">
                                         Mr
                                     </option>
@@ -94,9 +94,9 @@
 
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <button type="submit" class="btn btn-sm btn-info" ng-click="addUser()">Save
+                                <span type="submit" class="btn btn-sm btn-info" ng-click="addUser()">Save
                                     Changes
-                                </button>
+                                </span>
                                 <button class="btn btn-sm btn-danger" back-button>Cancel</button>
                             </div>
                         </div>

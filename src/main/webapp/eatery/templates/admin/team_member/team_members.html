@@ -19,7 +19,7 @@
                 <tbody>
                 <tr ng-repeat="row in teamMembers"  ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">
                     <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.userDTO.email}}</td>
-                    <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.userDTO.salutation}} {{row.name}}</td>
+                    <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.userDTO.firstName}} {{row.name}}</td>
                     <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.userDTO.title}}</td>
                     <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.userDTO.contactNumber}}</td>
                     <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.userDTO.role}}</td>

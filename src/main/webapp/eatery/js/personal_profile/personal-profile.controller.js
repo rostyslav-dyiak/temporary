@@ -26,7 +26,15 @@
 
         function activate() {
             $scope.master = angular.copy(AuthServerProvider.currentUser());
-            $scope.user = angular.copy(AuthServerProvider.currentUser());
+            AuthServerProvider.updateUserInfo()
+                .then(function () {
+                    $scope.user = angular.copy(AuthServerProvider.currentUser());
+                },
+                function (e) {
+                    $scope.error = 'Please try again.';
+                    console.error(e);
+                });
+
         }
 
 
