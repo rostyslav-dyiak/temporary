@@ -29,6 +29,7 @@
     <include file="classpath:config/liquibase/changelog/custom_added_column_title_to_user.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/custom_added_column_salutation_to_user.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/custom_added_column_contactnumber_and_status_to_user.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/change_user_passwords.xml" relativeToChangelogFile="false"/>
     <!-- JHipster will add liquibase changelogs here -->
 
     <include file="classpath:config/liquibase/changelog/data_batch.xml" relativeToChangelogFile="false"/>
