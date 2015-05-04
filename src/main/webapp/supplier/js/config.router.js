@@ -167,7 +167,7 @@ angular.module('app')
                 })
                 .state('app.companySettings.deliveryDays', {
                     url: '/profile',
-                    templateUrl: 'templates/company_settings/delivery_days.html',
+                    templateUrl: 'templates/company_settings/area_delivery.html',
                     resolve: {
                         deps: ['$ocLazyLoad',
                             function ($ocLazyLoad) {
@@ -183,7 +183,7 @@ angular.module('app')
                 })
                 .state('app.companySettings.deliveryTiming', {
                     url: '/profile',
-                    templateUrl: 'templates/company_settings/delivery_timing.html',
+                    templateUrl: 'templates/company_settings/order_timing.html',
                     resolve: {
                         deps: ['$ocLazyLoad',
                             function ($ocLazyLoad) {
