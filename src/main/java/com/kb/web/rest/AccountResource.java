@@ -8,7 +8,6 @@ import com.kb.security.SecurityUtils;
 import com.kb.service.MailService;
 import com.kb.service.UserService;
 import com.kb.service.company.CompanyService;
-import com.kb.service.company.DefaultCompanyService;
 import com.kb.web.rest.dto.CompanyUserInviteDTO;
 import com.kb.web.rest.dto.PasswordDTO;
 import com.kb.web.rest.dto.SupplierInviteDTO;
@@ -92,7 +91,7 @@ public class AccountResource {
         return userRepository.findOneByEmail(email)
             .map(user -> new ResponseEntity<>("e-mail address already in use", HttpStatus.BAD_REQUEST))
             .orElseGet(() -> {
-                companyService.saveCompanyWithEateryDetails(company);
+                companyService.save(company);
                 User user = userService.createInitialUserInformation(email, company, role);
                 String baseUrl = MessageFormat.format("{0}://{1}:{2}/{3}", request.getScheme(), request.getServerName(), Integer.toString(request.getServerPort()), "#/app/sign_up");
                 mailService.sendActivationEmail(user, baseUrl);
@@ -108,9 +107,9 @@ public class AccountResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<User> activateAccount(@RequestParam(value = "key") final String key) {
-        User user = userService.activateRegistration(key);
+        User user = userService.getUserByRegistrationKey(key);
         if (user != null) {
-            return new ResponseEntity<User>(user, HttpStatus.OK);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -209,7 +208,7 @@ public class AccountResource {
             .findOneByEmail(userDTO.getEmail().toLowerCase())
             .map(u -> {
                 UserDTO result = userService.updateUserInformation(userDTO, u.getCompany().getId());
-                return new ResponseEntity<UserDTO>(result, HttpStatus.OK);
+                return new ResponseEntity<>(result, HttpStatus.OK);
             })
             .orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
     }

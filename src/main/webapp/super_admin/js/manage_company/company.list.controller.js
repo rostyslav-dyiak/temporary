@@ -10,7 +10,7 @@
 
     function ManageCompanyListController($scope, CompanyFactory) {
         $scope.companies = {};
-
+        $scope.displayedCollection = [];
         $scope.itemsByPage = 3;
         activate();
 
@@ -18,6 +18,8 @@
             CompanyFactory.query({},
                 function (data) {
                     $scope.companies = data;
+                    $scope.displayedCollection =$scope.companies;
+
                 }, function (e) {
                     console.error(e);
                 });

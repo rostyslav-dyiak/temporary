@@ -38,8 +38,8 @@
         }
 
         function signup() {
-            $http.post('/api/account/password', $scope.user
-            ).success(function (data) {
+            $http.post('/api/account/password', $scope.user)
+                .success(function (data) {
                     AuthServerProvider.login($scope.user.email, $scope.user.password)
                         .then(function (data) {
                         }, function (e) {

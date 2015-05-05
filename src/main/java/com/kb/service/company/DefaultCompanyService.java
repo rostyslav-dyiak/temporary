@@ -18,20 +18,10 @@ import javax.transaction.Transactional;
 @Service
 public class DefaultCompanyService implements CompanyService {
     @Inject
-    private EateryDetailsRepository eateryDetailsRepository;
-    @Inject
     private CompanyRepository companyRepository;
 
     @Override
-    public void saveCompanyWithEateryDetails(Company company) {
-        EateryDetails eateryDetails = company.getEateryDetails();
-        if (eateryDetails != null) {
-            eateryDetailsRepository.save(eateryDetails);
-        }
-        companyRepository.save(company);
-    }
-
-    @Override
+    @Transactional
     public void save(Company company) {
         companyRepository.save(initializeDetails(company));
     }

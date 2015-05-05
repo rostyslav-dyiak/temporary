@@ -100,7 +100,7 @@
 
         function changeBusinessType() {
             if ($scope.userCompanyDTO.company.companyType != 'EATERY') {
-                delete $scope.userCompanyDTO.company["businessType"];
+                delete $scope.userCompanyDTO.company["eateryDetails"];
             }
         }
 

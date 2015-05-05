@@ -8,7 +8,7 @@
         <p th:text="#{email.activation.greeting(${user.login})}">
             Hi,
         </p>
-        <p th:text="#{email.activation.text1}">
+        <p >
             Welcome to KitchenBoost! We're so excited your company has given us the opportunity to work with you.
 
             Your KitchenBoost account has been created, please click on the URL below to activate it:
@@ -16,7 +16,7 @@
         <p>
             <a th:href="@{|${baseUrl}?key=${user.activationKey}|}">Activation Link</a>
         </p>
-        <p th:text="#{email.activation.text1}">
+        <p >
             Welcome again to the KitchenBoost family!
         </p>
         <p>

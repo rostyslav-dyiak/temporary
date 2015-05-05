@@ -26,8 +26,14 @@
         activate();
 
         function activate() {
-            $scope.company = AuthServerProvider.currentUserCompany();
-            console.log($scope.company);
+            AuthServerProvider.updateUserInfo()
+                .then(function () {
+                    $scope.company = angular.copy(AuthServerProvider.currentUser().company);
+                },
+                function (e) {
+                    $scope.error = 'Please try again.';
+                    console.error(e);
+                });
         }
 
         function saveCompany() {

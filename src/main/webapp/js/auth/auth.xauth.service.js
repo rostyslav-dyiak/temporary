@@ -4,8 +4,7 @@
 
     angular.module('app').factory('AuthServerProvider', AuthServerProvider);
 
-    AuthServerProvider
-        .$inject = [
+    AuthServerProvider.$inject = [
         '$http',
         'localStorageService'
     ];

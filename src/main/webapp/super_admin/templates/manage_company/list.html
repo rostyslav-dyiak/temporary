@@ -11,14 +11,14 @@
         </div>
         <div class="clearfix"></div>
         <div class="table-responsive">
-            <table st-table="rowCollectionPage" class="table table-striped text-center">
+            <table st-table="displayedCollection" st-safe-src="companies" class="table table-striped text-center">
                 <thead>
                 <tr>
-                    <th class="text-center" st-sort="companyCode">Company Code</th>
+                    <th class="text-center" >Company Code</th>
                     <th class="text-center">Logo</th>
                     <th class="text-center" st-sort="name">Name</th>
-                    <th class="text-center" st-sort="type">Type</th>
-                    <th class="text-center" st-sort="created">Created</th>
+                    <th class="text-center" st-sort="companyType">Type</th>
+                    <th class="text-center" st-sort="createdDate">Created</th>
                     <th class="text-center" st-sort="status">Status</th>
                     <th></th>
                     <th></th>
@@ -26,7 +26,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-switch="row.companyType" ng-repeat="row in companies">
+                <tr ng-switch="row.companyType" ng-repeat="row in displayedCollection">
                     <td>{{row.code}}</td>
                     <td><img class="company-logo-small" ng-src="/api/content?contentPath={{row.logo.url}}" alt="{{row.name}}"></td>
                     <td>{{row.name}}</td>

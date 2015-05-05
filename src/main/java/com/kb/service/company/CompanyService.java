@@ -9,8 +9,6 @@ import org.springframework.data.domain.Pageable;
  */
 public interface CompanyService {
 
-    public void saveCompanyWithEateryDetails(Company company);
-
     public void save(Company company);
 
     public Page<Company> findAll(Pageable page);
