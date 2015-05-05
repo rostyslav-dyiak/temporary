@@ -14,7 +14,7 @@
     ];
 
     function CompanyAddUpdateController($scope, $stateParams, $http, CompanyFactory, BusinessTypeFactory, FileUploadService) {
-        var companyId = $stateParams.id;
+        $scope.companyId = $stateParams.id;
 
         $scope.businessTypes = {};
         $scope.userCompanyDTO = {
@@ -25,13 +25,14 @@
         $scope.addCompany = addCompany;
         $scope.uploadPhoto = uploadPhoto;
         $scope.changeBusinessType = changeBusinessType;
+        $scope.deleteCompany = deleteCompany;
 
         activate();
 
         function activate() {
-            if (companyId) {
+            if ($scope.companyId) {
                 CompanyFactory.get({
-                        id: companyId
+                        id: $scope.companyId
                     },
                     function (data) {
                         $scope.userCompanyDTO.company = angular.copy(data);
@@ -48,7 +49,7 @@
         }
 
         function addCompany() {
-            if (!companyId) {
+            if (!$scope.companyId) {
                 createCompany();
             } else {
                 updateCompany();
@@ -78,6 +79,18 @@
                 });
         }
 
+        function deleteCompany() {
+            CompanyFactory.delete(
+                {id:$scope.companyId},
+                function (data) {
+                    console.log('Saved ' + data.id)
+                }, function (e) {
+                console.error(e);
+            }
+        )
+            ;
+        }
+
         function changeBusinessType() {
             if ($scope.userCompanyDTO.company.companyType != 'EATERY') {
                 delete $scope.userCompanyDTO.company["businessType"];
@@ -102,6 +115,7 @@
                 url: '/logo_placeholder.png'
             };
         }
+
 
         $scope.invitationHistory = [{
             id: 0,

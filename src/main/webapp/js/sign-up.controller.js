@@ -43,14 +43,14 @@
                     AuthServerProvider.login($scope.user.email, $scope.user.password)
                         .then(function (data) {
                         }, function (e) {
-                            $scope.error = 'Please try again.';
+                            $scope.authError = 'Please try again.';
                             console.error(e);
                         });
                     $scope.created = true;
                     $scope.user = AuthServerProvider.currentUser();
                 }).error(function (data) {
                     $scope.authError = "Check your data";
-                    console.error(e);
+                    console.error(data);
                 });
         }
     }

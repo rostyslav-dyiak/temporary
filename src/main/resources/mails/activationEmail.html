@@ -6,19 +6,23 @@
     </head>
     <body>
         <p th:text="#{email.activation.greeting(${user.login})}">
-            Dear
+            Hi,
         </p>
         <p th:text="#{email.activation.text1}">
-            Your JHipster account has been created, please click on the URL below to activate it:
+            Welcome to KitchenBoost! We're so excited your company has given us the opportunity to work with you.
+
+            Your KitchenBoost account has been created, please click on the URL below to activate it:
         </p>
         <p>
-            <a th:href="@{|${baseUrl}?key=${user.activationKey}|}"
-               >Activation Link</a>
+            <a th:href="@{|${baseUrl}?key=${user.activationKey}|}">Activation Link</a>
+        </p>
+        <p th:text="#{email.activation.text1}">
+            Welcome again to the KitchenBoost family!
         </p>
         <p>
-            <span th:text="#{email.activation.text2}">Regards, </span>
+            <span th:text="#{email.activation.text2}">Cheers, </span>
             <br/>
-            <em th:text="#{email.signature}">JHipster.</em>
+            <em th:text="#{email.signature}">KitchenBoost Team.</em>
         </p>
     </body>
 </html>

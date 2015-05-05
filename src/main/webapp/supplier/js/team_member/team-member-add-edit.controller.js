@@ -15,6 +15,11 @@
     function TeamMemberAddEditController($scope, $stateParams, $http, TeamFactory, MemberFactory, AuthServerProvider) {
         var teamMemberId = $stateParams.id;
         var master = {};
+        if(teamMemberId) {
+            $scope.saveButtonText = "Save Changes";
+        }else {
+            $scope.saveButtonText = "Send Invitation";
+        }
         $scope.teamMember = {};
         $scope.outlets = {};
 
