@@ -7,23 +7,25 @@
         .$inject = [
         '$scope',
         '$http',
+        'toaster',
         'UserFactory',
-        'AuthServerProvider'
+        'AuthServerProvider',
+        'FileUploadService'
     ];
 
-    function PersonalProfileController($scope, $http, UserFactory, AuthServerProvider) {
-        $scope.master = {};
+    function PersonalProfileController($scope, $http, toaster, UserFactory, AuthServerProvider, FileUploadService) {
         $scope.user = {};
         $scope.confirmPassword = '';
+        $scope.logo = {};
 
         $scope.save = save;
-        $scope.removePhoto = removeImage;
+        $scope.uploadLogo = uploadLogo;
+        $scope.removeLogo = removeLogo;
         $scope.changePassword = changePassword;
 
         activate();
 
         function activate() {
-            $scope.master = angular.copy(AuthServerProvider.currentUser());
             AuthServerProvider.updateUserInfo()
                 .then(function () {
                     $scope.user = angular.copy(AuthServerProvider.currentUser());
@@ -34,7 +36,6 @@
                 });
 
         }
-
 
         function save() {
             UserFactory.update($scope.user,
@@ -51,6 +52,25 @@
                 }, function (e) {
                     console.error(e);
                 });
+        }
+
+        function uploadLogo(image) {
+            if ($scope.logo && image.length > 0) {
+                FileUploadService.uploadFileToUrl(image[0])
+                    .then(function (response) {
+                        $scope.user.company.logo = {
+                            title: image[0].name,
+                            url: response.data.path
+                        };
+                    });
+            }
+        }
+
+        function removeLogo() {
+            $scope.user.company.logo = {
+                title: 'logo_placeholder',
+                url: '/logo_placeholder.png'
+            };
         }
 
         function changePassword() {
@@ -74,10 +94,6 @@
                     console.log(response);
                     $scope.user = {};
                 });
-        }
-
-        function removeImage() {
-            console.log("Removed image");
         }
     }
 })();

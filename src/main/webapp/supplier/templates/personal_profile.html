@@ -52,24 +52,25 @@
                                    placeholder="Title">
                         </div>
                     </div>
-                    <label class="col-lg-2 control-label">Profile Picture</label>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Profile Picture</label>
 
-                    <div class="col-lg-10">
-                        <img id="picture" class="mc-logo image-preview" src="img/logo_placeholder.png"
-                             ng-src="{{user.picture}}"/>
+                        <div class="col-lg-10">
+                            <img ngf-thumbnail="logo[0]" class="mc-logo"
+                                 ng-src="/api/content?contentPath={{user.company.logo.url}}">
 
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default" click-selector="#upload-logo">Upload
-                                Image
-                            </button>
-                            <input id="upload-logo" type="file" file-model="picture" accept="image/*"
-                                   style="display: none;">
-                            <button type="button" class="btn btn-default" ng-click="removeImage()">Remove</button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default" ng-model="logo" ngf-select
+                                        ngf-change="uploadLogo(logo)">Upload
+                                    Image
+                                </button>
+                                <button type="button" class="btn btn-default" ng-click="removeLogo()">Remove</button>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
-                            <button type="submit" class="btn btn-sm btn-info" ng-click="save(user)">Save
+                            <button type="submit" class="btn btn-sm btn-info" ng-click="save()">Save
                             </button>
                             <button class="btn btn-sm btn-danger" back-button>Cancel</button>
                         </div>

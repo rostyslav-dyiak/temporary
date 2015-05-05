@@ -74,8 +74,7 @@ angular.module('app')
                         deps: ['$ocLazyLoad',
                             function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
-                                    'js/directives/file-model.directive.js',
-                                    'js/directives/click-selector.directive.js',
+                                    '/js/services/file-upload.service.js',
                                     'js/personal_profile/users.factory.js',
                                     'js/personal_profile/personal-profile.controller.js'
                                 ]);

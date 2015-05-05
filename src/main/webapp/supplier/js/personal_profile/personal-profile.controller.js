@@ -7,25 +7,28 @@
         .$inject = [
         '$scope',
         '$http',
+        'toaster',
         'UserFactory',
-        'AuthServerProvider'
+        'AuthServerProvider',
+        'FileUploadService'
     ];
 
-    function PersonalProfileController($scope, $http, UserFactory, AuthServerProvider) {
+    function PersonalProfileController($scope, $http, toaster, UserFactory, AuthServerProvider, FileUploadService) {
         $scope.user = {};
         $scope.confirmPassword = '';
+        $scope.logo = {};
 
         $scope.save = save;
-        $scope.removePhoto = removeImage;
+        $scope.uploadLogo = uploadLogo;
+        $scope.removeLogo = removeLogo;
         $scope.changePassword = changePassword;
 
         activate();
 
         function activate() {
-            $scope.master = angular.copy(AuthServerProvider.currentUser());
             AuthServerProvider.updateUserInfo()
                 .then(function () {
-                    $scope.user = angular.copy(AuthServerProvider.currentUser());
+                    $scope.user = AuthServerProvider.currentUser();
                 },
                 function (e) {
                     $scope.error = 'Please try again.';
@@ -34,19 +37,41 @@
         }
 
 
-        function save(user) {
+        function save() {
             UserFactory.update($scope.user,
                 function (data) {
                     $http.get("/api/account")
                         .success(function (data) {
                             AuthServerProvider.setUser(data);
+                            toaster.pop('success', 'Success', 'User has been updated');
                         })
                         .error(function (data) {
                             console.log(data);
+                            toaster.pop('error', 'Error', 'Please try again');
                         });
                 }, function (e) {
                     console.error(e);
+                    toaster.pop('error', 'Error', 'Please try again');
                 });
+        }
+
+        function uploadLogo(image) {
+            if ($scope.logo && image.length > 0) {
+                FileUploadService.uploadFileToUrl(image[0])
+                    .then(function (response) {
+                        $scope.user.company.logo = {
+                            title: image[0].name,
+                            url: response.data.path
+                        };
+                    });
+            }
+        }
+
+        function removeLogo() {
+            $scope.user.company.logo = {
+                title: 'logo_placeholder',
+                url: '/logo_placeholder.png'
+            };
         }
 
         function changePassword() {
@@ -67,10 +92,6 @@
                 }).error(function (response) {
                     console.log(response);
                 });
-        }
-
-        function removeImage() {
-            console.log("Removed image");
         }
     }
 })();
