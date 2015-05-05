@@ -1,0 +1,52 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "symbol",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Symbol",
+            "fieldNameUnderscored": "symbol",
+            "fieldInJavaBeanMethod": "Symbol",
+            "fieldValidate": true,
+            "fieldValidateRules": []
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "currency_name",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Currency_name",
+            "fieldNameUnderscored": "currency_name",
+            "fieldInJavaBeanMethod": "Currency_name",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "available",
+            "fieldType": "Boolean",
+            "fieldNameCapitalized": "Available",
+            "fieldNameUnderscored": "available",
+            "fieldInJavaBeanMethod": "Available",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "rate",
+            "fieldType": "BigDecimal",
+            "fieldNameCapitalized": "Rate",
+            "fieldNameUnderscored": "rate",
+            "fieldInJavaBeanMethod": "Rate",
+            "fieldValidate": false
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOneToMany": false,
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": false,
+    "fieldsContainBigDecimal": true,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "changelogDate": "20150505122656",
+    "pagination": "pager",
+    "validation": true
+}
