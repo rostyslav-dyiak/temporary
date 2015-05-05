@@ -1,1 +1,78 @@
-<h1>Delivery Location</h1>
+<div class="bg-light lter b-b wrapper-md">
+    <button class="btn btn-default back-button" back-button>Back</button>
+</div>
+<div class="wrapper-md" ng-controller="DeliveryLocationController">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <button class="btn btn-info btn-rounded" ng-click="addDistrict()">Add District</button>
+
+                    <ul ui-sortable="sortableOptions"
+                        class="list-group gutter list-group-lg list-group-sp types-list"
+                        ng-model="districts">
+                        <li class="list-group-item" ng-repeat="district in districts"
+                            ng-class="{selectedSortable: selectedDistrict.id == district.id}">
+                                <span class="pull-left">
+                                    <i class="fa fa-sort text-muted fa m-r-sm"></i>
+                                </span>
+
+                            <div class="clear type-name" ng-click="editDistrict(district)">
+                                {{ district.name }}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6" ng-show="selectedDistrict.id || newType">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-horizontal col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label">District Name</label>
+
+                            <input type="text" class="form-control" ng-model="selectedDistrict.name"
+                                   placeholder="District Name">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Short Description</label>
+
+                            <input type="text" class="form-control" ng-model="selectedDistrict.shortDescription"
+                                   placeholder="Short Description">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">1st 2 digits of postal code</label>
+
+                            <div class="form-group" ng-repeat="code in selectedDistrict.postalCodes track by $index">
+                                <div class=" col-xs-6">
+                                    <input type="text" class="form-control" ng-model="selectedDistrict.postalCodes[$index]"
+                                           placeholder="Code">
+                                </div>
+                                <div class="col-xs-6">
+                                    <span class="btn btn-sm btn-danger" ng-click="removePostalCode(code)">Remove</span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <button class="btn btn-sm btn-info" ng-click="addPostalCode()">Add</button>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">List of Location</label>
+
+                            <textarea class="form-control" placeholder="longDescription" rows="5"
+                                      ng-model="selectedDistrict.longDescription"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <button ng-click="removeDistrict()" class="btn btn-sm btn-danger">Delete
+                            </button>
+                            <button type="submit" ng-click="saveDistrict()" class="btn btn-sm btn-info">Save
+                            </button>
+                            <button class="btn btn-sm btn-warning" ng-click="cancel()">Revert Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

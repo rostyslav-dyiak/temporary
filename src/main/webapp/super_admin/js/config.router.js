@@ -261,7 +261,17 @@
                     })
                     .state('app.deliveryLocation', {
                         url: '/delivery_location',
-                        templateUrl: 'templates/delivery_location.html'
+                        templateUrl: 'templates/delivery_location.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/delivery_location/district.factory.js',
+                                        'js/delivery_location/delivery-location.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
                     });
             }]);
 })();
