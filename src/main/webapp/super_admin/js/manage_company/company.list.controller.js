@@ -11,7 +11,7 @@
     function ManageCompanyListController($scope, CompanyFactory) {
         $scope.companies = {};
 
-        $scope.itemsByPage = 10;
+        $scope.itemsByPage = 3;
         activate();
 
         function activate() {
