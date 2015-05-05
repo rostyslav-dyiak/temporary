@@ -216,7 +216,48 @@
                     })
                     .state('app.currency', {
                         url: '/currency',
-                        templateUrl: 'templates/currency.html'
+                        templateUrl: 'templates/currency/currency.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/currency/currency.factory.js',
+                                        'js/currency/currency.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
+                    })
+                    .state('app.currencyAdd', {
+                        url: '/currency/add',
+                        templateUrl: 'templates/currency/currency.add-edit.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/currency/currency.factory.js',
+                                        'js/currency/currency.add-edit.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
+                    })
+                    .state('app.currencyEdit', {
+                        url: '/currency/:id/edit',
+                        templateUrl: 'templates/currency/currency.add-edit.html',
+                        controller: function ($stateParams) {
+                            $stateParams.id
+                        },
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/currency/currency.factory.js',
+                                        'js/currency/currency.add-edit.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
                     })
                     .state('app.deliveryLocation', {
                         url: '/delivery_location',
