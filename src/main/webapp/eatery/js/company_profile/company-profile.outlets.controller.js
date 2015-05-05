@@ -6,17 +6,17 @@
     CompanyProfileOutletsController
         .$inject = [
         '$scope',
+        'toaster',
         'OutletsFactory',
         'OutletsCompanyFactory'
     ];
 
-    function CompanyProfileOutletsController($scope, OutletsFactory,OutletsCompanyFactory) {
+    function CompanyProfileOutletsController($scope, toaster, OutletsFactory,OutletsCompanyFactory) {
         $scope.outlets = {};
         $scope.currentOutlet = {};
 
         $scope.edit = edit;
         $scope.save = save;
-        $scope.cancel = cancel;
 
         activate();
 
@@ -38,15 +38,13 @@
             OutletsFactory.update($scope.currentOutlet,
                 function (data) {
                     console.log(data);
+                    toaster.pop('success', 'Success', 'Outlet saved');
                 }, function (e) {
                     console.error(e);
+                    toaster.pop('error', 'Error', 'Please try again');
                 });
 
             console.log("Saved type with id: " + outlet.id);
-        }
-
-        function cancel() {
-            $scope.currentOutlet = {};
         }
     }
 })();

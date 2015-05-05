@@ -8,17 +8,18 @@
         '$scope',
         '$window',
         '$http',
+        'toaster',
         'AuthServerProvider'
     ];
 
-    function SignInController($scope, $window, $http, AuthServerProvider) {
+    function SignInController($scope, $window, $http, toaster, AuthServerProvider) {
         $scope.credentials = {};
         $scope.error = '';
 
         $scope.login = login;
 
-        function login(credentials) {
-            AuthServerProvider.login(credentials.email, credentials.password)
+        function login() {
+            AuthServerProvider.login($scope.credentials.email, $scope.credentials.password)
                 .then(function () {
                     $http.get("/api/account")
                         .success(function (data) {
@@ -30,7 +31,7 @@
                         });
                 },
                 function (e) {
-                    $scope.error = 'Please try again.';
+                    toaster.pop('error', 'Login Failed', 'Email or Password is Incorrect');
                     console.error(e);
                 });
         }

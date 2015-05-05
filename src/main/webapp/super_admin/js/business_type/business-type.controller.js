@@ -6,10 +6,11 @@
     BusinessTypeController
         .$inject = [
         '$scope',
+        'toaster',
         'BusinessTypeFactory'
     ];
 
-    function BusinessTypeController($scope, BusinessTypeFactory) {
+    function BusinessTypeController($scope, toaster, BusinessTypeFactory) {
     	$scope.type = {};
     	$scope.types = [];
         $scope.saveType = saveType;
@@ -40,18 +41,20 @@
             }
         };
 
-        
+
         function saveType() {
         	BusinessTypeFactory.update({
                 id: $scope.type.id,
                 name: $scope.type.name,
                 description: $scope.type.description
             }, function (data) {
+                toaster.pop('success', 'Success', 'Business type saved');
                 activate();
             }, function (e) {
                 console.error(e);
+                toaster.pop('error', 'Error', 'Please try again');
             });
-        
+
         }
 
         function newBusinessType() {
@@ -59,15 +62,17 @@
         	$scope.newType = true;
         }
 
-        
+
         function removeType(id) {
         	BusinessTypeFactory.delete({
                     id: id
                 },
                 function () {
+                    toaster.pop('success', 'Success', 'Business type removed');
                     activate();
                 }, function (e) {
                     console.error(e);
+                    toaster.pop('error', 'Error', 'Please try again');
                 });
         }
 
@@ -80,6 +85,6 @@
         function cancel() {
         	$scope.type = {};
         }
-        
+
     }
 })();

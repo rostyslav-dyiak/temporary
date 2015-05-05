@@ -6,12 +6,13 @@
     CompanyProfileCompanyController
         .$inject = [
         '$scope',
+        'toaster',
         'AuthServerProvider',
         'CompanyFactory',
         'FileUploadService'
     ];
 
-    function CompanyProfileCompanyController($scope, AuthServerProvider, CompanyFactory, FileUploadService) {
+    function CompanyProfileCompanyController($scope, toaster, AuthServerProvider, CompanyFactory, FileUploadService) {
         $scope.company = {};
         $scope.logo = {};
         $scope.optionalImage = {};
@@ -32,9 +33,11 @@
         function saveCompany() {
             CompanyFactory.update($scope.company,
                 function (data) {
+                    toaster.pop('success', 'Success', 'Company saved');
                     activate();
                 }, function (e) {
                     console.error(e);
+                    toaster.pop('error', 'Error', 'Please try again');
                 });
         }
 

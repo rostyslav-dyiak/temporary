@@ -8,14 +8,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" type="text/css" />
   <link rel="stylesheet" href="../bower_components/animate.css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="../bower_components/angularjs-toaster/toaster.min.css" type="text/css" />
   <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css" type="text/css" />
   <link rel="stylesheet" href="../bower_components/simple-line-icons/css/simple-line-icons.css" type="text/css" />
   <link rel="stylesheet" href="../css/font.css" type="text/css" />
   <link rel="stylesheet" href="../css/app.css" type="text/css" />
 </head>
 <body ng-controller="AppCtrl">
-  <div class="app" id="app" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view></div>
+  <div class="app" id="app" ui-view></div>
 
+  <toaster-container></toaster-container>
 
   <!-- jQuery -->
   <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -28,6 +30,7 @@
   <script src="../bower_components/angular-resource/angular-resource.js"></script>
   <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
   <script src="../bower_components/angular-touch/angular-touch.js"></script>
+  <script src="../bower_components/angularjs-toaster/toaster.min.js"></script>
 
   <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="../bower_components/ngstorage/ngStorage.js"></script>

@@ -8,12 +8,13 @@
         '$scope',
         '$stateParams',
         '$http',
+        'toaster',
         'CompanyFactory',
         'BusinessTypeFactory',
         'FileUploadService'
     ];
 
-    function CompanyAddUpdateController($scope, $stateParams, $http, CompanyFactory, BusinessTypeFactory, FileUploadService) {
+    function CompanyAddUpdateController($scope, $stateParams, $http, toaster, CompanyFactory, BusinessTypeFactory, FileUploadService) {
         $scope.companyId = $stateParams.id;
 
         $scope.businessTypes = {};
@@ -63,19 +64,23 @@
             $http.post("/api/invite",
                 $scope.userCompanyDTO)
                 .success(function (data) {
-                    console.log(data)
+                    console.log(data);
+                    toaster.pop('success', 'Success', 'Company created');
                 }).
                 error(function (data) {
-                    console.log(data)
+                    console.log(data);
+                    toaster.pop('error', 'Error', 'Please try again');
                 });
         }
 
         function updateCompany() {
             CompanyFactory.update($scope.userCompanyDTO.company,
                 function (data) {
-                    console.log('Saved ' + data.id)
+                    console.log('Saved ' + data.id);
+                    toaster.pop('success', 'Success', 'Company updated');
                 }, function (e) {
                     console.error(e);
+                    toaster.pop('error', 'Error', 'Please try again');
                 });
         }
 

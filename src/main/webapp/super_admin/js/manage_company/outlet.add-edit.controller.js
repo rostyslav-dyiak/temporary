@@ -6,10 +6,11 @@
         .$inject = [
         '$scope',
         '$stateParams',
+        'toaster',
         'OutletsFactory'
     ];
 
-    function OutletsAddEditController($scope, $stateParams, OutletsFactory) {
+    function OutletsAddEditController($scope, $stateParams, toaster, OutletsFactory) {
         var outletId = $stateParams.id;
         var companyId = $stateParams.companyId;
         var master = {};
@@ -17,7 +18,6 @@
         $scope.outlet = {};
 
         $scope.save = save;
-        $scope.cancel = cancel;
 
         activate();
 
@@ -39,14 +39,12 @@
             outlet.company = {id: companyId};
             OutletsFactory.update(outlet,
                 function (data) {
-                    console.log('Saved ' + data.id)
+                    console.log('Saved ' + data.id);
+                    toaster.pop('success', 'Success', 'Outlet created');
                 }, function (e) {
                     console.error(e);
+                    toaster.pop('error', 'Error', 'Please try again');
                 });
-        }
-
-        function cancel() {
-            $scope.outlet = master;
         }
     }
 

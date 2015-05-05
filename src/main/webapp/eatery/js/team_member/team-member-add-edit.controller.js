@@ -7,12 +7,13 @@
         '$scope',
         '$stateParams',
         '$http',
+        'toaster',
         'TeamFactory',
         'MemberFactory',
         'AuthServerProvider'
     ];
 
-    function TeamMemberAddEditController($scope, $stateParams, $http, TeamFactory, MemberFactory, AuthServerProvider) {
+    function TeamMemberAddEditController($scope, $stateParams, $http, toaster, TeamFactory, MemberFactory, AuthServerProvider) {
         var teamMemberId = $stateParams.id;
         if(teamMemberId) {
             $scope.saveButtonText = "Save Changes";
@@ -51,16 +52,20 @@
                 TeamFactory.update($scope.teamMember,
                     function (data) {
                         console.log(data);
+                        toaster.pop('success', 'Success', 'Team member updated');
                     }, function (e) {
                         console.error(e);
+                        toaster.pop('error', 'Error', 'Please try again');
                     });
             }
             else{
                 TeamFactory.save($scope.teamMember,
                     function (data) {
                         console.log(data);
+                        toaster.pop('success', 'Success', 'Team member saved');
                     }, function (e) {
                         console.error(e);
+                        toaster.pop('error', 'Error', 'Please try again');
                     });
             }
         }
@@ -87,10 +92,12 @@
             $http.post("/api/invite_supplier_member",
                 $scope.supplierInviteDTO)
                 .success(function (data) {
-                    console.log(data)
+                    console.log(data);
+                    toaster.pop('success', 'Success', 'User created');
                 }).
                 error(function (data) {
-                    console.log(data)
+                    console.log(data);
+                    toaster.pop('error', 'Error', 'Please try again');
                 });
         }
 
@@ -106,9 +113,11 @@
 
             MemberFactory.update($scope.supplierInviteDTO,
                 function (data) {
-                    console.log('Saved ' + data.id)
+                    console.log('Saved ' + data.id);
+                    toaster.pop('success', 'Success', 'User updated');
                 }, function (e) {
                     console.error(e);
+                    toaster.pop('error', 'Error', 'Please try again');
                 });
         }
 

@@ -46,9 +46,11 @@
                 name: $scope.type.name,
                 description: $scope.type.description
             }, function (data) {
+                toaster.pop('success', 'Success', 'Product type saved');
                 activate();
             }, function (e) {
                 console.error(e);
+                toaster.pop('error', 'Error', 'Please try again');
             });
 
         }
@@ -64,9 +66,11 @@
                     id: id
                 },
                 function () {
+                    toaster.pop('success', 'Success', 'Product type removed');
                     activate();
                 }, function (e) {
                     console.error(e);
+                    toaster.pop('error', 'Error', 'Please try again');
                 });
         }
 

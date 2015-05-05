@@ -6,7 +6,6 @@
             <strong>Sign in to dashboard</strong>
         </div>
         <form name="loginForm" class="form-validation">
-            <div class="text-danger wrapper text-center">{{ error }}</div>
             <div class="list-group list-group-sm">
                 <div class="list-group-item">
                     <input type="email" placeholder="Email" ng-model="credentials.email" class="form-control no-border" name="email" required>
@@ -16,7 +15,7 @@
                            required>
                 </div>
             </div>
-            <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="login(credentials)" ng-disabled="!loginForm.$valid">Log in</button>
+            <button class="btn btn-lg btn-primary btn-block" ng-click="login()" ng-disabled="!loginForm.$valid" prevent-default>Log in</button>
             <div class="text-center m-t m-b"><a href="#">Forgot password?</a></div>
             <div class="line line-dashed"></div>
         </form>

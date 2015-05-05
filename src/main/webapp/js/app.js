@@ -18,7 +18,8 @@
         'pascalprecht.translate',
         'LocalStorageModule',
         'sbDateSelect',
-        'ngFileUpload'
+        'ngFileUpload',
+        'toaster'
     ]);
 
 })();
