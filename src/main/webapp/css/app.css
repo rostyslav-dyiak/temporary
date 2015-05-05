@@ -5196,6 +5196,8 @@ a.text-#000000:hover {
 /* Type screens */
 .types-list {
     margin-top: 20px;
+    height: 300px;
+    overflow: auto;
 }
 .types-list li .btn {
     margin-top: -6px;

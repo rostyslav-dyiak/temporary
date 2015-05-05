@@ -204,7 +204,18 @@
                     })
                     .state('app.paymentTerms', {
                         url: '/payment_terms',
-                        templateUrl: 'templates/payment_terms.html'
+                        templateUrl: 'templates/payment_terms.html'  ,
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        '/js/filters/range.filter.js',
+                                        'js/payment_term/payment.factory.js',
+                                        'js/payment_term/payment-term.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
                     })
                     .state('app.eateryInvitation', {
                         url: '/eatery_invitation',

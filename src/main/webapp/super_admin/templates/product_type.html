@@ -10,7 +10,8 @@
 
                     <ul ui-sortable="sortableOptions" class="list-group gutter list-group-lg list-group-sp types-list"
                         ng-model="types">
-                        <li class="list-group-item" ng-repeat="type in types" ng-class="{selectedSortable: selectedType.id == type.id}">
+                        <li class="list-group-item" ng-repeat="type in types"
+                            ng-class="{selectedSortable: selectedType.id == type.id}">
                                 <span class="pull-left">
                                     <i class="fa fa-sort text-muted fa m-r-sm"></i>
                                 </span>
