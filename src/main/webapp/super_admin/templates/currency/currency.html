@@ -1,0 +1,52 @@
+<div class="bg-light lter b-b wrapper-md clearfix" ng-controller="CurrencyController">
+    <a ui-sref="app.currencyAdd" class="btn btn-info btn-rounded pull-right">Add Currency</a>
+</div>
+<div class="wrapper-md" ng-controller="CurrencyController">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table st-table="rowCollectionPage" class="table table-striped text-center">
+                            <thead>
+                            <tr>
+                                <th class="text-center" st-sort="symbol">Currency Symbol</th>
+                                <th class="text-center" st-sort="name">Name</th>
+                                <th class="text-center" st-sort="updated">Updated</th>
+                                <th class="text-center" st-sort="available">Available</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="row in currencies">
+                                <td>{{row.symbol}}</td>
+                                <td>{{row.name}}</td>
+                                <td>{{row.updated | date}}</td>
+                                <td>{{row.available}}</td>
+                                <td>
+                                    <a ui-sref="app.currencyEdit({id: {{row.id}} })" class="btn btn-default btn-rounded">
+                                        Edit
+                                    </a>
+                                </td>
+                                <td>
+                                    <span class="btn btn-default btn-rounded" ng-click="delete(row.id)">
+                                        Delete
+                                    </span>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <div st-pagination st-items-by-page="itemsByPage" st-displayed-pages="5" class="no-margin"></div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

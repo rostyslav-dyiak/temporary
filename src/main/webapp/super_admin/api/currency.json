@@ -1,0 +1,15 @@
+[
+    {
+        "id": 1,
+        "symbol": "SGD",
+        "name": "Singapur",
+        "updated": "24/02/2014",
+        "available": true
+    }, {
+        "id": 2,
+        "symbol": "RM",
+        "name": "Singapur",
+        "updated": "24/02/2014",
+        "available": false
+    }
+]
