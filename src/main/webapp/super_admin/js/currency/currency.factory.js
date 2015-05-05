@@ -9,7 +9,7 @@
     ];
 
     function CurrencyFactory($resource) {
-        return $resource('api/currency.json', {}, {
+        return $resource('/api/currencies/:id', {}, {
             'query': {
                 method: 'GET',
                 isArray: true

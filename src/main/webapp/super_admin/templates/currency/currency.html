@@ -11,8 +11,8 @@
                             <thead>
                             <tr>
                                 <th class="text-center" st-sort="symbol">Currency Symbol</th>
-                                <th class="text-center" st-sort="name">Name</th>
-                                <th class="text-center" st-sort="updated">Updated</th>
+                                <th class="text-center" st-sort="currencyName">Name</th>
+                                <th class="text-center" st-sort="lastModifiedDate">Updated</th>
                                 <th class="text-center" st-sort="available">Available</th>
                                 <th></th>
                                 <th></th>
@@ -21,8 +21,8 @@
                             <tbody>
                             <tr ng-repeat="row in currencies">
                                 <td>{{row.symbol}}</td>
-                                <td>{{row.name}}</td>
-                                <td>{{row.updated | date}}</td>
+                                <td>{{row.currencyName}}</td>
+                                <td>{{row.lastModifiedDate | date}}</td>
                                 <td>{{row.available}}</td>
                                 <td>
                                     <a ui-sref="app.currencyEdit({id: {{row.id}} })" class="btn btn-default btn-rounded">

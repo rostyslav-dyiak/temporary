@@ -31,6 +31,7 @@
                     id: id
                 },
                 function () {
+                    activate();
                     toaster.pop('success', 'Success', 'Currency has been deleted');
                 }, function (e) {
                     console.error(e);

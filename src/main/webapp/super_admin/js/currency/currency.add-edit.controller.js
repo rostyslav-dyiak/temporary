@@ -35,14 +35,27 @@
         }
 
         function save() {
-            CurrencyFactory.save($scope.currency,
-                function (data) {
-                    $scope.currency = data;
-                    toaster.pop('success', 'Success', 'Currency has been saved');
-                }, function (e) {
-                    console.error(e);
-                    toaster.pop('error', 'Error', 'Please try again');
-                });
+
+            if (currencyId) {
+                CurrencyFactory.update($scope.currency,
+                    function (data) {
+                        $scope.currency = data;
+                        toaster.pop('success', 'Success', 'Currency has been saved');
+                    }, function (e) {
+                        console.error(e);
+                        toaster.pop('error', 'Error', 'Please try again');
+                    });
+            }
+            else{
+                CurrencyFactory.save($scope.currency,
+                    function (data) {
+                        $scope.currency = data;
+                        toaster.pop('success', 'Success', 'Currency has been saved');
+                    }, function (e) {
+                        console.error(e);
+                        toaster.pop('error', 'Error', 'Please try again');
+                    });
+            }
         }
 
         function deleteCurrency() {
