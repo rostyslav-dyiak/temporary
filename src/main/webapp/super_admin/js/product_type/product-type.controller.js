@@ -6,10 +6,11 @@
     ProductTypeController
         .$inject = [
         '$scope',
+        'toaster',
         'ProductTypeFactory'
     ];
 
-    function ProductTypeController($scope, ProductTypeFactory) {
+    function ProductTypeController($scope,toaster, ProductTypeFactory) {
         $scope.type = {};
         $scope.selectedType = {};
         $scope.types = [];

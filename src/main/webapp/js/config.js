@@ -35,10 +35,13 @@ var app =
                         return config;
                     },
                     'responseError': function (response) {
-                        if (response.status === 401 || response.status === 403) {
-                            $window.location.href = '/index.html';
+                        if ($window.location.hash != "#/app/sign_in") {
+                            if (response.status === 401 || response.status === 403) {
+                                $window.location.href = '/index.html';
+                            }
                         }
                         return $q.reject(response);
+
                     }
                 };
             }]);
