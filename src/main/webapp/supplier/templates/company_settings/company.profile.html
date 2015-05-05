@@ -50,6 +50,14 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-sm-2 control-label">Company Fax Number</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="company.supplierDetails.faxNumber" class="form-control"
+                               placeholder="Company Fax Number" required>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-2 control-label">Company Email Address</label>
 
                     <div class="col-sm-10">
@@ -123,27 +131,6 @@
                         Order and Invoice</label>
 
                     <div class="col-sm-10">
-                        <img id="companyPictures" class="mc-logo image-preview" src="img/logo_placeholder.png"
-                             ng-src="{{picture.url}}" ng-model="" ng-repeat="picture in company.supplierDetails.pictures"/>
-
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default" click-selector="#upload-optional-image">
-                                Upload
-                                Image
-                            </button>
-                            <input id="upload-optional-image" type="file" file-model="optionalImage"
-                                   accept="image/*"
-                                   style="display: none;">
-                            <button type="button" class="btn btn-default" ng-click="removeOptionalImage()">Remove
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Optional Image to Appear at Top-Right Corner of Delivery
-                        Order and Invoice</label>
-
-                    <div class="col-sm-10">
                         <img id="optionalImage" class="mc-logo image-preview" src="img/logo_placeholder.png"
                              ng-src="{{company.optionalImage}}"/>
 
@@ -165,7 +152,7 @@
                 <div class="form-group">
                     <div class="col-sm-12">
                         <button type="submit" class="btn btn-sm">View Purchase Order Template</button>
-                        <button type="submit" class="btn btn-sm btn-info" ng-click="update()">Save Changes</button>
+                        <button type="submit" class="btn btn-sm btn-info" ng-disabled="companyProfileForm.$invalid" ng-click="update()" >Save Changes</button>
                         <button class="btn btn-sm btn-danger">Revert Changes</button>
                     </div>
                 </div>

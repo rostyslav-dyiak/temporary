@@ -86,13 +86,15 @@
 
         function deleteCompany() {
             CompanyFactory.delete(
-                {id:$scope.companyId},
+                {id: $scope.companyId},
                 function (data) {
-                    console.log('Saved ' + data.id)
+                    console.log('Deleted ' + data.id)
+                    toaster.pop('success', 'Success', 'Company deleted');
                 }, function (e) {
-                console.error(e);
-            }
-        )
+                    console.error(e);
+                    toaster.pop('error', 'Error', "Company can't be removed");
+                }
+            )
             ;
         }
 
