@@ -121,6 +121,7 @@ angular.module('app')
                         deps: ['$ocLazyLoad',
                             function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
+                                    '/js/services/file-upload.service.js',
                                     'js/company_settings/company.profile.controller.js'
                                 ]);
                             }

@@ -92,18 +92,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Logo</label>
+                    <label class="col-lg-2 control-label">Logo</label>
 
-                    <div class="col-sm-10">
-                        <img id="logo" class="mc-logo image-preview" src="img/logo_placeholder.png"
-                             ng-src="{{company.logo}}"/>
+                    <div class="col-lg-10">
+                        <img ngf-thumbnail="logo[0]" class="mc-logo"
+                             ng-src="/api/content?contentPath={{company.logo.url}}">
 
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default" click-selector="#upload-logo">Upload
+                            <button type="button" class="btn btn-default" ng-model="logo" ngf-select
+                                    ngf-change="uploadLogo(logo)">Upload
                                 Image
                             </button>
-                            <input id="upload-logo" type="file" file-model="logo" accept="image/*"
-                                   style="display: none;">
                             <button type="button" class="btn btn-default" ng-click="removeLogo()">Remove</button>
                         </div>
                     </div>
@@ -127,22 +126,38 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-sm-2 control-label">Company Pictures</label>
+
+                    <div class="col-lg-10">
+                        <img class="mc-logo small selectable" ng-class="{selected: image.url == selectedPicture}" ng-repeat="image in company.supplierDetails.pictures"
+                             ng-src="/api/content?contentPath={{image.url}}" ng-click="selectPicture(image.url)">
+
+                        <div class="clearfix"></div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default" ng-model="companyPictures" ngf-select
+                                    ngf-change="uploadCompanyPictures(companyPictures)" ngf-multiple="true"
+                                    ngf-accept="'.jpg,.png,.gif'">Upload
+                                Image
+                            </button>
+                            <button type="button" class="btn btn-default" ng-click="removeCompanyPicture()">Remove
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-2 control-label">Optional Image to Appear at Top-Right Corner of Delivery
                         Order and Invoice</label>
 
-                    <div class="col-sm-10">
-                        <img id="optionalImage" class="mc-logo image-preview" src="img/logo_placeholder.png"
-                             ng-src="{{company.optionalImage}}"/>
+                    <div class="col-lg-10">
+                        <img ngf-thumbnail="optionalImage[0]" class="mc-logo"
+                             ng-src="/api/content?contentPath={{company.supplierDetails.mainPicture.url}}">
 
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default" click-selector="#upload-optional-image">
-                                Upload
+                            <button type="button" class="btn btn-default" ng-model="mainPicture" ngf-select
+                                    ngf-change="uploadMainPicture(mainPicture)">Upload
                                 Image
                             </button>
-                            <input id="upload-optional-image" type="file" file-model="optionalImage"
-                                   accept="image/*"
-                                   style="display: none;">
-                            <button type="button" class="btn btn-default" ng-click="removeOptionalImage()">Remove
+                            <button type="button" class="btn btn-default" ng-click="removeMainPicture()">Remove
                             </button>
                         </div>
                     </div>
@@ -153,7 +168,7 @@
                     <div class="col-sm-12">
                         <button type="submit" class="btn btn-sm">View Purchase Order Template</button>
                         <button type="submit" class="btn btn-sm btn-info" ng-disabled="companyProfileForm.$invalid" ng-click="update()" >Save Changes</button>
-                        <button class="btn btn-sm btn-danger">Revert Changes</button>
+                        <button class="btn btn-sm btn-danger" back-button="">Revert Changes</button>
                     </div>
                 </div>
             </form>

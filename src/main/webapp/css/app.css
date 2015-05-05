@@ -5172,8 +5172,11 @@ a.text-#000000:hover {
 .form-horizontal .control-label {
     line-height: 1;
 }
-[ui-sref]:hover {
+[ui-sref]:hover, .selectable:hover {
     cursor: pointer;
+}
+.selectable.selected {
+    border: 2px solid #5c9ccc;
 }
 
 .additional-padding {
@@ -5191,6 +5194,10 @@ a.text-#000000:hover {
     margin: 10px;
     max-width: 120px;
     max-height: 120px;
+}
+.mc-logo.small {
+    max-width: 80px;
+    max-height: 80px;
 }
 
 /* Type screens */

@@ -96,7 +96,7 @@
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
-                                        'js/services/file-upload.service.js',
+                                        '/js/services/file-upload.service.js',
                                         'js/company_profile/company.factory.js',
                                         'js/company_profile/outlets.factory.js',
                                         'js/company_profile/outlets.company.factory.js',

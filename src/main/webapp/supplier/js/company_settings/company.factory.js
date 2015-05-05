@@ -13,7 +13,8 @@
             'query': {
                 method: 'GET',
                 isArray: true
-            }, 'update': {
+            },
+            'update': {
                 method: 'PUT'
             }
         });
