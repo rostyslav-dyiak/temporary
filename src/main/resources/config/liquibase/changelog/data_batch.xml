@@ -54,4 +54,14 @@
         <dropDefaultValue tableName="T_SUPPLIERDETAILS" columnName="created_date" columnDataType="datetime"/>
     </changeSet>
 
+    <changeSet id="data-for-currency" author="Oleh Yatskiv">
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/currency.csv"
+                  separator=";"
+                  tableName="CURRENCY">
+            <column name="created_date" type="timestamp"/>
+        </loadData>
+        <dropDefaultValue tableName="CURRENCY" columnName="created_date" columnDataType="datetime"/>
+    </changeSet>
+
 </databaseChangeLog>
