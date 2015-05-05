@@ -5,95 +5,85 @@
     </li>
     <li ui-sref-active="active">
         <a ui-sref="app.dashboard">
-            <i class="glyphicon glyphicon-dashboard text-info-dker"></i>
             <span class="font-bold">Dashboard</span>
         </a>
     </li>
     <li>
         <a ui-sref="app.overview">
-            <i class="glyphicon glyphicon-th-large text-info-dker"></i>
             <span class="font-bold">Overview</span>
         </a>
     </li>
     <li>
         <a ui-sref="app.order">
-            <i class="glyphicon glyphicon-shopping-cart text-info-dker"></i>
             <span class="font-bold">Order</span>
         </a>
     </li>
     <li>
         <a ui-sref="app.standingOrder">
-            <i class="glyphicon glyphicon-time text-info-dker"></i>
             <span class="font-bold">Standing Order</span>
         </a>
     </li>
     <li>
         <a ui-sref="app.paymentSchedule">
-            <i class="glyphicon glyphicon-credit-card text-info-dker"></i>
             <span class="font-bold">Payment Schedule</span>
         </a>
     </li>
     <li>
         <a ui-sref="app.deliverySchedule">
-            <i class="glyphicon glyphicon-road text-info-dker"></i>
             <span class="font-bold">Delivery Schedule</span>
         </a>
     </li>
     <li>
         <a ui-sref="app.customer">
-            <i class="glyphicon glyphicon-user text-info-dker"></i>
             <span class="font-bold">Customer</span>
         </a>
     </li>
     <li>
         <a ui-sref="app.inquiry">
-            <i class="glyphicon glyphicon-paperclip text-info-dker"></i>
             <span class="font-bold">Inquiry</span>
         </a>
     </li>
     <li>
         <a ui-sref="app.product">
-            <i class="glyphicon glyphicon-star text-info-dker"></i>
             <span class="font-bold">Product</span>
         </a>
     </li>
     <li>
         <a ui-sref="app.pricing">
-            <i class="glyphicon glyphicon-usd text-info-dker"></i>
             <span class="font-bold">Pricing</span>
         </a>
     </li>
-    <li>
-        <a ui-sref="app.setting">
-            <i class="glyphicon glyphicon-cog text-info-dker"></i>
-            <span class="font-bold">Setting</span>
+    <li><a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+            <span class="font-bold">Settings</span>
         </a>
+        <ul class="nav nav-sub dk">
+            <li>
+                <a ui-sref="app.companySettings">
+                    <span class="font-bold">Company Settings</span>
+                </a>
+            </li>
+            <li>
+                <a ui-sref="app.personalProfile">
+                    <span class="font-bold">Personal Profile</span>
+                </a>
+            </li>
+            <li>
+                <a ui-sref="app.teamMember">
+                    <span class="font-bold">Team Member</span>
+                </a>
+            </li>
+            <li>
+                <a ui-sref="app.activityLog">
+                    <span class="font-bold">Activity Log</span>
+                </a>
+            </li>
+        </ul>
     </li>
 
-    <li class="line dk hidden-folded"></li>
-    <li>
-        <a ui-sref="app.companySettings">
-            <i class="icon-briefcase icon"></i>
-            <span>Company Settings</span>
-        </a>
-    </li>
-    <li>
-        <a ui-sref="app.personalProfile">
-            <i class="icon-user icon"></i>
-            <span>Personal Profile</span>
-        </a>
-    </li>
-    <li>
-        <a ui-sref="app.teamMember">
-            <i class="icon-users icon"></i>
-            <span>Team Member</span>
-        </a>
-    </li>
-    <li>
-        <a ui-sref="app.activityLog">
-            <i class="icon-info icon"></i>
-            <span>Activity Log</span>
-        </a>
-    </li>
+
 </ul>
 <!-- / list -->
