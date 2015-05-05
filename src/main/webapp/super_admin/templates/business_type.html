@@ -8,9 +8,9 @@
                 <div class="panel-body">
                     <button class="btn btn-info btn-rounded" ng-click="newBusinessType()">Add New Business Type</button>
 
-                    <ul ui-sortable="sortableOptions" class="list-group gutter list-group-lg list-group-sp types-list" 
+                    <ul ui-sortable="sortableOptions" class="list-group gutter list-group-lg list-group-sp types-list"
                     	ng-model="types">
-                        <li class="list-group-item" ng-repeat="type in types">
+                        <li class="list-group-item" ng-repeat="type in types" ng-class="{selectedSortable: selectedType.id == type.id}">
                                 <span class="pull-left">
                                     <i class="fa fa-sort text-muted fa m-r-sm"></i>
                                 </span>

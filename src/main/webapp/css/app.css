@@ -5245,3 +5245,7 @@ a.text-#000000:hover {
     display: block;
     margin-bottom: 10px;
 }
+
+.selectedSortable {
+    background: #f4f4f4;
+}

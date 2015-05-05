@@ -11,6 +11,7 @@
         'ngStorage',
         'ui.router',
         'ui.bootstrap',
+        'ui.sortable',
         'ui.utils',
         'ui.load',
         'ui.jq',
