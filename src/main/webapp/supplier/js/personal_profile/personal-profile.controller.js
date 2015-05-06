@@ -14,6 +14,7 @@
     ];
 
     function PersonalProfileController($scope, $http, toaster, UserFactory, AuthServerProvider, FileUploadService) {
+        var master = {};
         $scope.user = {};
         $scope.confirmPassword = '';
         $scope.logo = {};
@@ -22,13 +23,15 @@
         $scope.uploadLogo = uploadLogo;
         $scope.removeLogo = removeLogo;
         $scope.changePassword = changePassword;
+        $scope.revert = revert;
 
         activate();
 
         function activate() {
             AuthServerProvider.updateUserInfo()
                 .then(function () {
-                    $scope.user = AuthServerProvider.currentUser();
+                    $scope.user = angular.copy(AuthServerProvider.currentUser());
+                    master = angular.copy(AuthServerProvider.currentUser());
                 },
                 function (e) {
                     $scope.error = 'Please try again.';
@@ -65,6 +68,10 @@
                         };
                     });
             }
+        }
+
+        function revert() {
+            $scope.user = master;
         }
 
         function removeLogo() {

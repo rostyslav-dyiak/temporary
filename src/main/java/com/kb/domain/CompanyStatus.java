@@ -5,5 +5,5 @@ package com.kb.domain;
  */
 public enum CompanyStatus {
 
-    ACTIVE,INACTIVE;
+    ACTIVE, INACTIVE, PENDING
 }
