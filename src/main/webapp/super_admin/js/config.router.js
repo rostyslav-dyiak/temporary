@@ -178,7 +178,49 @@
                     })
                     .state('app.publicHoliday', {
                         url: '/public_holiday',
-                        templateUrl: 'templates/public_holiday.html'
+                        templateUrl: 'templates/public_holiday/public_holiday.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/public_holiday/public-holiday.factory.js',
+                                        'js/public_holiday/public-holiday.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
+                    })
+                    .state('app.publicHolidayAdd', {
+                        url: '/public_holiday/add',
+                        templateUrl: 'templates/public_holiday/public_holiday_add_edit.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        '/js/directives/click-selector.directive.js',
+                                        'js/public_holiday/public-holiday.factory.js',
+                                        'js/public_holiday/public-holiday.add-edit.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
+                    })
+                    .state('app.publicHolidayEdit', {
+                        url: '/public_holiday/:id',
+                        templateUrl: 'templates/public_holiday/public_holiday_add_edit.html',
+                        controller: function ($stateParams) {
+                            $stateParams.id
+                        },
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/public_holiday/public-holiday.factory.js',
+                                        'js/public_holiday/public-holiday.add-edit.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
                     })
                     .state('app.systemAnnouncement', {
                         url: '/system_announcement',

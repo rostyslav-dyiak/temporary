@@ -1,0 +1,47 @@
+<div class="bg-light lter b-b wrapper-md clearfix">
+    <a ui-sref="app.publicHolidayAdd" class="btn btn-info btn-rounded pull-right">Add New Public Holiday</a>
+</div>
+<div class="wrapper-md" ng-controller="PublicHolidayController">
+    <div st-table="rowCollection" st-safe-src="holidays" class="panel panel-default">
+        <div class="row additional-padding">
+            <label class="col-sm-2 col-sm-offset-3 control-label text-right">Select a Year</label>
+
+            <div class="col-sm-3">
+                <select st-search="date" class="form-control" ng-model="selectedYear" clickSelector="#search">
+                    <option value="">All</option>
+                    <option ng-repeat="year in years" value="{{ year }}">{{ year }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped text-center">
+                <thead>
+                <tr>
+                    <th class="text-center" st-sort="date">Date</th>
+                    <th class="text-center" st-sort="description">Name</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-switch="row.companyType" ng-repeat="row in rowCollection">
+                    <td>{{row.date | date}}</td>
+                    <td>{{row.description}}</td>
+                    <td>{{row.companyType}}</td>
+                    <td>
+                        <a ui-sref="app.publicHolidayEdit({id: row.id })" class="btn btn-default btn-rounded">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr class="text-center">
+                    <td colspan="9" class="text-center">
+                        <div st-pagination class="no-margin"></div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

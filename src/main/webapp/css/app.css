@@ -5178,6 +5178,9 @@ a.text-#000000:hover {
 .selectable.selected {
     border: 2px solid #5c9ccc;
 }
+.margin-center {
+    margin: 0 auto;
+}
 
 .additional-padding {
     padding: 10px 0;

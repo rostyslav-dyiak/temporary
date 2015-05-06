@@ -34,11 +34,14 @@
                 });
         }
 
-        function openModal(dayOff) {
+        function openModal(yearly, dayOff) {
             $modal.open({
                 templateUrl: 'myModalContent.html',
                 controller: 'CompanyOffDaysCreateController',
                 resolve: {
+                    yearly: function () {
+                        return yearly;
+                    },
                     dayOff: function () {
                         return dayOff;
                     },
