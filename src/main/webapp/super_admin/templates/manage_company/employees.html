@@ -6,18 +6,18 @@
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div class="table-responsive">
-                    <table st-table="rowCollectionPage" class="table table-striped text-center">
+                    <table st-table="rowCollection" st-safe-src="employees" class="table table-striped text-center">
                         <thead>
                         <tr>
                             <th class="text-center" st-sort="email">Email Address</th>
-                            <th class="text-center" st-sort="name">Name</th>
+                            <th class="text-center" st-sort="firstName">Name</th>
                             <th class="text-center" st-sort="title">Title</th>
                             <th class="text-center" st-sort="contactNumber">Contact Number</th>
-                            <th class="text-center" st-sort="access">Access</th>
+                            <th class="text-center" st-sort="role">Access</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="row in employees">
+                        <tr ng-repeat="row in rowCollection">
                             <td>{{row.email}}</td>
                             <td>{{row.firstName}}</td>
                             <td>{{row.title}}</td>
@@ -28,7 +28,7 @@
                         <tfoot>
                         <tr>
                             <td colspan="5" class="text-center">
-                                <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="5" class="no-margin"></div>
+                                <div st-pagination class="no-margin"></div>
                             </td>
                         </tr>
                         </tfoot>

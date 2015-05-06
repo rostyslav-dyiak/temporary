@@ -14,7 +14,8 @@
 
     function CompanyOffDaysCreateController($scope, $modalInstance, dayOff, OffDayFactory, OrdersFactory) {
         $scope.dayOff = {};
-        $scope.orders = {};
+        $scope.orders = [];
+        $scope.rowCollection = [];
 
         $scope.refreshOrders = refreshOrders;
         $scope.save = save;
@@ -38,6 +39,7 @@
                 },
                 function (data) {
                     $scope.orders = data;
+                    $scope.rowCollection = data;
                 },
                 function (e) {
                     console.error(e);

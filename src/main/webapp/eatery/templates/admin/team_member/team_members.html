@@ -5,21 +5,21 @@
 <div class="wrapper-md" ng-controller="TeamMembersController">
     <div class="panel panel-default">
         <div class="table-responsive">
-            <table st-table="rowCollectionPage" class="table table-striped text-center">
+            <table st-table="rowCollection" st-safe-src="teamMembers" class="table table-striped text-center">
                 <thead>
                 <tr>
-                    <th class="text-center" st-sort="email">Email</th>
-                    <th class="text-center" st-sort="name">Name</th>
-                    <th class="text-center" st-sort="title">Title</th>
-                    <th class="text-center" st-sort="contactNumber">Contact Number</th>
-                    <th class="text-center" st-sort="access">Access</th>
-                    <th class="text-center" st-sort="status">Status</th>
+                    <th class="text-center" st-sort="userDTO.email">Email</th>
+                    <th class="text-center" st-sort="userDTO.firstName">Name</th>
+                    <th class="text-center" st-sort="userDTO.title">Title</th>
+                    <th class="text-center" st-sort="userDTO.contactNumber">Contact Number</th>
+                    <th class="text-center" st-sort="userDTO.role">Access</th>
+                    <th class="text-center" st-sort="userDTO.status">Status</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="row in teamMembers"  ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">
+                <tr ng-repeat="row in rowCollection"  ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">
                     <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.userDTO.email}}</td>
-                    <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.userDTO.firstName}} {{row.name}}</td>
+                    <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.userDTO.firstName}}</td>
                     <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.userDTO.title}}</td>
                     <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.userDTO.contactNumber}}</td>
                     <td ui-sref="app.teamMemberEdit({id: {{row.userDTO.id}} })">{{row.userDTO.role}}</td>
@@ -28,9 +28,8 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td colspan="5" class="text-center">
-                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="5"
-                             class="no-margin"></div>
+                    <td colspan="6" class="text-center">
+                        <div st-pagination class="no-margin"></div>
                     </td>
                 </tr>
                 </tfoot>

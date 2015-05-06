@@ -33,7 +33,11 @@
     <include file="classpath:config/liquibase/changelog/custom_added_column_contactnumber_and_status_to_user.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/change_user_passwords.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/custom_change_foreignkey_for_user_authorities.xml" relativeToChangelogFile="false"/>
+<<<<<<< HEAD
     <include file="classpath:config/liquibase/changelog/20150506114859_added_entity_SystemAnnouncement.xml" relativeToChangelogFile="false"/>
+=======
+    <include file="classpath:config/liquibase/changelog/custom_added_column_termType_to_PaymentTerm.xml" relativeToChangelogFile="false"/>
+>>>>>>> c0d998a73a2bb619837f2f31be9a6600b3894fac
     <!-- JHipster will add liquibase changelogs here -->
 
     <include file="classpath:config/liquibase/changelog/data_batch.xml" relativeToChangelogFile="false"/>

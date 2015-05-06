@@ -59,6 +59,7 @@
         }
 
         function createCompany() {
+            $scope.userCompanyDTO.company.status = "PENDING";
             $scope.userCompanyDTO.email = $scope.userCompanyDTO.company.email;
             $scope.userCompanyDTO.role = "ROLE_" + $scope.userCompanyDTO.company.companyType.toUpperCase() + "_ADMIN";
             $http.post("/api/invite",

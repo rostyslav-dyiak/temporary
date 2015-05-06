@@ -10,16 +10,14 @@
 
     function TeamMembersController($scope, TeamFactory) {
         $scope.teamMembers = [];
-
-        $scope.itemsByPage = 5;
-
-        $scope.companyId;
+        $scope.rowCollection = [];
 
         activate();
 
         function activate() {
             TeamFactory.query({}, function (data) {
                 $scope.teamMembers = data;
+                $scope.rowCollection = data;
             }, function (e) {
                 console.error(e);
             });

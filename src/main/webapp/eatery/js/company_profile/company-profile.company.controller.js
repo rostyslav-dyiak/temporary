@@ -13,6 +13,7 @@
     ];
 
     function CompanyProfileCompanyController($scope, toaster, AuthServerProvider, CompanyFactory, FileUploadService) {
+        var master = {};
         $scope.company = {};
         $scope.logo = {};
         $scope.optionalImage = {};
@@ -22,6 +23,7 @@
         $scope.uploadOptionalImage = uploadOptionalImage;
         $scope.removePhoto = removePhoto;
         $scope.removeOptionalImage = removeOptionalImage;
+        $scope.revert = revert;
 
         activate();
 
@@ -29,6 +31,7 @@
             AuthServerProvider.updateUserInfo()
                 .then(function () {
                     $scope.company = angular.copy(AuthServerProvider.currentUser().company);
+                    master = angular.copy(AuthServerProvider.currentUser().company);
                 },
                 function (e) {
                     $scope.error = 'Please try again.';
@@ -84,5 +87,10 @@
                 url: '/logo_placeholder.png'
             };
         }
+
+        function revert() {
+            $scope.company = master;
+        }
+
     }
 })();

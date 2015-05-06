@@ -12,6 +12,7 @@
 
     function CurrencyController($scope, toaster, CurrencyFactory) {
         $scope.currencies = [];
+        $scope.rowCollection = [];
 
         $scope.delete = deleteCurrency;
 
@@ -21,6 +22,7 @@
             CurrencyFactory.query({},
                 function (data) {
                     $scope.currencies = data;
+                    $scope.rowCollection = data;
                 }, function (e) {
                     console.error(e);
                 });

@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table st-table="rowCollectionPage" class="table table-striped text-center">
+                        <table st-table="rowCollection" st-safe-src="currencies" class="table table-striped text-center">
                             <thead>
                             <tr>
                                 <th class="text-center" st-sort="symbol">Currency Symbol</th>
@@ -19,7 +19,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="row in currencies">
+                            <tr ng-repeat="row in rowCollection">
                                 <td>{{row.symbol}}</td>
                                 <td>{{row.currencyName}}</td>
                                 <td>{{row.lastModifiedDate | date}}</td>
@@ -38,8 +38,8 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <td colspan="5" class="text-center">
-                                    <div st-pagination st-items-by-page="itemsByPage" st-displayed-pages="5" class="no-margin"></div>
+                                <td colspan="6" class="text-center">
+                                    <div st-pagination class="no-margin"></div>
                                 </td>
                             </tr>
                             </tfoot>

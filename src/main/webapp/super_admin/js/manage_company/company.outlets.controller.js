@@ -11,9 +11,8 @@
 
     function ManageCompanyOutletsController($scope, $stateParams, CompanyOutletsFactory) {
         $scope.companyId = $stateParams.companyId;
-        $scope.outlets = {};
-
-        $scope.itemsByPage = 5;
+        $scope.outlets = [];
+        $scope.rowCollection = [];
 
         activate();
         function activate() {
@@ -22,6 +21,7 @@
                 },
                 function (data) {
                     $scope.outlets = data;
+                    $scope.rowCollection = data;
                 }, function (e) {
                     console.error(e);
                 });

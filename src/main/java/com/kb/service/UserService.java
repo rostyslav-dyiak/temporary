@@ -1,9 +1,6 @@
 package com.kb.service;
 
-import com.kb.domain.Authority;
-import com.kb.domain.Company;
-import com.kb.domain.Salutation;
-import com.kb.domain.User;
+import com.kb.domain.*;
 import com.kb.repository.AuthorityRepository;
 import com.kb.repository.CompanyRepository;
 import com.kb.repository.PersistentTokenRepository;
@@ -112,10 +109,11 @@ public class UserService {
     public UserDTO updateUserInformation(UserDTO userDTO, Long companyId) {
         Company company = companyRepository.getOne(companyId);
         company.setContactNumber(userDTO.getContactNumber());
-        String encryptedPassword = passwordEncoder
-            .encode(userDTO.getPassword());
+        company.setStatus(CompanyStatus.ACTIVE);
         userRepository.findOneByEmail(userDTO.getEmail()).ifPresent(u -> {
+            String encryptedPassword = passwordEncoder.encode(userDTO.getPassword());
             u.setFirstName(userDTO.getFirstName());
+            u.setContactNumber(userDTO.getContactNumber());
             u.setPassword(encryptedPassword);
             u.setActivated(true);
             u.setActivationKey(null);

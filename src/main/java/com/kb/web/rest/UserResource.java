@@ -1,10 +1,19 @@
 package com.kb.web.rest;
 
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
 
+=======
+import com.codahale.metrics.annotation.Timed;
+import com.kb.domain.User;
+import com.kb.repository.UserRepository;
+import com.kb.security.SecurityUtils;
+import com.kb.service.company.CompanyService;
+import com.kb.web.rest.dto.UserDTO;
+>>>>>>> c0d998a73a2bb619837f2f31be9a6600b3894fac
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -34,6 +43,9 @@ public class UserResource {
     @Inject
     private UserRepository userRepository;
 
+    @Inject
+    private CompanyService companyService;
+
     /**
      * GET  /users -> get all users.
      */
@@ -60,17 +72,13 @@ public class UserResource {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    /**
-     * PUT  /users -> update user.
-     */
-    @RequestMapping(value = "/users",
+	@RequestMapping(value = "/users",
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<?> update(@RequestBody final UserDTO userDTO) {
         log.debug("REST request to update User");
         Optional<User> optionalUser = userRepository.findOneByEmail(SecurityUtils.getCurrentLogin());
-        ResponseEntity<?> entity = null;
         if(optionalUser.isPresent()) {
             User user = optionalUser.get();
             user.setSalutation(userDTO.getSalutation());
@@ -78,12 +86,10 @@ public class UserResource {
             user.setContactNumber(userDTO.getContactNumber());
             user.setTitle(userDTO.getTitle());
             user.getCompany().setLogo(userDTO.getCompany().getLogo());
-
-            entity = new ResponseEntity<User>(userRepository.save(user), HttpStatus.OK);
+            companyService.save(user.getCompany());
+            return new ResponseEntity<User>(userRepository.save(user), HttpStatus.OK);
         } else {
-        	entity = new ResponseEntity<String>("User not found", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>("User not found", HttpStatus.BAD_REQUEST);
         }
-        
-        return entity;
     }
 }

@@ -5,20 +5,22 @@
     ManageCompanyListController
         .$inject = [
         '$scope',
+        '$filter',
         'CompanyFactory'
     ];
 
-    function ManageCompanyListController($scope, CompanyFactory) {
+    function ManageCompanyListController($scope, $filter, CompanyFactory) {
         $scope.companies = {};
-        $scope.displayedCollection = [];
-        $scope.itemsByPage = 3;
+        $scope.rowCollection = {};
+        $scope.predicates = ['code', 'name'];
+
         activate();
 
         function activate() {
             CompanyFactory.query({},
                 function (data) {
                     $scope.companies = data;
-                    $scope.displayedCollection =$scope.companies;
+                    $scope.rowCollection = data;
 
                 }, function (e) {
                     console.error(e);
