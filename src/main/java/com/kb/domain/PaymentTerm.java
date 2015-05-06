@@ -10,7 +10,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "PAYMENTTERM")
-public class PaymentTerm implements Serializable {
+public class PaymentTerm extends AbstractAuditingEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

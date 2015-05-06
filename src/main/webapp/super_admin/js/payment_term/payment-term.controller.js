@@ -83,6 +83,7 @@
 
         function cancel() {
             $scope.selectedPayment = {};
+            $scope.newType = false;
         }
 
     }

@@ -6,7 +6,7 @@
 
     <property name="now" value="now()" dbms="mysql,h2"/>
     <property name="now" value="current_timestamp" dbms="postgresql"/>
-	
+
 	<changeSet id="create_date_" author="ivanursul">
 		<addColumn tableName="T_SUPPLIERDETAILS">
             <column name="created_by" type="varchar(50)">
@@ -69,7 +69,5 @@
             <column name="last_modified_date" type="timestamp"/>
 		</addColumn>
 	</changeSet>
-	
-
 
 </databaseChangeLog>

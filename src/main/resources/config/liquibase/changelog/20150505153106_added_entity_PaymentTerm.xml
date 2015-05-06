@@ -19,6 +19,20 @@
             <column name="description" type="varchar(255)"/>
             <column name="num_of_days" type="integer"/>
         </createTable>
-        
+
     </changeSet>
+
+    <changeSet id="create_date_PAYMENT_TERM" author="Oleh Yatskiv">
+        <addColumn tableName="PAYMENTTERM">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
