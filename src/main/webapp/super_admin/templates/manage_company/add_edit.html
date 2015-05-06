@@ -70,10 +70,10 @@
                                        placeholder="Contact number" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-hide="!companyId">
                             <label class="col-lg-2 control-label">Status</label>
 
-                            <div class="col-lg-10" ng-hide="companyId">
+                            <div class="col-lg-10">
                                 <div class="radio">
                                     <label class="i-checks">
                                         <input type="radio" ng-model="userCompanyDTO.company.status" name="status" value="ACTIVE">
@@ -91,10 +91,13 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <span type="submit" class="btn btn-sm btn-info" ng-disabled="form.$invalid" ng-hide="companyId" ng-click="addCompany()">Save</span>
-                                <span type="submit" class="btn btn-sm btn-info" ng-hide="!companyId" ng-click="addCompany()">Update and
-                                    Send
-                                </span>
+                                <span type="submit" class="btn btn-sm btn-info" ng-disabled="form.$invalid"
+                                      ng-show="!companyId" ng-click="addCompany()">Save</span>
+                                <span type="submit" class="btn btn-sm btn-info"
+                                      ng-show="companyId && companyStatus == 'PENDING'" ng-click="updateCompanyInfo()">Update and Send</span>
+                                <span type="submit" class="btn btn-sm btn-info"
+                                      ng-show="companyId && companyStatus != 'PENDING'"
+                                      ng-click="addCompany()">Update</span>
                                 <span class="btn btn-sm btn-danger" back-button>Cancel</span>
                                 <span class="btn btn-sm btn-danger" ng-click="deleteCompany()" ng-hide="!companyId">Delete</span>
                             </div>
