@@ -1,20 +1,26 @@
 package com.kb.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.kb.domain.User;
-import com.kb.repository.UserRepository;
-import com.kb.security.SecurityUtils;
-import com.kb.web.rest.dto.UserDTO;
+import java.util.List;
+import java.util.Optional;
+
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
-import java.util.List;
-import java.util.Optional;
+import com.codahale.metrics.annotation.Timed;
+import com.kb.domain.User;
+import com.kb.repository.UserRepository;
+import com.kb.security.SecurityUtils;
+import com.kb.web.rest.dto.UserDTO;
 
 /**
  * REST controller for managing users.
@@ -61,9 +67,10 @@ public class UserResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<User> update(@RequestBody final UserDTO userDTO) {
+    public ResponseEntity<?> update(@RequestBody final UserDTO userDTO) {
         log.debug("REST request to update User");
         Optional<User> optionalUser = userRepository.findOneByEmail(SecurityUtils.getCurrentLogin());
+        ResponseEntity<?> entity = null;
         if(optionalUser.isPresent()) {
             User user = optionalUser.get();
             user.setSalutation(userDTO.getSalutation());
@@ -71,9 +78,12 @@ public class UserResource {
             user.setContactNumber(userDTO.getContactNumber());
             user.setTitle(userDTO.getTitle());
             user.getCompany().setLogo(userDTO.getCompany().getLogo());
-            return new ResponseEntity(userRepository.save(user), HttpStatus.OK);
-        }else{
-            return new ResponseEntity("User not found", HttpStatus.BAD_REQUEST);
+
+            entity = new ResponseEntity<User>(userRepository.save(user), HttpStatus.OK);
+        } else {
+        	entity = new ResponseEntity<String>("User not found", HttpStatus.BAD_REQUEST);
         }
+        
+        return entity;
     }
 }
