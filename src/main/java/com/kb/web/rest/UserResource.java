@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.kb.domain.User;
 import com.kb.repository.UserRepository;
 import com.kb.security.SecurityUtils;
+import com.kb.service.company.CompanyService;
 import com.kb.web.rest.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,9 @@ public class UserResource {
 
     @Inject
     private UserRepository userRepository;
+
+    @Inject
+    private CompanyService companyService;
 
     /**
      * GET  /users -> get all users.
@@ -71,6 +75,7 @@ public class UserResource {
             user.setContactNumber(userDTO.getContactNumber());
             user.setTitle(userDTO.getTitle());
             user.getCompany().setLogo(userDTO.getCompany().getLogo());
+            companyService.save(user.getCompany());
             return new ResponseEntity(userRepository.save(user), HttpStatus.OK);
         }else{
             return new ResponseEntity("User not found", HttpStatus.BAD_REQUEST);

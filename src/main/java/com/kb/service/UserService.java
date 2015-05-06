@@ -116,6 +116,7 @@ public class UserService {
             .encode(userDTO.getPassword());
         userRepository.findOneByEmail(userDTO.getEmail()).ifPresent(u -> {
             u.setFirstName(userDTO.getFirstName());
+            u.setContactNumber(userDTO.getContactNumber());
             u.setPassword(encryptedPassword);
             u.setActivated(true);
             u.setActivationKey(null);

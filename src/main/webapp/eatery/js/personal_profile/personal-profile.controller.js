@@ -69,7 +69,7 @@
         function removeLogo() {
             $scope.user.company.logo = {
                 title: 'logo_placeholder',
-                url: '/logo_placeholder.png'
+                url: 'logo_placeholder.png'
             };
         }
 
