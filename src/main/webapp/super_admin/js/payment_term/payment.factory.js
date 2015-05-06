@@ -9,10 +9,13 @@
     ];
 
     function PaymentFactory($resource) {
-        return $resource('api/payment.json', {}, {
+        return $resource('/api/paymentTerms/:id', {}, {
             'query': {
                 method: 'GET',
                 isArray: true
+            },
+            'update': {
+                method: 'PUT'
             }
         });
     }

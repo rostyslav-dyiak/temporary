@@ -20,8 +20,6 @@
         $scope.editPayment = editPayment;
         $scope.addPayment = addPayment;
         $scope.removePayment = removePayment;
-        $scope.addPostalCode = addPostalCode;
-        $scope.removePostalCode = removePostalCode;
         $scope.cancel = cancel;
 
         activate();
@@ -52,9 +50,9 @@
             $scope.newType = true;
         }
 
-        function removePayment() {
+        function removePayment(id) {
             PaymentFactory.delete({
-                    id: $scope.selectedPayment.id
+                    id: id
                 },
                 function () {
                     toaster.pop('success', 'Success', 'Payment has been removed');
@@ -67,18 +65,6 @@
 
         function editPayment(payment) {
             $scope.selectedPayment = angular.copy(payment);
-        }
-
-        function addPostalCode() {
-            if(!$scope.selectedPayment.postalCodes) {
-                $scope.selectedPayment.postalCodes = [];
-            }
-            $scope.selectedPayment.postalCodes.push('');
-        }
-
-        function removePostalCode(code) {
-            var index = $scope.selectedPayment.postalCodes.indexOf(code);
-            $scope.selectedPayment.postalCodes.splice(index, 1);
         }
 
         function cancel() {

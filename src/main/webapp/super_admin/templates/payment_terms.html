@@ -21,7 +21,7 @@
                             </button>
 
                             <div class="clear type-name" ng-click="editPayment(payment)">
-                                <span ng-show="payment.type == 'MFI'">{{ payment.daysNumber }}</span> {{ payment.type }} <span ng-show="payment.type == 'NET'">{{ payment.daysNumber }}</span>
+                                <span ng-show="payment.termType == 'MFI'">{{ payment.numOfDays }}</span> {{ payment.termType }} <span ng-show="payment.termType == 'NET'">{{ payment.numOfDays }}</span>
                             </div>
                         </li>
                     </ul>
@@ -33,24 +33,24 @@
                 <div class="panel-body">
                     <form class="form-horizontal col-sm-12">
                         <div class="form-group">
-                            <label class="control-label">Short Description</label>
+                            <label class="control-label">Type of payment term</label>
 
-                            <select class="form-control" name="type" ng-model="selectedPayment.type">
+                            <select class="form-control" name="type" ng-model="selectedPayment.termType">
                                 <option ng-repeat="type in types" value="{{type}}">{{type}}</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Short Description</label>
+                            <label class="control-label">No of days</label>
 
-                            <select class="form-control" name="daysNumber" ng-model="selectedPayment.daysNumber"
+                            <select class="form-control" name="daysNumber" ng-model="selectedPayment.numOfDays"
                                     ng-options="n for n in [] | range:1:30"
-                                    ng-disabled="selectedPayment.type == 'COD' || selectedPayment.type == 'EOM'">
+                                    ng-disabled="selectedPayment.termType == 'COD' || selectedPayment.termType == 'EOM'">
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Payment Name</label>
 
-                            <input type="text" class="form-control" ng-model="selectedPayment.name"
+                            <input type="text" class="form-control" ng-model="selectedPayment.termName"
                                    placeholder="Payment Name">
                         </div>
                         <div class="form-group">

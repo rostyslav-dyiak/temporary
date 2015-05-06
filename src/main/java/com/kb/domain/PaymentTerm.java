@@ -16,6 +16,10 @@ public class PaymentTerm extends AbstractAuditingEntity implements Serializable 
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "term_type")
+    private PaymentType termType;
+
     @Column(name = "term_name")
     private String termName;
 
@@ -57,6 +61,14 @@ public class PaymentTerm extends AbstractAuditingEntity implements Serializable 
         this.numOfDays = numOfDays;
     }
 
+    public PaymentType getTermType() {
+        return termType;
+    }
+
+    public void setTermType(PaymentType termType) {
+        this.termType = termType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -68,7 +80,7 @@ public class PaymentTerm extends AbstractAuditingEntity implements Serializable 
 
         PaymentTerm paymentTerm = (PaymentTerm) o;
 
-        if ( ! Objects.equals(id, paymentTerm.id)) return false;
+        if (!Objects.equals(id, paymentTerm.id)) return false;
 
         return true;
     }
@@ -81,10 +93,10 @@ public class PaymentTerm extends AbstractAuditingEntity implements Serializable 
     @Override
     public String toString() {
         return "PaymentTerm{" +
-                "id=" + id +
-                ", termName='" + termName + "'" +
-                ", description='" + description + "'" +
-                ", numOfDays='" + numOfDays + "'" +
-                '}';
+            "id=" + id +
+            ", termName='" + termName + "'" +
+            ", description='" + description + "'" +
+            ", numOfDays='" + numOfDays + "'" +
+            '}';
     }
 }
