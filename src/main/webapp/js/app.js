@@ -20,7 +20,8 @@
         'LocalStorageModule',
         'sbDateSelect',
         'ngFileUpload',
-        'toaster'
+        'toaster',
+        'smart-table'
     ]);
 
 })();

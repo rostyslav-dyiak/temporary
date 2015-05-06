@@ -13,6 +13,7 @@
         var companyId = $stateParams.id;
 
         $scope.employees = [];
+        $scope.rowCollection = [];
 
         activate();
 
@@ -22,11 +23,10 @@
                 },
                 function (data) {
                     $scope.employees = data;
+                    $scope.rowCollection = data;
                 }, function (e) {
                     console.error(e);
                 });
         }
-
-        $scope.itemsByPage = 5;
     }
 })();

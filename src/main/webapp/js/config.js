@@ -45,5 +45,10 @@ var app =
                     }
                 };
             }]);
+        }])
+        .config(['stConfig', function(stConfig) {
+            stConfig.pagination.template = '../templates/pagination.custom.html';
+            stConfig.pagination.itemsByPage = 10;
         }]);
+
 

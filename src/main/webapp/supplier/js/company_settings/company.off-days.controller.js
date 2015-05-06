@@ -17,7 +17,7 @@
         }
         $scope.years = range;
         $scope.selectedYear = '';
-        $scope.holidays = {};
+        $scope.holidays = [];
 
         $scope.openModal = openModal;
 

@@ -12,8 +12,8 @@
 
     function CompanyPublicHolidayController($scope, AuthServerProvider, PublicHolidayFactory) {
         $scope.company = {};
-        $scope.holidays = {};
-        $scope.itemsByPage = 10;
+        $scope.holidays = [];
+        $scope.rowCollection = [];
 
         $scope.toggle = toggle;
 
@@ -24,6 +24,7 @@
             PublicHolidayFactory.query({},
                 function (data) {
                     $scope.holidays = data;
+                    $scope.rowCollection = data;
                 },
                 function (e) {
                     console.error(e);

@@ -18,16 +18,16 @@
     </div>
     <div class="clearfix"></div>
     <div class="table-responsive">
-        <table st-table="rowCollectionPage" class="table table-striped text-center">
+        <table st-table="rowCollection" st-safe-src="orders" class="table table-striped text-center">
             <thead>
             <tr>
                 <th class="text-center" st-sort="orderNumber">Order No.</th>
-                <th class="text-center" st-sort="eatery">Eatery</th>
+                <th class="text-center" st-sort="eatery.name">Eatery</th>
                 <th class="text-center" st-sort="status">Status</th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="row in orders">
+            <tr ng-repeat="row in rowCollection">
                 <td>{{row.orderNumber}}</td>
                 <td>{{row.eatery.name}}</td>
                 <td>{{row.status}}</td>
@@ -35,9 +35,8 @@
             </tbody>
             <tfoot>
             <tr>
-                <td colspan="5" class="text-center">
-                    <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"
-                         class="no-margin"></div>
+                <td colspan="3" class="text-center">
+                    <div st-pagination class="no-margin"></div>
                 </td>
             </tr>
             </tfoot>

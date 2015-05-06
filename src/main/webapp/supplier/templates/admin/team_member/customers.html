@@ -5,7 +5,7 @@
     <div class="panel panel-default">
         <p class="table-count-label">List of Customers({{ customers.length }})</p>
         <div class="table-responsive">
-            <table st-table="rowCollectionPage" class="table table-striped text-center">
+            <table st-table="rowCollection" st-safe-src="customers" class="table table-striped text-center">
                 <thead>
                 <tr>
                     <th class="text-center" st-sort="name">Name</th>
@@ -13,16 +13,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="row in customers">
+                <tr ng-repeat="row in rowCollection">
                     <td>{{row.name}}</td>
                     <td>{{row.outletsNumber}} outlets</td>
                 </tr>
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td colspan="5" class="text-center">
-                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="5"
-                             class="no-margin"></div>
+                    <td colspan="2" class="text-center">
+                        <div st-pagination class="no-margin"></div>
                     </td>
                 </tr>
                 </tfoot>

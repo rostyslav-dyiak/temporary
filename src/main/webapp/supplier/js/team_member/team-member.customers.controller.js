@@ -9,7 +9,8 @@
     ];
 
     function TeamMemberCustomersController($scope, CustomersFactory) {
-        $scope.customers = {};
+        $scope.customers = [];
+        $scope.rowCollection = [];
 
         $scope.itemsByPage = 5;
 
@@ -18,6 +19,7 @@
             CustomersFactory.get({},
                 function (data) {
                     $scope.customers = data.customers;
+                    $scope.rowCollection = data.customers;
                 }, function (e) {
                     console.error(e);
                 });
