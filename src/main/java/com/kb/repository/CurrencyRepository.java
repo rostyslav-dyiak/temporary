@@ -1,9 +1,8 @@
 package com.kb.repository;
 
-import com.kb.domain.Currency;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import com.kb.domain.Currency;
 
 /**
  * Spring Data JPA repository for the Currency entity.

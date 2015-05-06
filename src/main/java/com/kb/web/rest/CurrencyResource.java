@@ -1,10 +1,12 @@
 package com.kb.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.kb.domain.Currency;
-import com.kb.repository.CurrencyRepository;
-import com.kb.security.SecurityUtils;
-import com.kb.web.rest.util.PaginationUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -12,14 +14,17 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
+import com.codahale.metrics.annotation.Timed;
+import com.kb.domain.Currency;
+import com.kb.repository.CurrencyRepository;
+import com.kb.web.rest.util.PaginationUtil;
 
 /**
  * REST controller for managing Currency.
@@ -40,7 +45,7 @@ public class CurrencyResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Void> create(@RequestBody Currency currency) throws URISyntaxException {
+    public ResponseEntity<Void> create(@RequestBody final Currency currency) throws URISyntaxException {
         log.debug("REST request to save Currency : {}", currency);
         if (currency.getId() != null) {
             return ResponseEntity.badRequest().header("Failure", "A new currency cannot already have an ID").build();
@@ -56,7 +61,7 @@ public class CurrencyResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Void> update(@RequestBody Currency currency) throws URISyntaxException {
+    public ResponseEntity<Void> update(@RequestBody final Currency currency) throws URISyntaxException {
         log.debug("REST request to update Currency : {}", currency);
         if (currency.getId() == null) {
             return create(currency);
@@ -72,8 +77,8 @@ public class CurrencyResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Currency>> getAll(@RequestParam(value = "page" , required = false) Integer offset,
-                                  @RequestParam(value = "per_page", required = false) Integer limit)
+    public ResponseEntity<List<Currency>> getAll(@RequestParam(value = "page" , required = false) final Integer offset,
+                                  @RequestParam(value = "per_page", required = false) final Integer limit)
         throws URISyntaxException {
         Page<Currency> page = currencyRepository.findAll(PaginationUtil.generatePageRequest(offset, limit));
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/currencies", offset, limit);
@@ -87,7 +92,7 @@ public class CurrencyResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Currency> get(@PathVariable Long id) {
+    public ResponseEntity<Currency> get(@PathVariable final Long id) {
         log.debug("REST request to get Currency : {}", id);
         return Optional.ofNullable(currencyRepository.findOne(id))
             .map(currency -> new ResponseEntity<>(
@@ -103,7 +108,7 @@ public class CurrencyResource {
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable final Long id) {
         log.debug("REST request to delete Currency : {}", id);
         currencyRepository.delete(id);
     }

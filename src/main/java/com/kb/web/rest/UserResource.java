@@ -1,19 +1,10 @@
 package com.kb.web.rest;
 
-<<<<<<< HEAD
 import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
 
-=======
-import com.codahale.metrics.annotation.Timed;
-import com.kb.domain.User;
-import com.kb.repository.UserRepository;
-import com.kb.security.SecurityUtils;
-import com.kb.service.company.CompanyService;
-import com.kb.web.rest.dto.UserDTO;
->>>>>>> c0d998a73a2bb619837f2f31be9a6600b3894fac
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -29,6 +20,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.kb.domain.User;
 import com.kb.repository.UserRepository;
 import com.kb.security.SecurityUtils;
+import com.kb.service.company.CompanyService;
 import com.kb.web.rest.dto.UserDTO;
 
 /**

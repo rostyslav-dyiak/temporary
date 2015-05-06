@@ -1,10 +1,15 @@
 package com.kb.domain;
 
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * A SystemAnnouncement.
@@ -12,8 +17,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "T_SYSTEMANNOUNCEMENT")
 public class SystemAnnouncement implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -30,7 +36,7 @@ public class SystemAnnouncement implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -38,7 +44,7 @@ public class SystemAnnouncement implements Serializable {
         return assignmentType;
     }
 
-    public void setAssignmentType(String assignmentType) {
+    public void setAssignmentType(final String assignmentType) {
         this.assignmentType = assignmentType;
     }
 
@@ -46,7 +52,7 @@ public class SystemAnnouncement implements Serializable {
         return subject;
     }
 
-    public void setSubject(String subject) {
+    public void setSubject(final String subject) {
         this.subject = subject;
     }
 
@@ -54,12 +60,12 @@ public class SystemAnnouncement implements Serializable {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(final String message) {
         this.message = message;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }

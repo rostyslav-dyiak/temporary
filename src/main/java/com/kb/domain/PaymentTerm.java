@@ -1,9 +1,17 @@
 package com.kb.domain;
 
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * A PaymentTerm.
@@ -11,8 +19,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "PAYMENTTERM")
 public class PaymentTerm extends AbstractAuditingEntity implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -33,7 +42,7 @@ public class PaymentTerm extends AbstractAuditingEntity implements Serializable 
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -41,7 +50,7 @@ public class PaymentTerm extends AbstractAuditingEntity implements Serializable 
         return termName;
     }
 
-    public void setTermName(String termName) {
+    public void setTermName(final String termName) {
         this.termName = termName;
     }
 
@@ -49,7 +58,7 @@ public class PaymentTerm extends AbstractAuditingEntity implements Serializable 
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -57,7 +66,7 @@ public class PaymentTerm extends AbstractAuditingEntity implements Serializable 
         return numOfDays;
     }
 
-    public void setNumOfDays(Integer numOfDays) {
+    public void setNumOfDays(final Integer numOfDays) {
         this.numOfDays = numOfDays;
     }
 
@@ -65,12 +74,12 @@ public class PaymentTerm extends AbstractAuditingEntity implements Serializable 
         return termType;
     }
 
-    public void setTermType(PaymentType termType) {
+    public void setTermType(final PaymentType termType) {
         this.termType = termType;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }

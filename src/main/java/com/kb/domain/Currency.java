@@ -1,11 +1,16 @@
 package com.kb.domain;
 
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * A Currency.
@@ -13,8 +18,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "CURRENCY")
 public class Currency extends AbstractAuditingEntity implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -34,7 +40,7 @@ public class Currency extends AbstractAuditingEntity implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -42,7 +48,7 @@ public class Currency extends AbstractAuditingEntity implements Serializable {
         return symbol;
     }
 
-    public void setSymbol(String symbol) {
+    public void setSymbol(final String symbol) {
         this.symbol = symbol;
     }
 
@@ -50,7 +56,7 @@ public class Currency extends AbstractAuditingEntity implements Serializable {
         return currencyName;
     }
 
-    public void setCurrencyName(String currencyName) {
+    public void setCurrencyName(final String currencyName) {
         this.currencyName = currencyName;
     }
 
@@ -58,7 +64,7 @@ public class Currency extends AbstractAuditingEntity implements Serializable {
         return available;
     }
 
-    public void setAvailable(Boolean available) {
+    public void setAvailable(final Boolean available) {
         this.available = available;
     }
 
@@ -66,12 +72,12 @@ public class Currency extends AbstractAuditingEntity implements Serializable {
         return rate;
     }
 
-    public void setRate(BigDecimal rate) {
+    public void setRate(final BigDecimal rate) {
         this.rate = rate;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
