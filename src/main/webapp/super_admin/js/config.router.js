@@ -224,7 +224,50 @@
                     })
                     .state('app.systemAnnouncement', {
                         url: '/system_announcement',
-                        templateUrl: 'templates/system_announcement.html'
+                        templateUrl: 'templates/system_announcement/system_announcement.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/system_announcement/system-announcement.factory.js',
+                                        'js/system_announcement/system-announcement.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
+                    })
+                    .state('app.systemAnnouncementAdd', {
+                        url: '/system_announcement/add',
+                        templateUrl: 'templates/system_announcement/system_announcement_add_edit.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/system_announcement/user.factory.js',
+                                        'js/system_announcement/system-announcement.factory.js',
+                                        'js/system_announcement/system-announcement.add-edit.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
+                    })
+                    .state('app.systemAnnouncementEdit', {
+                        url: '/system_announcement/:id',
+                        templateUrl: 'templates/system_announcement/system_announcement_add_edit.html',
+                        controller: function ($stateParams) {
+                            $stateParams.id
+                        },
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/system_announcement/user.factory.js',
+                                        'js/system_announcement/system-announcement.factory.js',
+                                        'js/system_announcement/system-announcement.add-edit.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
                     })
                     .state('app.businessType', {
                         url: '/business_type',

@@ -9,7 +9,7 @@
     ];
 
     function PublicHolidayController($scope, PublicHolidayFactory) {
-        $scope.holidays = [];
+        $scope.announcements = [];
         $scope.rowCollection = [];
         $scope.years = [];
         $scope.selectedYear = '';
@@ -19,7 +19,7 @@
         function activate() {
             PublicHolidayFactory.query({},
                 function (data) {
-                    $scope.holidays = data;
+                    $scope.announcements = data;
                     $scope.rowCollection = data;
                     generateYears();
 
@@ -29,8 +29,8 @@
         }
 
         function generateYears() {
-            for (var i = 0; i < $scope.holidays.length; i++) {
-                var year = new Date($scope.holidays[i].date).getFullYear();
+            for (var i = 0; i < $scope.announcements.length; i++) {
+                var year = new Date($scope.announcements[i].date).getFullYear();
                 if ($scope.years.indexOf(year) < 0) {
                     $scope.years.push(year);
                 }

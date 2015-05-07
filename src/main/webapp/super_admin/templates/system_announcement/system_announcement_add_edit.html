@@ -1,0 +1,82 @@
+<div class="bg-light lter b-b wrapper-md">
+    <button class="btn btn-default back-button" back-button>Back</button>
+</div>
+<div class="wrapper-md" ng-controller="SystemAnnouncementAddUpdateController">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form name="form" class="form-horizontal col-sm-12">
+                <div class="form-group">
+                    <label class="control-label">To</label>
+
+                    <select name="type" ng-model="systemAnnouncement.assignmentType" class="form-control"
+                            required ng-change="filterUsers()">
+                        <option ng-repeat="type in assignmentTypes" value="{{type}}">{{type}}</option>
+                    </select>
+                </div>
+                <div class="form-group" ng-show="systemAnnouncement.assignmentType != 'ALL'">
+                    <div class="scroll-box">
+                        <div class="table-responsive">
+                            <table st-table="rowCollection" st-safe-src="users" st-select-mode
+                                   class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th class="text-center" st-sort="name">Name</th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <input st-search placeholder="Search" class="input-sm form-control" type="search"/>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="selectable" ng-repeat="row in rowCollection">
+                                    <td>
+                                        <div class="checkbox">
+                                            <label class="i-checks">
+                                                <input type="checkbox" ng-model="row.isNormalUser" ng-change="toggleUser(row.id)"><i></i> {{row.firstName}} {{row.lastName}}
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr class="text-center">
+                                    <td class="text-center">
+                                        <div class="checkbox">
+                                            <label class="i-checks">
+                                                <input type="checkbox" ng-model="systemAnnouncement.isNormalUser" ng-change="filterUsers()"><i></i> Normal User
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="checkbox">
+                                            <label class="i-checks">
+                                                <input type="checkbox" ng-model="systemAnnouncement.isAdmin" ng-change="filterUsers()"><i></i> Admin
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Subject</label>
+                        <input type="text" class="form-control" ng-model="systemAnnouncement.subject"
+                               placeholder="Subject">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Message</label>
+                    <textarea class="form-control" ng-model="systemAnnouncement.content" rows="5"></textarea>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" ng-click="save()" class="btn btn-sm btn-info">Send and Update</button>
+                    <button class="btn btn-sm btn-warning" back-button>Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

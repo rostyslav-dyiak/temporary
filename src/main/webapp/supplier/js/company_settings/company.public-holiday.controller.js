@@ -12,7 +12,7 @@
 
     function CompanyPublicHolidayController($scope, AuthServerProvider, PublicHolidayFactory) {
         $scope.company = {};
-        $scope.holidays = [];
+        $scope.announcements = [];
         $scope.rowCollection = [];
 
         $scope.toggle = toggle;
@@ -23,7 +23,7 @@
             $scope.company = AuthServerProvider.currentUserCompany();
             PublicHolidayFactory.query({},
                 function (data) {
-                    $scope.holidays = data;
+                    $scope.announcements = data;
                     $scope.rowCollection = data;
                 },
                 function (e) {

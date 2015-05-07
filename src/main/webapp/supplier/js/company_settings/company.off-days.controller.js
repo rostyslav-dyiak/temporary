@@ -17,7 +17,7 @@
         }
         $scope.years = range;
         $scope.selectedYear = '';
-        $scope.holidays = [];
+        $scope.announcements = [];
 
         $scope.openModal = openModal;
 
@@ -26,8 +26,8 @@
         function activate() {
             OffDayFactory.get({},
                 function (data) {
-                    $scope.holidays = data.dates;
-                    console.log($scope.holidays);
+                    $scope.announcements = data.dates;
+                    console.log($scope.announcements);
                 },
                 function (e) {
                     console.log(e);

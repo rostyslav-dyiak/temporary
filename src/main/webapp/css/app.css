@@ -5261,3 +5261,9 @@ a.text-#000000:hover {
 .selectedSortable {
     background: #f4f4f4;
 }
+
+/* System announcements */
+.scroll-box {
+    max-height: 300px;
+    overflow: auto;
+}

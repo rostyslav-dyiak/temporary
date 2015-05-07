@@ -1,0 +1,114 @@
+<div class="bg-light lter b-b wrapper-md clearfix">
+    <a ui-sref="app.systemAnnouncementAdd" class="btn btn-info btn-rounded pull-right">Make New Announcement</a>
+</div>
+<div class="wrapper-md" ng-controller="SystemAnnouncementController">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <table st-table="rowCollection" st-safe-src="announcements" st-select-mode
+                           class="table table-striped">
+                        <tbody>
+                        <tr class="selectable" ng-class="{selected: row.id == selectedAnnouncement.id}" ng-repeat="row in rowCollection" ng-click="selectAnnouncement(row)">
+                            <td>
+                                <p>TO: <span>{{row.assignmentType}}</span></p>
+
+                                <p>{{row.subject}}</p>
+                            </td>
+                            <td>
+                                <p>{{row.updateDate | date}}</p>
+                                <pre class="alert alert-info"><em class="ng-binding">{{row.viewed.length}}/{{row.sent.length}}</em> VIEW</pre>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr class="text-center">
+                            <td colspan="2" class="text-center">
+                                <div st-pagination class="no-margin"></div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6" ng-show="selectedAnnouncement.id">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-horizontal col-sm-12">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Send To:</label>
+
+                            <div class="scroll-box col-sm-10">
+                                <div class="table-responsive">
+                                    <table st-table="rowCollectionSent" st-safe-src="selectedAnnouncement.sent"
+                                           class="table table-striped text-center">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center" st-sort="firstName">Name</th>
+                                            <th class="text-center" st-sort="role">Role</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="row in rowCollectionSent">
+                                            <td>{{row.firstName}} {{row.lastName}}</td>
+                                            <td>{{row.role}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Subject:</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="selectedAnnouncement.subject"
+                                       placeholder="Subject" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Content:</label>
+
+                            <textarea class="form-control" ng-model="selectedAnnouncement.content" disabled></textarea>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" ng-click="delete()" class="btn btn-sm btn-danger">Delete</button>
+                            <a ui-sref="app.systemAnnouncementEdit({id: selectedAnnouncement.id })"
+                               class="btn btn-sm btn-info">Edit</a>
+                        </div>
+                    </form>
+
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <h5>Viewed By:</h5>
+
+                    <div class="table-responsive">
+                        <table st-table="rowCollectionViewers" st-safe-src="selectedAnnouncement.viewed"
+                               class="table table-striped text-center">
+                            <thead>
+                            <tr>
+                                <th class="text-center" st-sort="firstName">Name</th>
+                                <th class="text-center" st-sort="viewedDate">Viewed</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="row in rowCollectionViewers">
+                                <td>{{row.firstName}} {{row.lastName}}</td>
+                                <td>{{row.viewedDate | date}}</td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr class="text-center">
+                                <td colspan="9" class="text-center">
+                                    <div st-pagination class="no-margin"></div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
