@@ -246,7 +246,7 @@
                     })
                     .state('app.paymentTerms', {
                         url: '/payment_terms',
-                        templateUrl: 'templates/payment_terms.html'  ,
+                        templateUrl: 'templates/payment_terms.html',
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
@@ -263,9 +263,19 @@
                         url: '/eatery_invitation',
                         templateUrl: 'templates/eatery_invitation.html'
                     })
-                    .state('app.standingOrderConvertion', {
-                        url: '/standing_order_convertion',
-                        templateUrl: 'templates/standing_order_convertion.html'
+                    .state('app.standingOrderConversion', {
+                        url: '/standing_order_conversion',
+                        templateUrl: 'templates/standing_order_conversion.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        '/js/filters/range.filter.js',
+                                        'js/standing_order/standing-order.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
                     })
                     .state('app.currency', {
                         url: '/currency',
