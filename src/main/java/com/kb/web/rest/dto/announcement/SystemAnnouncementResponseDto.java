@@ -8,6 +8,7 @@ import com.kb.domain.AssignmentType;
 
 public class SystemAnnouncementResponseDto {
 
+	private Long id;
 	private String subject;
 	private String content;
 	private AssignmentType assignmentType;
@@ -17,6 +18,14 @@ public class SystemAnnouncementResponseDto {
 	private List<UserAnnouncementDto> viewed;
 	private List<UserAnnouncementDto> sent;
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
 	public String getSubject() {
 		return subject;
 	}
@@ -81,6 +90,7 @@ public class SystemAnnouncementResponseDto {
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result
 				+ ((createDate == null) ? 0 : createDate.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((sent == null) ? 0 : sent.hashCode());
 		result = prime * result + ((subject == null) ? 0 : subject.hashCode());
 		result = prime * result
@@ -118,6 +128,13 @@ public class SystemAnnouncementResponseDto {
 		} else if (!createDate.equals(other.createDate)) {
 			return false;
 		}
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
+			return false;
+		}
 		if (sent == null) {
 			if (other.sent != null) {
 				return false;
@@ -151,10 +168,12 @@ public class SystemAnnouncementResponseDto {
 
 	@Override
 	public String toString() {
-		return "SystemAnnouncementResponseDto [subject=" + subject
-				+ ", content=" + content + ", assignmentType=" + assignmentType
-				+ ", updateDate=" + updateDate + ", createDate=" + createDate
-				+ ", viewed=" + viewed + ", sent=" + sent + "]";
+		return "SystemAnnouncementResponseDto [id=" + id + ", subject="
+				+ subject + ", content=" + content + ", assignmentType="
+				+ assignmentType + ", updateDate=" + updateDate
+				+ ", createDate=" + createDate + ", viewed=" + viewed
+				+ ", sent=" + sent + "]";
 	}
+	
 	
 }

@@ -30,6 +30,7 @@ public class SystemAnnouncementEntityConverter extends AbstractConverter<SystemA
 		
 		target.setUpdateDate(source.getLastModifiedDate());
 		target.setCreateDate(source.getCreatedDate());
+		target.setId(source.getId());
 		
 		return target;
 	}
