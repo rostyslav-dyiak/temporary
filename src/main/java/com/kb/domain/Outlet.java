@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.kb.domain.status.OutletStatus;
+import org.springframework.cloud.cloudfoundry.com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * A Outlet.
@@ -51,10 +52,11 @@ public class Outlet extends AbstractAuditingEntity implements Serializable {
     @Column(name = "status")
     private OutletStatus status;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
-    
+
     @ManyToMany(mappedBy="outlets")
     Set<User> suppliers = new HashSet<>();
 

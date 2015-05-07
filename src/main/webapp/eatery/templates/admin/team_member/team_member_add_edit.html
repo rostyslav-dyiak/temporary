@@ -65,11 +65,10 @@
                             <div class="col-lg-10">
                                 <select class="form-control" ng-model="teamMember.userDTO.role">
                                     <option value="ROLE_EATERY_ADMIN">
-                                        Company Admin
+                                        Eatery Admin
                                     </option>
-                                    <option value="ROLE_EATERY">
-                                        Normal User
-                                    </option>
+
+                                    <option ng-repeat="outlet in outlets" value="ROLE_EATERY">{{outlet.name}}</option>
                                 </select>
                             </div>
                         </div>
