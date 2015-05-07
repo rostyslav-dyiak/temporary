@@ -39,7 +39,7 @@
         $scope.saveOrderTiming = saveOrderTiming;
 
         function saveOrderTiming() {
-            console.log("save order timing");
+            console.log('updating on server..');
         }
     }
 })();

@@ -23,7 +23,7 @@
                                 <td>{{row.symbol}}</td>
                                 <td>{{row.currencyName}}</td>
                                 <td>{{row.lastModifiedDate | date}}</td>
-                                <td>{{row.available}}</td>
+                                <td><span ng-show="row.available">Yes</span><span ng-show="!row.available">No</span></td>
                                 <td>
                                     <a ui-sref="app.currencyEdit({id: {{row.id}} })" class="btn btn-default btn-rounded">
                                         Edit

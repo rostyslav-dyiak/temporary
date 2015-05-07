@@ -15,18 +15,17 @@
     ];
 
     function CompanyAddUpdateController($scope, $stateParams, $http, toaster, CompanyFactory, BusinessTypeFactory, FileUploadService) {
+        var oldEmail = "";
         $scope.companyId = $stateParams.id;
-
+        $scope.companyStatus = "";
         $scope.businessTypes = {};
-        $scope.userCompanyDTO = {
-            company: {}
-        };
-
+        $scope.userCompanyDTO = {};
         $scope.removePhoto = removePhoto;
         $scope.addCompany = addCompany;
         $scope.uploadPhoto = uploadPhoto;
         $scope.changeBusinessType = changeBusinessType;
         $scope.deleteCompany = deleteCompany;
+        $scope.updateCompanyInfo = updateCompanyInfo;
 
         activate();
 
@@ -36,6 +35,8 @@
                         id: $scope.companyId
                     },
                     function (data) {
+                        $scope.companyStatus = data.status;
+                        oldEmail = data.email;
                         $scope.userCompanyDTO.company = angular.copy(data);
                     }, function (e) {
                         console.error(e);
@@ -74,6 +75,7 @@
                 });
         }
 
+
         function updateCompany() {
             CompanyFactory.update($scope.userCompanyDTO.company,
                 function (data) {
@@ -84,6 +86,7 @@
                     toaster.pop('error', 'Error', 'Please try again');
                 });
         }
+
 
         function deleteCompany() {
             CompanyFactory.delete(
@@ -97,6 +100,22 @@
                 }
             )
             ;
+        }
+
+        function updateCompanyInfo() {
+            $scope.userCompanyDTO.company.status = "PENDING";
+            $scope.userCompanyDTO.email = oldEmail;
+            $scope.userCompanyDTO.role = "ROLE_" + $scope.userCompanyDTO.company.companyType.toUpperCase() + "_ADMIN";
+            $http.post("/api/invite/update",
+                $scope.userCompanyDTO)
+                .success(function (data) {
+                    console.log(data);
+                    toaster.pop('success', 'Success', 'Company info updated');
+                }).
+                error(function (data) {
+                    console.log(data);
+                    toaster.pop('error', 'Error', 'Please try again');
+                });
         }
 
         function changeBusinessType() {

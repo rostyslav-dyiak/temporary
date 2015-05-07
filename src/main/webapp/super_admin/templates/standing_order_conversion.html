@@ -1,0 +1,31 @@
+<div class="bg-light lter b-b wrapper-md clearfix">
+    <button class="btn btn-default back-button pull-left" back-button>Back</button>
+</div>
+<div class="wrapper-md" ng-controller="StandingOrderController">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form name="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Hours Before Delivery Date</label>
+
+                            <div class="col-sm-5">
+                                <select class="form-control" name="numberOfHours" ng-model="numberOfHours"
+                                        ng-options="n for n in [] | range:1:24" required>
+                                </select>
+                            </div>
+                            <label class="col-sm-2 control-label text-left">HR</label>
+                        </div>
+                        <div class="form-group text-center">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button type="submit" class="btn btn-sm btn-info" ng-click="save()" ng-disabled="!form.$valid">Save</button>
+                                <span class="btn btn-sm btn-danger" back-button>Cancel</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

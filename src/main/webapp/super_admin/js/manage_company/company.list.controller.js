@@ -5,14 +5,12 @@
     ManageCompanyListController
         .$inject = [
         '$scope',
-        '$filter',
         'CompanyFactory'
     ];
 
-    function ManageCompanyListController($scope, $filter, CompanyFactory) {
-        $scope.companies = {};
-        $scope.rowCollection = {};
-        $scope.predicates = ['code', 'name'];
+    function ManageCompanyListController($scope, CompanyFactory) {
+        $scope.companies = [];
+        $scope.rowCollection = [];
 
         activate();
 

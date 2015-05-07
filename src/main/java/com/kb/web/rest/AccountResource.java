@@ -8,11 +8,7 @@ import com.kb.security.SecurityUtils;
 import com.kb.service.MailService;
 import com.kb.service.UserService;
 import com.kb.service.company.CompanyService;
-import com.kb.web.rest.dto.CompanyUserInviteDTO;
-import com.kb.web.rest.dto.PasswordDTO;
-import com.kb.web.rest.dto.SupplierInviteDTO;
-import com.kb.web.rest.dto.UserCompanyDTO;
-import com.kb.web.rest.dto.UserDTO;
+import com.kb.web.rest.dto.*;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -86,8 +82,8 @@ public class AccountResource {
     @Timed
     public ResponseEntity<?> registerCompanyAndInvite(@Valid @RequestBody final CompanyUserInviteDTO userCompanyDTO, final HttpServletRequest request) {
         String email = userCompanyDTO.getEmail();
-        Company company = userCompanyDTO.getCompany();
         String role = userCompanyDTO.getRole();
+        Company company = userCompanyDTO.getCompany();
         return userRepository.findOneByEmail(email)
             .map(user -> new ResponseEntity<>("e-mail address already in use", HttpStatus.BAD_REQUEST))
             .orElseGet(() -> {
@@ -97,6 +93,26 @@ public class AccountResource {
                 mailService.sendActivationEmail(user, baseUrl);
                 return new ResponseEntity<>(HttpStatus.CREATED);
             });
+    }
+
+    @RequestMapping(value = "/invite/update",
+        method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.TEXT_PLAIN_VALUE)
+    @Timed
+    public ResponseEntity<?> updateUserInvite(@Valid @RequestBody final CompanyUserInviteDTO userCompanyDTO, final HttpServletRequest request) {
+        String oldEmail = userCompanyDTO.getEmail();
+        Company company = userCompanyDTO.getCompany();
+        return userRepository.findOneByEmail(oldEmail)
+            .map(u -> {
+                if (company.getStatus().equals(CompanyStatus.PENDING)) {
+                    User user = userService.changeUserEmail(oldEmail, company.getEmail());
+                    String baseUrl = MessageFormat.format("{0}://{1}:{2}/{3}", request.getScheme(), request.getServerName(), Integer.toString(request.getServerPort()), "#/app/sign_up");
+                    mailService.sendActivationEmail(user, baseUrl);
+                    return new ResponseEntity<>(HttpStatus.CREATED);
+                }
+                return new ResponseEntity<>("Company status isn't pending.", HttpStatus.BAD_REQUEST);
+            })
+            .orElseGet(() -> new ResponseEntity<>("e-mail address not found", HttpStatus.BAD_REQUEST));
     }
 
     /**

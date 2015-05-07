@@ -10,14 +10,15 @@
         'toaster',
         'TeamFactory',
         'MemberFactory',
-        'AuthServerProvider'
+        'AuthServerProvider',
+        'OutletsCompanyFactory'
     ];
 
-    function TeamMemberAddEditController($scope, $stateParams, $http, toaster, TeamFactory, MemberFactory, AuthServerProvider) {
+    function TeamMemberAddEditController($scope, $stateParams, $http, toaster, TeamFactory, MemberFactory, AuthServerProvider, OutletsCompanyFactory) {
         var teamMemberId = $stateParams.id;
-        if(teamMemberId) {
+        if (teamMemberId) {
             $scope.saveButtonText = "Save Changes";
-        }else {
+        } else {
             $scope.saveButtonText = "Send Invitation";
         }
         $scope.teamMember = {};
@@ -44,6 +45,10 @@
                         console.error(e);
                     });
             }
+            OutletsCompanyFactory.query({},
+                function(data) {
+                    $scope.outlets = data;
+                });
             $scope.company = AuthServerProvider.currentUserCompany();
         }
 
@@ -58,7 +63,7 @@
                         toaster.pop('error', 'Error', 'Please try again');
                     });
             }
-            else{
+            else {
                 TeamFactory.save($scope.teamMember,
                     function (data) {
                         console.log(data);

@@ -190,6 +190,19 @@ public class UserService {
         return newUser;
     }
 
+
+    public User changeUserEmail(String oldEmail, String newEmail) {
+        Optional<User> userOptional = userRepository.findOneByEmail(oldEmail);
+        User user = userOptional.get();
+        user.setEmail(newEmail);
+        user.setActivated(false);
+        user.setActivationKey(RandomUtil.generateActivationKey());
+        userRepository.save(user);
+        log.debug("Updated activation key for User: {}", user);
+        return user;
+    }
+
+
     /**
      * Persistent Token are used for providing automatic authentication, they
      * should be automatically deleted after 30 days.
