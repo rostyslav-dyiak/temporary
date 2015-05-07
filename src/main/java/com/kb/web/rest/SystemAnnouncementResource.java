@@ -2,7 +2,6 @@ package com.kb.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -10,8 +9,6 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
-import com.kb.domain.SystemAnnouncement;
-import com.kb.repository.SystemAnnouncementRepository;
+import com.kb.service.announcement.SystemAnnouncementService;
+import com.kb.web.rest.dto.announcement.SystemAnnouncementDto;
+import com.kb.web.rest.dto.announcement.SystemAnnouncementResponseDto;
+import com.kb.web.rest.dto.announcement.SystemAnnouncementsDto;
 import com.kb.web.rest.util.PaginationUtil;
 
 /**
@@ -36,57 +35,54 @@ public class SystemAnnouncementResource {
 	private final Logger log = LoggerFactory.getLogger(SystemAnnouncementResource.class);
 
 	@Inject
-	private SystemAnnouncementRepository repository;
-
+	private SystemAnnouncementService service;
+	
 	@RequestMapping(value = "/messages", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	public ResponseEntity<Void> create(
-			@Valid @RequestBody final SystemAnnouncement systemAnnouncement)
-			throws URISyntaxException {
+	public ResponseEntity<Void> create(@Valid @RequestBody final SystemAnnouncementDto dto) throws URISyntaxException {
 		
-		log.debug("REST request to save message : {}", systemAnnouncement);
-		if (systemAnnouncement.getId() != null) {
+		log.debug("REST request to save message : {}", dto);
+		
+		if (dto.getId() != null) {
 			return ResponseEntity
 					.badRequest()
 					.header("Failure", "A new message cannot already have an ID")
 					.build();
 		}
 		
-		repository.save(systemAnnouncement);
-		return ResponseEntity.created(new URI("/api/messages/" + systemAnnouncement.getId())).build();
+		service.save(dto);
+		return ResponseEntity.created(new URI("/api/messages/" + dto.getId())).build();
 	}
 
 	@RequestMapping(value = "/messages", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public ResponseEntity<Void> update(
-			@Valid @RequestBody final SystemAnnouncement systemAnnouncement)
+			@Valid @RequestBody final SystemAnnouncementDto dto)
 			throws URISyntaxException {
-		log.debug("REST request to update message : {}",
-				systemAnnouncement);
-		if (systemAnnouncement.getId() == null) {
-			return create(systemAnnouncement);
+		log.debug("REST request to update message : {}", dto);
+		if (dto.getId() == null) {
+			return create(dto);
 		}
-		repository.save(systemAnnouncement);
+		service.save(dto);
 		return ResponseEntity.ok().build();
 	}
 
 	@RequestMapping(value = "/messages", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	public ResponseEntity<List<SystemAnnouncement>> getAll(
+	public ResponseEntity<SystemAnnouncementsDto> getAll(
 			@RequestParam(value = "page", required = false) final Integer offset,
 			@RequestParam(value = "per_page", required = false) final Integer limit)
 			throws URISyntaxException {
-		Page<SystemAnnouncement> page = repository.findAll(PaginationUtil.generatePageRequest(offset, limit));
-		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/messages", offset, limit);
-		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+		SystemAnnouncementsDto announcements = service.findAll(PaginationUtil.generatePageRequest(offset, limit));
+		return new ResponseEntity<>(announcements, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/messages/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	public ResponseEntity<SystemAnnouncement> get(@PathVariable final Long id) {
+	public ResponseEntity<SystemAnnouncementResponseDto> get(@PathVariable final Long id) {
 		log.debug("REST request to get message : {}", id);
 		return Optional
-				.ofNullable(repository.findOne(id))
+				.ofNullable(service.findOne(id))
 				.map(systemAnnouncement -> new ResponseEntity<>(
 						systemAnnouncement, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -96,6 +92,6 @@ public class SystemAnnouncementResource {
 	@Timed
 	public void delete(@PathVariable final Long id) {
 		log.debug("REST request to delete message : {}", id);
-		repository.delete(id);
+		service.delete(id);
 	}
 }

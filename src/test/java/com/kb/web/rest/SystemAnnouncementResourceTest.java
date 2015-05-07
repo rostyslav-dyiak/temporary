@@ -30,6 +30,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kb.Application;
+import com.kb.domain.AssignmentType;
 import com.kb.domain.SystemAnnouncement;
 import com.kb.repository.SystemAnnouncementRepository;
 
@@ -39,8 +40,8 @@ import com.kb.repository.SystemAnnouncementRepository;
 @IntegrationTest
 public class SystemAnnouncementResourceTest {
 
-    private static final String DEFAULT_ASSIGNMENT_TYPE = "SAMPLE_TEXT";
-    private static final String UPDATED_ASSIGNMENT_TYPE = "UPDATED_TEXT";
+    private static final AssignmentType DEFAULT_ASSIGNMENT_TYPE = AssignmentType.ALL;
+    private static final AssignmentType UPDATED_ASSIGNMENT_TYPE = AssignmentType.CUSTOM;
     private static final String DEFAULT_SUBJECT = "SAMPLE_TEXT";
     private static final String UPDATED_SUBJECT = "UPDATED_TEXT";
     private static final String DEFAULT_MESSAGE = "SAMPLE_TEXT";

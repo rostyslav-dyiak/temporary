@@ -35,6 +35,8 @@
     <include file="classpath:config/liquibase/changelog/custom_change_foreignkey_for_user_authorities.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20150506114859_added_entity_SystemAnnouncement.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/custom_added_column_termType_to_PaymentTerm.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/custom_add_column_is_admin_to_t_authority.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20150507083733_added_entity_SystemAnnouncementUser.xml" relativeToChangelogFile="false"/>
     <!-- JHipster will add liquibase changelogs here -->
 
     <include file="classpath:config/liquibase/changelog/data_batch.xml" relativeToChangelogFile="false"/>

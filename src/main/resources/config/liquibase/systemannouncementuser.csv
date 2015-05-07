@@ -1,0 +1,5 @@
+system_announcement_id;user_id;status;created_date;last_modified_date
+1;1;NEW;now();now()
+1;2;READ;now();now()
+1;3;NEW;now();now()
+1;4;NEW;now();now()

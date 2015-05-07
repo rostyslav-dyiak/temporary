@@ -1,0 +1,2 @@
+assignment_type;subject;message; is_admin; is_normal_user;created_date;last_modified_date
+SUPPLIERS;subject1;message1;true;true;now();now()

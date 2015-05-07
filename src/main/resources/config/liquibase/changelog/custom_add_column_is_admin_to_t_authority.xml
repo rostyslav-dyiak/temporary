@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="add_is_admin_column_to_t_authority" author="ivanursul">
+    	<addColumn tableName="T_AUTHORITY">
+    		<column name="is_admin" type="boolean" defaultValue="false" />
+    	</addColumn>
+    	
+    	<sql>
+    		UPDATE t_authority set is_admin = true where name like '%ADMIN'
+    	</sql>
+    	<sql>
+    		UPDATE t_authority set is_admin = false where name not like '%ADMIN'
+    	</sql>
+    </changeSet>
+
+</databaseChangeLog>

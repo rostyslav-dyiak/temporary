@@ -64,4 +64,24 @@
         <dropDefaultValue tableName="CURRENCY" columnName="created_date" columnDataType="datetime"/>
     </changeSet>
 
+    <changeSet id="data-for-t_systemannouncement" author="ivanursul">
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/systemannouncement.csv"
+                  separator=";"
+                  tableName="T_SYSTEMANNOUNCEMENT">
+            <column name="created_date" type="timestamp"/>
+        </loadData>
+        <dropDefaultValue tableName="T_SYSTEMANNOUNCEMENT" columnName="created_date" columnDataType="datetime"/>
+    </changeSet>
+
+    <changeSet id="data-for-t_systemannouncementuser" author="ivanursul">
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/systemannouncementuser.csv"
+                  separator=";"
+                  tableName="T_SYSTEMANNOUNCEMENTUSER">
+            <column name="created_date" type="timestamp"/>
+        </loadData>
+        <dropDefaultValue tableName="T_SYSTEMANNOUNCEMENT" columnName="created_date" columnDataType="datetime"/>
+    </changeSet>
+
 </databaseChangeLog>

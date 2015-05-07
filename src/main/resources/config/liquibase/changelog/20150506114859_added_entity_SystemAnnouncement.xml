@@ -21,4 +21,21 @@
         </createTable>
         
     </changeSet>
+    
+    <changeSet id="added_is_admin_and_is_user_to_t_systemannouncement" author="ivanursul">
+    	<addColumn tableName="T_SYSTEMANNOUNCEMENT">
+    		<column name="is_admin" type="boolean" />
+    		<column name="is_normal_user" type="boolean" />
+    	</addColumn>
+    </changeSet>
+    
+   <changeSet id="add_date_fields_to_t_systemannouncement_table" author="ivanursul">
+		<addColumn tableName="T_SYSTEMANNOUNCEMENT">
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="timestamp"/>
+		</addColumn>    
+    </changeSet>    
+    
 </databaseChangeLog>

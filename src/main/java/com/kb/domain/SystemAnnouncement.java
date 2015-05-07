@@ -3,12 +3,14 @@ package com.kb.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -16,35 +18,44 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "T_SYSTEMANNOUNCEMENT")
-public class SystemAnnouncement implements Serializable {
+public class SystemAnnouncement extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     @Column(name = "assignment_type")
-    private String assignmentType;
+    @Enumerated(EnumType.STRING)
+    private AssignmentType assignmentType;
 
     @Column(name = "subject")
     private String subject;
 
     @Column(name = "message")
     private String message;
+    
+    @Column(name = "is_admin")
+    private Boolean isAdmin;
 
-    public Long getId() {
+    @Column(name = "is_normal_user")
+    private Boolean isNormalUser;
+    
+    @OneToMany
+    @JoinColumn(name = "system_announcement_id")
+    private Set<SystemAnnouncementUser> users;
+    
+    @Override
+	public Long getId() {
         return id;
     }
 
-    public void setId(final Long id) {
+    @Override
+	public void setId(final Long id) {
         this.id = id;
     }
 
-    public String getAssignmentType() {
+    public AssignmentType getAssignmentType() {
         return assignmentType;
     }
 
-    public void setAssignmentType(final String assignmentType) {
+    public void setAssignmentType(final AssignmentType assignmentType) {
         this.assignmentType = assignmentType;
     }
 
@@ -64,7 +75,31 @@ public class SystemAnnouncement implements Serializable {
         this.message = message;
     }
 
-    @Override
+    public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(final Boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+	public Boolean getIsNormalUser() {
+		return isNormalUser;
+	}
+
+	public void setIsNormalUser(final Boolean isNormalUser) {
+		this.isNormalUser = isNormalUser;
+	}
+
+	public Set<SystemAnnouncementUser> getUsers() {
+		return users;
+	}
+
+	public void setUsers(final Set<SystemAnnouncementUser> users) {
+		this.users = users;
+	}
+
+	@Override
     public boolean equals(final Object o) {
         if (this == o) {
             return true;
