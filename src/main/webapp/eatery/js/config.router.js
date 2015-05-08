@@ -156,6 +156,7 @@
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
                                         'js/team_member/team.factory.js',
+                                        'js/team_member/outlets.company.factory.js',
                                         'js/team_member/member.factory.js',
                                         'js/team_member/team-member-add-edit.controller.js'
                                     ]);

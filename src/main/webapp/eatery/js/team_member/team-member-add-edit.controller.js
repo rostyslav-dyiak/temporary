@@ -32,6 +32,7 @@
         $scope.addUser = addUser;
         $scope.createUser = createUser;
         $scope.updateUser = updateUser;
+        $scope.selectedRole = selectedRole;
 
         activate();
         function activate() {
@@ -93,6 +94,7 @@
             $scope.supplierInviteDTO.email = $scope.teamMember.userDTO.email;
             $scope.supplierInviteDTO.role = $scope.teamMember.userDTO.role;
             $scope.supplierInviteDTO.contactNumber = $scope.teamMember.company.contactNumber;
+            $scope.supplierInviteDTO.outlet = $scope.teamMember.userDTO.outlet;
 
             $http.post("/api/invite_supplier_member",
                 $scope.supplierInviteDTO)
@@ -115,6 +117,7 @@
             $scope.supplierInviteDTO.email = $scope.teamMember.userDTO.email;
             $scope.supplierInviteDTO.role = $scope.teamMember.userDTO.role;
             $scope.supplierInviteDTO.contactNumber = $scope.teamMember.company.contactNumber;
+            $scope.supplierInviteDTO.outlet = $scope.teamMember.userDTO.outlet;
 
             MemberFactory.update($scope.supplierInviteDTO,
                 function (data) {
@@ -124,6 +127,15 @@
                     console.error(e);
                     toaster.pop('error', 'Error', 'Please try again');
                 });
+        }
+
+        function selectedRole(){
+            if($scope.role == "ROLE_EATERY_ADMIN")
+                $scope.teamMember.userDTO.role = "ROLE_EATERY_ADMIN";
+            else{
+                $scope.teamMember.userDTO.role = "ROLE_EATERY";
+                $scope.teamMember.userDTO.outlet = $scope.outlets[$scope.role];
+            }
         }
 
     }
