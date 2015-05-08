@@ -16,6 +16,10 @@
     <include file="classpath:config/liquibase/changelog/20150424132903_added_entity_BusinessType.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20150505122656_added_entity_Currency.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20150505153106_added_entity_PaymentTerm.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20150507121919_added_entity_District.xml"
+             relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20150507123152_added_entity_Postal_Code.xml"
+             relativeToChangelogFile="false"/>
 
     <include file="classpath:config/liquibase/changelog/create-update-date.xml" relativeToChangelogFile="false"/>
 

@@ -11,6 +11,7 @@
     ];
 
     function DeliveryLocationController($scope, toaster, DistrictFactory) {
+        var master = {};
         $scope.selectedDistrict = {};
         $scope.districts = [];
 
@@ -65,6 +66,7 @@
 
         function editDistrict(district) {
             $scope.selectedDistrict = angular.copy(district);
+            master = $scope.selectedDistrict;
         }
 
         function addPostalCode() {
@@ -80,7 +82,7 @@
         }
 
         function cancel() {
-            $scope.selectedDistrict = {};
+            $scope.selectedDistrict = master;
         }
 
     }

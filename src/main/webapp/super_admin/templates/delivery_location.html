@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <label class="control-label">Short Description</label>
 
-                            <input type="text" class="form-control" ng-model="selectedDistrict.shortDescription"
+                            <input type="text" class="form-control" ng-model="selectedDistrict.description"
                                    placeholder="Short Description">
                         </div>
                         <div class="form-group">
@@ -46,7 +46,8 @@
 
                             <div class="form-group" ng-repeat="code in selectedDistrict.postalCodes track by $index">
                                 <div class=" col-xs-6">
-                                    <input type="text" class="form-control" ng-model="selectedDistrict.postalCodes[$index]"
+                                    <input type="text" class="form-control"
+                                           ng-model="selectedDistrict.postalCodes[$index].firstTwoDigits"
                                            placeholder="Code">
                                 </div>
                                 <div class="col-xs-6">
@@ -60,7 +61,7 @@
                             <label class="control-label">List of Location</label>
 
                             <textarea class="form-control" placeholder="longDescription" rows="5"
-                                      ng-model="selectedDistrict.longDescription"></textarea>
+                                      ng-model="selectedDistrict.locations"></textarea>
                         </div>
 
                         <div class="form-group">
