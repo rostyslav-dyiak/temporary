@@ -244,6 +244,7 @@
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
                                         'js/system_announcement/user.factory.js',
+                                        'js/system_announcement/system-announcement.user.factory.js',
                                         'js/system_announcement/system-announcement.factory.js',
                                         'js/system_announcement/system-announcement.add-edit.controller.js'
                                     ]);

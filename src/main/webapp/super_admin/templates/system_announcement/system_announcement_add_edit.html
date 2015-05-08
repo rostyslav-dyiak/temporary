@@ -10,17 +10,17 @@
 
                     <select name="type" ng-model="systemAnnouncement.assignmentType" class="form-control"
                             required ng-change="filterUsers()">
-                        <option ng-repeat="type in assignmentTypes" value="{{type}}">{{type}}</option>
+                        <option ng-repeat="(type, name) in assignmentTypes" value="{{type}}">{{name}}</option>
                     </select>
                 </div>
-                <div class="form-group" ng-show="systemAnnouncement.assignmentType != 'ALL'">
+                <div class="form-group" ng-show="systemAnnouncement.assignmentType == 'CUSTOM'">
                     <div class="scroll-box">
                         <div class="table-responsive">
                             <table st-table="rowCollection" st-safe-src="users" st-select-mode
                                    class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th class="text-center" st-sort="name">Name</th>
+                                    <th colspan="2" class="text-center" st-sort="name">Name</th>
                                 </tr>
                                 <tr>
                                     <th>
@@ -33,7 +33,7 @@
                                     <td>
                                         <div class="checkbox">
                                             <label class="i-checks">
-                                                <input type="checkbox" ng-model="row.isNormalUser" ng-change="toggleUser(row.id)"><i></i> {{row.firstName}} {{row.lastName}}
+                                                <input type="checkbox" ng-model="row.selected" ng-checked="systemAnnouncement.users.indexOf(row.id) > -1" ng-change="toggleUser(row.id)"><i></i> {{row.firstName}} {{row.lastName}}
                                             </label>
                                         </div>
                                     </td>
@@ -46,14 +46,14 @@
                                     <td class="text-center">
                                         <div class="checkbox">
                                             <label class="i-checks">
-                                                <input type="checkbox" ng-model="systemAnnouncement.isNormalUser" ng-change="filterUsers()"><i></i> Normal User
+                                                <input type="checkbox" ng-model="selectedAll" ng-checked="systemAnnouncement.users.length == users.length" ng-change="selectAll()"><i></i> Select All
                                             </label>
                                         </div>
                                     </td>
                                     <td class="text-center">
                                         <div class="checkbox">
                                             <label class="i-checks">
-                                                <input type="checkbox" ng-model="systemAnnouncement.isAdmin" ng-change="filterUsers()"><i></i> Admin
+                                                <input type="checkbox" ng-model="deselectedAll" ng-checked="systemAnnouncement.users.length == 0" ng-change="deselectAll()"><i></i> Deselect All
                                             </label>
                                         </div>
                                     </td>
@@ -63,6 +63,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group text-center">
+                    <div class="checkbox col-xs-6">
+                        <label class="i-checks">
+                            <input type="checkbox" ng-model="systemAnnouncement.isNormalUser" ng-change="filterUsers()"><i></i> Normal User
+                        </label>
+                    </div>
+                    <div class="checkbox col-xs-6">
+                        <label class="i-checks">
+                            <input type="checkbox" ng-model="systemAnnouncement.isAdmin" ng-change="filterUsers()"><i></i> Admin
+                        </label>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="control-label">Subject</label>
                         <input type="text" class="form-control" ng-model="systemAnnouncement.subject"
@@ -70,11 +82,11 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Message</label>
-                    <textarea class="form-control" ng-model="systemAnnouncement.content" rows="5"></textarea>
+                    <textarea class="form-control" ng-model="systemAnnouncement.message" rows="5"></textarea>
                 </div>
                 <div class="form-group text-center">
-                    <button type="submit" ng-click="save()" class="btn btn-sm btn-info">Send and Update</button>
-                    <button class="btn btn-sm btn-warning" back-button>Cancel</button>
+                    <button type="submit" ng-click="save()" class="btn btn-sm btn-success">Send and Update</button>
+                    <button class="btn btn-sm" back-button>Cancel</button>
                 </div>
             </form>
         </div>
