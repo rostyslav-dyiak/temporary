@@ -1,30 +1,14 @@
 package com.kb.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Email;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.Email;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * A user.
@@ -55,7 +39,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Size(max = 50)
     @Column(name = "last_name", length = 50)
     private String lastName;
-    
+
     @Size(max = 50)
     @Column(name = "contact_number", length = 50)
     private String contactNumber;
@@ -63,7 +47,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Size(max = 50)
     @Column(name = "status", length = 50)
     private String status;
-    
+
     @Email
     @Size(max = 100)
     @Column(length = 100, unique = true)
@@ -75,7 +59,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "salutation")
     @Enumerated(EnumType.STRING)
     private Salutation salutation;
-    
+
     @Size(min = 2, max = 5)
     @Column(name = "lang_key", length = 5)
     private String langKey;
@@ -88,7 +72,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "title", length = 255)
     private String title;
 
-    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "T_USER_AUTHORITY",
@@ -103,7 +86,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
-    
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "T_SUPPLIER_OUTLET",
@@ -222,7 +205,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	public Salutation getSalutation() {
 		return salutation;
 	}
@@ -230,7 +213,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	public void setSalutation(Salutation salutation) {
 		this.salutation = salutation;
 	}
-	
+
 	public String getContactNumber() {
 		return contactNumber;
 	}
