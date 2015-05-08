@@ -14,7 +14,8 @@ public class SystemAnnouncementResponseDto {
 	private AssignmentType assignmentType;
 	private DateTime updateDate;
 	private DateTime createDate;
-	
+    private Boolean isAdmin;
+    private Boolean isNormalUser;
 	private List<UserAnnouncementDto> viewed;
 	private List<UserAnnouncementDto> sent;
 	
@@ -81,6 +82,22 @@ public class SystemAnnouncementResponseDto {
 		this.sent = sent;
 	}
 
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(final Boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+	public Boolean getIsNormalUser() {
+		return isNormalUser;
+	}
+
+	public void setIsNormalUser(final Boolean isNormalUser) {
+		this.isNormalUser = isNormalUser;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -91,6 +108,9 @@ public class SystemAnnouncementResponseDto {
 		result = prime * result
 				+ ((createDate == null) ? 0 : createDate.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((isAdmin == null) ? 0 : isAdmin.hashCode());
+		result = prime * result
+				+ ((isNormalUser == null) ? 0 : isNormalUser.hashCode());
 		result = prime * result + ((sent == null) ? 0 : sent.hashCode());
 		result = prime * result + ((subject == null) ? 0 : subject.hashCode());
 		result = prime * result
@@ -135,6 +155,20 @@ public class SystemAnnouncementResponseDto {
 		} else if (!id.equals(other.id)) {
 			return false;
 		}
+		if (isAdmin == null) {
+			if (other.isAdmin != null) {
+				return false;
+			}
+		} else if (!isAdmin.equals(other.isAdmin)) {
+			return false;
+		}
+		if (isNormalUser == null) {
+			if (other.isNormalUser != null) {
+				return false;
+			}
+		} else if (!isNormalUser.equals(other.isNormalUser)) {
+			return false;
+		}
 		if (sent == null) {
 			if (other.sent != null) {
 				return false;
@@ -171,9 +205,9 @@ public class SystemAnnouncementResponseDto {
 		return "SystemAnnouncementResponseDto [id=" + id + ", subject="
 				+ subject + ", content=" + content + ", assignmentType="
 				+ assignmentType + ", updateDate=" + updateDate
-				+ ", createDate=" + createDate + ", viewed=" + viewed
+				+ ", createDate=" + createDate + ", isAdmin=" + isAdmin
+				+ ", isNormalUser=" + isNormalUser + ", viewed=" + viewed
 				+ ", sent=" + sent + "]";
 	}
-	
 	
 }

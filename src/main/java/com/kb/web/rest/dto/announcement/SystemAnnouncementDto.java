@@ -7,17 +7,11 @@ import com.kb.domain.AssignmentType;
 public class SystemAnnouncementDto {
 
     private Long id;
-
 	private AssignmentType assignmentType;
-
     private String subject;
-
-    private String message;
-    
+    private String content;
     private Boolean isAdmin;
-
     private Boolean isNormalUser;
-    
     private Set<Long> users;
 
 	public Long getId() {
@@ -44,12 +38,12 @@ public class SystemAnnouncementDto {
 		this.subject = subject;
 	}
 
-	public String getMessage() {
-		return message;
+	public String getContent() {
+		return content;
 	}
 
-	public void setMessage(final String message) {
-		this.message = message;
+	public void setContent(final String message) {
+		this.content = message;
 	}
 
 	public Boolean getIsAdmin() {
@@ -86,7 +80,7 @@ public class SystemAnnouncementDto {
 		result = prime * result + ((isAdmin == null) ? 0 : isAdmin.hashCode());
 		result = prime * result
 				+ ((isNormalUser == null) ? 0 : isNormalUser.hashCode());
-		result = prime * result + ((message == null) ? 0 : message.hashCode());
+		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((subject == null) ? 0 : subject.hashCode());
 		result = prime * result + ((users == null) ? 0 : users.hashCode());
 		return result;
@@ -128,11 +122,11 @@ public class SystemAnnouncementDto {
 		} else if (!isNormalUser.equals(other.isNormalUser)) {
 			return false;
 		}
-		if (message == null) {
-			if (other.message != null) {
+		if (content == null) {
+			if (other.content != null) {
 				return false;
 			}
-		} else if (!message.equals(other.message)) {
+		} else if (!content.equals(other.content)) {
 			return false;
 		}
 		if (subject == null) {
@@ -156,7 +150,7 @@ public class SystemAnnouncementDto {
 	public String toString() {
 		return "SystemAnnouncementDto [id=" + id + ", assignmentType="
 				+ assignmentType + ", subject=" + subject + ", message="
-				+ message + ", isAdmin=" + isAdmin + ", isNormalUser="
+				+ content + ", isAdmin=" + isAdmin + ", isNormalUser="
 				+ isNormalUser + ", users=" + users + "]";
 	}
 	

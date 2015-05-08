@@ -23,10 +23,14 @@ public class SystemAnnouncementsConverter extends AbstractConverter<Page<SystemA
 	@Override
 	public SystemAnnouncementsDto convert(final Page<SystemAnnouncement> source, final SystemAnnouncementsDto target) {
 		
-		List<SystemAnnouncementResponseDto> announcements = source.getContent()
-				.stream()
-				.map(e -> entityConverter.convert(e))
-				.collect(Collectors.toList());
+		List<SystemAnnouncementResponseDto> announcements = null;
+		
+		if (source.getContent() != null) {
+			announcements = source.getContent()
+					.stream()
+					.map(e -> entityConverter.convert(e))
+					.collect(Collectors.toList());
+		}
 		
 		target.setTotal(source.getTotalElements());
 		target.setAnnouncements(announcements);

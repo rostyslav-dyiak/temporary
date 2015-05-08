@@ -18,9 +18,13 @@ public class SystemAnnouncementEntityConverter extends AbstractConverter<SystemA
 	public SystemAnnouncementResponseDto convert(final SystemAnnouncement source, final SystemAnnouncementResponseDto target) {
 		
 		List<UserAnnouncementDto> sent = getSentUsers(source);
-		List<UserAnnouncementDto> viewed = sent.stream()
-				.filter(e -> ViewedType.READ.equals(e.getViewedType()))
-				.collect(Collectors.toList());
+		List<UserAnnouncementDto> viewed = null;
+		
+		if (sent != null) {
+			viewed = sent.stream()
+					.filter(e -> ViewedType.READ.equals(e.getViewedType()))
+					.collect(Collectors.toList());
+		}
 		
 		target.setAssignmentType(source.getAssignmentType());
 		target.setSubject(source.getSubject());
@@ -31,19 +35,26 @@ public class SystemAnnouncementEntityConverter extends AbstractConverter<SystemA
 		target.setUpdateDate(source.getLastModifiedDate());
 		target.setCreateDate(source.getCreatedDate());
 		target.setId(source.getId());
+		target.setIsNormalUser(source.getIsNormalUser());
+		target.setIsAdmin(source.getIsAdmin());
 		
 		return target;
 	}
 
 	private List<UserAnnouncementDto> getSentUsers(final SystemAnnouncement source) {
-		return source.getUsers().stream()
-			.map(user -> new UserAnnouncementDto(user.getUser().getId(), 
-							user.getLastModifiedDate(), 
-							user.getUser().getAuthorities().stream().findFirst().get().getName(), 
-							user.getStatus(),
-							user.getUser().getFirstName(),
-							user.getUser().getLastName()))
-			.collect(Collectors.toList());
+		List<UserAnnouncementDto> users = null;
+		if (source.getUsers() != null) {
+			users = source.getUsers().stream()
+				.map(user -> new UserAnnouncementDto(user.getUser().getId(), 
+								user.getLastModifiedDate(), 
+								user.getUser().getAuthorities().stream().findFirst().get().getName(), 
+								user.getStatus(),
+								user.getUser().getFirstName(),
+								user.getUser().getLastName()))
+				.collect(Collectors.toList());
+		}
+		
+		return users;
 	}
 
 	@Override

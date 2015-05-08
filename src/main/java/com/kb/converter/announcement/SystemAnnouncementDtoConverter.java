@@ -25,7 +25,7 @@ public class SystemAnnouncementDtoConverter extends AbstractConverter<SystemAnno
 		target.setId(source.getId());
 		target.setIsAdmin(source.getIsAdmin());
 		target.setIsNormalUser(target.getIsNormalUser());
-		target.setMessage(source.getMessage());
+		target.setMessage(source.getContent());
 		target.setSubject(source.getSubject());
 		
 		return target;
