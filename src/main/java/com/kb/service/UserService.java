@@ -106,6 +106,33 @@ public class UserService {
         return newUser;
     }
 
+    public User createUserInformation(Salutation salutation, String firstName,
+                                      String title, String status, String email, String role,
+                                      String contactNumber, Company company, Outlet outlet) {
+        User newUser = new User();
+        Authority authority = authorityRepository.findOne(role);
+        Set<Authority> authorities = new HashSet<>();
+        newUser.setLogin(email);
+        newUser.setSalutation(salutation);
+        newUser.setTitle(title);
+        newUser.setStatus(status);
+        newUser.setContactNumber(contactNumber);
+        // new user gets initially a generated password
+        newUser.setFirstName(firstName);
+        newUser.setEmail(email);
+        newUser.setCompany(company);
+        // new user is not active
+        newUser.setActivated(false);
+        // new user gets registration key
+        newUser.setActivationKey(RandomUtil.generateActivationKey());
+        newUser.setOutletForMember(outlet);
+        authorities.add(authority);
+        newUser.setAuthorities(authorities);
+        userRepository.save(newUser);
+        log.debug("Created Information for User: {}", newUser);
+        return newUser;
+    }
+
     public UserDTO updateUserInformation(UserDTO userDTO, Long companyId) {
         Company company = companyRepository.getOne(companyId);
         company.setContactNumber(userDTO.getContactNumber());

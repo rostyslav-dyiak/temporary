@@ -1,6 +1,7 @@
 package com.kb.web.rest.dto;
 
 import com.kb.domain.Company;
+import com.kb.domain.Outlet;
 import com.kb.domain.Salutation;
 import org.hibernate.validator.constraints.Email;
 
@@ -44,6 +45,8 @@ public class UserDTO {
     private String contactNumber;
 
     private String status;
+
+    private Outlet outlet;
 
 
     public UserDTO() {
@@ -174,6 +177,14 @@ public class UserDTO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Outlet getOutlet() {
+        return outlet;
+    }
+
+    public void setOutlet(Outlet outlet) {
+        this.outlet = outlet;
     }
 
     @Override

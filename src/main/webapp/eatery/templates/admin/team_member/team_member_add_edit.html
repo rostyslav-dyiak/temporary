@@ -63,12 +63,12 @@
                             <label class="col-lg-2 control-label">Access</label>
 
                             <div class="col-lg-10">
-                                <select class="form-control" ng-model="teamMember.userDTO.role">
-                                    <option value="ROLE_EATERY_ADMIN">
+                                <select class="form-control" ng-model="role" ng-change = "selectedRole()">
+                                    <option value="ROLE_EATERY_ADMIN" ng-selected="teamMember.userDTO.role == 'ROLE_EATERY_ADMIN'">
                                         Eatery Admin
                                     </option>
 
-                                    <option ng-repeat="outlet in outlets" value="ROLE_EATERY">{{outlet.name}}</option>
+                                    <option ng-repeat="outlet in outlets" value="{{$index}}" ng-selected="teamMember.userDTO.outlet.name == outlet.name">{{outlet.name}}</option>
                                 </select>
                             </div>
                         </div>

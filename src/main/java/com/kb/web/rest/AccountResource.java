@@ -202,10 +202,13 @@ public class AccountResource {
         String role = supplierInviteDTO.getRole();
         String contactNumber = supplierInviteDTO.getContactNumber();
         Company company = supplierInviteDTO.getCompany();
+        Outlet outlet = supplierInviteDTO.getOutlet();
         return userRepository.findOneByEmail(email)
             .map(user -> new ResponseEntity<>("e-mail address already in use", HttpStatus.BAD_REQUEST))
             .orElseGet(() -> {
-                User user = userService.createUserInformation(salutation, firstName, title, status, email, role, contactNumber, company);
+                User user = userService.createUserInformation(salutation, firstName, title, status, email, role, contactNumber, company, outlet);
+
+                user.setOutletForMember(outlet);
                 String baseUrl = MessageFormat.format("{0}://{1}:{2}/{3}", request.getScheme(), request.getServerName(), Integer.toString(request.getServerPort()), "#/app/sign_up");
                 mailService.sendActivationEmail(user, baseUrl);
                 return new ResponseEntity<>(HttpStatus.CREATED);

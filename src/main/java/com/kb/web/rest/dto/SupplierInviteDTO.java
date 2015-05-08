@@ -1,6 +1,7 @@
 package com.kb.web.rest.dto;
 
 import com.kb.domain.Company;
+import com.kb.domain.Outlet;
 import com.kb.domain.Salutation;
 
 public class SupplierInviteDTO {
@@ -13,6 +14,7 @@ public class SupplierInviteDTO {
     private String role;
     private String contactNumber;
     private Company company;
+    private Outlet outlet;
 
     public Company getCompany() {
         return company;
@@ -78,7 +80,15 @@ public class SupplierInviteDTO {
 		this.contactNumber = contactNumber;
 	}
 
-	@Override
+    public Outlet getOutlet() {
+        return outlet;
+    }
+
+    public void setOutlet(Outlet outlet) {
+        this.outlet = outlet;
+    }
+
+    @Override
     public String toString() {
         return "UserCompanyDTO{" +
             ", company=" + company +
@@ -86,5 +96,5 @@ public class SupplierInviteDTO {
             ", role=" + role +
             '}';
     }
-	
+
 }
