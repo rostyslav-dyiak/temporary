@@ -36,6 +36,105 @@
             </column>
             <column name="last_modified_date" type="timestamp"/>
 		</addColumn>    
-    </changeSet>    
+    </changeSet>
+
+	<changeSet id="create_trigger_for_t_system_announcement" author="ivaursul">
+		<sql splitStatements="false">
+			<![CDATA[
+				create or replace function process_system_announcement_assignment_type() returns trigger as $$
+						declare r record; 
+						begin
+						RAISE NOTICE 'process_system_announcement_assignment_type - begin, id %', new.id;
+						if new.assignment_type <> 'CUSTOM' then
+							if new.is_admin = true then
+								RAISE NOTICE 'ADMIN';
+								if new.assignment_type = 'ALL' then
+									RAISE NOTICE 'admin - all';
+									FOR r IN select ua.user_id from t_user_authority ua where ua.authority_name like '%ADMIN'
+									LOOP  
+										RAISE NOTICE '%', r.user_id;
+										
+										INSERT INTO T_SYSTEMANNOUNCEMENTUSER(system_announcement_id, user_id, status, created_date, last_modified_date)
+										VALUES(new.id, r.user_id, 'NEW', now(), now());
+									END LOOP;
+								end if;
+				
+								if new.assignment_type = 'SUPPLIERS' then
+									RAISE NOTICE 'admin - suppliers';
+									FOR r IN select ua.user_id from t_user_authority ua where ua.authority_name like '%ADMIN' and ua.authority_name like '%SUPPLIER%'
+									LOOP  
+										RAISE NOTICE '%', r.user_id;     
+										
+										INSERT INTO T_SYSTEMANNOUNCEMENTUSER(system_announcement_id, user_id, status, created_date, last_modified_date)
+										VALUES(new.id, r.user_id, 'NEW', now(), now());						
+									END LOOP;
+								end if;
+				
+								if new.assignment_type = 'EATERIES' then
+									RAISE NOTICE 'admin - eatery';
+									FOR r IN select ua.user_id from t_user_authority ua where ua.authority_name like '%ADMIN' and ua.authority_name like '%EATERY%'
+									LOOP  
+										RAISE NOTICE '%', r.user_id;
+				
+										INSERT INTO T_SYSTEMANNOUNCEMENTUSER(system_announcement_id, user_id, status, created_date, last_modified_date)
+										VALUES(new.id, r.user_id, 'NEW', now(), now());		
+									END LOOP;
+								end if;
+							end if;
+				
+							if new.is_normal_user = true then
+								RAISE NOTICE 'NORMAL USER';
+								if new.assignment_type = 'ALL' then
+									RAISE NOTICE 'user - all';
+									FOR r IN select ua.user_id from t_user_authority ua where ua.authority_name not like '%ADMIN'
+									LOOP  
+										RAISE NOTICE '%', r.user_id;
+										
+										INSERT INTO T_SYSTEMANNOUNCEMENTUSER(system_announcement_id, user_id, status, created_date, last_modified_date)
+										VALUES(new.id, r.user_id, 'NEW', now(), now());
+									END LOOP;
+								end if;
+				
+								if new.assignment_type = 'SUPPLIERS' then
+									RAISE NOTICE 'user - suppliers';
+									FOR r IN select ua.user_id from t_user_authority ua where ua.authority_name not like '%ADMIN' and ua.authority_name like '%SUPPLIER%'
+									LOOP  
+										RAISE NOTICE '%', r.user_id;     
+										
+										INSERT INTO T_SYSTEMANNOUNCEMENTUSER(system_announcement_id, user_id, status, created_date, last_modified_date)
+										VALUES(new.id, r.user_id, 'NEW', now(), now());						
+									END LOOP;
+								end if;
+				
+								if new.assignment_type = 'EATERIES' then
+									RAISE NOTICE 'user - eatery';
+									FOR r IN select ua.user_id from t_user_authority ua where ua.authority_name not like '%ADMIN' and ua.authority_name like '%EATERY%'
+									LOOP  
+										RAISE NOTICE '%', r.user_id;
+				
+										INSERT INTO T_SYSTEMANNOUNCEMENTUSER(system_announcement_id, user_id, status, created_date, last_modified_date)
+										VALUES(new.id, r.user_id, 'NEW', now(), now());		
+									END LOOP;
+								end if;				
+							end if;
+						end if;
+						return new;
+				end
+				$$ language 'plpgsql';
+			]]>
+		</sql>
+		<rollback>
+			drop function if exists process_system_announcement_assignment_type()
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="set_trigger_for_system_announcement" author="ivanursul">
+		<sql>
+			create trigger t_system_announcement_itrig after insert on t_systemannouncement for each row execute procedure process_system_announcement_assignment_type();
+		</sql>
+		<rollback>
+			drop trigger if exists t_system_announcement_itrig on t_systemannouncement
+		</rollback>
+	</changeSet>        
     
 </databaseChangeLog>
