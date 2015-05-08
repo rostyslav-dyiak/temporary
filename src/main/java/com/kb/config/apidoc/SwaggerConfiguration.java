@@ -1,10 +1,5 @@
 package com.kb.config.apidoc;
 
-import com.kb.config.Constants;
-import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
-import com.mangofactory.swagger.models.dto.ApiInfo;
-import com.mangofactory.swagger.plugin.EnableSwagger;
-import com.mangofactory.swagger.plugin.SwaggerSpringMvcPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.bind.RelaxedPropertyResolver;
@@ -16,6 +11,12 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StopWatch;
 
+import com.kb.config.Constants;
+import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
+import com.mangofactory.swagger.models.dto.ApiInfo;
+import com.mangofactory.swagger.plugin.EnableSwagger;
+import com.mangofactory.swagger.plugin.SwaggerSpringMvcPlugin;
+
 /**
  * Swagger configuration.
  *
@@ -25,7 +26,7 @@ import org.springframework.util.StopWatch;
  */
 @Configuration
 @EnableSwagger
-@Profile("!" + Constants.SPRING_PROFILE_FAST)
+@Profile(Constants.SPRING_PROFILE_PRODUCTION)
 public class SwaggerConfiguration implements EnvironmentAware {
 
     private final Logger log = LoggerFactory.getLogger(SwaggerConfiguration.class);
@@ -33,9 +34,9 @@ public class SwaggerConfiguration implements EnvironmentAware {
     public static final String DEFAULT_INCLUDE_PATTERN = "/api/.*";
 
     private RelaxedPropertyResolver propertyResolver;
-
+    
     @Override
-    public void setEnvironment(Environment environment) {
+    public void setEnvironment(final Environment environment) {
         this.propertyResolver = new RelaxedPropertyResolver(environment, "swagger.");
     }
 
@@ -43,7 +44,7 @@ public class SwaggerConfiguration implements EnvironmentAware {
      * Swagger Spring MVC configuration.
      */
     @Bean
-    public SwaggerSpringMvcPlugin swaggerSpringMvcPlugin(SpringSwaggerConfig springSwaggerConfig) {
+    public SwaggerSpringMvcPlugin swaggerSpringMvcPlugin(final SpringSwaggerConfig springSwaggerConfig) {
         log.debug("Starting Swagger");
         StopWatch watch = new StopWatch();
         watch.start();
