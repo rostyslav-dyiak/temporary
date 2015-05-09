@@ -1,0 +1,63 @@
+<div class="bg-light lter b-b wrapper-md clearfix" ng-controller="TaxTypeController">
+    <a ui-sref="app.taxTypeAdd" class="btn btn-info btn-rounded pull-right">Add Text Type</a>
+</div>
+<div class="wrapper-md" ng-controller="TaxTypeController">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table st-table="rowCollection" st-safe-src="taxTypes" class="table table-striped text-center">
+                            <thead>
+                            <tr>
+                                <th class="text-center" st-sort="code">Tax Type Code</th>
+                                <th class="text-center" st-sort="name">Name</th>
+                                <th class="text-center" st-sort="lastModifiedDate">Updated</th>
+                                <th class="text-center" st-sort="available">Available</th>
+                                <th class="text-center">Default</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="row in rowCollection">
+                                <td>{{row.code}}</td>
+                                <td>{{row.name}}</td>
+                                <td>{{row.lastModifiedDate | date}}</td>
+                                <td><span ng-show="row.available">Yes</span><span ng-show="!row.available">No</span>
+                                </td>
+                                <td>
+                                    <div class="radio">
+                                        <label class="i-checks">
+                                            <input type="radio" name="default" ng-value="true" ng-model="row.default"
+                                                   checked>
+                                            <i></i>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a ui-sref="app.taxtypeEdit({id: {{row.id}} })" class="btn btn-default btn-rounded">
+                                        Edit
+                                    </a>
+                                </td>
+                                <td>
+                                    <span class="btn btn-default btn-rounded" ng-click="delete(row.id)">
+                                        Delete
+                                    </span>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    <div st-pagination class="no-margin"></div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

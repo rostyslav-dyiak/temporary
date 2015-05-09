@@ -42,6 +42,8 @@
     <include file="classpath:config/liquibase/changelog/custom_user_to_outlet_for_member_relation.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/custom_add_column_is_admin_to_t_authority.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20150507083733_added_entity_SystemAnnouncementUser.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20150508140746_added_entity_TaxType.xml"
+             relativeToChangelogFile="false"/>
     <!-- JHipster will add liquibase changelogs here -->
 
     <include file="classpath:config/liquibase/changelog/data_batch.xml" relativeToChangelogFile="false"/>
