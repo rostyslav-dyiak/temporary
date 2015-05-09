@@ -1,24 +1,12 @@
 package com.kb.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * A SupplierDetails.
@@ -37,7 +25,7 @@ public class SupplierDetails extends AbstractAuditingEntity implements Serializa
 	@JoinColumn(name = "supplier_id")
 	private Company supplier;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "main_picture_id")
     private Picture mainPicture;
 
@@ -64,9 +52,9 @@ public class SupplierDetails extends AbstractAuditingEntity implements Serializa
 
     @OneToMany
     @JoinColumn(name = "supplier_details_id")
-    private Set<DayOff> holidays; 
-    
-    @ManyToMany
+    private Set<DayOff> holidays;
+
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "t_supplier_details_picture",
     	joinColumns = @JoinColumn(name = "supplier_details_picture_id", referencedColumnName = "id"),
     	inverseJoinColumns = @JoinColumn(name = "picture_id", referencedColumnName = "id"))

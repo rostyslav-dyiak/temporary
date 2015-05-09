@@ -7,12 +7,14 @@
         .$inject = [
         '$scope',
         '$http',
+        'toaster',
         'AuthServerProvider',
         'CompanyFactory',
         'FileUploadService'
     ];
 
-    function CompanyProfileController($scope, $http, AuthServerProvider, CompanyFactory, FileUploadService) {
+    function CompanyProfileController($scope, $http, toaster, AuthServerProvider, CompanyFactory, FileUploadService) {
+        var master = {};
         $scope.company = {};
         $scope.logo = {};
         $scope.mainPicture = {};
@@ -27,12 +29,30 @@
         $scope.removeCompanyPicture = removeCompanyPicture;
         $scope.selectPicture = selectPicture;
         $scope.update = update;
+        $scope.revert = revert;
 
         activate();
 
         function activate() {
             $scope.company = AuthServerProvider.currentUserCompany();
+            master = angular.copy(AuthServerProvider.currentUser().company);
         }
+
+        function update() {
+            CompanyFactory.update($scope.company,
+                function (data) {
+                    $http.get("/api/account")
+                        .success(function (data) {
+                            AuthServerProvider.setUser(data);
+                        })
+                        .error(function (data) {
+                            console.log(data);
+                        });
+                }, function (e) {
+                    console.log(e);
+                });
+        }
+
 
         function uploadLogo(image) {
             if ($scope.logo && image.length > 0) {
@@ -93,34 +113,25 @@
 
         function removeCompanyPicture() {
             for (var i = 0; i < $scope.company.supplierDetails.pictures.length; i++) {
-                 if($scope.company.supplierDetails.pictures[i].url == $scope.selectedPicture) {
-                     $scope.company.supplierDetails.pictures.splice(i,1);
-                     return;
-                 }
+                if ($scope.company.supplierDetails.pictures[i].url == $scope.selectedPicture) {
+                    $scope.company.supplierDetails.pictures.splice(i, 1);
+                    return;
+                }
             }
         }
 
         function selectPicture(url) {
-            if($scope.selectedPicture == url) {
+            if ($scope.selectedPicture == url) {
                 $scope.selectedPicture = '';
             } else {
                 $scope.selectedPicture = url;
             }
         }
 
-        function update() {
-            CompanyFactory.update($scope.company,
-                function (data) {
-                    $http.get("/api/account")
-                        .success(function (data) {
-                            AuthServerProvider.setUser(data);
-                        })
-                        .error(function (data) {
-                            console.log(data);
-                        });
-                }, function (e) {
-                    console.log(e);
-                });
+        function revert() {
+            $scope.company = master;
         }
+
+
     }
 })();

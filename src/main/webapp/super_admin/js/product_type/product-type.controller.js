@@ -12,7 +12,7 @@
 
     function ProductTypeController($scope,toaster, ProductTypeFactory) {
         $scope.type = {};
-        $scope.selectedDistrict = {};
+        $scope.selectedType = {};
         $scope.types = [];
         $scope.saveType = saveType;
         $scope.editType = editType;
@@ -77,7 +77,8 @@
         }
 
         function editType(type) {
-            $scope.selectedDistrict = type;
+            $scope.newType = false;
+            $scope.selectedType = type;
             $scope.type.id = type.id;
             $scope.type.name = type.name;
             $scope.type.description = type.description;

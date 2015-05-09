@@ -9,14 +9,14 @@
         '$http',
         'toaster',
         'TeamFactory',
-        'MemberFactory',
         'AuthServerProvider',
         'OutletsCompanyFactory'
     ];
 
-    function TeamMemberAddEditController($scope, $stateParams, $http, toaster, TeamFactory, MemberFactory, AuthServerProvider, OutletsCompanyFactory) {
-        var teamMemberId = $stateParams.id;
-        if (teamMemberId) {
+    function TeamMemberAddEditController($scope, $stateParams, $http, toaster, TeamFactory, AuthServerProvider, OutletsCompanyFactory) {
+        $scope.teamMemberId = $stateParams.id;
+        var master = {};
+        if ($scope.teamMemberId) {
             $scope.saveButtonText = "Save Changes";
         } else {
             $scope.saveButtonText = "Send Invitation";
@@ -28,17 +28,17 @@
             user: {}
         };
 
-        $scope.save = save;
         $scope.addUser = addUser;
         $scope.createUser = createUser;
         $scope.updateUser = updateUser;
         $scope.selectedRole = selectedRole;
+        $scope.revert = revert;
 
         activate();
         function activate() {
-            if (teamMemberId) {
+            if ($scope.teamMemberId) {
                 TeamFactory.get({
-                        id: teamMemberId
+                        id: $scope.teamMemberId
                     },
                     function (data) {
                         $scope.teamMember = data;
@@ -53,31 +53,9 @@
             $scope.company = AuthServerProvider.currentUserCompany();
         }
 
-        function save() {
-            if (teamMemberId) {
-                TeamFactory.update($scope.teamMember,
-                    function (data) {
-                        console.log(data);
-                        toaster.pop('success', 'Success', 'Team member updated');
-                    }, function (e) {
-                        console.error(e);
-                        toaster.pop('error', 'Error', 'Please try again');
-                    });
-            }
-            else {
-                TeamFactory.save($scope.teamMember,
-                    function (data) {
-                        console.log(data);
-                        toaster.pop('success', 'Success', 'Team member saved');
-                    }, function (e) {
-                        console.error(e);
-                        toaster.pop('error', 'Error', 'Please try again');
-                    });
-            }
-        }
 
         function addUser() {
-            if (!teamMemberId) {
+            if (!$scope.teamMemberId) {
                 createUser();
             } else {
                 updateUser();
@@ -90,7 +68,7 @@
             $scope.supplierInviteDTO.salutation = $scope.teamMember.userDTO.salutation;
             $scope.supplierInviteDTO.firstName = $scope.teamMember.userDTO.firstName;
             $scope.supplierInviteDTO.title = $scope.teamMember.userDTO.title;
-            $scope.supplierInviteDTO.status = $scope.teamMember.company.status;
+            $scope.supplierInviteDTO.status = "PENDING";
             $scope.supplierInviteDTO.email = $scope.teamMember.userDTO.email;
             $scope.supplierInviteDTO.role = $scope.teamMember.userDTO.role;
             $scope.supplierInviteDTO.contactNumber = $scope.teamMember.company.contactNumber;
@@ -119,7 +97,7 @@
             $scope.supplierInviteDTO.contactNumber = $scope.teamMember.company.contactNumber;
             $scope.supplierInviteDTO.outlet = $scope.teamMember.userDTO.outlet;
 
-            MemberFactory.update($scope.supplierInviteDTO,
+            TeamFactory.update($scope.supplierInviteDTO,
                 function (data) {
                     console.log('Saved ' + data.id);
                     toaster.pop('success', 'Success', 'User updated');
@@ -136,6 +114,10 @@
                 $scope.teamMember.userDTO.role = "ROLE_EATERY";
                 $scope.teamMember.userDTO.outlet = $scope.outlets[$scope.role];
             }
+        }
+
+        function revert() {
+            $scope.teamMember = angular.copy(master);
         }
 
     }

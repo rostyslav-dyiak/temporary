@@ -31,7 +31,7 @@ import java.util.Set;
 public class UserService {
 
     private final Logger log = LoggerFactory.getLogger(UserService.class);
-
+    private final String ACTIVE_STATUS = "ACTIVE";
     @Inject
     private PasswordEncoder passwordEncoder;
 
@@ -144,6 +144,7 @@ public class UserService {
             u.setPassword(encryptedPassword);
             u.setActivated(true);
             u.setActivationKey(null);
+            u.setStatus(ACTIVE_STATUS);
             userRepository.save(u);
             log.debug("Changed Information for User: {}", u);
 

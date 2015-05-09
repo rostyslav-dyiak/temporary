@@ -70,7 +70,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" ng-show="$scope.teamMemberId">
                     <label class="col-lg-2 control-label">Status</label>
 
                     <div class="col-lg-10">
@@ -92,7 +92,7 @@
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
                         <button type="submit" class="btn btn-sm btn-info" ng-click="addUser()">{{saveButtonText}}</button>
-                        <button class="btn btn-sm btn-danger" ng-click="cancel()">Cancel</button>
+                        <button class="btn btn-sm btn-danger" ng-click="revert()">Revert Changes</button>
                     </div>
                 </div>
             </form>
