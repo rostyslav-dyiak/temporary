@@ -40,8 +40,10 @@ module.exports = function (config) {
             'main/webapp/bower_components/angular-local-storage/dist/angular-local-storage.js',
             'main/webapp/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
             'main/webapp/bower_components/ngstorage/ngStorage.js',
+            'main/webapp/bower_components/ng-file-upload/ng-file-upload.js',
             'main/webapp/bower_components/oclazyload/dist/ocLazyLoad.min.js',
             'main/webapp/bower_components/html5sortable/jquery.sortable.js',
+            'main/webapp/bower_components/angularjs-toaster/toaster.js',
             'main/webapp/bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'main/webapp/scripts/app/app.js',

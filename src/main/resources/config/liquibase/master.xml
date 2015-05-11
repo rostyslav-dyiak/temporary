@@ -20,6 +20,8 @@
              relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20150507123152_added_entity_Postal_Code.xml"
              relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20150509154156_added_entity_Unit.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20150511111536_added_entity_Product.xml" relativeToChangelogFile="false"/>
 
     <include file="classpath:config/liquibase/changelog/create-update-date.xml" relativeToChangelogFile="false"/>
 

@@ -8,15 +8,15 @@
         <form name="loginForm" class="form-validation">
             <div class="list-group list-group-sm">
                 <div class="list-group-item">
-                    <input type="email" placeholder="Email" ng-model="credentials.email" class="form-control no-border" name="email" required>
+                    <input type="email" placeholder="Email" ng-model="credentials.email" class="form-control no-border" name="username" required>
                 </div>
                 <div class="list-group-item">
-                    <input type="password" placeholder="Password" ng-model="credentials.password" class="form-control no-border" ng-minlength="5" password="password"
+                    <input type="password" placeholder="Password" ng-model="credentials.password" class="form-control no-border" ng-minlength="5" name="password"
                            required>
                 </div>
             </div>
             <button type="submit" class="btn btn-lg btn-danger btn-block" ng-click="login()"
-                    ng-disabled="!loginForm.$valid" prevent-default>Log in
+                    ng-disabled="!loginForm.$valid">Log in
             </button>
             <div class="text-center m-t m-b"><a href="#">Forgot password?</a></div>
             <div class="line line-dashed"></div>

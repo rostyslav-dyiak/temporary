@@ -1,0 +1,42 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "unitSymbol",
+            "fieldType": "String",
+            "fieldNameCapitalized": "UnitSymbol",
+            "fieldNameUnderscored": "unit_symbol",
+            "fieldInJavaBeanMethod": "UnitSymbol",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "shortDesc",
+            "fieldType": "String",
+            "fieldNameCapitalized": "ShortDesc",
+            "fieldNameUnderscored": "short_desc",
+            "fieldInJavaBeanMethod": "ShortDesc",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "longDesc",
+            "fieldType": "String",
+            "fieldNameCapitalized": "LongDesc",
+            "fieldNameUnderscored": "long_desc",
+            "fieldInJavaBeanMethod": "LongDesc",
+            "fieldValidate": false
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOneToMany": false,
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": false,
+    "fieldsContainBigDecimal": false,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "changelogDate": "20150509154156",
+    "pagination": "no",
+    "validation": false
+}

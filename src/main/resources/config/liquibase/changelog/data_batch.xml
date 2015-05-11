@@ -84,4 +84,14 @@
         <dropDefaultValue tableName="T_SYSTEMANNOUNCEMENT" columnName="created_date" columnDataType="datetime"/>
     </changeSet>
 
+    <changeSet id="data-for-unit2" author="mudryiroman">
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/unit.csv"
+                  separator=";"
+                  tableName="UNIT">
+            <column name="created_date" type="timestamp"/>
+        </loadData>
+        <dropDefaultValue tableName="UNIT" columnName="created_date" columnDataType="datetime"/>
+    </changeSet>
+
 </databaseChangeLog>

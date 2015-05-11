@@ -286,7 +286,21 @@
                     })
                     .state('app.unit', {
                         url: '/unit',
-                        templateUrl: 'templates/unit.html'
+                        template: '<div ui-view></div>'
+                    })
+                    .state('app.unit.list', {
+                        url: '/list',
+                        templateUrl: 'templates/unit/list.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/unit/unit.factory.js',
+                                        'js/unit/unit.list.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
                     })
                     .state('app.paymentTerms', {
                         url: '/payment_terms',
