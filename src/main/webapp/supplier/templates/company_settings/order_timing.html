@@ -3,21 +3,30 @@
         <div class="panel-body">
             <div class="row">
                 <div class="form-group col-sm-4">
-                    <timepicker class="margin-center" ng-model="orderTiming.date" ng-change="saveOrderTiming()" hour-step="1" minute-step="1" show-meridian="true" required></timepicker>
+                    <timepicker class="margin-center" ng-model="orderTiming.date" ng-change="saveOrderTiming()"
+                                hour-step="1" minute-step="1" show-meridian="true" required></timepicker>
                 </div>
                 <div class="col-sm-8">
                     <h5>Order must come in by</h5>
+
                     <div class="row">
                         <div class="col-sm-8">
-                            <select class="form-control" ng-model="orderTiming.date" ng-options="item.date as item.name for item in deliveryDates" ng-change="saveOrderTiming()" required></select>
+                            <select class="form-control" ng-model="orderTiming.date"
+                                    ng-options="item.date as item.name for item in deliveryDates"
+                                    ng-change="saveOrderTiming()" required></select>
                         </div>
                         <label class="col-sm-4 control-label">Delivery Day</label>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-sm-8 col-sm-offset-4">
-
+                <div class="form-group col-sm-12 col-sm-offset-4">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-sm btn-info" ng-disabled="companyProfileForm.$invalid"
+                                ng-click="update()">Save
+                        </button>
+                        <button class="btn btn-sm btn-danger" ng-click="revert()">Revert Changes</button>
+                    </div>
                 </div>
             </div>
         </div>

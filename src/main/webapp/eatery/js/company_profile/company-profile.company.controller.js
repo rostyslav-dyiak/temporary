@@ -14,7 +14,11 @@
 
     function CompanyProfileCompanyController($scope, toaster, AuthServerProvider, CompanyFactory, FileUploadService) {
         var master = {};
-        $scope.company = {};
+        $scope.company = {
+            eateryDetails: {
+                topRightPicture: {}
+            }
+        };
         $scope.logo = {};
         $scope.optionalImage = {};
 
@@ -34,8 +38,7 @@
                     master = angular.copy(AuthServerProvider.currentUser().company);
                 },
                 function (e) {
-                    $scope.error = 'Please try again.';
-                    console.error(e);
+                    toaster.pop('error', 'Error', 'Problems with getting company');
                 });
         }
 

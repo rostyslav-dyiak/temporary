@@ -174,7 +174,48 @@
                     })
                     .state('app.taxType', {
                         url: '/tax_type',
-                        templateUrl: 'templates/tax_type.html'
+                        templateUrl: 'templates/tax_types/tax_type.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/tax_type/taxtype.factory.js',
+                                        'js/tax_type/taxtype.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
+                    })
+                    .state('app.taxTypeAdd', {
+                        url: '/tax_type/add',
+                        templateUrl: 'templates/tax_types/taxtype.add-edit.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/tax_type/taxtype.factory.js',
+                                        'js/tax_type/taxtype.add-edit.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
+                    })
+                    .state('app.taxtypeEdit', {
+                        url: '/tax_type/:id/edit',
+                        templateUrl: 'templates/tax_types/taxtype.add-edit.html',
+                        controller: function ($stateParams) {
+                            $stateParams.id
+                        },
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/tax_type/taxtype.factory.js',
+                                        'js/tax_type/taxtype.add-edit.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
                     })
                     .state('app.publicHoliday', {
                         url: '/public_holiday',

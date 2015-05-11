@@ -18,7 +18,7 @@
         var oldEmail = "";
         $scope.companyId = $stateParams.id;
         $scope.companyStatus = "";
-        $scope.systemAnnouncement = {};
+        $scope.businessTypes = {};
         $scope.userCompanyDTO = {};
         $scope.removePhoto = removePhoto;
         $scope.addCompany = addCompany;
@@ -44,7 +44,7 @@
             }
             BusinessTypeFactory.query({},
                 function (data) {
-                    $scope.systemAnnouncement = angular.copy(data);
+                    $scope.businessTypes = angular.copy(data);
                 }, function (e) {
                     console.error(e);
                 });

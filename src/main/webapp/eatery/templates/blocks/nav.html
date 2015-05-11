@@ -31,20 +31,29 @@
         </a>
     </li>
     <li>
-        <a ui-sref="app.suplier">
-            <span class="font-bold">Suplier</span>
+        <a ui-sref="app.supplier">
+            <span class="font-bold">Supplier</span>
         </a>
     </li>
-    <li>
-        <a ui-sref="app.setting">
-            <span class="font-bold">Setting</span>
-        </a>
-    </li>
-    <li class="line dk hidden-folded"></li>
-    <li>
-        <a ui-sref="app.personalProfile">
-            <span>Personal Profile</span>
-        </a>
+    <li><a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+        <span class="font-bold">Settings</span>
+    </a>
+        <ul class="nav nav-sub dk">
+            <li>
+                <a ui-sref="app.personalProfile">
+                    <span class="font-bold">Personal Profile</span>
+                </a>
+            </li>
+            <li>
+                <a ui-sref="app.activityLog">
+                    <span class="font-bold">Activity Log</span>
+                </a>
+            </li>
+        </ul>
     </li>
 </ul>
 <!-- / list -->

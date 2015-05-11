@@ -24,7 +24,7 @@
                 </thead>
                 <tbody>
                 <tr ng-switch="row.companyType" ng-repeat="row in rowCollection">
-                    <td>{{row.date | date}}</td>
+                    <td>{{row.date | date:"EEEE, MMM dd.yyyy h:mma"}}</td>
                     <td>{{row.description}}</td>
                     <td>{{row.companyType}}</td>
                     <td>

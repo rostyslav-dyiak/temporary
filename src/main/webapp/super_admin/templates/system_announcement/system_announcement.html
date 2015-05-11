@@ -16,7 +16,7 @@
                                 <p>{{row.subject}}</p>
                             </td>
                             <td>
-                                <p>{{row.updateDate | date}}</p>
+                                <p>{{row.updateDate | date:"EEEE, MMM dd.yyyy h:mma"}}</p>
                                 <pre class="alert alert-info"><em class="ng-binding">{{row.viewed.length}}/{{row.sent.length}}</em> VIEW</pre>
                             </td>
                         </tr>

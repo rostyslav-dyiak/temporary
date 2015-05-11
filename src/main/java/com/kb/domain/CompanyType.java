@@ -5,5 +5,5 @@ package com.kb.domain;
  */
 public enum CompanyType {
     EATERY,
-    SUPPLIER;
+    SUPPLIER
 }

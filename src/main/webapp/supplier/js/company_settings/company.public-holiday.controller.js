@@ -6,11 +6,12 @@
     CompanyPublicHolidayController
         .$inject = [
         '$scope',
+        'toaster',
         'AuthServerProvider',
         'PublicHolidayFactory'
     ];
 
-    function CompanyPublicHolidayController($scope, AuthServerProvider, PublicHolidayFactory) {
+    function CompanyPublicHolidayController($scope, toaster, AuthServerProvider, PublicHolidayFactory) {
         $scope.company = {};
         $scope.announcements = [];
         $scope.rowCollection = [];
@@ -27,7 +28,7 @@
                     $scope.rowCollection = data;
                 },
                 function (e) {
-                    console.error(e);
+                    toaster.pop('error', 'Error', 'Error in initialization');
                 });
         }
 

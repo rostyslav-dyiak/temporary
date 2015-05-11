@@ -19,7 +19,7 @@
                             <tbody>
                             <tr ng-repeat="row in rowCollection">
                                 <td>{{row.name}}</td>
-                                <td>{{row.created | date}}</td>
+                                <td>{{row.createdDate | date:"EEEE, MMM dd.yyyy h:mma"}}</td>
                                 <td>{{row.status}}</td>
                                 <td>
                                     <a ui-sref="app.manageCompany.outletsEdit({companyId: {{companyId}}, id: {{row.id}} })" class="btn btn-default btn-rounded">

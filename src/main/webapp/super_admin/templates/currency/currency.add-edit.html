@@ -18,7 +18,8 @@
                         <div class="form-group">
                             <label class="control-label">Available</label>
                             <select name="type" ng-model="currency.available" class="form-control"
-                                    ng-options="o.v as o.n for o in [{ n: 'False', v: false }, { n: 'True', v: true }]" required>
+                                    ng-options="o.v as o.n for o in [{ n: 'Yes', v: false }, { n: 'No', v: true }]"
+                                    required>
                             </select>
                         </div>
                         <div class="form-group">
