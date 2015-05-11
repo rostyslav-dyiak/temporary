@@ -22,7 +22,7 @@
                             <tr ng-repeat="row in rowCollection">
                                 <td>{{row.symbol}}</td>
                                 <td>{{row.currencyName}}</td>
-                                <td>{{row.lastModifiedDate | date}}</td>
+                                <td>{{row.lastModifiedDate | date:"EEEE, MMM dd.yyyy h:mma"}}</td>
                                 <td><span ng-show="row.available">Yes</span><span ng-show="!row.available">No</span></td>
                                 <td>
                                     <a ui-sref="app.currencyEdit({id: {{row.id}} })" class="btn btn-default btn-rounded">

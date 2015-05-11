@@ -92,7 +92,7 @@
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
                                 <span type="submit" class="btn btn-sm btn-info" ng-disabled="form.$invalid"
-                                      ng-show="!companyId" ng-click="addCompany()">Save</span>
+                                      ng-show="!companyId" ng-click="addCompany()">Send Invitation</span>
                                 <span type="submit" class="btn btn-sm btn-info"
                                       ng-show="companyId && companyStatus == 'PENDING'" ng-click="updateCompanyInfo()">Update and Send</span>
                                 <span type="submit" class="btn btn-sm btn-info"
@@ -122,7 +122,7 @@
                         <tbody>
                         <tr ng-repeat="row in invitationHistory">
                             <td>{{row.email}}</td>
-                            <td>{{row.sent | date}}</td>
+                            <td>{{row.sent | date:"EEEE, MMM dd.yyyy h:mma"}}</td>
                             <td>{{row.status}}</td>
                         </tr>
                         </tbody>

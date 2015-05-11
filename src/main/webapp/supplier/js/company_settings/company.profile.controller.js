@@ -35,12 +35,18 @@
 
         function activate() {
             $scope.company = AuthServerProvider.currentUserCompany();
+            if (!$scope.company.supplierDetails) {
+                $scope.company.supplierDetails = {
+                    pictures: []
+                };
+            }
             master = angular.copy(AuthServerProvider.currentUser().company);
         }
 
         function update() {
             CompanyFactory.update($scope.company,
                 function (data) {
+                    toaster.pop('success', 'Success', 'Company saved');
                     $http.get("/api/account")
                         .success(function (data) {
                             AuthServerProvider.setUser(data);
@@ -48,8 +54,9 @@
                         .error(function (data) {
                             console.log(data);
                         });
+
                 }, function (e) {
-                    console.log(e);
+                    toaster.pop('error', 'Error', 'Error on update');
                 });
         }
 
@@ -96,17 +103,21 @@
             if ($scope.companyPictures && images.length > 0) {
                 for (var i = 0; i < images.length; i++) {
                     var name = images[i].name;
-                    FileUploadService.uploadFileToUrl(images[i])
-                        .then(function (response) {
-                            var picture = {
-                                title: name,
-                                url: response.data.path
-                            };
-                            if (!$scope.company.supplierDetails.pictures) {
-                                $scope.company.supplierDetails.pictures = [];
-                            }
-                            $scope.company.supplierDetails.pictures.push(picture);
-                        });
+                    if ($scope.company.supplierDetails.pictures.length < 6) {
+                        FileUploadService.uploadFileToUrl(images[i])
+                            .then(function (response) {
+                                var picture = {
+                                    title: name,
+                                    url: response.data.path
+                                };
+                                if (!$scope.company.supplierDetails.pictures) {
+                                    $scope.company.supplierDetails.pictures = [];
+                                }
+                                $scope.company.supplierDetails.pictures.push(picture);
+                            });
+                    } else {
+                        toaster.pop('error', 'Error', "Can't add more than 6 pictures");
+                    }
                 }
             }
         }

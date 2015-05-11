@@ -33,7 +33,7 @@
                              alt="{{row.name}}"></td>
                     <td>{{row.name}}</td>
                     <td>{{row.companyType}}</td>
-                    <td>{{row.createdDate | date}}</td>
+                    <td>{{row.createdDate | date:"EEEE, MMM dd.yyyy h:mma"}}</td>
                     <td>{{row.status}}</td>
                     <td>
                         <a ui-sref="app.manageCompany.edit({id: row.id })" class="btn btn-default btn-rounded">

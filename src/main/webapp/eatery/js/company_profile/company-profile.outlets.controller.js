@@ -25,7 +25,7 @@
                 function (data) {
                     $scope.outlets = data;
                 }, function (e) {
-                    console.error(e);
+                    toaster.pop('error', 'Error', 'Error in initialization');
                 });
         }
 

@@ -169,7 +169,7 @@
                     })
                     .state('app.activityLog', {
                         url: '/activity_log',
-                        templateUrl: 'templates/admin/activity_log.html',
+                        templateUrl: 'templates/activity_log.html',
                         data: {
                             authorizedRoles: [USER_ROLES.eateryAdmin]
                         }

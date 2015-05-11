@@ -13,8 +13,22 @@
                     <tbody>
                     <tr ng-repeat="row in rowCollection">
                         <td>{{row.description}}</td>
-                        <td>{{row.date}}</td>
+                        <td>{{row.date | date:"EEEE, MMM dd.yyyy h:mma"}}</td>
                         <td>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="btn-group m-r" ng-controller="ButtonsDemoCtrl">
+                                        <label class="btn btn-default" ng-model="radioModel"
+                                               ng-class="{'btn-success' :row.status == 'Open'}" btn-radio="'Open'"
+                                               uncheckable>Open</label>
+                                        <label class="btn btn-default" ng-model="radioModel"
+                                               ng-class="{'btn-success' :row.status == 'Closed'}" btn-radio="'Closed'"
+                                               uncheckable>Closed</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--
                             <div class="radio">
                                 <label class="radio-inline i-checks">
                                     <input type="radio" ng-model="row.status" ng-change="toggle(row)"
@@ -28,7 +42,7 @@
                                            name="gstRegistered" ng-value="false" selected>
                                     <i></i> Closed
                                 </label>
-                            </div>
+                            </div>-->
                         </td>
                     </tr>
                     </tbody>
