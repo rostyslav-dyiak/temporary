@@ -1,23 +1,23 @@
 <div class="bg-light lter b-b wrapper-md">
     <button class="btn btn-default back-button" back-button>Back</button>
 </div>
-<div class="wrapper-md" ng-controller="ProductController">
+<div class="wrapper-md" ng-controller="UnitProductController">
     <div class="row">
         <div class="col-sm-12">
-            <div class="panel panel-default">
+            <div>
                 <div class="panel-body">
                     <ul ui-sortable="sortableOptions" class="list-group gutter list-group-lg list-group-sp types-list"
                         ng-model="products">
-                        <li class="list-group-item" ng-repeat="product in products">
+                        <li class="list-group-item" ng-repeat="product in unitProducts">
 
                             <div class="clear type-name">
                                 <div class="col-sm-12">
-                                <div class="col-sm-6">
-                                    {{ product.company.name}}
-                                </div>
-                                <div class="col-sm-5">
-                                    {{ product.company.code }}
-                                </div>
+                                    <div class="col-sm-6">
+                                        {{ product.company.name}}
+                                    </div>
+                                    <div class="col-sm-5">
+                                        {{ product.company.code }}
+                                    </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="col-sm-6">
@@ -31,7 +31,9 @@
                         </li>
                     </ul>
                 </div>
+
             </div>
+            <div class="col-sm-12 text-center"><div st-pagination class="no-margin"></div></div>
         </div>
-     </div>
+    </div>
 </div>

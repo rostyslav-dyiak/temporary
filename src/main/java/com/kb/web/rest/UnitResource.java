@@ -1,10 +1,15 @@
 package com.kb.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.kb.domain.Product;
 import com.kb.domain.Unit;
+import com.kb.repository.ProductRepository;
 import com.kb.repository.UnitRepository;
+import com.kb.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +32,9 @@ public class UnitResource {
 
     @Inject
     private UnitRepository unitRepository;
+
+    @Inject
+    private ProductRepository productRepository;
 
     /**
      * POST  /units -> Create a new unit.
@@ -98,5 +106,19 @@ public class UnitResource {
     public void delete(@PathVariable Long id) {
         log.debug("REST request to delete Unit : {}", id);
         unitRepository.delete(id);
+    }
+
+    @RequestMapping(value = "/units/{id}/products",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Product>> getAll(@PathVariable Long id,
+                                                @RequestParam(value = "page", required = false) Integer offset,
+                                                @RequestParam(value = "per_page", required = false) Integer limit)
+        throws URISyntaxException {
+        Unit unit = unitRepository.findOne(id);
+        Page<Product> page = productRepository.findByUnit(unit, PaginationUtil.generatePageRequest(offset, limit));
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/units", offset, limit);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 }

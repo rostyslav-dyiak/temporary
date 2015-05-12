@@ -344,14 +344,17 @@
                         }
                     })
                     .state('app.unit.products', {
-                        url: '/products',
+                        url: '/:unitId/products',
                         templateUrl: 'templates/unit/products.html',
+                        controller: function ($stateParams) {
+                            $stateParams.unitId
+                        },
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
-                                        'js/product/product.factory.js',
-                                        'js/product/product.controller.js'
+                                        'js/unit/unit.product.factory.js',
+                                        'js/unit/unit.product.controller.js'
                                     ]);
                                 }
                             ]
