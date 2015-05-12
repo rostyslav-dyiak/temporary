@@ -1,0 +1,105 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Title",
+            "fieldNameUnderscored": "title",
+            "fieldInJavaBeanMethod": "Title",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Description",
+            "fieldNameUnderscored": "description",
+            "fieldInJavaBeanMethod": "Description",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "brand",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Brand",
+            "fieldNameUnderscored": "brand",
+            "fieldInJavaBeanMethod": "Brand",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "origin",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Origin",
+            "fieldNameUnderscored": "origin",
+            "fieldInJavaBeanMethod": "Origin",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "certifiedHalal",
+            "fieldType": "Boolean",
+            "fieldNameCapitalized": "CertifiedHalal",
+            "fieldNameUnderscored": "certified_halal",
+            "fieldInJavaBeanMethod": "CertifiedHalal",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "unitDescription",
+            "fieldType": "String",
+            "fieldNameCapitalized": "UnitDescription",
+            "fieldNameUnderscored": "unit_description",
+            "fieldInJavaBeanMethod": "UnitDescription",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "unitHide",
+            "fieldType": "Boolean",
+            "fieldNameCapitalized": "UnitHide",
+            "fieldNameUnderscored": "unit_hide",
+            "fieldInJavaBeanMethod": "UnitHide",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "available",
+            "fieldType": "Boolean",
+            "fieldNameCapitalized": "Available",
+            "fieldNameUnderscored": "available",
+            "fieldInJavaBeanMethod": "Available",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "code",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Code",
+            "fieldNameUnderscored": "code",
+            "fieldInJavaBeanMethod": "Code",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "codeGenerate",
+            "fieldType": "Boolean",
+            "fieldNameCapitalized": "CodeGenerate",
+            "fieldNameUnderscored": "code_generate",
+            "fieldInJavaBeanMethod": "CodeGenerate",
+            "fieldValidate": false
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOneToMany": false,
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": false,
+    "fieldsContainBigDecimal": false,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "changelogDate": "20150511111536",
+    "pagination": "no",
+    "validation": false
+}
