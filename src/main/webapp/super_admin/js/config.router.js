@@ -343,6 +343,20 @@
                             ]
                         }
                     })
+                    .state('app.unit.products', {
+                        url: '/products',
+                        templateUrl: 'templates/unit/products.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/product/product.factory.js',
+                                        'js/product/product.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
+                    })
                     .state('app.paymentTerms', {
                         url: '/payment_terms',
                         templateUrl: 'templates/payment_terms.html',

@@ -46,6 +46,7 @@
     <include file="classpath:config/liquibase/changelog/20150507083733_added_entity_SystemAnnouncementUser.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20150508140746_added_entity_TaxType.xml"
              relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/custom_add_company_to_product.xml" relativeToChangelogFile="false"/>
     <!-- JHipster will add liquibase changelogs here -->
 
     <include file="classpath:config/liquibase/changelog/data_batch.xml" relativeToChangelogFile="false"/>

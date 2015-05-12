@@ -54,6 +54,9 @@ public class Company extends AbstractAuditingEntity implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
     private Set<Contact> contacts = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
+    private Set<Product> products = new HashSet<>();
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "logo_id")
     private Picture logo;
@@ -146,6 +149,14 @@ public class Company extends AbstractAuditingEntity implements Serializable {
         this.logo = logo;
     }
 
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
@@ -165,17 +176,5 @@ public class Company extends AbstractAuditingEntity implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Company{" +
-                "id=" + id +
-                ", name='" + name + "'" +
-                ", email='" + email + "'" +
-                ", contactNumber='" + contactNumber + "'" +
-                ", companyType='" + companyType + "'" +
-                ", status='" + status + "'" +
-                '}';
     }
 }
