@@ -24,11 +24,12 @@
         <div class="col-sm-6" ng-show="unit.id || newUnit">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form class="form-horizontal">
+                    <form name="addEditForm" class="form-horizontal form-validation">
                         <div class="form-group text-center">
                             <div class="checkbox col-xs-6">
                                 <label class="i-checks">
-                                    <input type="checkbox" ng-model="unit.available"><i></i> AVAILABLE FOR SELECTION
+                                    <input type="checkbox" ng-model="unit.available" required><i></i> AVAILABLE FOR
+                                    SELECTION
                                 </label>
                             </div>
                         </div>
@@ -36,14 +37,14 @@
                             <label class="col-sm-3 control-label">UNIT SYMBOL</label>
 
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" ng-model="unit.unitSymbol">
+                                <input type="text" class="form-control" ng-model="unit.unitSymbol" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">UNIT DESCRIPTION</label>
 
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" ng-model="unit.description">
+                                <input type="text" class="form-control" ng-model="unit.description" required>
                             </div>
                         </div>
                         <br><br><br><br>
@@ -78,7 +79,9 @@
                                 <button class="btn btn-danger btn-rounded" ng-click="removeUnit(unit.id)">
                                     DELETE
                                 </button>
-                                <button ng-click="saveUnit()" class="btn btn-info btn-rounded" >SAVE</button>
+                                <button ng-click="saveUnit()" ng-disabled="addEditForm.$invalid"
+                                        class="btn btn-info btn-rounded">SAVE
+                                </button>
                                 <button class="btn btn-rounded" ng-click="cancel()">REVERT CHANGES</button>
                             </div>
                         </div>

@@ -6,14 +6,15 @@
         <div class="col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal form-validation">
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Outlets Name</label>
                             <div class="col-lg-10">
-                                <input type="text" ng-model="outlet.name" class="form-control" placeholder="Outlets Name">
+                                <input type="text" ng-model="outlet.name" class="form-control"
+                                       placeholder="Outlets Name" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" required>
                             <label class="col-lg-2 control-label">Status</label>
                             <div class="col-lg-10">
                                 <div class="radio">
@@ -32,7 +33,9 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <button type="submit" class="btn btn-sm btn-info" ng-click="save(outlet)">Save</button>
+                                <button type="submit" class="btn btn-sm btn-info" ng-disabled="addEditForm.$invalid"
+                                        ng-click="save(outlet)">Save
+                                </button>
                                 <span class="btn btn-sm btn-danger" back-button>Cancel</span>
                             </div>
                         </div>

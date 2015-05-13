@@ -6,7 +6,7 @@
         <div class="col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form name="form" class="form-horizontal col-sm-12">
+                    <form name="addEditForm" class="form-horizontal form-horizontal col-sm-12">
                         <div class="form-group">
                             <label class="control-label">Tax Type Code</label>
                             <input type="text" ng-model="taxType.code" class="form-control" placeholder="Tax Type Code"
@@ -31,12 +31,14 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">Percentage</label>
-                            <input type="number" ng-model="taxType.percentage" class="form-control" placeholder="%">
+                            <input type="number" ng-model="taxType.percentage" class="form-control" placeholder="%"
+                                   required>
                         </div>
                         <div class="form-group">
                             <div class="text-center">
                                 <button class="btn btn-sm btn-error" ng-click="delete()">Delete</button>
-                                <button type="submit" class="btn btn-sm btn-info" ng-click="save()"
+                                <button type="submit" class="btn btn-sm btn-info" ng-disabled="addEditForm.$invalid"
+                                        ng-click="save()"
                                         ng-disabled="!form.$valid">Save
                                 </button>
                                 <span class="btn btn-sm btn-danger" back-button>Cancel</span>

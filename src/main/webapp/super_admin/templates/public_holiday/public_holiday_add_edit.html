@@ -6,7 +6,7 @@
         <div class="col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form name="form" class="form-horizontal col-sm-12">
+                    <form name="addEditForm" class="form-horizontal form-validation col-sm-12">
                         <div class="form-group">
                             <label class="control-label">Name</label>
                             <input type="text" ng-model="publicHoliday.description" class="form-control" placeholder="Name" required>
@@ -16,7 +16,7 @@
                             <p class="input-group">
                                 <input type="text" class="form-control" ng-model="publicHoliday.date"
                                        is-open="opened"
-                                       datepicker-popup="dd-MM-yyyy" ng-required="true" close-text="Close"/>
+                                       datepicker-popup="dd-MM-yyyy" ng-required="true" close-text="Close" required/>
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i
                     class="glyphicon glyphicon-calendar"></i></button>
@@ -26,7 +26,9 @@
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
                                 <button class="btn btn-sm btn-danger" ng-click="delete()" ng-show="publicHolidayId">Delete</button>
-                                <button type="submit" class="btn btn-sm btn-info" ng-click="save()" ng-disabled="!form.$valid">Save</button>
+                                <button type="submit" class="btn btn-sm btn-info" ng-disabled="addEditForm.$invalid"
+                                        ng-click="save()" ng-disabled="!form.$valid">Save
+                                </button>
                                 <span class="btn btn-sm btn-warning" back-button>Cancel</span>
                             </div>
                         </div>

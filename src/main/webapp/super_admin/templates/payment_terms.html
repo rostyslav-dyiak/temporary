@@ -31,7 +31,7 @@
         <div class="col-sm-6" ng-show="selectedPayment.id || newType">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form class="form-horizontal col-sm-12">
+                    <form name="addEditForm" class="form-horizontal form-validation col-sm-12">
                         <div class="form-group">
                             <label class="control-label">Type of payment term</label>
 
@@ -44,7 +44,8 @@
 
                             <select class="form-control" name="daysNumber" ng-model="selectedPayment.numOfDays"
                                     ng-options="n for n in [] | range:1:30"
-                                    ng-disabled="selectedPayment.termType == 'COD' || selectedPayment.termType == 'EOM'">
+                                    ng-disabled="selectedPayment.termType == 'COD' || selectedPayment.termType == 'EOM'"
+                                    required>
                             </select>
                         </div>
                         <div class="form-group">
@@ -57,11 +58,12 @@
                             <label class="control-label">Payment Term Description</label>
 
                             <textarea class="form-control" placeholder="description" rows="5"
-                                      ng-model="selectedPayment.description"></textarea>
+                                      ng-model="selectedPayment.description" required></textarea>
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" ng-click="savePayment()" class="btn btn-sm btn-info">Save
+                            <button type="submit" ng-disabled="addEditForm.$invalid" ng-click="savePayment()"
+                                    class="btn btn-sm btn-info">Save
                             </button>
                             <button class="btn btn-sm btn-danger" ng-click="cancel()">Cancel</button>
                         </div>

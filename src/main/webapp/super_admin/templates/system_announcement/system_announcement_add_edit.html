@@ -4,7 +4,7 @@
 <div class="wrapper-md" ng-controller="SystemAnnouncementAddUpdateController">
     <div class="panel panel-default">
         <div class="panel-body">
-            <form name="form" class="form-horizontal col-sm-12">
+            <form name="addEditForm" class="form-horizontal form-horizontal col-sm-12">
                 <div class="form-group">
                     <label class="control-label">To</label>
 
@@ -85,7 +85,9 @@
                     <textarea class="form-control" ng-model="systemAnnouncement.message" rows="5"></textarea>
                 </div>
                 <div class="form-group text-center">
-                    <button type="submit" ng-click="save()" class="btn btn-sm btn-success">Send and Update</button>
+                    <button type="submit" ng-click="save()" ng-disabled="addEditForm.$invalid"
+                            class="btn btn-sm btn-success">Send and Update
+                    </button>
                     <button class="btn btn-sm" back-button>Cancel</button>
                 </div>
             </form>
