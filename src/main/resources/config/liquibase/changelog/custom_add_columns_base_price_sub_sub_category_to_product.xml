@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <!--
+        Added the entity ProductAlias.
+    -->
+    <changeSet id="20150513091136" author="mudryiroman">
+
+        <addColumn tableName="PRODUCT">
+            <column name="base_price"  type="decimal(10,2)"/>
+            <column name="sub_category_id"  type="bigint"/>
+            <column name="sub_sub_category_id"  type="bigint"/>
+        </addColumn>
+
+        <addForeignKeyConstraint baseColumnNames="sub_category_id"
+                                 baseTableName="PRODUCT"
+                                 constraintName="fk_product_sub_category"
+                                 referencedColumnNames="id"
+                                 referencedTableName="T_CATEGORY"/>
+        <addForeignKeyConstraint baseColumnNames="sub_sub_category_id"
+                                 baseTableName="PRODUCT"
+                                 constraintName="fk_product_sub_sub_category"
+                                 referencedColumnNames="id"
+                                 referencedTableName="T_CATEGORY"/>
+
+
+    </changeSet>
+</databaseChangeLog>

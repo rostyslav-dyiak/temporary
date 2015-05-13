@@ -3,7 +3,10 @@ package com.kb.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A Product.
@@ -49,9 +52,23 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     @Column(name = "quantity")
     private Integer quantity;
 
+    @Column(name = "base_price")
+    private BigDecimal basePrice;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    private Set<ProductAlias> productAliasSet = new HashSet<>();
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "sub_category_id")
+    private Category subCategory;
+
+    @ManyToOne
+    @JoinColumn(name = "sub_sub_category_id")
+    private Category subSubCategory;
 
     @ManyToOne
     @JoinColumn(name = "unit_id")
@@ -191,5 +208,37 @@ public class Product extends AbstractAuditingEntity implements Serializable {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public BigDecimal getBasePrice() {
+        return basePrice;
+    }
+
+    public void setBasePrice(BigDecimal basePrice) {
+        this.basePrice = basePrice;
+    }
+
+    public Set<ProductAlias> getProductAliasSet() {
+        return productAliasSet;
+    }
+
+    public void setProductAliasSet(Set<ProductAlias> productAliasSet) {
+        this.productAliasSet = productAliasSet;
+    }
+
+    public Category getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(Category subCategory) {
+        this.subCategory = subCategory;
+    }
+
+    public Category getSubSubCategory() {
+        return subSubCategory;
+    }
+
+    public void setSubSubCategory(Category subSubCategory) {
+        this.subSubCategory = subSubCategory;
     }
 }

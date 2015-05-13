@@ -1,39 +1,55 @@
-<div class="bg-light lter b-b wrapper-md">
+<div class="bg-light lter b-b wrapper-md" ng-controller="UnitProductController">
     <button class="btn btn-default back-button" back-button>Back</button>
 </div>
 <div class="wrapper-md" ng-controller="UnitProductController">
     <div class="row">
         <div class="col-sm-12">
-            <div>
+            <div class="panel panel-default">
                 <div class="panel-body">
-                    <ul ui-sortable="sortableOptions" class="list-group gutter list-group-lg list-group-sp types-list"
-                        ng-model="products">
-                        <li class="list-group-item" ng-repeat="product in unitProducts">
+                    <div class="table-responsive">
+                        <table st-table="rowCollection" st-safe-src="unitProducts" class="table table-striped text-center">
+                            <tbody>
+                            <tr><td>
+                                <ul ui-sortable="sortableOptions" class="list-group gutter list-group-lg list-group-sp types-list">
+                                    <li class="list-group-item " ng-repeat="row in rowCollection">
 
-                            <div class="clear type-name">
-                                <div class="col-sm-12">
-                                    <div class="col-sm-6">
-                                        {{ product.company.name}}
-                                    </div>
-                                    <div class="col-sm-5">
-                                        {{ product.company.code }}
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="col-sm-6">
-                                        {{ product.title }}
-                                    </div>
-                                    <div class="col-sm-5">
-                                        {{ product.code }}
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                                        <div class="clear type-name">
+                                            <div class="col-sm-12">
+                                                <div class="col-sm-6">
+                                                    {{ row.company.name}}
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    {{ row.company.code }}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="col-sm-6">
+                                                    {{ row.title }}
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    {{ row.code }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </td></tr>
+
+                            </tbody>
+                            <tfoot>
+                            <tr class="text-center">
+                                <td colspan="9" class="text-center">
+                                    <div st-pagination st-items-by-page="6" class="no-margin"></div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+
+
+                    </div>
                 </div>
-
             </div>
-            <div class="col-sm-12 text-center"><div st-pagination class="no-margin"></div></div>
         </div>
     </div>
 </div>
