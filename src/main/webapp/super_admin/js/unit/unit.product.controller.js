@@ -13,6 +13,7 @@
         $scope.unitId = $stateParams.unitId;
         $scope.unitProduct = {};
         $scope.unitProducts = [];
+        $scope.rowCollection = [];
 
         activate();
 
@@ -22,6 +23,7 @@
                 },
                 function (data) {
                     $scope.unitProducts = data;
+                    $scope.rowCollection = data;
                 }, function (e) {
                 });
         }
