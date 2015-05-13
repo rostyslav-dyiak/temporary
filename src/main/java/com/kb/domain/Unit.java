@@ -28,7 +28,7 @@ public class Unit extends AbstractAuditingEntity implements Serializable {
     @Column(name = "equivalent_quantity")
     private Integer equivalentQuantity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "component_id")
     private Unit component;
 

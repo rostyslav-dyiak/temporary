@@ -2,9 +2,15 @@ package com.kb.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.kb.domain.Product;
+import com.kb.domain.User;
 import com.kb.repository.ProductRepository;
+import com.kb.repository.UserRepository;
+import com.kb.security.SecurityUtils;
+import com.kb.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +33,8 @@ public class ProductResource {
 
     @Inject
     private ProductRepository productRepository;
+    @Inject
+    private UserRepository userRepository;
 
     /**
      * POST  /products -> Create a new product.
@@ -67,9 +75,15 @@ public class ProductResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<Product> getAll() {
-        log.debug("REST request to get all Products");
-        return productRepository.findAll();
+    public ResponseEntity<List<Product>> getAll(@RequestParam(value = "page", required = false) final Integer offset,
+                                @RequestParam(value = "per_page", required = false) final Integer limit) throws URISyntaxException {
+        Optional<User> user = userRepository.findOneByEmail(SecurityUtils.getCurrentLogin());
+        if(user.isPresent()) {
+            log.debug("REST request to get all Products");
+            Page<Product> page = productRepository.findByCompany(user.get().getCompany(), PaginationUtil.generatePageRequest(offset, limit));
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/products", offset, limit);
+            return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     /**

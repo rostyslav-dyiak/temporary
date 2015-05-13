@@ -57,7 +57,21 @@ angular.module('app')
                 })
                 .state('app.product', {
                     url: '/product',
-                    templateUrl: 'templates/product.html'
+                    template: '<div ui-view></div>'
+                })
+                .state('app.product.list', {
+                    url: '/list',
+                    templateUrl: 'templates/product/list.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    'js/product/product.factory.js',
+                                    'js/product/product.controller.js'
+                                ]);
+                            }
+                        ]
+                    }
                 })
                 .state('app.pricing', {
                     url: '/pricing',

@@ -1,0 +1,45 @@
+<div class="bg-light lter b-b wrapper-md clearfix">
+    <a ui-sref="app.product.add" class="btn btn-info btn-rounded">Add Product</a>
+    <a ui-sref="app.product.manage" class="btn btn-info btn-rounded">Manage category and subcategory</a>
+</div>
+<div class="wrapper-md" ng-controller="ProductController">
+    <div st-table="rowCollection" st-safe-src="products" class="panel panel-default">
+        <div class="table-responsive">
+            <table class="table table-striped text-center">
+                <thead>
+                <tr>
+                    <th colspan="3">
+                        <input st-search placeholder="Search Product Code or Name" class="input-sm form-control"
+                               type="search"/>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="text-center" st-sort="id">NO</th>
+                    <th class="text-center" st-sort="code">Product code</th>
+                    <th class="text-center" st-sort="title">Product name</th>
+                    <th class="text-center" st-sort="unit.unitSymbol">Unit</th>
+                    <th class="text-center" st-sort="basePrice">Based price</th>
+                </tr>
+
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in rowCollection">
+                    <td>{{row.id}}</td>
+                    <td>{{row.code}}</td>
+                    <td><img class="company-logo-small" ng-src="/api/content?contentPath={{row.picture.url}}">{{row.title}}</td>
+                    <td><div><p>{{row.unit.unitSymbol}}</p>
+                    <p>( {{row.unit.equivalentQuantity}} {{row.unit.component.unitSymbol}} )</p></div></td>
+                    <td>{{row.basePrice}}</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr class="text-center">
+                    <td colspan="9" class="text-center">
+                        <div st-pagination st-items-by-page="8" class="no-margin"></div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
