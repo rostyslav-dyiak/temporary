@@ -1,6 +1,13 @@
 package com.kb;
 
-import com.kb.config.Constants;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Arrays;
+
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -10,14 +17,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.SimpleCommandLinePropertySource;
-import com.google.common.base.Joiner;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.Arrays;
+import com.google.common.base.Joiner;
+import com.kb.config.Constants;
 
 @ComponentScan
 @EnableAutoConfiguration(exclude = {MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class})
@@ -46,7 +48,7 @@ public class Application {
     /**
      * Main method, used to run the application.
      */
-    public static void main(String[] args) throws UnknownHostException {
+    public static void main(final String[] args) throws UnknownHostException {
         SpringApplication app = new SpringApplication(Application.class);
         app.setShowBanner(false);
 
@@ -69,7 +71,7 @@ public class Application {
     /**
      * Set a default profile if it has not been set
      */
-    private static void addDefaultProfile(SpringApplication app, SimpleCommandLinePropertySource source) {
+    private static void addDefaultProfile(final SpringApplication app, final SimpleCommandLinePropertySource source) {
         if (!source.containsProperty("spring.profiles.active")) {
             app.setAdditionalProfiles(Constants.SPRING_PROFILE_DEVELOPMENT);
         }

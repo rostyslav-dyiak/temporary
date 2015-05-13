@@ -49,6 +49,7 @@
         <spring-security.version>4.0.0.RELEASE</spring-security.version>
         <swagger-springmvc.version>0.9.5</swagger-springmvc.version>
         <usertype-core.version>3.2.0.GA</usertype-core.version>
+        <lucene.version>5.1.0</lucene.version>
     </properties>
 
     <dependencies>
@@ -338,6 +339,37 @@
             <artifactId>spring-security-messaging</artifactId>
             <version>${spring-security.version}</version>
         </dependency>
+        <dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.data</groupId>
+                    <artifactId>spring-data-elasticsearch</artifactId>
+                </exclusion>
+            </exclusions>        	
+        </dependency>
+ 		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-elasticsearch</artifactId>
+			<version>1.2.0.RELEASE</version>
+		</dependency> 
+     
+        
+		<dependency>
+		    <groupId>org.codehaus.groovy</groupId>
+		    <artifactId>groovy-all</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>4.10.3</version>
+		</dependency>
+	    <dependency>
+	        <groupId>org.apache.lucene</groupId>
+	        <artifactId>lucene-expressions</artifactId>
+	        <version>4.10.3</version>
+	    </dependency>        
     </dependencies>
     <build>
         <resources>

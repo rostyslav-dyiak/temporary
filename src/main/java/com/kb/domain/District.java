@@ -1,10 +1,19 @@
 package com.kb.domain;
 
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * A District.
@@ -33,7 +42,7 @@ public class District implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -41,7 +50,7 @@ public class District implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -49,7 +58,7 @@ public class District implements Serializable {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -57,7 +66,7 @@ public class District implements Serializable {
         return locations;
     }
 
-    public void setLocations(String locations) {
+    public void setLocations(final String locations) {
         this.locations = locations;
     }
 
@@ -65,12 +74,12 @@ public class District implements Serializable {
         return postalCodes;
     }
 
-    public void setPostalCodes(Set<PostalCode> postalCodes) {
+    public void setPostalCodes(final Set<PostalCode> postalCodes) {
         this.postalCodes = postalCodes;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
