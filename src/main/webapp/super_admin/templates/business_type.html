@@ -15,7 +15,8 @@
                                 <span class="pull-left">
                                     <i class="fa fa-sort text-muted fa m-r-sm"></i>
                                 </span>
-                            <button class="btn btn-danger btn-rounded pull-right" ng-click="removeType(type.id)">
+                            <button class="btn btn-danger btn-rounded pull-right" confirmed-click="removeType(type.id)"
+                                    ng-confirm-click="Would you like delete business type {{ type.name }}">
                                 Delete
                             </button>
 

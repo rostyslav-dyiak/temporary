@@ -35,10 +35,6 @@ public class EateryDto extends CompanyDto{
 
     }
 
-    public static void main(String[] args) {
-        EateryDto eateryDto = new EateryDto();
-    }
-
     public Set<Outlet> getOutlets() {
         return outlets;
     }
