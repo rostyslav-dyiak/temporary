@@ -78,6 +78,28 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="added_date_condition_to_invitation_history_trigger" author="rostyslavdyyak">
+        <sql splitStatements="false">
+            <![CDATA[
+			CREATE OR REPLACE FUNCTION invitation_history_trigger() RETURNS trigger AS $$
+				begin
+						RAISE NOTICE 'invitation_history_trigger - begin, id %', new.id;
+						if new.last_modified_date IS NOT NULL THEN
+							INSERT INTO T_INVITATION_HISTORY(status,company_id,created_date,created_by) VALUES (new.status,new.id,new.last_modified_date,new.created_by);
+						else
+							INSERT INTO T_INVITATION_HISTORY(status,company_id,created_date,created_by) VALUES (new.status,new.id,new.created_date,new.created_by);
+						end if;
+						return new;
+
+				end
+            $$ language 'plpgsql';
+			]]>
+        </sql>
+        <rollback>
+            drop function if exists invitation_history_trigger()
+        </rollback>
+    </changeSet>
+
     <changeSet id="set_invitation_history_trigger" author="rostyslavdyyak">
         <sql>
             create trigger t_company_update_status after insert or update on T_COMPANY for each row execute procedure

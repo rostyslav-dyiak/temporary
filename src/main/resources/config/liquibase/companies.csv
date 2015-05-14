@@ -1,4 +1,4 @@
-id;name;email;contact_number;company_type;created_by;status;code
-1;Company1;test1@mail.com;74628734;SUPPLIER;3;ACTIVE;KB
-2;Company2;test2@mail.com;43576565;EATERY;3;ACTIVE;CS
-3;Company3;test3@mail.com;12748574;EATERY;3;INACTIVE;MC
+id;name;email;contact_number;company_type;created_by;status;code;created_date
+1;Company1;test1@mail.com;74628734;SUPPLIER;3;ACTIVE;KB;2015-05-13
+2;Company2;test2@mail.com;43576565;EATERY;3;ACTIVE;CS;2015-05-13
+3;Company3;test3@mail.com;12748574;EATERY;3;INACTIVE;MC;2015-05-13
