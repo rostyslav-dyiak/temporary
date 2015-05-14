@@ -5273,3 +5273,7 @@ a.text-#000000:hover {
     max-height: 300px;
     overflow: auto;
 }
+.scroll-box-big {
+    max-height: 600px;
+    overflow: auto;
+}

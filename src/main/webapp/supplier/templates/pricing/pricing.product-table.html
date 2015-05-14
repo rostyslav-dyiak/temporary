@@ -17,7 +17,7 @@
                     <th class="text-center" st-sort="title" colspan="2">Product name</th>
                     <th class="text-center" st-sort="unit.unitSymbol">Unit</th>
                     <th class="text-center" st-sort="basePrice">Based price</th>
-                    <th class="text-center" ng-repeat="group in pricingGroups">{{group.name}}</th>
+                    <th class="text-center" ng-repeat="group in pricingGroups">{{group.groupName}}</th>
                 </tr>
 
                 </thead>
@@ -41,7 +41,7 @@
                     </td>
                     <td class="edit-input" ng-repeat="pricingGroup in row.pricingGroups" ng-click="editPrice(pricingGroup)">
                         <span ng-show="pricingGroup.price == row.basePrice && !pricingGroup.editMode">Base Price</span>
-                        <input type="text" ng-model="pricingGroup.price" class="form-control col-md-8" placeholder="pricingGroup.group.name"
+                        <input type="text" ng-model="pricingGroup.price" class="form-control col-md-8" placeholder="pricingGroup.group.groupName"
                                ng-hide="pricingGroup.price == row.basePrice && !pricingGroup.editMode" ng-disabled="!pricingGroup.editMode" ng-enter="saveProduct(row, pricingGroup)">
                         <span ng-show="pricingGroup.saving">Saving Changes...</span>
                     </td>

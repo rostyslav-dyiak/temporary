@@ -113,6 +113,7 @@ angular.module('app')
                                 return $ocLazyLoad.load([
                                     '/js/directives/ng-enter.directive.js',
                                     'js/pricing/pricing-groups.factory.js',
+                                    'js/pricing/pricing.eatery.factory.js',
                                     'js/pricing/pricing.price-group.controller.js'
                                 ]);
                             }

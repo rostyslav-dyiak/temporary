@@ -1,15 +1,15 @@
 (function () {
     'use strict';
 
-    app.factory('PricingGroupFactory', PricingGroupFactory);
+    app.factory('PricingEateryFactory', PricingEateryFactory);
 
-    PricingGroupFactory
+    PricingEateryFactory
         .$inject = [
         '$resource'
     ];
 
-    function PricingGroupFactory($resource) {
-        return $resource('/api/pricingGroups/:id', {}, {
+    function PricingEateryFactory($resource) {
+        return $resource('api/pricing-eatery.json', {}, {
             'query': {
                 method: 'GET',
                 isArray: true
