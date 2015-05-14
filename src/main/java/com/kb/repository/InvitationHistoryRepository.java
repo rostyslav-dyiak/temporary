@@ -8,11 +8,15 @@
 
 package com.kb.repository;
 
+import com.kb.domain.Company;
 import com.kb.domain.InvitationHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
 
 /**
  * Created by rdyyak on 14.05.15.
  */
 public interface InvitationHistoryRepository extends JpaRepository<InvitationHistory, Long> {
+    public List<InvitationHistory> findAllByCompany(Company company);
 }

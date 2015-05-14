@@ -42,7 +42,8 @@
                                     return $ocLazyLoad.load([
                                         'js/directives/file-model.directive.js',
                                         'js/directives/click-selector.directive.js',
-                                        'js/manage_company/company.factory.js',
+                                        'js/manage_company/factories/company.factory.js',
+                                        'js/manage_company/factories/invitation.history.factory.js',
                                         'js/business_type/business-type.factory.js',
                                         'js/manage_company/company.add-edit.controller.js',
                                         'js/services/file-upload.service.js'
@@ -62,8 +63,9 @@
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
                                         'js/services/file-upload.service.js',
-                                        'js/manage_company/company.factory.js',
+                                        'js/manage_company/factories/company.factory.js',
                                         'js/business_type/business-type.factory.js',
+                                        'js/manage_company/factories/invitation.history.factory.js',
                                         'js/manage_company/company.add-edit.controller.js'
                                     ]);
                                 }
@@ -77,7 +79,7 @@
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
-                                        'js/manage_company/company.factory.js',
+                                        'js/manage_company/factories/company.factory.js',
                                         'js/manage_company/company.list.controller.js'
                                     ]);
                                 }
@@ -94,7 +96,7 @@
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
-                                        'js/manage_company/company.outlets.factory.js',
+                                        'js/manage_company/factories/company.outlets.factory.js',
                                         'js/manage_company/company.outlets.controller.js'
                                     ]);
                                 }
@@ -111,7 +113,7 @@
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
-                                        'js/manage_company/outlets.factory.js',
+                                        'js/manage_company/factories/outlets.factory.js',
                                         'js/manage_company/outlet.add-edit.controller.js'
                                     ]);
                                 }
@@ -129,7 +131,7 @@
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
-                                        'js/manage_company/outlets.factory.js',
+                                        'js/manage_company/factories/outlets.factory.js',
                                         'js/manage_company/outlet.add-edit.controller.js'
                                     ]);
                                 }
@@ -146,8 +148,8 @@
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
-                                        'js/manage_company/company.users.factory.js',
-                                        'js/manage_company/company.factory.js',
+                                        'js/manage_company/factories/company.users.factory.js',
+                                        'js/manage_company/factories/company.factory.js',
                                         'js/manage_company/company.employees.controller.js'
                                     ]);
                                 }

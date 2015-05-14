@@ -11,21 +11,26 @@
         'toaster',
         'CompanyFactory',
         'BusinessTypeFactory',
+        'InvitationHistoryFactory',
         'FileUploadService'
     ];
 
-    function CompanyAddUpdateController($scope, $stateParams, $http, toaster, CompanyFactory, BusinessTypeFactory, FileUploadService) {
+    function CompanyAddUpdateController($scope, $stateParams, $http, toaster, CompanyFactory, BusinessTypeFactory, InvitationHistoryFactory, FileUploadService) {
         var oldEmail = "";
         $scope.companyId = $stateParams.id;
         $scope.companyStatus = "";
         $scope.businessTypes = {};
         $scope.userCompanyDTO = {};
+        $scope.invitationHistory = [];
+        $scope.rowCollectionPage = [];
+
         $scope.removePhoto = removePhoto;
         $scope.addCompany = addCompany;
         $scope.uploadPhoto = uploadPhoto;
         $scope.changeBusinessType = changeBusinessType;
         $scope.deleteCompany = deleteCompany;
         $scope.updateCompanyInfo = updateCompanyInfo;
+
 
         activate();
 
@@ -41,6 +46,15 @@
                     }, function (e) {
                         console.error(e);
                     });
+                InvitationHistoryFactory.query({
+                    id: $scope.companyId
+                }, function (data) {
+                    $scope.invitationHistory = data;
+                    $scope.rowCollectionPage = data;
+                }, function (e) {
+                    console.error(e);
+                });
+
             }
             BusinessTypeFactory.query({},
                 function (data) {

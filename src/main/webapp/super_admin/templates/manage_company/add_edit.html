@@ -109,23 +109,24 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6" ng-show="company.id">
+        <div class="col-sm-6" ng-hide="!companyId">
             <div class="panel panel-default">
                 <h4 class="text-center">Invitation History</h4>
 
                 <div class="table-responsive">
-                    <table st-table="rowCollectionPage" class="table table-striped text-center">
+                    <table st-table="rowCollectionPage" st-safe-src="invitationHistory"
+                           class="table table-striped text-center">
                         <thead>
                         <tr>
                             <th class="text-center" st-sort="email">Email</th>
-                            <th class="text-center" st-sort="sent">Sent</th>
+                            <th class="text-center" st-sort="createdDate">Sent</th>
                             <th class="text-center" st-sort="status">Status</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="row in invitationHistory">
-                            <td>{{row.email}}</td>
-                            <td>{{row.sent | date:"EEEE, MMM dd.yyyy h:mma"}}</td>
+                            <td>{{row.company.email}}</td>
+                            <td>{{row.createdDate | date:"EEEE, MMM dd.yyyy h:mma"}}</td>
                             <td>{{row.status}}</td>
                         </tr>
                         </tbody>
