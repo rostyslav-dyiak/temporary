@@ -1,17 +1,10 @@
 package com.kb.domain;
 
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  * A SystemAnnouncement.
@@ -30,17 +23,17 @@ public class SystemAnnouncement extends BaseEntity implements Serializable {
 
     @Column(name = "message")
     private String message;
-    
+
     @Column(name = "is_admin")
     private Boolean isAdmin;
 
     @Column(name = "is_normal_user")
     private Boolean isNormalUser;
-    
+
     @OneToMany
     @JoinColumn(name = "system_announcement_id")
     private Set<SystemAnnouncementUser> users;
-    
+
     @Override
 	public Long getId() {
         return id;

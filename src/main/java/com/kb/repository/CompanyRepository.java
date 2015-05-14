@@ -1,8 +1,7 @@
 package com.kb.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.kb.domain.Company;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * Spring Data JPA repository for the Company entity.

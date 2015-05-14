@@ -1,35 +1,34 @@
 package com.kb.service.dayoff;
 
-import javax.annotation.Resource;
-import javax.inject.Inject;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-
 import com.kb.converter.Converter;
 import com.kb.domain.DayOff;
 import com.kb.repository.DayOffRepository;
 import com.kb.web.rest.dto.dayoff.AggregatedDayOffDto;
 import com.kb.web.rest.dto.dayoff.DayOffDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import javax.inject.Inject;
 
 @Service("dayOffService")
 public class DefaultDayOffService implements DayOffService {
 
     @Inject
     private DayOffRepository repository;
-	
+
     @Resource(name = "dayOffConverter")
     private Converter<DayOff, DayOffDto> entityConverter;
-    
+
     @Resource(name = "dayOffAggregatedConverter")
     private Converter<Page<DayOff>, AggregatedDayOffDto> aggregatedEntityConverter;
-    
+
     @Resource(name = "dayOffDtoConverter")
     private Converter<DayOffDto, DayOff> dtoConverter;
-    
-	@Override
-	public AggregatedDayOffDto findAll(final Pageable request) {
+
+    @Override
+    public AggregatedDayOffDto findAll(final Pageable request) {
 		Page<DayOff> page = repository.findAll(request);
 		AggregatedDayOffDto result = aggregatedEntityConverter.convert(page);
 

@@ -1,10 +1,9 @@
 package com.kb.web.rest.dto.announcement;
 
-import java.util.List;
-
+import com.kb.domain.AssignmentType;
 import org.joda.time.DateTime;
 
-import com.kb.domain.AssignmentType;
+import java.util.List;
 
 public class SystemAnnouncementResponseDto {
 
@@ -18,9 +17,9 @@ public class SystemAnnouncementResponseDto {
     private Boolean isNormalUser;
 	private List<UserAnnouncementDto> viewed;
 	private List<UserAnnouncementDto> sent;
-	
-	public Long getId() {
-		return id;
+
+    public Long getId() {
+        return id;
 	}
 
 	public void setId(final Long id) {
@@ -30,56 +29,56 @@ public class SystemAnnouncementResponseDto {
 	public String getSubject() {
 		return subject;
 	}
-	
-	public void setSubject(final String subject) {
-		this.subject = subject;
+
+    public void setSubject(final String subject) {
+        this.subject = subject;
 	}
-	
-	public String getContent() {
-		return content;
+
+    public String getContent() {
+        return content;
 	}
-	
-	public void setContent(final String content) {
-		this.content = content;
+
+    public void setContent(final String content) {
+        this.content = content;
 	}
-	
-	public AssignmentType getAssignmentType() {
-		return assignmentType;
+
+    public AssignmentType getAssignmentType() {
+        return assignmentType;
 	}
-	
-	public void setAssignmentType(final AssignmentType assignmentType) {
-		this.assignmentType = assignmentType;
+
+    public void setAssignmentType(final AssignmentType assignmentType) {
+        this.assignmentType = assignmentType;
 	}
-	
-	public DateTime getUpdateDate() {
-		return updateDate;
+
+    public DateTime getUpdateDate() {
+        return updateDate;
 	}
-	
-	public void setUpdateDate(final DateTime updateDate) {
-		this.updateDate = updateDate;
+
+    public void setUpdateDate(final DateTime updateDate) {
+        this.updateDate = updateDate;
 	}
-	
-	public DateTime getCreateDate() {
-		return createDate;
+
+    public DateTime getCreateDate() {
+        return createDate;
 	}
-	
-	public void setCreateDate(final DateTime createDate) {
-		this.createDate = createDate;
+
+    public void setCreateDate(final DateTime createDate) {
+        this.createDate = createDate;
 	}
 	public List<UserAnnouncementDto> getViewed() {
 		return viewed;
 	}
-	
-	public void setViewed(final List<UserAnnouncementDto> viewed) {
-		this.viewed = viewed;
+
+    public void setViewed(final List<UserAnnouncementDto> viewed) {
+        this.viewed = viewed;
 	}
-	
-	public List<UserAnnouncementDto> getSent() {
-		return sent;
+
+    public List<UserAnnouncementDto> getSent() {
+        return sent;
 	}
-	
-	public void setSent(final List<UserAnnouncementDto> sent) {
-		this.sent = sent;
+
+    public void setSent(final List<UserAnnouncementDto> sent) {
+        this.sent = sent;
 	}
 
 	public Boolean getIsAdmin() {
@@ -209,5 +208,5 @@ public class SystemAnnouncementResponseDto {
 				+ ", isNormalUser=" + isNormalUser + ", viewed=" + viewed
 				+ ", sent=" + sent + "]";
 	}
-	
+
 }

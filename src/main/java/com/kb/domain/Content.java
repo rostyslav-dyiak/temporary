@@ -1,12 +1,12 @@
 package com.kb.domain;
 
-import java.io.InputStream;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.io.InputStream;
 
 /**
  * Model for storing content.
- * 
+ *
  * @author rostyslav
  *
  */

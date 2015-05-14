@@ -5,7 +5,7 @@ import com.kb.domain.Product;
 import com.kb.domain.Unit;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 
 /**

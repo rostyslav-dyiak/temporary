@@ -3,11 +3,9 @@ package com.kb.web.rest;
 import com.kb.Application;
 import com.kb.domain.PaymentTerm;
 import com.kb.repository.PaymentTermRepository;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -24,6 +22,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -134,8 +133,8 @@ public class PaymentTermResourceTest {
     public void updatePaymentTerm() throws Exception {
         // Initialize the database
         paymentTermRepository.saveAndFlush(paymentTerm);
-		
-		int databaseSizeBeforeUpdate = paymentTermRepository.findAll().size();
+
+        int databaseSizeBeforeUpdate = paymentTermRepository.findAll().size();
 
         // Update the paymentTerm
         paymentTerm.setTermName(UPDATED_TERM_NAME);
@@ -160,8 +159,8 @@ public class PaymentTermResourceTest {
     public void deletePaymentTerm() throws Exception {
         // Initialize the database
         paymentTermRepository.saveAndFlush(paymentTerm);
-		
-		int databaseSizeBeforeDelete = paymentTermRepository.findAll().size();
+
+        int databaseSizeBeforeDelete = paymentTermRepository.findAll().size();
 
         // Get the paymentTerm
         restPaymentTermMockMvc.perform(delete("/api/paymentTerms/{id}", paymentTerm.getId())

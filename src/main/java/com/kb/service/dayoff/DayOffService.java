@@ -1,9 +1,8 @@
 package com.kb.service.dayoff;
 
-import org.springframework.data.domain.Pageable;
-
 import com.kb.web.rest.dto.dayoff.AggregatedDayOffDto;
 import com.kb.web.rest.dto.dayoff.DayOffDto;
+import org.springframework.data.domain.Pageable;
 
 public interface DayOffService {
 

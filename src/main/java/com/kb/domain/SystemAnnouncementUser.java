@@ -1,16 +1,9 @@
 package com.kb.domain;
 
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "T_SYSTEMANNOUNCEMENTUSER")
@@ -24,7 +17,7 @@ public class SystemAnnouncementUser extends BaseEntity implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private ViewedType status;

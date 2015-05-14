@@ -1,16 +1,12 @@
 package com.kb.domain;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @MappedSuperclass
 public class BaseEntity {
@@ -18,7 +14,7 @@ public class BaseEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
-	
+
     @CreatedDate
     @NotNull
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
@@ -117,6 +113,6 @@ public class BaseEntity {
 		return "BaseEntity [id=" + id + ", createdDate=" + createdDate
 				+ ", lastModifiedDate=" + lastModifiedDate + "]";
 	}
-    
-    
+
+
 }

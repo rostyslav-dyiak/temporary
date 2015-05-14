@@ -1,7 +1,5 @@
 package com.kb.security.xauth;
 
-import com.kb.security.xauth.TokenProvider;
-import com.kb.security.xauth.XAuthTokenFilter;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;

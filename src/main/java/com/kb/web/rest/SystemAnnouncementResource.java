@@ -1,30 +1,23 @@
 package com.kb.web.rest;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Optional;
-
-import javax.inject.Inject;
-import javax.validation.Valid;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.codahale.metrics.annotation.Timed;
 import com.kb.service.announcement.SystemAnnouncementService;
 import com.kb.web.rest.dto.announcement.SystemAnnouncementDto;
 import com.kb.web.rest.dto.announcement.SystemAnnouncementResponseDto;
 import com.kb.web.rest.dto.announcement.SystemAnnouncementsDto;
 import com.kb.web.rest.util.PaginationUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.inject.Inject;
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Optional;
 
 /**
  * REST controller for managing SystemAnnouncement.
@@ -36,22 +29,22 @@ public class SystemAnnouncementResource {
 
 	@Inject
 	private SystemAnnouncementService service;
-	
-	@RequestMapping(value = "/messages", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	@Timed
+
+    @RequestMapping(value = "/messages", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
 	public ResponseEntity<Void> create(@Valid @RequestBody final SystemAnnouncementDto dto) throws URISyntaxException {
-		
-		log.debug("REST request to save message : {}", dto);
-		
-		if (dto.getId() != null) {
-			return ResponseEntity
+
+        log.debug("REST request to save message : {}", dto);
+
+        if (dto.getId() != null) {
+            return ResponseEntity
 					.badRequest()
 					.header("Failure", "A new message cannot already have an ID")
 					.build();
 		}
-		
-		service.save(dto);
-		return ResponseEntity.created(new URI("/api/messages/" + dto.getId())).build();
+
+        service.save(dto);
+        return ResponseEntity.created(new URI("/api/messages/" + dto.getId())).build();
 	}
 
 	@RequestMapping(value = "/messages", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)

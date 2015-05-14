@@ -3,11 +3,9 @@ package com.kb.web.rest;
 import com.kb.Application;
 import com.kb.domain.ProductType;
 import com.kb.repository.ProductTypeRepository;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -24,6 +22,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -127,8 +126,8 @@ public class ProductTypeResourceTest {
     public void updateProductType() throws Exception {
         // Initialize the database
         productTypeRepository.saveAndFlush(productType);
-		
-		int databaseSizeBeforeUpdate = productTypeRepository.findAll().size();
+
+        int databaseSizeBeforeUpdate = productTypeRepository.findAll().size();
 
         // Update the productType
         productType.setName(UPDATED_NAME);
@@ -151,8 +150,8 @@ public class ProductTypeResourceTest {
     public void deleteProductType() throws Exception {
         // Initialize the database
         productTypeRepository.saveAndFlush(productType);
-		
-		int databaseSizeBeforeDelete = productTypeRepository.findAll().size();
+
+        int databaseSizeBeforeDelete = productTypeRepository.findAll().size();
 
         // Get the productType
         restProductTypeMockMvc.perform(delete("/api/productTypes/{id}", productType.getId())

@@ -1,10 +1,7 @@
 package com.kb.repository;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.inject.Inject;
-
+import com.kb.config.audit.AuditEventConverter;
+import com.kb.domain.PersistentAuditEvent;
 import org.joda.time.LocalDateTime;
 import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.boot.actuate.audit.AuditEventRepository;
@@ -13,8 +10,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kb.config.audit.AuditEventConverter;
-import com.kb.domain.PersistentAuditEvent;
+import javax.inject.Inject;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Wraps an implementation of Spring Boot's AuditEventRepository.

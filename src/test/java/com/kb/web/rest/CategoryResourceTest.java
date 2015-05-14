@@ -1,20 +1,8 @@
 package com.kb.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-
+import com.kb.Application;
+import com.kb.domain.Category;
+import com.kb.repository.CategoryRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,9 +17,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kb.Application;
-import com.kb.domain.Category;
-import com.kb.repository.CategoryRepository;
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Test class for the CategoryResource REST controller.
@@ -128,8 +121,8 @@ public class CategoryResourceTest {
     public void updateCategory() throws Exception {
         // Initialize the database
         categoryRepository.saveAndFlush(category);
-		
-		int databaseSizeBeforeUpdate = categoryRepository.findAll().size();
+
+        int databaseSizeBeforeUpdate = categoryRepository.findAll().size();
 
         // Update the category
         category.setTitle(UPDATED_TITLE);
@@ -150,8 +143,8 @@ public class CategoryResourceTest {
     public void deleteCategory() throws Exception {
         // Initialize the database
         categoryRepository.saveAndFlush(category);
-		
-		int databaseSizeBeforeDelete = categoryRepository.findAll().size();
+
+        int databaseSizeBeforeDelete = categoryRepository.findAll().size();
 
         // Get the category
         restCategoryMockMvc.perform(delete("/api/categorys/{id}", category.getId())

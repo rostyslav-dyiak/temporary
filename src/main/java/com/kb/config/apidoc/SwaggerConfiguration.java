@@ -1,5 +1,10 @@
 package com.kb.config.apidoc;
 
+import com.kb.config.Constants;
+import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
+import com.mangofactory.swagger.models.dto.ApiInfo;
+import com.mangofactory.swagger.plugin.EnableSwagger;
+import com.mangofactory.swagger.plugin.SwaggerSpringMvcPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.bind.RelaxedPropertyResolver;
@@ -10,12 +15,6 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StopWatch;
-
-import com.kb.config.Constants;
-import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
-import com.mangofactory.swagger.models.dto.ApiInfo;
-import com.mangofactory.swagger.plugin.EnableSwagger;
-import com.mangofactory.swagger.plugin.SwaggerSpringMvcPlugin;
 
 /**
  * Swagger configuration.
@@ -34,7 +33,7 @@ public class SwaggerConfiguration implements EnvironmentAware {
     public static final String DEFAULT_INCLUDE_PATTERN = "/api/.*";
 
     private RelaxedPropertyResolver propertyResolver;
-    
+
     @Override
     public void setEnvironment(final Environment environment) {
         this.propertyResolver = new RelaxedPropertyResolver(environment, "swagger.");

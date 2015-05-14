@@ -3,11 +3,9 @@ package com.kb.web.rest;
 import com.kb.Application;
 import com.kb.domain.Picture;
 import com.kb.repository.PictureRepository;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -24,6 +22,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -127,8 +126,8 @@ public class PictureResourceTest {
     public void updatePicture() throws Exception {
         // Initialize the database
         pictureRepository.saveAndFlush(picture);
-		
-		int databaseSizeBeforeUpdate = pictureRepository.findAll().size();
+
+        int databaseSizeBeforeUpdate = pictureRepository.findAll().size();
 
         // Update the picture
         picture.setTitle(UPDATED_TITLE);
@@ -151,8 +150,8 @@ public class PictureResourceTest {
     public void deletePicture() throws Exception {
         // Initialize the database
         pictureRepository.saveAndFlush(picture);
-		
-		int databaseSizeBeforeDelete = pictureRepository.findAll().size();
+
+        int databaseSizeBeforeDelete = pictureRepository.findAll().size();
 
         // Get the picture
         restPictureMockMvc.perform(delete("/api/pictures/{id}", picture.getId())
