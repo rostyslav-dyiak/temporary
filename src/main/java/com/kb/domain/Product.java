@@ -81,6 +81,9 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     @JoinColumn(name = "company_id")
     private Company company;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    private Set<ProductPricingGroup> productPricingGroups = new HashSet<ProductPricingGroup>();
+
     public Long getId() {
         return id;
     }
@@ -239,5 +242,13 @@ public class Product extends AbstractAuditingEntity implements Serializable {
 
     public void setSubSubCategory(Category subSubCategory) {
         this.subSubCategory = subSubCategory;
+    }
+
+    public Set<ProductPricingGroup> getProductPricingGroups() {
+        return productPricingGroups;
+    }
+
+    public void setProductPricingGroups(Set<ProductPricingGroup> productPricingGroups) {
+        this.productPricingGroups = productPricingGroups;
     }
 }

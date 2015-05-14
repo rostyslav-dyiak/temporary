@@ -9,7 +9,7 @@
     ];
 
     function PricingProductTableFactory($resource) {
-        return $resource('api/pricing.json', {}, {
+        return $resource('/api/products', {}, {
             'query': {
                 method: 'GET',
                 isArray: true

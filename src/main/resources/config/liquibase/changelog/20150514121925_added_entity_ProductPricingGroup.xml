@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <!--
+        Added the entity ProductPricingGroup.
+    -->
+    <changeSet id="20150514121925" author="oleh_yatskiv">
+        <createTable tableName="T_PRODUCTPRICINGGROUP">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="price" type="decimal(10,2)"/>
+            <column name="product_id" type="bigint"/>
+            <column name="pricing_group_id" type="bigint"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="T_PRODUCTPRICINGGROUP"
+                                 constraintName="fk_product_pricing_group"
+                                 referencedColumnNames="id"
+                                 referencedTableName="PRODUCT"/>
+
+        <addForeignKeyConstraint baseColumnNames="pricing_group_id"
+                                 baseTableName="T_PRODUCTPRICINGGROUP"
+                                 constraintName="fk_pricing_group_product"
+                                 referencedColumnNames="id"
+                                 referencedTableName="T_PRICINGGROUP"/>
+
+    </changeSet>
+</databaseChangeLog>
