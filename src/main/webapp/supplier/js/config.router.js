@@ -73,9 +73,36 @@ angular.module('app')
                         ]
                     }
                 })
-                .state('app.pricing', {
-                    url: '/pricing',
-                    templateUrl: 'templates/pricing.html'
+                .state('app.pricingProductTable', {
+                    url: '/pricing/product_table',
+                    templateUrl: 'templates/pricing/pricing.product-table.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    '/js/directives/ng-enter.directive.js',
+                                    'js/pricing/pricing-groups.factory.js',
+                                    'js/pricing/pricing.product-table.factory.js',
+                                    'js/pricing/pricing.product-table.controller.js'
+                                ]);
+                            }
+                        ]
+                    }
+                })
+                .state('app.pricingPriceGroup', {
+                    url: '/pricing/price_group',
+                    templateUrl: 'templates/pricing/pricing.price-group.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    '/js/directives/ng-enter.directive.js',
+                                    'js/pricing/pricing-groups.factory.js',
+                                    'js/pricing/pricing.price-group.controller.js'
+                                ]);
+                            }
+                        ]
+                    }
                 })
                 .state('app.setting', {
                     url: '/setting',

@@ -1,0 +1,170 @@
+[
+    {
+        "id": 1,
+        "code": "A715",
+        "title": "Egg",
+        "unit": {
+            "unitSymbol": "tray",
+            "equivalentQuantity": 40,
+            "component": {
+                "unitSymbol": "eggs"
+            }
+        },
+        "picture": {
+            "url": "/logo_placeholder.png"
+        },
+        "basePrice": 10,
+        "pricingGroups": [
+            {
+                "group": {
+                    "id": 1,
+                    "name": "hotelGroup",
+                    "description": "7856fdhjgdf6345rew"
+                },
+                "price": 10
+            },
+            {
+                "group": {
+                    "id": 2,
+                    "name": "cafeGroup",
+                    "description": "7856fdhjgdf6345rew"
+                },
+                "price": 11
+            },
+            {
+                "group": {
+                    "id": 3,
+                    "name": "coffeeShopGroup",
+                    "description": "7856fdhjgdf6345rew"
+                },
+                "price": 12
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "code": "A115",
+        "title": "Chill",
+        "unit": {
+            "unitSymbol": "tray",
+            "equivalentQuantity": 40,
+            "component": {
+                "unitSymbol": "eggs"
+            }
+        },
+        "picture": {
+            "url": "/logo_placeholder.png"
+        },
+        "basePrice": 3,
+        "pricingGroups": [
+            {
+                "group": {
+                    "id": 1,
+                    "name": "hotelGroup",
+                    "description": "7856fdhjgdf6345rew"
+                },
+                "price": 63
+            },
+            {
+                "group": {
+                    "id": 2,
+                    "name": "cafeGroup",
+                    "description": "7856fdhjgdf6345rew"
+                },
+                "price": 6
+            },
+            {
+                "group": {
+                    "id": 3,
+                    "name": "coffeeShopGroup",
+                    "description": "7856fdhjgdf6345rew"
+                },
+                "price": 3
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "code": "A915",
+        "title": "Hot dog",
+        "unit": {
+            "unitSymbol": "tray",
+            "equivalentQuantity": 40,
+            "component": {
+                "unitSymbol": "eggs"
+            }
+        },
+        "picture": {
+            "url": "/logo_placeholder.png"
+        },
+        "basePrice": 11,
+        "pricingGroups": [
+            {
+                "group": {
+                    "id": 1,
+                    "name": "hotelGroup",
+                    "description": "7856fdhjgdf6345rew"
+                },
+                "price": 10
+            },
+            {
+                "group": {
+                    "id": 2,
+                    "name": "cafeGroup",
+                    "description": "7856fdhjgdf6345rew"
+                },
+                "price": 11
+            },
+            {
+                "group": {
+                    "id": 3,
+                    "name": "coffeeShopGroup",
+                    "description": "7856fdhjgdf6345rew"
+                },
+                "price": 12
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "code": "A315",
+        "title": "Egg",
+        "unit": {
+            "unitSymbol": "tray",
+            "equivalentQuantity": 40,
+            "component": {
+                "unitSymbol": "eggs"
+            }
+        },
+        "picture": {
+            "url": "/logo_placeholder.png"
+        },
+        "basePrice": 12,
+        "pricingGroups": [
+            {
+                "group": {
+                    "id": 1,
+                    "name": "hotelGroup",
+                    "description": "7856fdhjgdf6345rew"
+                },
+                "price": 10
+            },
+            {
+                "group": {
+                    "id": 2,
+                    "name": "cafeGroup",
+                    "description": "7856fdhjgdf6345rew"
+                },
+                "price": 11
+            },
+            {
+                "group": {
+                    "id": 3,
+                    "name": "coffeeShopGroup",
+                    "description": "7856fdhjgdf6345rew"
+                },
+                "price": 12
+            }
+        ]
+    }
+]

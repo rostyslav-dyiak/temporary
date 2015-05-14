@@ -5202,6 +5202,9 @@ a.text-#000000:hover {
     max-width: 80px;
     max-height: 80px;
 }
+.edit-input {
+    max-width: 50px;
+}
 
 /* Type screens */
 .types-list {

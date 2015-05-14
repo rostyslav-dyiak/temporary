@@ -1,0 +1,60 @@
+<div class="bg-light lter b-b wrapper-md clearfix">
+    <a ui-sref="app.pricingPriceGroup" class="btn btn-success btn-rounded">Manage Price Groups</a>
+</div>
+<div class="wrapper-md" ng-controller="PricingProductTableController">
+    <div st-table="rowCollection" st-safe-src="productsPricing" class="panel panel-default">
+        <div class="table-responsive">
+            <table class="table table-striped text-center">
+                <thead>
+                <tr>
+                    <th colspan="3">
+                        <input st-search placeholder="Search " class="input-sm form-control" type="search"/>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="text-center" st-sort="id">NO</th>
+                    <th class="text-center" st-sort="code">Product code</th>
+                    <th class="text-center" st-sort="title" colspan="2">Product name</th>
+                    <th class="text-center" st-sort="unit.unitSymbol">Unit</th>
+                    <th class="text-center" st-sort="basePrice">Based price</th>
+                    <th class="text-center" ng-repeat="group in pricingGroups">{{group.name}}</th>
+                </tr>
+
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in rowCollection">
+                    <td>{{row.id}}</td>
+                    <td>{{row.code}}</td>
+                    <td><img class="company-logo-small" ng-src="/api/content?contentPath={{row.picture.url}}"></td>
+                    <td>{{row.title}}</td>
+                    <td>
+                        <div>
+                            <p>{{row.unit.unitSymbol}}<br>
+                                ({{row.unit.equivalentQuantity}} {{row.unit.component.unitSymbol}})
+                            </p>
+                        </div>
+                    </td>
+                    <td class="edit-input" ng-click="editBasePrice(row)">
+                        <input type="text" ng-model="row.basePrice" class="form-control" placeholder="Base Price"
+                               ng-disabled="!row.basePriceEditMode" ng-enter="saveProduct(row)">
+                        <span ng-show="row.saving">Saving Changes...</span>
+                    </td>
+                    <td class="edit-input" ng-repeat="pricingGroup in row.pricingGroups" ng-click="editPrice(pricingGroup)">
+                        <span ng-show="pricingGroup.price == row.basePrice && !pricingGroup.editMode">Base Price</span>
+                        <input type="text" ng-model="pricingGroup.price" class="form-control col-md-8" placeholder="pricingGroup.group.name"
+                               ng-hide="pricingGroup.price == row.basePrice && !pricingGroup.editMode" ng-disabled="!pricingGroup.editMode" ng-enter="saveProduct(row, pricingGroup)">
+                        <span ng-show="pricingGroup.saving">Saving Changes...</span>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr class="text-center">
+                    <td colspan="7" class="text-center">
+                        <div st-pagination class="no-margin"></div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
