@@ -103,7 +103,8 @@
                                       ng-show="companyId && companyStatus != 'PENDING'"
                                       ng-disabled="addEditForm.$invalid" ng-click="addCompany()">Update</span>
                                 <span class="btn btn-sm btn-danger" back-button>Cancel</span>
-                                <span class="btn btn-sm btn-danger" ng-click="deleteCompany()" ng-hide="!companyId">Delete</span>
+                                <span class="btn btn-sm btn-danger" confirmed-click="deleteCompany()"
+                                      ng-hide="!companyId" ng-confirm-click>Delete</span>
                             </div>
                         </div>
                     </form>

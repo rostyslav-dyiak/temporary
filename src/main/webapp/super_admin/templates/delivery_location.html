@@ -65,12 +65,16 @@
                         </div>
 
                         <div class="form-group">
-                            <button ng-click="removeDistrict()" class="btn btn-sm btn-danger">Delete
+                            <button confirmed-click="removeDistrict()"
+                                    ng-confirm-click="Would you like remove district?" class="btn btn-sm btn-danger">
+                                Delete
                             </button>
                             <button type="submit" ng-disabled="addEditForm.$invalid" ng-click="saveDistrict()"
                                     class="btn btn-sm btn-info">Save
                             </button>
-                            <button class="btn btn-sm btn-warning" ng-click="cancel()">Revert Changes</button>
+                            <button class="btn btn-sm btn-warning" confirmed-click="cancel()" ng-confirm-click>Revert
+                                Changes
+                            </button>
                         </div>
                     </form>
                 </div>

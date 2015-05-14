@@ -74,7 +74,9 @@
                             <textarea class="form-control" ng-model="selectedAnnouncement.content" disabled></textarea>
                         </div>
                         <div class="form-group text-center">
-                            <button type="submit" ng-click="delete()" class="btn btn-sm">Delete</button>
+                            <button type="submit" confirmed-click="delete()" class="btn btn-sm" ng-confirm-click>
+                                Delete
+                            </button>
                             <a ui-sref="app.systemAnnouncementEdit({id: selectedAnnouncement.id })"
                                class="btn btn-sm btn-success">Edit</a>
                         </div>

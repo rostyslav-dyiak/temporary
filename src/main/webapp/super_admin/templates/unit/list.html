@@ -9,7 +9,8 @@
                         ng-model="units">
                         <li class="list-group-item" ng-repeat="unit in units">
 
-                            <button class="btn btn-danger btn-rounded pull-right" ng-click="removeUnit(unit.id)">
+                            <button class="btn btn-danger btn-rounded pull-right" confirmed-click="removeUnit(unit.id)"
+                                    ng-confirm-click>
                                 Delete
                             </button>
 
@@ -75,13 +76,16 @@
 
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-sm-10">
-                                <button class="btn btn-danger btn-rounded" ng-click="removeUnit(unit.id)">
+                                <button class="btn btn-danger btn-rounded" confirmed-click="removeUnit(unit.id)"
+                                        ng-confirm-click>
                                     DELETE
                                 </button>
                                 <button ng-click="saveUnit()" ng-disabled="addEditForm.$invalid"
                                         class="btn btn-info btn-rounded">SAVE
                                 </button>
-                                <button class="btn btn-rounded" ng-click="cancel()">Revert changes</button>
+                                <button class="btn btn-rounded" confirmed-click="cancel()" ng-confirm-click>Revert
+                                    changes
+                                </button>
                             </div>
                         </div>
                         <div class="form-group">
