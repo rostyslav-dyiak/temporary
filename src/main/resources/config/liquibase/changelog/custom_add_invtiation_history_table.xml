@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <!--
+        Added the entity Invitation History.
+    -->
+    <changeSet id="create_invitation_history_table" author="rostyslavdyyak">
+        <createTable tableName="T_INVITATION_HISTORY">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="status" type="varchar(50)"/>
+            <column name="company_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="added common fields and fk to T_INVITATION_HISTORY" author="rostyslavdyyak">
+        <addForeignKeyConstraint baseColumnNames="company_id"
+                                 baseTableName="T_INVITATION_HISTORY"
+                                 constraintName="fk_invitation_history_company"
+                                 referencedColumnNames="id"
+                                 referencedTableName="T_COMPANY"/>
+
+
+        <addColumn tableName="T_INVITATION_HISTORY">
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" defaultValueDate="${now}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+        </addColumn>
+
+    </changeSet>
+
+
+    <changeSet id="create_invitation_history_trigger" author="rostyslavdyyak">
+        <sql splitStatements="false">
+            <![CDATA[
+			CREATE OR REPLACE FUNCTION invitation_history_trigger() RETURNS trigger AS $$
+				begin
+						RAISE NOTICE 'invitation_history_trigger - begin, id %', new.id;
+						INSERT INTO T_INVITATION_HISTORY(status,company_id,created_date) VALUES (new.status,new.id,new.last_modified_date);
+						return new;
+
+				end
+            $$ language 'plpgsql';
+			]]>
+        </sql>
+        <rollback>
+            drop function if exists invitation_history_trigger()
+        </rollback>
+    </changeSet>
+
+    <changeSet id="change_invitation_history_trigger" author="rostyslavdyyak">
+        <sql splitStatements="false">
+            <![CDATA[
+			CREATE OR REPLACE FUNCTION invitation_history_trigger() RETURNS trigger AS $$
+				begin
+						RAISE NOTICE 'invitation_history_trigger - begin, id %', new.id;
+						INSERT INTO T_INVITATION_HISTORY(status,company_id,created_date,created_by) VALUES (new.status,new.id,new.last_modified_date,new.created_by);
+						return new;
+
+				end
+            $$ language 'plpgsql';
+			]]>
+        </sql>
+        <rollback>
+            drop function if exists invitation_history_trigger()
+        </rollback>
+    </changeSet>
+
+    <changeSet id="set_invitation_history_trigger" author="rostyslavdyyak">
+        <sql>
+            create trigger t_company_update_status after insert or update on T_COMPANY for each row execute procedure
+            invitation_history_trigger();
+        </sql>
+        <rollback>
+            drop trigger if exists t_company_update_status on T_COMPANY
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
