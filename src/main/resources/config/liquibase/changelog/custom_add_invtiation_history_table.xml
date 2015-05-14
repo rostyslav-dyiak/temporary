@@ -87,4 +87,14 @@
             drop trigger if exists t_company_update_status on T_COMPANY
         </rollback>
     </changeSet>
+    <changeSet id="change_foreign_key_for_invitaiton" author="rostyslavdyiak">
+        <dropForeignKeyConstraint baseTableName="T_INVITATION_HISTORY" constraintName="fk_invitation_history_company"/>
+        <addForeignKeyConstraint baseColumnNames="company_id"
+                                 baseTableName="T_INVITATION_HISTORY"
+                                 constraintName="fk_invitation_history_company"
+                                 referencedColumnNames="id"
+                                 referencedTableName="T_COMPANY"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+    </changeSet>
 </databaseChangeLog>
