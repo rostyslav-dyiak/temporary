@@ -14,6 +14,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -75,7 +76,7 @@ public class ProductResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Product>> getAll(@RequestParam(value = "page", required = false) final Integer offset,
+    public ResponseEntity<List<Product>> getAllPaged(@RequestParam(value = "page", required = false) final Integer offset,
                                 @RequestParam(value = "per_page", required = false) final Integer limit) throws URISyntaxException {
         Optional<User> user = userRepository.findOneByEmail(SecurityUtils.getCurrentLogin());
         if(user.isPresent()) {
@@ -83,6 +84,23 @@ public class ProductResource {
             Page<Product> page = productRepository.findByCompany(user.get().getCompany(), PaginationUtil.generatePageRequest(offset, limit));
             HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/products", offset, limit);
             return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    /**
+     * GET  /products -> get all the products.
+     */
+    @RequestMapping(value = "/products/uncategorized",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional
+    public ResponseEntity<List<Product>> getAll() throws URISyntaxException {
+        Optional<User> user = userRepository.findOneByEmail(SecurityUtils.getCurrentLogin());
+        if(user.isPresent()) {
+            log.debug("REST request to get all Products");
+            List<Product> products = productRepository.findByCompanyAndCategoryIsNull(user.get().getCompany());
+            return new ResponseEntity<>(products, HttpStatus.OK);
         } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
