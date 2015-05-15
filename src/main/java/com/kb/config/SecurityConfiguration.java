@@ -1,7 +1,9 @@
 package com.kb.config;
 
-import javax.inject.Inject;
-
+import com.kb.security.AuthoritiesConstants;
+import com.kb.security.Http401UnauthorizedEntryPoint;
+import com.kb.security.xauth.TokenProvider;
+import com.kb.security.xauth.XAuthTokenConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,10 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension;
 
-import com.kb.security.AuthoritiesConstants;
-import com.kb.security.Http401UnauthorizedEntryPoint;
-import com.kb.security.xauth.TokenProvider;
-import com.kb.security.xauth.XAuthTokenConfigurer;
+import javax.inject.Inject;
 
 @Configuration
 @EnableWebSecurity

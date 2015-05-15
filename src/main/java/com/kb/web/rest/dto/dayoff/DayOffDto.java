@@ -1,11 +1,10 @@
 package com.kb.web.rest.dto.dayoff;
 
-import javax.validation.constraints.NotNull;
-
-import org.joda.time.DateTime;
-
 import com.kb.domain.AbsenceType;
 import com.kb.web.rest.dto.BaseDto;
+import org.joda.time.DateTime;
+
+import javax.validation.constraints.NotNull;
 
 public class DayOffDto extends BaseDto {
 
@@ -15,9 +14,9 @@ public class DayOffDto extends BaseDto {
 	private Long supplierDetailsId;
 
 	private Long publicHolidayId;
-	
-	private AbsenceType absenceType;
-	
+
+    private AbsenceType absenceType;
+
     private String description;
 
     private DateTime date;
@@ -149,5 +148,5 @@ public class DayOffDto extends BaseDto {
 				+ ", absenceType=" + absenceType + ", description="
 				+ description + ", date=" + date + "]";
 	}
-	
+
 }

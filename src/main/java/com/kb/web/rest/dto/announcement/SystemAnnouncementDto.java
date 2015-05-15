@@ -1,8 +1,8 @@
 package com.kb.web.rest.dto.announcement;
 
-import java.util.Set;
-
 import com.kb.domain.AssignmentType;
+
+import java.util.Set;
 
 public class SystemAnnouncementDto {
 
@@ -153,5 +153,5 @@ public class SystemAnnouncementDto {
 				+ content + ", isAdmin=" + isAdmin + ", isNormalUser="
 				+ isNormalUser + ", users=" + users + "]";
 	}
-	
+
 }

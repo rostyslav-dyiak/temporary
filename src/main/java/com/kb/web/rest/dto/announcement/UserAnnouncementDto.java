@@ -1,8 +1,7 @@
 package com.kb.web.rest.dto.announcement;
 
-import org.joda.time.DateTime;
-
 import com.kb.domain.ViewedType;
+import org.joda.time.DateTime;
 
 public class UserAnnouncementDto {
 
@@ -31,29 +30,29 @@ public class UserAnnouncementDto {
 	public Long getId() {
 		return id;
 	}
-	
-	public void setId(final Long id) {
-		this.id = id;
+
+    public void setId(final Long id) {
+        this.id = id;
 	}
-	
-	public DateTime getViewedDate() {
-		return viewedDate;
+
+    public DateTime getViewedDate() {
+        return viewedDate;
 	}
-	
-	public void setViewedDate(final DateTime viewedDate) {
-		this.viewedDate = viewedDate;
+
+    public void setViewedDate(final DateTime viewedDate) {
+        this.viewedDate = viewedDate;
 	}
-	
-	public String getRole() {
-		return role;
+
+    public String getRole() {
+        return role;
 	}
-	
-	public void setRole(final String role) {
-		this.role = role;
+
+    public void setRole(final String role) {
+        this.role = role;
 	}
-	
-	public ViewedType getViewedType() {
-		return viewedType;
+
+    public ViewedType getViewedType() {
+        return viewedType;
 	}
 
 	public void setViewedType(final ViewedType viewedType) {

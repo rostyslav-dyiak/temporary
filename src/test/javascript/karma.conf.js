@@ -44,6 +44,8 @@ module.exports = function (config) {
             'main/webapp/bower_components/oclazyload/dist/ocLazyLoad.min.js',
             'main/webapp/bower_components/html5sortable/jquery.sortable.js',
             'main/webapp/bower_components/angularjs-toaster/toaster.js',
+            'main/webapp/bower_components/bootbox/bootbox.js',
+            'main/webapp/bower_components/ngBootbox/dist/ngBootbox.js',
             'main/webapp/bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'main/webapp/scripts/app/app.js',

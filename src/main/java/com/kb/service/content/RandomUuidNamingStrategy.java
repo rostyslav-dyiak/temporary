@@ -1,14 +1,13 @@
 package com.kb.service.content;
 
-import java.util.UUID;
-
+import com.kb.domain.Content;
 import org.springframework.stereotype.Component;
 
-import com.kb.domain.Content;
+import java.util.UUID;
 
 /**
  * Class for randomly resource naming.
- * 
+ *
  * @author rostyslav
  *
  */

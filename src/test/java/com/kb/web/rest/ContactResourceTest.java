@@ -3,11 +3,9 @@ package com.kb.web.rest;
 import com.kb.Application;
 import com.kb.domain.Contact;
 import com.kb.repository.ContactRepository;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -24,6 +22,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -145,8 +144,8 @@ public class ContactResourceTest {
     public void updateContact() throws Exception {
         // Initialize the database
         contactRepository.saveAndFlush(contact);
-		
-		int databaseSizeBeforeUpdate = contactRepository.findAll().size();
+
+        int databaseSizeBeforeUpdate = contactRepository.findAll().size();
 
         // Update the contact
         contact.setContactName(UPDATED_CONTACT_NAME);
@@ -175,8 +174,8 @@ public class ContactResourceTest {
     public void deleteContact() throws Exception {
         // Initialize the database
         contactRepository.saveAndFlush(contact);
-		
-		int databaseSizeBeforeDelete = contactRepository.findAll().size();
+
+        int databaseSizeBeforeDelete = contactRepository.findAll().size();
 
         // Get the contact
         restContactMockMvc.perform(delete("/api/contacts/{id}", contact.getId())

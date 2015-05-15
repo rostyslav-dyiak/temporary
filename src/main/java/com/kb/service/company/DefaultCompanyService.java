@@ -1,16 +1,15 @@
 package com.kb.service.company;
 
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-
 import com.kb.domain.Company;
 import com.kb.domain.EateryDetails;
 import com.kb.domain.SupplierDetails;
 import com.kb.repository.CompanyRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 /**
  * Created by rdyyak on 29.04.15.

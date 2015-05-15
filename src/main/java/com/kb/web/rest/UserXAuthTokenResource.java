@@ -1,7 +1,8 @@
 package com.kb.web.rest;
 
-import javax.inject.Inject;
-
+import com.codahale.metrics.annotation.Timed;
+import com.kb.security.xauth.Token;
+import com.kb.security.xauth.TokenProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.codahale.metrics.annotation.Timed;
-import com.kb.security.xauth.Token;
-import com.kb.security.xauth.TokenProvider;
+import javax.inject.Inject;
 
 /**
  * Created by rdyyak on 24.04.15.

@@ -3,11 +3,9 @@ package com.kb.web.rest;
 import com.kb.Application;
 import com.kb.domain.BusinessType;
 import com.kb.repository.BusinessTypeRepository;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -24,6 +22,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -127,8 +126,8 @@ public class BusinessTypeResourceTest {
     public void updateBusinessType() throws Exception {
         // Initialize the database
         businessTypeRepository.saveAndFlush(businessType);
-		
-		int databaseSizeBeforeUpdate = businessTypeRepository.findAll().size();
+
+        int databaseSizeBeforeUpdate = businessTypeRepository.findAll().size();
 
         // Update the businessType
         businessType.setName(UPDATED_NAME);
@@ -151,8 +150,8 @@ public class BusinessTypeResourceTest {
     public void deleteBusinessType() throws Exception {
         // Initialize the database
         businessTypeRepository.saveAndFlush(businessType);
-		
-		int databaseSizeBeforeDelete = businessTypeRepository.findAll().size();
+
+        int databaseSizeBeforeDelete = businessTypeRepository.findAll().size();
 
         // Get the businessType
         restBusinessTypeMockMvc.perform(delete("/api/businessTypes/{id}", businessType.getId())

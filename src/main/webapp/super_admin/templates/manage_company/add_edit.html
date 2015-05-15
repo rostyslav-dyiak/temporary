@@ -6,7 +6,8 @@
         <div class="col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form name="form" class="form-horizontal" ng-switch="userCompanyDTO.company.companyType">
+                    <form name="form" class="form-horizontal form-validation"
+                          ng-switch="userCompanyDTO.company.companyType">
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Logo</label>
 
@@ -18,6 +19,7 @@
                                         Image
                                     </button>
                                     <button type="button" class="btn btn-default" ng-click="removePhoto()">Remove</button>
+                                    <input name="fileName" class="form-control" ng-model="logo[0].name" disabled>
                                 </div>
                             </div>
                         </div>
@@ -92,37 +94,41 @@
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
                                 <span type="submit" class="btn btn-sm btn-info" ng-disabled="form.$invalid"
-                                      ng-show="!companyId" ng-click="addCompany()">Send Invitation</span>
+                                      ng-show="!companyId" ng-disabled="addEditForm.$invalid" ng-click="addCompany()">Send Invitation</span>
                                 <span type="submit" class="btn btn-sm btn-info"
-                                      ng-show="companyId && companyStatus == 'PENDING'" ng-click="updateCompanyInfo()">Update and Send</span>
+                                      ng-show="companyId && companyStatus == 'PENDING'"
+                                      ng-disabled="addEditForm.$invalid"
+                                      ng-click="updateCompanyInfo()">Update and Send</span>
                                 <span type="submit" class="btn btn-sm btn-info"
                                       ng-show="companyId && companyStatus != 'PENDING'"
-                                      ng-click="addCompany()">Update</span>
+                                      ng-disabled="addEditForm.$invalid" ng-click="addCompany()">Update</span>
                                 <span class="btn btn-sm btn-danger" back-button>Cancel</span>
-                                <span class="btn btn-sm btn-danger" ng-click="deleteCompany()" ng-hide="!companyId">Delete</span>
+                                <span class="btn btn-sm btn-danger" confirmed-click="deleteCompany()"
+                                      ng-hide="!companyId" ng-confirm-click>Delete</span>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6" ng-show="company.id">
+        <div class="col-sm-6" ng-hide="!companyId">
             <div class="panel panel-default">
                 <h4 class="text-center">Invitation History</h4>
 
                 <div class="table-responsive">
-                    <table st-table="rowCollectionPage" class="table table-striped text-center">
+                    <table st-table="rowCollectionPage" st-safe-src="invitationHistory"
+                           class="table table-striped text-center">
                         <thead>
                         <tr>
                             <th class="text-center" st-sort="email">Email</th>
-                            <th class="text-center" st-sort="sent">Sent</th>
+                            <th class="text-center" st-sort="createdDate">Sent</th>
                             <th class="text-center" st-sort="status">Status</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="row in invitationHistory">
-                            <td>{{row.email}}</td>
-                            <td>{{row.sent | date:"EEEE, MMM dd.yyyy h:mma"}}</td>
+                            <td>{{row.company.email}}</td>
+                            <td>{{row.createdDate | date:"EEEE, MMM dd.yyyy h:mma"}}</td>
                             <td>{{row.status}}</td>
                         </tr>
                         </tbody>

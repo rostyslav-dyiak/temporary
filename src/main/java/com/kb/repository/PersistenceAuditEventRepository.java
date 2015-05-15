@@ -1,11 +1,10 @@
 package com.kb.repository;
 
-import java.util.List;
-
+import com.kb.domain.PersistentAuditEvent;
 import org.joda.time.LocalDateTime;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.kb.domain.PersistentAuditEvent;
+import java.util.List;
 
 /**
  * Spring Data JPA repository for the PersistentAuditEvent entity.

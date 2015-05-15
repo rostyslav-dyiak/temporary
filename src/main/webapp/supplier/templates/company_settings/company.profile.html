@@ -1,7 +1,7 @@
 <div class="wrapper-md" ng-controller="CompanyProfileController">
     <div class="panel panel-default">
         <div class="panel-body">
-            <form name="companyProfileForm" class="form-horizontal">
+            <form name="companyProfileForm" class="form-horizontal form-validation">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Company Code</label>
 
@@ -104,6 +104,7 @@
                                 Image
                             </button>
                             <button type="button" class="btn btn-default" ng-click="removeLogo()">Remove</button>
+                            <input name="fileName" class="form-control " ng-model="logo[0].name" disabled>
                         </div>
                     </div>
                 </div>
@@ -159,6 +160,7 @@
                             </button>
                             <button type="button" class="btn btn-default" ng-click="removeMainPicture()">Remove
                             </button>
+                            <input name="fileName" class="form-control " ng-model="optionalImage[0].name" disabled>
                         </div>
                     </div>
                 </div>

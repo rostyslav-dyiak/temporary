@@ -1,20 +1,9 @@
 package com.kb.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-
+import com.kb.Application;
+import com.kb.domain.AssignmentType;
+import com.kb.domain.SystemAnnouncement;
+import com.kb.repository.SystemAnnouncementRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,10 +18,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kb.Application;
-import com.kb.domain.AssignmentType;
-import com.kb.domain.SystemAnnouncement;
-import com.kb.repository.SystemAnnouncementRepository;
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
@@ -135,8 +128,8 @@ public class SystemAnnouncementResourceTest {
     public void updateSystemAnnouncement() throws Exception {
         // Initialize the database
         repository.saveAndFlush(systemAnnouncement);
-		
-		int databaseSizeBeforeUpdate = repository.findAll().size();
+
+        int databaseSizeBeforeUpdate = repository.findAll().size();
 
         // Update the systemAnnouncement
         systemAnnouncement.setAssignmentType(UPDATED_ASSIGNMENT_TYPE);
@@ -161,8 +154,8 @@ public class SystemAnnouncementResourceTest {
     public void deleteSystemAnnouncement() throws Exception {
         // Initialize the database
         repository.saveAndFlush(systemAnnouncement);
-		
-		int databaseSizeBeforeDelete = repository.findAll().size();
+
+        int databaseSizeBeforeDelete = repository.findAll().size();
 
         // Get the systemAnnouncement
         restSystemAnnouncementMockMvc.perform(delete("/api/messages/{id}", systemAnnouncement.getId())

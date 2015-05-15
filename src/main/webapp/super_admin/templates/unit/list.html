@@ -9,8 +9,9 @@
                         ng-model="units">
                         <li class="list-group-item" ng-repeat="unit in units">
 
-                            <button class="btn btn-danger btn-rounded pull-right" ng-click="removeUnit(unit.id)">
-                                DELETE
+                            <button class="btn btn-danger btn-rounded pull-right" confirmed-click="removeUnit(unit.id)"
+                                    ng-confirm-click>
+                                Delete
                             </button>
 
                             <div class="clear type-name" ng-click="editUnit(unit)">
@@ -24,39 +25,39 @@
         <div class="col-sm-6" ng-show="unit.id || newUnit">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form class="form-horizontal">
+                    <form name="addEditForm" class="form-horizontal form-validation">
                         <div class="form-group text-center">
                             <div class="checkbox col-xs-6">
                                 <label class="i-checks">
-                                    <input type="checkbox" ng-model="unit.available"><i></i> AVAILABLE FOR SELECTION
+                                    <input type="checkbox" ng-model="unit.available" required><i></i> Available for selection
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">UNIT SYMBOL</label>
+                            <label class="col-sm-3 control-label">Unit symbol</label>
 
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" ng-model="unit.unitSymbol">
+                                <input type="text" class="form-control" ng-model="unit.unitSymbol" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">UNIT DESCRIPTION</label>
+                            <label class="col-sm-3 control-label">Unit description</label>
 
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" ng-model="unit.description">
+                                <input type="text" class="form-control" ng-model="unit.description" required>
                             </div>
                         </div>
                         <br><br><br><br>
                         <div class="form-group text-center">
                             <div class="checkbox col-xs-6">
                                 <label class="i-checks">
-                                    <input type="checkbox" ng-model="isCompositeUnit"><i></i> THIS IS A COMPOSITE UNIT
+                                    <input type="checkbox" ng-model="isCompositeUnit"><i></i> This is a composite unit
                                 </label>
                             </div>
                         </div>
                         <div ng-show="isCompositeUnit">
                         <div class="form-group">
-                            <label class="col-sm-5 control-label">COMPOSITION SMALL UNIT</label>
+                            <label class="col-sm-5 control-label">Composition small unit</label>
 
                             <div class="col-sm-5">
                                 <select class="form-control" name="unitSymbol" ng-model="componentIndex">
@@ -65,7 +66,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-5 control-label">EQUIVALENT QUANTITY</label>
+                            <label class="col-sm-5 control-label">Equivalent quantity</label>
 
                             <div class="col-sm-5">
                                 <input type="text" class="form-control" ng-model="unit.equivalentQuantity">
@@ -75,16 +76,21 @@
 
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-sm-10">
-                                <button class="btn btn-danger btn-rounded" ng-click="removeUnit(unit.id)">
+                                <button class="btn btn-danger btn-rounded" confirmed-click="removeUnit(unit.id)"
+                                        ng-confirm-click>
                                     DELETE
                                 </button>
-                                <button ng-click="saveUnit()" class="btn btn-info btn-rounded" >SAVE</button>
-                                <button class="btn btn-rounded" ng-click="cancel()">REVERT CHANGES</button>
+                                <button ng-click="saveUnit()" ng-disabled="addEditForm.$invalid"
+                                        class="btn btn-info btn-rounded">SAVE
+                                </button>
+                                <button class="btn btn-rounded" confirmed-click="cancel()" ng-confirm-click>Revert
+                                    changes
+                                </button>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-sm-10">
-                                <button class="btn btn-rounded " ui-sref="app.unit.products({unitId: unit.id })">VIEW PRODUCTS</button>
+                                <button class="btn btn-rounded " ui-sref="app.unit.products({unitId: unit.id })">View products</button>
                             </div>
                         </div>
                     </form>

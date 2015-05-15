@@ -8,7 +8,7 @@
                 <tab-heading>
                     Company
                 </tab-heading>
-                <form class="form-horizontal">
+                <form name="companyForm" class="form-horizontal form-validation">
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Company Code</label>
 
@@ -21,7 +21,8 @@
                         <label class="col-lg-2 control-label">Company Name</label>
 
                         <div class="col-lg-10">
-                            <input type="text" ng-model="company.name" class="form-control" placeholder="Company Name">
+                            <input type="text" ng-model="company.name" class="form-control" placeholder="Company Name"
+                                   required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -53,7 +54,7 @@
 
                         <div class="col-lg-10">
                             <input type="text" ng-model="company.contactNumber" class="form-control"
-                                   placeholder="Company Contact Number">
+                                   placeholder="Company Contact Number" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -69,7 +70,7 @@
 
                         <div class="col-lg-10">
                             <input type="email" ng-model="company.email" class="form-control"
-                                   placeholder="Company Email Address">
+                                   placeholder="Company Email Address" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -85,6 +86,7 @@
                                     Image
                                 </button>
                                 <button type="button" class="btn btn-default" ng-click="removePhoto()">Remove</button>
+                                <input name="fileName" class="form-control" ng-model="logo[0].name" disabled>
                             </div>
                         </div>
                     </div>
@@ -103,6 +105,7 @@
                                 </button>
                                 <button type="button" class="btn btn-default" ng-click="removeOptionalImage()">Remove
                                 </button>
+                                <input name="fileName" class="form-control" ng-model="optionalImage[0].name" disabled>
                             </div>
                         </div>
                     </div>
@@ -126,7 +129,8 @@
                             <button type="submit" class="btn btn-sm">View Purchase Order Template</button>
                         </div>
                         <div class="col-lg-9 col-lg-offset-1">
-                            <span type="submit" class="btn btn-sm btn-info" ng-click="saveCompany()">Save Changes</span>
+                            <span type="submit" ng-disabled="!companyForm.$valid" class="btn btn-sm btn-info"
+                                  ng-click="saveCompany()">Save Changes</span>
                             <button class="btn btn-sm btn-danger" ng-click="revert()">Revert Changes</button>
                         </div>
                     </div>
@@ -139,7 +143,7 @@
                 </tab-heading>
                 <accordion close-others="true">
                     <accordion-group heading="{{outlet.name}}" ng-repeat="outlet in outlets">
-                        <form class="form-horizontal">
+                        <form name="addEditForm" class="form-horizontal form-validate">
                             <div class="form-group">
                                 <label class="col-lg-2 control-label">Outlet Name</label>
 
@@ -187,10 +191,12 @@
                             <div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-2">
                                     <button class="btn btn-sm btn-info" ng-click="edit(outlet)"
-                                            ng-hide="currentOutlet.id == outlet.id">Edit
+                                            ng-hide="currentOutlet.id == outlet.id" ng-disabled="addEditForm.$invalid">
+                                        Edit
                                     </button>
                                     <button type="submit" class="btn btn-sm btn-info" ng-click="save(outlet)"
-                                            ng-show="currentOutlet.id == outlet.id">Save
+                                            ng-show="currentOutlet.id == outlet.id" ng-disabled="addEditForm.$invalid">
+                                        Save
                                     </button>
                                     <button class="btn btn-sm btn-danger" back-button>Cancel</button>
                                 </div>

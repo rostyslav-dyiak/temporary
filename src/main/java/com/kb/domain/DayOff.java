@@ -1,26 +1,15 @@
 package com.kb.domain;
 
-import java.io.Serializable;
-import java.util.Objects;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.kb.domain.util.CustomDateTimeDeserializer;
 import com.kb.domain.util.CustomDateTimeSerializer;
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * A SupplierDetailsPublicHolidays.
@@ -41,11 +30,11 @@ public class DayOff extends AbstractAuditingEntity implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "public_holiday_id")
 	private PublicHoliday publicHoliday;
-	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "absence_type")
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "absence_type")
 	private AbsenceType absenceType;
-	
+
     @Column(name = "description")
     private String description;
 
@@ -54,7 +43,7 @@ public class DayOff extends AbstractAuditingEntity implements Serializable {
     @JsonDeserialize(using = CustomDateTimeDeserializer.class)
     @Column(name = "date")
     private DateTime date;
-	
+
     public Long getId() {
         return id;
     }
@@ -128,5 +117,5 @@ public class DayOff extends AbstractAuditingEntity implements Serializable {
 	public String toString() {
 		return "SupplierDetailsPublicHolidays [id=" + id + "]";
 	}
-    
+
 }

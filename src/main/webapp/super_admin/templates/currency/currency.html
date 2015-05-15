@@ -1,4 +1,4 @@
-<div class="bg-light lter b-b wrapper-md clearfix" ng-controller="CurrencyController">
+<div class="bg-light lter b-b wrapper-md clearfix">
     <a ui-sref="app.currencyAdd" class="btn btn-info btn-rounded pull-right">Add Currency</a>
 </div>
 <div class="wrapper-md" ng-controller="CurrencyController">
@@ -30,7 +30,8 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <span class="btn btn-default btn-rounded" ng-click="delete(row.id)">
+                                    <span class="btn btn-default btn-rounded" confirmed-click="delete(row.id)"
+                                          ng-confirm-click>
                                         Delete
                                     </span>
                                 </td>

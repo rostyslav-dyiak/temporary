@@ -1,25 +1,20 @@
 package com.kb.service.content;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
+import com.kb.domain.Content;
+import com.kb.domain.MimeType;
+import com.kb.exception.ContentReadException;
+import com.kb.exception.ContentSaveException;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.AutoCloseInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.kb.domain.Content;
-import com.kb.domain.MimeType;
-import com.kb.exception.ContentReadException;
-import com.kb.exception.ContentSaveException;
+import java.io.*;
 
 /**
  * Default implementation of ContentFacade.
- * 
+ *
  * @author rostyslav
  *
  */
@@ -29,11 +24,11 @@ public class DefaultContentService implements ContentService {
 	private static final char EXTENSION_SEPARATOR = '.';
 
 	private ContentResourceNamingStrategy namingStrategy;
-	
-	private String contentRepositoryPath;
-	
-	@Override
-	public Content getContent(final String path) {
+
+    private String contentRepositoryPath;
+
+    @Override
+    public Content getContent(final String path) {
 		LOG.info("Get content by uri: {}", path);
 		Content content = null;
 
@@ -55,15 +50,15 @@ public class DefaultContentService implements ContentService {
 			LOG.error("Can't read file from file system", e);
 			throw new ContentReadException(message);
 		}
-		
-		return content;
-	}
+
+        return content;
+    }
 
 	@Override
 	public Content storeContent(final Content content) {
-		
-		String identifier = namingStrategy.createIdentifier(content);
-		LOG.info("Store content with identifier: {}", identifier);
+
+        String identifier = namingStrategy.createIdentifier(content);
+        LOG.info("Store content with identifier: {}", identifier);
 		content.setPath(identifier);
 
 		try {
@@ -86,11 +81,11 @@ public class DefaultContentService implements ContentService {
 			} catch (IOException e) {
 				throw new ContentSaveException("Could not close the content input stream", e);
 			}
-			
-		}
-		
-		return content;
-	}
+
+        }
+
+        return content;
+    }
 
 	private String getFullfilePath(final String filePath) {
 		return getContentRepositoryPath() + filePath;
@@ -107,5 +102,5 @@ public class DefaultContentService implements ContentService {
 	public void setNamingStrategy(final ContentResourceNamingStrategy namingStrategy) {
 		this.namingStrategy = namingStrategy;
 	}
-	
+
 }

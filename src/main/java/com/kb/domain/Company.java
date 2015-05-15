@@ -157,6 +157,22 @@ public class Company extends AbstractAuditingEntity implements Serializable {
         this.products = products;
     }
 
+    public Set<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(Set<Contact> contacts) {
+        this.contacts = contacts;
+    }
+
+    public Set<Outlet> getOutlets() {
+        return outlets;
+    }
+
+    public void setOutlets(Set<Outlet> outlets) {
+        this.outlets = outlets;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {

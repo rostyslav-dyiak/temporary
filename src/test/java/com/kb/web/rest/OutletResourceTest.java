@@ -3,11 +3,9 @@ package com.kb.web.rest;
 import com.kb.Application;
 import com.kb.domain.Outlet;
 import com.kb.repository.OutletRepository;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -24,6 +22,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -145,8 +144,8 @@ public class OutletResourceTest {
     public void updateOutlet() throws Exception {
         // Initialize the database
         outletRepository.saveAndFlush(outlet);
-		
-		int databaseSizeBeforeUpdate = outletRepository.findAll().size();
+
+        int databaseSizeBeforeUpdate = outletRepository.findAll().size();
 
         // Update the outlet
         outlet.setName(UPDATED_NAME);
@@ -175,8 +174,8 @@ public class OutletResourceTest {
     public void deleteOutlet() throws Exception {
         // Initialize the database
         outletRepository.saveAndFlush(outlet);
-		
-		int databaseSizeBeforeDelete = outletRepository.findAll().size();
+
+        int databaseSizeBeforeDelete = outletRepository.findAll().size();
 
         // Get the outlet
         restOutletMockMvc.perform(delete("/api/outlets/{id}", outlet.getId())

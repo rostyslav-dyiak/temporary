@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -92,6 +93,9 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    private Set<ProductPricingGroup> productPricingGroups = new HashSet<ProductPricingGroup>();
 
     public Long getId() {
         return id;
@@ -251,5 +255,13 @@ public class Product extends AbstractAuditingEntity implements Serializable {
 
     public void setSubSubCategory(final Category subSubCategory) {
         this.subSubCategory = subSubCategory;
+    }
+
+    public Set<ProductPricingGroup> getProductPricingGroups() {
+        return productPricingGroups;
+    }
+
+    public void setProductPricingGroups(final Set<ProductPricingGroup> productPricingGroups) {
+        this.productPricingGroups = productPricingGroups;
     }
 }

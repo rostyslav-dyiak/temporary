@@ -1,12 +1,11 @@
 package com.kb.repository;
 
-import java.util.List;
-
+import com.kb.domain.PersistentToken;
+import com.kb.domain.User;
 import org.joda.time.LocalDate;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.kb.domain.PersistentToken;
-import com.kb.domain.User;
+import java.util.List;
 
 /**
  * Spring Data JPA repository for the PersistentToken entity.

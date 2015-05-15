@@ -1,20 +1,8 @@
 package com.kb.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-
+import com.kb.Application;
+import com.kb.domain.PublicHoliday;
+import com.kb.repository.PublicHolidayRepository;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
@@ -34,9 +22,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kb.Application;
-import com.kb.domain.PublicHoliday;
-import com.kb.repository.PublicHolidayRepository;
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Test class for the PublicHolidayResource REST controller.
@@ -143,8 +136,8 @@ public class PublicHolidayResourceTest {
     public void updatePublicHoliday() throws Exception {
         // Initialize the database
         publicHolidayRepository.saveAndFlush(publicHoliday);
-		
-		int databaseSizeBeforeUpdate = publicHolidayRepository.findAll().size();
+
+        int databaseSizeBeforeUpdate = publicHolidayRepository.findAll().size();
 
         // Update the publicHoliday
         publicHoliday.setDescription(UPDATED_DESCRIPTION);
@@ -167,8 +160,8 @@ public class PublicHolidayResourceTest {
     public void deletePublicHoliday() throws Exception {
         // Initialize the database
         publicHolidayRepository.saveAndFlush(publicHoliday);
-		
-		int databaseSizeBeforeDelete = publicHolidayRepository.findAll().size();
+
+        int databaseSizeBeforeDelete = publicHolidayRepository.findAll().size();
 
         // Get the publicHoliday
         restPublicHolidayMockMvc.perform(delete("/api/holidays/{id}", publicHoliday.getId())

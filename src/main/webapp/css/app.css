@@ -5178,6 +5178,9 @@ a.text-#000000:hover {
 .selectable.selected {
     border: 2px solid #5c9ccc;
 }
+.selectable.greenBackground {
+    background-color: #9fda58;
+}
 .margin-center {
     margin: 0 auto;
 }
@@ -5201,6 +5204,9 @@ a.text-#000000:hover {
 .mc-logo.small {
     max-width: 80px;
     max-height: 80px;
+}
+.edit-input {
+    max-width: 50px;
 }
 
 /* Type screens */
@@ -5265,5 +5271,9 @@ a.text-#000000:hover {
 /* System announcements */
 .scroll-box {
     max-height: 300px;
+    overflow: auto;
+}
+.scroll-box-big {
+    max-height: 600px;
     overflow: auto;
 }

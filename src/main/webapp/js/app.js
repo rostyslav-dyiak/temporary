@@ -21,7 +21,8 @@
         'sbDateSelect',
         'ngFileUpload',
         'toaster',
-        'smart-table'
+        'smart-table',
+        'ngBootbox'
     ]);
 
 })();

@@ -57,11 +57,68 @@ angular.module('app')
                 })
                 .state('app.product', {
                     url: '/product',
-                    templateUrl: 'templates/product.html'
+                    template: '<div ui-view></div>'
                 })
-                .state('app.pricing', {
-                    url: '/pricing',
-                    templateUrl: 'templates/pricing.html'
+                .state('app.product.list', {
+                    url: '/list',
+                    templateUrl: 'templates/product/list.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    'js/product/product.factory.js',
+                                    'js/product/product.controller.js'
+                                ]);
+                            }
+                        ]
+                    }
+                })
+                .state('app.product.categorization', {
+                    url: '/categorization',
+                    templateUrl: 'templates/product/categorization.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    'js/product/product.uncategorized.factory.js',
+                                    'js/product/category.factory.js',
+                                    'js/product/product.category.controller.js'
+                                ]);
+                            }
+                        ]
+                    }
+                })
+                .state('app.pricingProductTable', {
+                    url: '/pricing/product_table',
+                    templateUrl: 'templates/pricing/pricing.product-table.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    '/js/directives/ng-enter.directive.js',
+                                    'js/pricing/pricing-groups.factory.js',
+                                    'js/pricing/pricing.product-table.factory.js',
+                                    'js/pricing/pricing.product-table.controller.js'
+                                ]);
+                            }
+                        ]
+                    }
+                })
+                .state('app.pricingPriceGroup', {
+                    url: '/pricing/price_group',
+                    templateUrl: 'templates/pricing/pricing.price-group.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    '/js/directives/ng-enter.directive.js',
+                                    'js/pricing/pricing-groups.factory.js',
+                                    'js/pricing/pricing.eatery.factory.js',
+                                    'js/pricing/pricing.price-group.controller.js'
+                                ]);
+                            }
+                        ]
+                    }
                 })
                 .state('app.setting', {
                     url: '/setting',
