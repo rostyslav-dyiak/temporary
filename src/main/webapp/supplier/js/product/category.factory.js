@@ -16,6 +16,13 @@
             },
             'update': {
                 method: 'PUT'
+            },
+            'get': {
+                method: 'GET',
+                isArray: false
+            },
+            'deleted': {
+                method: 'DELETE'
             }
         });
     }
