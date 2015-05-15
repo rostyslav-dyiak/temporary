@@ -1,6 +1,7 @@
 package com.kb.domain;
 
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -31,11 +32,11 @@ public class ProductPricingGroup implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "pricing_group_id")
-    PricingGroup pricingGroup;
+    private PricingGroup pricingGroup;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    PricingGroup product;
+    private Product product;
 
     public Long getId() {
         return id;
@@ -61,40 +62,21 @@ public class ProductPricingGroup implements Serializable {
         this.pricingGroup = pricingGroup;
     }
 
-    public PricingGroup getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(final PricingGroup product) {
+    public void setProduct(final Product product) {
         this.product = product;
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        ProductPricingGroup productPricingGroup = (ProductPricingGroup) o;
-
-        if ( ! Objects.equals(id, productPricingGroup.id)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
     }
 
     @Override
     public String toString() {
         return "ProductPricingGroup{" +
-                "id=" + id +
-                ", price='" + price + "'" +
-                '}';
+            "id=" + id +
+            ", price=" + price +
+            ", pricingGroup=" + pricingGroup +
+            ", product=" + product +
+            '}';
     }
 }

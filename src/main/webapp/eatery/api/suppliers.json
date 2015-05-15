@@ -1,0 +1,35 @@
+[
+    {
+        "id": 0,
+        "supplier": {
+            "name": "FoodService",
+            "logo": {
+                "url": "/logo_placeholder.png"
+            }
+        },
+        "gstRegistered": true,
+        "publicPricingVisible": true
+    },
+    {
+        "id": 2,
+        "supplier": {
+            "name": "54 ervice",
+            "logo": {
+                "url": "/logo_placeholder.png"
+            }
+        },
+        "gstRegistered": true,
+        "publicPricingVisible": false
+    },
+    {
+        "id": 4,
+        "supplier": {
+            "name": "4356 ervice",
+            "logo": {
+                "url": "/logo_placeholder.png"
+            }
+        },
+        "gstRegistered": false,
+        "publicPricingVisible": true
+    }
+]

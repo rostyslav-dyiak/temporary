@@ -48,7 +48,20 @@
                     })
                     .state('app.store', {
                         url: '/store',
-                        templateUrl: 'templates/store.html'
+                        templateUrl: 'templates/store/store.list.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/store/category.factory.js',
+                                        'js/store/supplier-for-category.factory.js',
+                                        'js/store/supplier.category.factory.js',
+                                        'js/store/supplier.product.factory.js',
+                                        'js/store/store.list.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
                     })
                     .state('app.inventory', {
                         url: '/inventory',

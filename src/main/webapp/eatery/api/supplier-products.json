@@ -1,0 +1,130 @@
+[
+    {
+        "id": 1,
+        "title": "apple 2 hdfg fjdkgh ksjhf jwkfh et sfhj fshf sfjh sfkj",
+        "picture": {
+            "url": "/logo_placeholder.png"
+        },
+        "basePrice": 120,
+        "unit": {
+            "unitSymbol": "kg"
+        },
+        "productPricingGroups": [
+            {
+                "price": 230
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "apple 5 kjhfds 65 dfs",
+        "picture": {
+            "url": "/logo_placeholder.png"
+        },
+        "basePrice": 100,
+        "unit": {
+            "unitSymbol": "kg"
+        }
+    },
+    {
+        "id": 3,
+        "title": "apple 9 fgfd",
+        "picture": {
+            "url": "/logo_placeholder.png"
+        },
+        "basePrice": 40,
+        "unit": {
+            "unitSymbol": "kg"
+        },
+        "productPricingGroups": [
+            {
+                "price": 130
+            }
+        ]
+    },{
+        "id": 1,
+        "title": "apple 2 hdfg fjdkgh ksjhf jwkfh et sfhj fshf sfjh sfkj",
+        "picture": {
+            "url": "/logo_placeholder.png"
+        },
+        "basePrice": 120,
+        "unit": {
+            "unitSymbol": "kg"
+        },
+        "productPricingGroups": [
+            {
+                "price": 230
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "apple 5 kjhfds 65 dfs",
+        "picture": {
+            "url": "/logo_placeholder.png"
+        },
+        "basePrice": 100,
+        "unit": {
+            "unitSymbol": "kg"
+        }
+    },
+    {
+        "id": 3,
+        "title": "apple 9 fgfd",
+        "picture": {
+            "url": "/logo_placeholder.png"
+        },
+        "basePrice": 40,
+        "unit": {
+            "unitSymbol": "kg"
+        },
+        "productPricingGroups": [
+            {
+                "price": 130
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "title": "apple 2 hdfg fjdkgh ksjhf jwkfh et sfhj fshf sfjh sfkj",
+        "picture": {
+            "url": "/logo_placeholder.png"
+        },
+        "basePrice": 120,
+        "unit": {
+            "unitSymbol": "kg"
+        },
+        "productPricingGroups": [
+            {
+                "price": 230
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "apple 5 kjhfds 65 dfs",
+        "picture": {
+            "url": "/logo_placeholder.png"
+        },
+        "basePrice": 100,
+        "unit": {
+            "unitSymbol": "kg"
+        }
+    },
+    {
+        "id": 3,
+        "title": "apple 9 fgfd",
+        "picture": {
+            "url": "/logo_placeholder.png"
+        },
+        "basePrice": 40,
+        "unit": {
+            "unitSymbol": "kg"
+        },
+        "productPricingGroups": [
+            {
+                "price": 130
+            }
+        ]
+    }
+]
