@@ -1,12 +1,21 @@
 package com.kb.domain;
 
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * A Product.
@@ -14,8 +23,10 @@ import java.util.Set;
 @Entity
 @Table(name = "PRODUCT")
 public class Product extends AbstractAuditingEntity implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
+	@org.springframework.data.annotation.Id // For Elastic Search
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -86,7 +97,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -94,7 +105,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
         this.title = title;
     }
 
@@ -102,7 +113,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -110,7 +121,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public void setBrand(final String brand) {
         this.brand = brand;
     }
 
@@ -118,7 +129,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return origin;
     }
 
-    public void setOrigin(String origin) {
+    public void setOrigin(final String origin) {
         this.origin = origin;
     }
 
@@ -126,7 +137,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return certifiedHalal;
     }
 
-    public void setCertifiedHalal(Boolean certifiedHalal) {
+    public void setCertifiedHalal(final Boolean certifiedHalal) {
         this.certifiedHalal = certifiedHalal;
     }
 
@@ -134,7 +145,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return unitDescription;
     }
 
-    public void setUnitDescription(String unitDescription) {
+    public void setUnitDescription(final String unitDescription) {
         this.unitDescription = unitDescription;
     }
 
@@ -142,7 +153,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return unitHide;
     }
 
-    public void setUnitHide(Boolean unitHide) {
+    public void setUnitHide(final Boolean unitHide) {
         this.unitHide = unitHide;
     }
 
@@ -150,7 +161,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return available;
     }
 
-    public void setAvailable(Boolean available) {
+    public void setAvailable(final Boolean available) {
         this.available = available;
     }
 
@@ -158,7 +169,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(final String code) {
         this.code = code;
     }
 
@@ -166,7 +177,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return codeGenerate;
     }
 
-    public void setCodeGenerate(Boolean codeGenerate) {
+    public void setCodeGenerate(final Boolean codeGenerate) {
         this.codeGenerate = codeGenerate;
     }
 
@@ -174,7 +185,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(final Integer quantity) {
         this.quantity = quantity;
     }
 
@@ -182,7 +193,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return unit;
     }
 
-    public void setUnit(Unit unit) {
+    public void setUnit(final Unit unit) {
         this.unit = unit;
     }
 
@@ -190,7 +201,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return picture;
     }
 
-    public void setPicture(Picture picture) {
+    public void setPicture(final Picture picture) {
         this.picture = picture;
     }
 
@@ -198,7 +209,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(final Category category) {
         this.category = category;
     }
 
@@ -206,7 +217,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return company;
     }
 
-    public void setCompany(Company company) {
+    public void setCompany(final Company company) {
         this.company = company;
     }
 
@@ -214,7 +225,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return basePrice;
     }
 
-    public void setBasePrice(BigDecimal basePrice) {
+    public void setBasePrice(final BigDecimal basePrice) {
         this.basePrice = basePrice;
     }
 
@@ -222,7 +233,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return productAliasSet;
     }
 
-    public void setProductAliasSet(Set<ProductAlias> productAliasSet) {
+    public void setProductAliasSet(final Set<ProductAlias> productAliasSet) {
         this.productAliasSet = productAliasSet;
     }
 
@@ -230,7 +241,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return subCategory;
     }
 
-    public void setSubCategory(Category subCategory) {
+    public void setSubCategory(final Category subCategory) {
         this.subCategory = subCategory;
     }
 
@@ -238,7 +249,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return subSubCategory;
     }
 
-    public void setSubSubCategory(Category subSubCategory) {
+    public void setSubSubCategory(final Category subSubCategory) {
         this.subSubCategory = subSubCategory;
     }
 }

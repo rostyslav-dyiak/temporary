@@ -1,9 +1,8 @@
 package com.kb.repository;
 
-import com.kb.domain.Unit;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import com.kb.domain.Unit;
 
 /**
  * Spring Data JPA repository for the Unit entity.

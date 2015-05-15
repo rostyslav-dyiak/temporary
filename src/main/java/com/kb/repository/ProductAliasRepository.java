@@ -1,9 +1,8 @@
 package com.kb.repository;
 
-import com.kb.domain.ProductAlias;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import com.kb.domain.ProductAlias;
 
 /**
  * Spring Data JPA repository for the ProductAlias entity.

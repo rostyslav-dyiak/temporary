@@ -21,8 +21,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "T_DISTRICT")
 public class District implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

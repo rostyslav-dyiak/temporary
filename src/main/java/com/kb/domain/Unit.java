@@ -1,9 +1,16 @@
 package com.kb.domain;
 
 
-import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * A Unit.
@@ -11,8 +18,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "UNIT")
 public class Unit extends AbstractAuditingEntity implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -36,7 +44,7 @@ public class Unit extends AbstractAuditingEntity implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -44,7 +52,7 @@ public class Unit extends AbstractAuditingEntity implements Serializable {
         return unitSymbol;
     }
 
-    public void setUnitSymbol(String unitSymbol) {
+    public void setUnitSymbol(final String unitSymbol) {
         this.unitSymbol = unitSymbol;
     }
 
@@ -52,7 +60,7 @@ public class Unit extends AbstractAuditingEntity implements Serializable {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -60,7 +68,7 @@ public class Unit extends AbstractAuditingEntity implements Serializable {
         return available;
     }
 
-    public void setAvailable(Boolean available) {
+    public void setAvailable(final Boolean available) {
         this.available = available;
     }
 
@@ -68,7 +76,7 @@ public class Unit extends AbstractAuditingEntity implements Serializable {
         return equivalentQuantity;
     }
 
-    public void setEquivalentQuantity(Integer equivalentQuantity) {
+    public void setEquivalentQuantity(final Integer equivalentQuantity) {
         this.equivalentQuantity = equivalentQuantity;
     }
 
@@ -76,7 +84,7 @@ public class Unit extends AbstractAuditingEntity implements Serializable {
         return component;
     }
 
-    public void setComponent(Unit component) {
+    public void setComponent(final Unit component) {
         this.component = component;
     }
 }

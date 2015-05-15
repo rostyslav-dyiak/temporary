@@ -1,11 +1,5 @@
 package com.kb.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.validator.constraints.Email;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -220,7 +214,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 		return outlets;
 	}
 
-	public void setOutlets(Set<Outlet> outlets) {
+	public void setOutlets(final Set<Outlet> outlets) {
 		this.outlets = outlets;
 	}
 
@@ -228,7 +222,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 		return title;
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(final String title) {
 		this.title = title;
 	}
 
@@ -236,7 +230,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 		return salutation;
 	}
 
-	public void setSalutation(Salutation salutation) {
+	public void setSalutation(final Salutation salutation) {
 		this.salutation = salutation;
 	}
 
@@ -244,7 +238,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 		return contactNumber;
 	}
 
-	public void setContactNumber(String contactNumber) {
+	public void setContactNumber(final String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 
@@ -252,7 +246,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(final String status) {
 		this.status = status;
 	}
 
@@ -260,7 +254,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return outletForMember;
     }
 
-    public void setOutletForMember(Outlet outletForMember) {
+    public void setOutletForMember(final Outlet outletForMember) {
         this.outletForMember = outletForMember;
     }
 

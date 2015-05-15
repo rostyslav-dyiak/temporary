@@ -1,10 +1,18 @@
 package com.kb.domain;
 
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * A TaxType.
@@ -12,8 +20,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "T_TAXTYPE")
 public class TaxType extends AbstractAuditingEntity implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -40,7 +49,7 @@ public class TaxType extends AbstractAuditingEntity implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -48,7 +57,7 @@ public class TaxType extends AbstractAuditingEntity implements Serializable {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(final String code) {
         this.code = code;
     }
 
@@ -56,7 +65,7 @@ public class TaxType extends AbstractAuditingEntity implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -64,7 +73,7 @@ public class TaxType extends AbstractAuditingEntity implements Serializable {
         return available;
     }
 
-    public void setAvailable(Boolean available) {
+    public void setAvailable(final Boolean available) {
         this.available = available;
     }
 
@@ -72,7 +81,7 @@ public class TaxType extends AbstractAuditingEntity implements Serializable {
         return calculationType;
     }
 
-    public void setCalculationType(CalculationType calculationType) {
+    public void setCalculationType(final CalculationType calculationType) {
         this.calculationType = calculationType;
     }
 
@@ -80,7 +89,7 @@ public class TaxType extends AbstractAuditingEntity implements Serializable {
         return percentage;
     }
 
-    public void setPercentage(BigDecimal percentage) {
+    public void setPercentage(final BigDecimal percentage) {
         this.percentage = percentage;
     }
 
@@ -88,12 +97,12 @@ public class TaxType extends AbstractAuditingEntity implements Serializable {
         return isDefault;
     }
 
-    public void setDefault(Boolean isDefault) {
+    public void setDefault(final Boolean isDefault) {
         this.isDefault = isDefault;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
