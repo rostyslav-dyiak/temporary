@@ -15,25 +15,85 @@
         <tbody>
         <tr>
             <td>
+                <button class="btn btn-info btn-rounded text-center" ng-show="isAdmin" ng-click="addNewCategory()">Add new category</button>
                 <ul class="list-group gutter list-group-lg list-group-sp types-list">
-                <li class="list-group-item selectable" ng-class="{greenBackground: data.clicked}" ng-repeat="data in categories">
-                    <h5 ng-click="showSubCategories(data)">{{data.category.title}} ({{data.count}})</h5>
+                <li class="list-group-item selectable" ng-class="{greenBackground: data.clicked}" ng-repeat="data in categories"
+                    ng-mouseover = "edit = true" ng-mouseout= "edit = false">
+                    <div>
+                        <button class="btn btn-sm btn-info  pull-right" ng-show="edit && isAdmin" ng-click="editCategory(data)">Edit</button>
+                        <h5 ng-click="showSubCategories(data)">{{data.category.title}} ({{data.count}})</h5>
+                    </div>
                 </li>
                 </ul>
+                <div class="text-center" ng-show="editCat">
+                    <input type="text" class="form-control text-center" ng-model="edited.title">
+                    <div>
+                        <button class="btn btn-sm btn-danger" ng-click="deleted()">Delete</button>
+                        <button class="btn btn-sm btn-info" ng-click="update()">Save</button>
+                        <button class="btn btn-sm btn-danger" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+                <div class="text-center" ng-show="addNewCat">
+                    <input type="text" class="form-control" ng-model="category">
+                    <div>
+                        <button class="btn btn-sm btn-info" ng-click="saveCategory()">Save</button>
+                        <button class="btn btn-sm btn-danger" ng-click="discardNewCategory()">Discard</button>
+                    </div>
+                </div>
             </td>
             <td>
+                <button class="btn btn-info btn-rounded text-center" ng-show="categorySelected" ng-click="addNewSubCategory()">Add new subcategory</button>
                 <ul class="list-group gutter list-group-lg list-group-sp types-list">
-                    <li class="list-group-item selectable" ng-class="{greenBackground: data.clicked}" ng-repeat="data in subcategories">
-                        <h5 ng-click="showSubSubCategories(data)">{{data.category.title}} ({{data.count}})</h5>
+                    <li class="list-group-item selectable" ng-class="{greenBackground: data.clicked}" ng-repeat="data in subcategories"
+                        ng-mouseover = "edit = true" ng-mouseout= "edit = false">
+                        <div>
+                            <button class="btn btn-sm btn-info  pull-right" ng-show="edit" ng-click="editSubCategory(data)">Edit</button>
+                            <h5 ng-click="showSubSubCategories(data)">{{data.category.title}} ({{data.count}})</h5>
+                        </div>
                     </li>
                 </ul>
+                <div class="text-center" ng-show="editSub">
+                    <input type="text" class="form-control text-center" ng-model="edited.title">
+                    <div>
+                        <button class="btn btn-sm btn-danger" ng-click="deleted()">Delete</button>
+                        <button class="btn btn-sm btn-info" ng-click="update()">Save</button>
+                        <button class="btn btn-sm btn-danger" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+                <div class="text-center" ng-show="addNewSub">
+                    <input type="text" class="form-control" ng-model="subcategory">
+                    <div>
+                        <button class="btn btn-sm btn-info" ng-click="saveSubCategory()">Save</button>
+                        <button class="btn btn-sm btn-danger" ng-click="discardNewSubCategory()">Discard</button>
+                    </div>
+                </div>
             </td>
             <td>
+                <button class="btn btn-info btn-rounded text-center" ng-show="subCategorySelected" ng-click="addNewSubSubCategory()">Add new sub-subcategory</button>
                 <ul class="list-group gutter list-group-lg list-group-sp types-list">
-                    <li class="list-group-item selectable" ng-repeat="data in subsubcategories">
-                        <h5>{{data.category.title}} ({{data.count}})</h5>
+                    <li class="list-group-item selectable" ng-repeat="data in subsubcategories"
+                        ng-mouseover = "edit = true" ng-mouseout= "edit = false">
+                        <div>
+                            <button class="btn btn-sm btn-info  pull-right" ng-show="edit" ng-click="editSubSubCategory(data)">Edit</button>
+                        <h5>{{data.category.title}}</h5>
+                        </div>
                     </li>
                 </ul>
+                <div class="text-center" ng-show="editSubSub">
+                    <input type="text" class="form-control text-center" ng-model="edited.title">
+                    <div>
+                        <button class="btn btn-sm btn-danger" ng-click="deleted()">Delete</button>
+                        <button class="btn btn-sm btn-info" ng-click="update()">Save</button>
+                        <button class="btn btn-sm btn-danger" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+                <div class="text-center" ng-show="addNewSubSub">
+                    <input type="text" class="form-control text-center" ng-model="subsubcategory">
+                    <div>
+                        <button class="btn btn-sm btn-info" ng-click="saveSubSubCategory()">Save</button>
+                        <button class="btn btn-sm btn-danger" ng-click="discardNewSubSubCategory()">Discard</button>
+                    </div>
+                </div>
             </td>
         </tr>
         </tbody>
