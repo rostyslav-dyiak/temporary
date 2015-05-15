@@ -8,11 +8,10 @@
         '$scope',
         '$http',
         '$location',
-        'localStorageService',
         'AuthServerProvider'
     ];
 
-    function SignUpController($scope, $http, $location, localStorageService, AuthServerProvider) {
+    function SignUpController($scope, $http, $location, AuthServerProvider) {
         $scope.user = {};
         $scope.authError = '';
 
@@ -42,7 +41,13 @@
                 .success(function (data) {
                     AuthServerProvider.login($scope.user.email, $scope.user.password)
                         .then(function (data) {
-                            $scope.user = AuthServerProvider.currentUser();
+                            $scope.user = AuthServerProvider.updateUserInfo()
+                                .then(function () {
+                                    $scope.user = AuthServerProvider.currentUser();
+                                },
+                                function (e) {
+                                    console.log('Problems with getting user');
+                                });
                         }, function (e) {
                             $scope.authError = 'Please try again.';
                             console.error(e);

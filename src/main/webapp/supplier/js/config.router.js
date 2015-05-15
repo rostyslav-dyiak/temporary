@@ -88,6 +88,20 @@ angular.module('app')
                         ]
                     }
                 })
+                .state('app.product.add', {
+                    url: '/viewone',
+                    templateUrl: 'templates/product/viewone.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    'js/product/product.factory.js',
+                                    'js/product/product.viewone.controller.js'
+                                ]);
+                            }
+                        ]
+                    }
+                })
                 .state('app.pricingProductTable', {
                     url: '/pricing/product_table',
                     templateUrl: 'templates/pricing/pricing.product-table.html',

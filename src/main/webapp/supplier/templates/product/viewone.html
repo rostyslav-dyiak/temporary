@@ -1,0 +1,131 @@
+<div class="bg-light lter b-b wrapper-md">
+    <button class="btn btn-default back-button" back-button>Back</button>
+
+</div>
+<div class="wrapper-md" ng-controller="ViewProductController">
+    <div class="panel panel-default">
+        <tabset class="tab-container">
+            <tab class="tab-bootstrap col-sm-3">
+                <tab-heading>
+                    Info
+                </tab-heading>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form name="addEditForm" class="form-horizontal form-validation">
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Salutation</label>
+
+                                <div class="col-lg-10">
+                                    <select class="form-control" ng-model="teamMember.userDTO.salutation" required>
+                                        <option value="Mr" ng-selected="teamMember.userDTO.salutation == 'Mr'">
+                                            Mr
+                                        </option>
+                                        <option value="Ms" ng-selected="teamMember.userDTO.salutation == 'Ms'">
+                                            Ms
+                                        </option>
+                                        <option value="Mrs" ng-selected="teamMember.userDTO.salutation == 'Mrs'">
+                                            Mrs
+                                        </option>
+                                        <option value="Dr" ng-selected="teamMember.userDTO.salutation == 'Dr'">
+                                            Dr
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Name</label>
+
+                                <div class="col-lg-10">
+                                    <input type="text" ng-model="teamMember.userDTO.firstName" class="form-control"
+                                           placeholder="Name" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Contact Number</label>
+
+                                <div class="col-lg-10">
+                                    <input type="text" ng-model="teamMember.company.contactNumber" class="form-control"
+                                           placeholder="Contact Number" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Email Address</label>
+
+                                <div class="col-lg-10">
+                                    <input type="email" ng-model="teamMember.userDTO.email" class="form-control"
+                                           placeholder="Email" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Title</label>
+
+                                <div class="col-lg-10">
+                                    <input type="text" ng-model="teamMember.userDTO.title" class="form-control"
+                                           placeholder="Title" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Access</label>
+
+                                <div class="col-lg-10">
+                                    <select class="form-control" ng-model="teamMember.userDTO.role" required>
+                                        <option value="ROLE_SUPPLIER_ADMIN" value="ROLE_SUPPLIER_ADMIN">
+                                            Company Admin
+                                        </option>
+                                        <option value="ROLE_SUPPLIER" value="ROLE_SUPPLIER">
+                                            Normal User
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-show="$scope.teamMemberId">
+                                <label class="col-lg-2 control-label">Status</label>
+
+                                <div class="col-lg-10">
+                                    <div class="radio">
+                                        <label class="i-checks">
+                                            <input type="radio" ng-model="teamMember.company.status" name="status"
+                                                   value="ACTIVE">
+                                            <i></i> Active
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label class="i-checks">
+                                            <input type="radio" ng-model="teamMember.company.status" name="status"
+                                                   value="INACTIVE">
+                                            <i></i> Inactive
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button type="submit" ng-disabled="addEditForm.$invalid" class="btn btn-sm btn-info"
+                                            ng-click="addUser()">{{saveButtonText}}
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" ng-click="revert()">Revert Changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </tab>
+            <tab class="tab-bootstrap col-sm-3">
+                <tab-heading>
+                    Pricing
+                </tab-heading>
+            </tab>
+            <tab class="tab-bootstrap col-sm-3">
+                <tab-heading>
+                    Customers
+                </tab-heading>
+            </tab>
+            <tab class="tab-bootstrap col-sm-3">
+                <tab-heading>
+                    History
+                </tab-heading>
+            </tab>
+        </tabset>
+    </div>
+</div>
