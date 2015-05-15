@@ -14,6 +14,7 @@
     	$scope.type = {};
         $scope.selectedType = {};
     	$scope.types = [];
+
         $scope.saveType = saveType;
         $scope.editType = editType;
         $scope.removeType = removeType;
@@ -25,23 +26,27 @@
         function activate() {
             BusinessTypeFactory.query({},
                 function (data) {
-                    $scope.types = data;
+                    $scope.types = angular.copy(data);
+                    //Delete this
+                    for(var i=0; i<$scope.types.length; i++) {
+                        $scope.types[i].order = i;
+                    }
+                    // End of delete
+                    $scope.types.sort(function (a, b) {
+                        return a.order > b.order;
+                    });
                 }, function (e) {
                     console.error(e);
                 });
         }
 
-
         $scope.sortableOptions = {
-            stop: function (e, ui) {
-                var logEntry = $scope.types.map(function (i) {
-                    return i.order;
-                }).join(', ');
-                console.log('Stop: ' + logEntry);
-
+            stop: function () {
+                for (var index in $scope.types) {
+                    $scope.types[index].order = index;
+                }
             }
         };
-
 
         function saveType() {
         	BusinessTypeFactory.update({
@@ -62,7 +67,6 @@
         	$scope.type = {};
         	$scope.newType = true;
         }
-
 
         function removeType(id) {
         	BusinessTypeFactory.delete({
