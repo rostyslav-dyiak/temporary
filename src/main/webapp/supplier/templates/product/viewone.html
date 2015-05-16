@@ -9,104 +9,89 @@
                 <tab-heading>
                     Info
                 </tab-heading>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <form name="addEditForm" class="form-horizontal form-validation">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form name="addEditForm" class="form-horizontal col-sm-12 form-validation">
                             <div class="form-group">
-                                <label class="col-lg-2 control-label">Salutation</label>
+                                <div class="col-lg-6">
+                                    <label>Product Code</label>
 
-                                <div class="col-lg-10">
-                                    <select class="form-control" ng-model="teamMember.userDTO.salutation" required>
-                                        <option value="Mr" ng-selected="teamMember.userDTO.salutation == 'Mr'">
-                                            Mr
-                                        </option>
-                                        <option value="Ms" ng-selected="teamMember.userDTO.salutation == 'Ms'">
-                                            Ms
-                                        </option>
-                                        <option value="Mrs" ng-selected="teamMember.userDTO.salutation == 'Mrs'">
-                                            Mrs
-                                        </option>
-                                        <option value="Dr" ng-selected="teamMember.userDTO.salutation == 'Dr'">
-                                            Dr
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-2 control-label">Name</label>
-
-                                <div class="col-lg-10">
-                                    <input type="text" ng-model="teamMember.userDTO.firstName" class="form-control"
-                                           placeholder="Name" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-2 control-label">Contact Number</label>
-
-                                <div class="col-lg-10">
-                                    <input type="text" ng-model="teamMember.company.contactNumber" class="form-control"
-                                           placeholder="Contact Number" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-2 control-label">Email Address</label>
-
-                                <div class="col-lg-10">
-                                    <input type="email" ng-model="teamMember.userDTO.email" class="form-control"
-                                           placeholder="Email" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-2 control-label">Title</label>
-
-                                <div class="col-lg-10">
-                                    <input type="text" ng-model="teamMember.userDTO.title" class="form-control"
-                                           placeholder="Title" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-2 control-label">Access</label>
-
-                                <div class="col-lg-10">
-                                    <select class="form-control" ng-model="teamMember.userDTO.role" required>
-                                        <option value="ROLE_SUPPLIER_ADMIN" value="ROLE_SUPPLIER_ADMIN">
-                                            Company Admin
-                                        </option>
-                                        <option value="ROLE_SUPPLIER" value="ROLE_SUPPLIER">
-                                            Normal User
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group" ng-show="$scope.teamMemberId">
-                                <label class="col-lg-2 control-label">Status</label>
-
-                                <div class="col-lg-10">
-                                    <div class="radio">
+                                    <div class="checkbox">
                                         <label class="i-checks">
-                                            <input type="radio" ng-model="teamMember.company.status" name="status"
-                                                   value="ACTIVE">
-                                            <i></i> Active
+                                            <input type="checkbox" checked value="">
+                                            <i></i>
+                                            Generate product code
                                         </label>
                                     </div>
-                                    <div class="radio">
-                                        <label class="i-checks">
-                                            <input type="radio" ng-model="teamMember.company.status" name="status"
-                                                   value="INACTIVE">
-                                            <i></i> Inactive
-                                        </label>
-                                    </div>
+                                    <input type="text" ng-model="product.code" class="form-subelement form-control"
+                                           disabled>
                                 </div>
                             </div>
-
                             <div class="form-group">
-                                <div class="col-lg-10 col-lg-offset-2">
-                                    <button type="submit" ng-disabled="addEditForm.$invalid" class="btn btn-sm btn-info"
-                                            ng-click="addUser()">{{saveButtonText}}
+                                <div class="col-lg-6">
+                                    <label>Product Name</label>
+                                    <input type="text" ng-model="product.title" class="form-control"
+                                           placeholder="Product Name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-6">
+                                    <label>Other product names</label>
+
+                                    <div class="form-group" ng-repeat="name in product.productAliasSet track by $index">
+                                        <div class="col-xs-10">
+                                            <input type="text" class="form-control"
+                                                   ng-model="product.productAliasSet[$index].name"
+                                                   placeholder="name" required>
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <button class="btn btn-sm btn-danger" ng-click="removeOtherName(name)">
+                                                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"/>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button type="submit" ng-click="addOtherName()"
+                                            class="btn btn-sm btn-default btn-block">Add another name
                                     </button>
-                                    <button class="btn btn-sm btn-danger" ng-click="revert()">Revert Changes</button>
                                 </div>
                             </div>
+                            <div class="form-group">
+
+
+                                <div class="col-lg-4">
+                                    <label>Category</label>
+                                    <select name="category" class="form-control m-b">
+                                        <option>option 1</option>
+                                        <option>option 2</option>
+                                        <option>option 3</option>
+                                        <option>option 4</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>Subcategory</label>
+                                    <select name="subcategory" class="form-control m-b">
+                                        <option>option 1</option>
+                                        <option>option 2</option>
+                                        <option>option 3</option>
+                                        <option>option 4</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>Sub-subcategory</label>
+                                    <select name="subsubcategory" class="form-control m-b">
+                                        <option>option 1</option>
+                                        <option>option 2</option>
+                                        <option>option 3</option>
+                                        <option>option 4</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-6">
+                        <form name="addEditForm" class="form-horizontal form-validation">
                         </form>
                     </div>
                 </div>
@@ -128,4 +113,6 @@
             </tab>
         </tabset>
     </div>
+</div>
+
 </div>

@@ -5422,7 +5422,18 @@ a.text-#000000:hover {
     max-height: 600px;
     overflow: auto;
 }
+/* Tabs */
+.tab-bootstrap {
+    padding: 0px;
+}
 
+/* Product Info */
+.form-subelement {
+    margin-top:10px;
+}
+.glyphicon.glyphicon-remove-circle {
+    font-size: 20px;
+}
 /*Eatery Store */
 .supplier-row {
     margin-bottom: 30px;
