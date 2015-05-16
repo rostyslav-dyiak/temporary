@@ -50,19 +50,15 @@
                                             </button>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-6">
                                     <button type="submit" ng-click="addOtherName()"
                                             class="btn btn-sm btn-default btn-block">Add another name
                                     </button>
                                 </div>
                             </div>
                             <div class="form-group">
-
-
                                 <div class="col-lg-4">
                                     <label>Category</label>
-                                    <select name="category" class="form-control m-b">
+                                    <select name="category" ng-model="product.category" class="form-control m-b">
                                         <option>option 1</option>
                                         <option>option 2</option>
                                         <option>option 3</option>
@@ -71,7 +67,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <label>Subcategory</label>
-                                    <select name="subcategory" class="form-control m-b">
+                                    <select name="subcategory" ng-model="product.subcategory" class="form-control m-b">
                                         <option>option 1</option>
                                         <option>option 2</option>
                                         <option>option 3</option>
@@ -80,12 +76,94 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <label>Sub-subcategory</label>
-                                    <select name="subsubcategory" class="form-control m-b">
+                                    <select name="subSubCategory" ng-model="product.subSubCategory"
+                                            class="form-control m-b">
                                         <option>option 1</option>
                                         <option>option 2</option>
                                         <option>option 3</option>
                                         <option>option 4</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-4">
+                                    <div counter value="product.quantity" min="1" max="9999" step="1"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-4">
+                                    <label>Brand</label>
+                                    <input type="text" ng-model="product.brand" class="form-control"
+                                           placeholder="Brand">
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>Origin</label>
+                                    <input type="text" ng-model="product.origin" class="form-control"
+                                           placeholder="Origin">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-4">
+                                    <label class="control-label">Certified Halal</label>
+                                    <select name="type" ng-model="product.certifiedHalal" class="form-control"
+                                            ng-options="o.v as o.n for o in [{ n: 'Yes', v: false }, { n: 'No', v: true }]"
+                                            required>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-4">
+                                    <label class="control-label">Unit</label>
+                                    <select name="type" ng-model="product.unit" class="form-control"
+                                            ng-options="o.v as o.n for o in [{ n: 'Yes', v: false }, { n: 'No', v: true }]"
+                                            required>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>Unit Description</label>
+                                    <input type="text" ng-model="product.unitDescription" class="form-control"
+                                           placeholder="Unit Description">
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="">
+                                        <label></label>
+
+                                        <div class="checkbox">
+                                            <label class="i-checks i-checks-lg">
+                                                <input type="checkbox" checked value="">
+                                                <i></i>
+                                                Hide unit description for this item
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <label>Description</label>
+                                    <input type="text" ng-model="product.description" class="form-control"
+                                           placeholder="Description">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <div class="col-lg-2">
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <button type="submit" ng-disabled="addEditForm.$invalid"
+                                                ng-click="saveDistrict()"
+                                                class="full-width-button btn btn-lg btn-info">Save
+                                        </button>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <button class="full-width-button btn btn-lg btn-warning"
+                                                confirmed-click="cancel()" ng-confirm-click>
+                                            Revert Changes
+                                        </button>
+                                    </div>
+                                    <div class="col-lg-3">
+                                    </div>
                                 </div>
                             </div>
                         </form>

@@ -5318,6 +5318,7 @@ a.text-#000000:hover {
 .back-button {
     margin-right: 20px;
 }
+
 .margin-center {
     margin: 0 auto;
 }
@@ -5422,6 +5423,7 @@ a.text-#000000:hover {
     max-height: 600px;
     overflow: auto;
 }
+
 /* Tabs */
 .tab-bootstrap {
     padding: 0px;
@@ -5429,11 +5431,41 @@ a.text-#000000:hover {
 
 /* Product Info */
 .form-subelement {
-    margin-top:10px;
+    margin-top: 10px;
 }
+
 .glyphicon.glyphicon-remove-circle {
     font-size: 20px;
 }
+
+/* Styles used for the counter. */
+.counter-container .counter-minus, .counter-plus {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    background: #333;
+    color: white;
+    margin: 0;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+.counter-container .counter-field {
+    display: inline;
+    margin: 0;
+    padding: 5px;
+    text-align: center;
+    width: 250px;
+}
+
+/* Buttons style. */
+.full-width-button {
+    display: block;
+    width: 100%;
+}
+
 /*Eatery Store */
 .supplier-row {
     margin-bottom: 30px;
@@ -5441,22 +5473,27 @@ a.text-#000000:hover {
     border: 1px solid #F7F7F7;
     border-radius: 10px;
 }
-.supplier-row .mc-logo{
+
+.supplier-row .mc-logo {
     margin: 0;
 }
+
 .category-row {
     margin-bottom: 20px;
     padding: 15px;
     height: 140px;
     background: #F7F7F7;
 }
+
 .category-badge {
     padding: 5px;
 }
+
 .category-badge .badge {
     padding: 5px;
     font-size: 16px;
 }
+
 .product-title {
     margin-top: 5px;
     height: 29px;
@@ -5468,9 +5505,11 @@ a.text-#000000:hover {
     line-height: 1;
     max-height: 2;
 }
+
 .product-price {
     color: #27c24c;
 }
+
 .gst-badge {
     overflow: hidden;
     text-overflow: ellipsis;

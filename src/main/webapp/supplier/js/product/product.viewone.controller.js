@@ -11,6 +11,7 @@
 
     function ViewProductController($scope, toaster, ProductFactory) {
         $scope.product = {
+            quantity: 1,
             productAliasSet: [
                 {
                     name: 'first myName'
@@ -21,9 +22,11 @@
             ]
         };
 
+        $scope.quantity1 = 3;
+        $scope.products = [];
+
         $scope.removeOtherName = removeOtherName;
         $scope.addOtherName = addOtherName;
-        $scope.products = [];
 
         activate();
 
@@ -49,4 +52,5 @@
         }
     }
 
-})();
+})
+();
