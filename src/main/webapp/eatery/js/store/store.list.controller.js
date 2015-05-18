@@ -17,8 +17,11 @@
         $scope.categories = [];
         $scope.selectedCategory = [];
         $scope.selectedSuppliers = [];
+        $scope.cartItems = 3;
+        $scope.searchQuery = '';
 
         $scope.selectCategory = selectCategory;
+        $scope.search = search;
 
         activate();
 
@@ -26,6 +29,16 @@
             CategoryFactory.query({},
                 function (data) {
                     $scope.categories = data;
+                }, function (e) {
+                    console.error(e);
+                });
+            SupplierForCategoryFactory.query({},
+                function (data) {
+                    $scope.selectedSuppliers = angular.copy(data);
+                    for (var i = 0; i < $scope.selectedSuppliers.length; i++) {
+                        getSupplierCategories(i);
+                        getSupplierProducts(i);
+                    }
                 }, function (e) {
                     console.error(e);
                 });
@@ -44,6 +57,11 @@
             }, function (e) {
                 console.error(e);
             });
+        }
+
+        function search() {
+            // $scope.searchQuery
+            console.log("Sending request...");
         }
 
         function getSupplierCategories(supplierIndex) {

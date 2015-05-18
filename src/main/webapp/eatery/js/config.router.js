@@ -53,6 +53,7 @@
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
+                                        '/js/directives/ng-enter.directive.js',
                                         'js/store/category.factory.js',
                                         'js/store/supplier-for-category.factory.js',
                                         'js/store/supplier.category.factory.js',
