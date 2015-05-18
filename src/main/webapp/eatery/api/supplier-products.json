@@ -5,6 +5,11 @@
         "picture": {
             "url": "/logo_placeholder.png"
         },
+        "code": "kjdgh7 34",
+        "quantity": 20,
+        "brand": "bla bla",
+        "origin": "lusnc",
+        "certifiedHahal": true,
         "basePrice": 120,
         "unit": {
             "unitSymbol": "kg"
@@ -21,10 +26,28 @@
         "picture": {
             "url": "/logo_placeholder.png"
         },
+        "code": "kjdgh7 34",
+        "quantity": 20,
+        "brand": "bla bla",
+        "origin": "lusnc",
+        "certifiedHahal": false,
         "basePrice": 100,
         "unit": {
             "unitSymbol": "kg"
-        }
+        },
+        "productAliasSet": [
+            {
+                "name": "fhdfds"
+            }, {
+                "name": "fhdfds"
+            }, {
+                "name": "fhdfds"
+            }, {
+                "name": "fhdfds"
+            }, {
+                "name": "fhdfds"
+            }
+        ]
     },
     {
         "id": 3,
@@ -32,6 +55,11 @@
         "picture": {
             "url": "/logo_placeholder.png"
         },
+        "code": "kjdgh7 34",
+        "quantity": 20,
+        "brand": "bla bla",
+        "origin": "lusnc",
+        "certifiedHahal": true,
         "basePrice": 40,
         "unit": {
             "unitSymbol": "kg"
@@ -40,13 +68,28 @@
             {
                 "price": 130
             }
+        ],
+        "productAliasSet": [
+            {
+                "name": "fhdfds"
+            }, {
+                "name": "fhdfds"
+            }, {
+                "name": "fhdfds"
+            }
         ]
-    },{
+    },
+    {
         "id": 1,
         "title": "apple 2 hdfg fjdkgh ksjhf jwkfh et sfhj fshf sfjh sfkj",
         "picture": {
             "url": "/logo_placeholder.png"
         },
+        "code": "kjdgh7 34",
+        "quantity": 20,
+        "brand": "bla bla",
+        "origin": "lusnc",
+        "certifiedHahal": false,
         "basePrice": 120,
         "unit": {
             "unitSymbol": "kg"
@@ -63,6 +106,11 @@
         "picture": {
             "url": "/logo_placeholder.png"
         },
+        "code": "kjdgh7 34",
+        "quantity": 20,
+        "brand": "bla bla",
+        "origin": "lusnc",
+        "certifiedHahal": true,
         "basePrice": 100,
         "unit": {
             "unitSymbol": "kg"
@@ -74,6 +122,11 @@
         "picture": {
             "url": "/logo_placeholder.png"
         },
+        "code": "kjdgh7 34",
+        "quantity": 20,
+        "brand": "bla bla",
+        "origin": "lusnc",
+        "certifiedHahal": true,
         "basePrice": 40,
         "unit": {
             "unitSymbol": "kg"
@@ -82,6 +135,13 @@
             {
                 "price": 130
             }
+        ],
+        "productAliasSet": [
+            {
+                "name": "fhdfds"
+            }, {
+                "name": "fhdfds"
+            }
         ]
     },
     {
@@ -90,6 +150,11 @@
         "picture": {
             "url": "/logo_placeholder.png"
         },
+        "code": "kjdgh7 34",
+        "quantity": 20,
+        "brand": "bla bla",
+        "origin": "lusnc",
+        "certifiedHahal": true,
         "basePrice": 120,
         "unit": {
             "unitSymbol": "kg"
@@ -106,6 +171,11 @@
         "picture": {
             "url": "/logo_placeholder.png"
         },
+        "code": "kjdgh7 34",
+        "quantity": 20,
+        "brand": "bla bla",
+        "origin": "lusnc",
+        "certifiedHahal": true,
         "basePrice": 100,
         "unit": {
             "unitSymbol": "kg"
@@ -117,6 +187,11 @@
         "picture": {
             "url": "/logo_placeholder.png"
         },
+        "code": "kjdgh7 34",
+        "quantity": 20,
+        "brand": "bla bla",
+        "origin": "lusnc",
+        "certifiedHahal": false,
         "basePrice": 40,
         "unit": {
             "unitSymbol": "kg"

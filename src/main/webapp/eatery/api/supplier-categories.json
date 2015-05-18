@@ -1,41 +1,101 @@
 [
     {
-        "title": "Staples"
+        "id": 1,
+        "title": "Staples",
+        "total": 23,
+        "subcategories": [
+            {
+                "id": 99,
+                "title": "la la ---",
+                "total": 12,
+                "subsubcategories": [
+                    {
+                        "id": 999,
+                        "title": "dfhdjsg",
+                        "total": 9
+                    },
+                    {
+                        "id": 999,
+                        "title": "dfhdjsg",
+                        "total": 9
+                    },
+                    {
+                        "id": 999,
+                        "title": "dfhdjsg",
+                        "total": 9
+                    },
+                    {
+                        "id": 999,
+                        "title": "dfhdjsg",
+                        "total": 9
+                    }
+                ]
+            },
+            {
+                "id": 99,
+                "title": "la la",
+                "total": 12,
+                "subsubcategories": [
+                    {
+                        "id": 999,
+                        "title": "dfhdjsg",
+                        "total": 9
+                    }
+                ]
+            },
+            {
+                "id": 99,
+                "title": "la la",
+                "total": 12,
+                "subsubcategories": [
+                    {
+                        "id": 999,
+                        "title": "dfhdjsg",
+                        "total": 9
+                    }
+                ]
+            }
+        ]
     },
     {
-        "title": "Line2"
+        "id": 2,
+        "title": "Line2",
+        "total": 23,
+        "subcategories": [
+            {
+                "id": 99,
+                "title": "la la",
+                "total": 12
+            },
+            {
+                "id": 99,
+                "title": "la la",
+                "total": 12
+            }
+        ]
     },
     {
-        "title": "Dressing"
+        "id": 3,
+        "title": "Dressing",
+        "total": 23
     },
     {
-        "title": "Dessert"
-    },
-    {
-        "title": "Staples"
-    },
-    {
-        "title": "Line2"
-    },
-    {
-        "title": "Dressing"
-    },
-    {
-        "title": "Dessert"
-    },
-    {
-        "title": "Staples"
-    },
-    {
-        "title": "Line2"
-    },
-    {
-        "title": "Dressing"
-    },
-    {
-        "title": "Dessert"
-    },
-    {
-        "title": "Dressing"
+        "id": 4,
+        "title": "Dessert",
+        "total": 23,
+        "subcategories": [
+            {
+                "id": 99,
+                "title": "la la",
+                "total": 12,
+                "subsubcategories": [
+                    {
+                        "id": 999,
+                        "title": "dfhdjsg",
+                        "total": 9
+                    }
+                ]
+            }
+        ]
     }
 ]

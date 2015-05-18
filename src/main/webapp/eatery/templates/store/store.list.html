@@ -6,6 +6,16 @@
         </div>
         <div class="wrapper hidden-sm hidden-xs" id="category-menu">
             <ul class="nav nav-pills nav-stacked nav-sm">
+                <li>
+                    <div class="input-group">
+                        <input type="text" ng-model="searchQuery" ng-enter="search()"
+                               class="form-control input-sm bg-light no-border rounded padder"
+                               placeholder="Search..." aria-autocomplete="list" aria-expanded="false">
+                      <span class="input-group-btn">
+                        <button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
+                      </span>
+                    </div>
+                </li>
                 <li ng-repeat="category in categories">
                     <a ng-click="selectCategory(category)">{{category.title}}</a>
                 </li>
@@ -14,35 +24,51 @@
     </div>
     <div class="col">
         <div class="wrapper-md">
-            <div class="panel panel-default" ng-show="selectedCategory.id">
+            <div class="panel panel-default">
                 <div class="panel-body">
+                    <a ui-sref="app" class="btn btn-sm btn-default pull-right" ng-show="admin"><i class="fa fa-shopping-cart fa-fw m-r-xs"></i> Inquiry Cart ({{cartItems}})</a>
                     <span>{{selectedSuppliers.length}} suppliers selling {{selectedCategory.title}}:</span>
                     <br/><br/>
+
                     <div class="supplier-row clearfix" ng-repeat="supplier in selectedSuppliers">
                         <div class="col-sm-3 text-center">
-                            <h4>{{supplier.supplier.name}}</h4>
+                            <a ui-sref="app"><h4>{{supplier.supplier.name}}</h4></a>
                             <img class="mc-logo" ng-src="/api/content?contentPath={{supplier.supplier.logo.url}}"
                                  alt="{{supplier.supplier.name}}">
+
                             <div class="clearfix"></div>
                             <br>
-                            <a class="btn btn-sm btn-success">View Supplier's Store</a>
+                            <a ui-sref="app.storeSupplier({id: {{supplier.id}} })" class="btn btn-sm btn-success">View Supplier's Store</a>
                         </div>
                         <div class="col-sm-9">
                             <p>Available Categories:</p>
+
                             <div class="category-row">
-                                <div class="col-xs-2 category-badge" ng-repeat="supplierCategory in supplier.categories | limitTo:18">
+                                <div class="col-xs-2 category-badge"
+                                     ng-repeat="supplierCategory in supplier.categories | limitTo:18">
                                     <span class="badge bg-warning col-xs-12">{{supplierCategory.title}}</span>
                                 </div>
                             </div>
                             <br/>
+
                             <div class="row">
                                 <div class="col-xs-2 text-center" ng-repeat="product in supplier.products | limitTo:6">
-                                    <img class="img-responsive margin-center" ng-src="/api/content?contentPath={{product.picture.url}}">
+                                    <img class="img-responsive margin-center"
+                                         ng-src="/api/content?contentPath={{product.picture.url}}">
+
                                     <p class="product-title">{{product.title}}</p>
-                                    <p class="product-price" ng-hide="supplier.publicPricingVisible || product.productPricingGroups">Contact for Price</p>
-                                    <p class="product-price" ng-show="supplier.publicPricingVisible || product.productPricingGroups"><span ng-show="!product.productPricingGroups">{{product.basePrice}}</span><span ng-show="product.productPricingGroups">{{product.productPricingGroups[0].price}}</span>/{{product.unit.unitSymbol}}
+
+                                    <p class="product-price"
+                                       ng-hide="supplier.publicPricingVisible || product.productPricingGroups">Contact
+                                        for Price</p>
+
+                                    <p class="product-price"
+                                       ng-show="supplier.publicPricingVisible || product.productPricingGroups"><span
+                                        ng-show="!product.productPricingGroups">{{product.basePrice}}</span><span
+                                        ng-show="product.productPricingGroups">{{product.productPricingGroups[0].price}}</span>/{{product.unit.unitSymbol}}
                                         <br/>
-                                        <span class="badge gst-badge bg-success col-xs-12" ng-show="supplier.gstRegistered">GST Inclusive</span>
+                                        <span class="badge gst-badge bg-success col-xs-12"
+                                              ng-show="supplier.gstRegistered">GST Inclusive</span>
                                     </p>
                                 </div>
                             </div>

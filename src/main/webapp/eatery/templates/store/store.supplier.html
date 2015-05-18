@@ -1,0 +1,112 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="StoreSupplierController">
+    <div class="col w-md bg-light dk b-r bg-auto">
+        <div class="wrapper b-b bg visible-sm visible-xs">
+            <button class="btn btn-sm btn-default pull-right" ui-toggle-class="show"
+                    target="#category-menu"><i class="fa fa-bars"></i></button>
+        </div>
+        <div class="wrapper hidden-sm hidden-xs" id="category-menu">
+            <ul class="nav nav-pills nav-stacked nav-sm">
+                <li>
+                    <div class="input-group">
+                        <input type="text" ng-model="searchQuery" ng-enter="search()"
+                               class="form-control input-sm bg-light no-border rounded padder"
+                               placeholder="Search..." aria-autocomplete="list" aria-expanded="false">
+                      <span class="input-group-btn">
+                        <button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
+                      </span>
+                    </div>
+                </li>
+                <li class="text-center">
+                    <h3>{{supplier.supplier.name}}</h3>
+                    <img class="mc-logo" ng-src="/api/content?contentPath={{supplier.supplier.logo.url}}"
+                         alt="{{supplier.name}}">
+                </li>
+
+                <li ng-repeat="category in categories" ng-class="{active: category.id == selectedCategory.id}">
+                    <a ng-click="selectCategory(category)" ng-hide="category.subcategories.length > 0">
+                        {{category.title}} ({{category.total}})
+                    </a>
+                    <a href class="auto" ng-show="category.subcategories.length > 0" ng-click="selectCategory(category)">
+                      <span class="pull-right text-muted">
+                        <i class="fa fa-fw fa-angle-right text"></i>
+                        <i class="fa fa-fw fa-angle-down text-active"></i>
+                      </span>
+                        <span class="font-bold">{{category.title}} ({{category.total}})</span>
+                    </a>
+                    <ul class="nav nav-sub dk" ng-show="category.subcategories.length > 0"
+                        ng-repeat="subcategory in category.subcategories">
+                        <li ng-class="{active: subcategory.id == selectedCategory.subcategory.id}">
+                            <a ng-click="selectSubCategory(subcategory)"
+                               ng-hide="subcategory.subsubcategories.length > 0">
+                                <span class="font-bold">{{subcategory.title}} ({{subcategory.total}})</span>
+                            </a>
+                            <a href class="auto" ng-show="subcategory.subsubcategories.length > 0" ng-click="selectSubCategory(subcategory)">
+                              <span class="pull-right text-muted">
+                                <i class="fa fa-fw fa-angle-right text"></i>
+                                <i class="fa fa-fw fa-angle-down text-active"></i>
+                              </span>
+                                <span class="font-bold">{{subcategory.title}} ({{subcategory.total}})</span>
+                            </a>
+                            <ul class="nav nav-sub dk" ng-show="category.subcategories.length > 0"
+                                ng-repeat="subsubcategory in subcategory.subsubcategories">
+                                <li>
+                                    <a ng-click="selectSubSubCategory(subsubcategory)">
+                                        <span class="font-bold">{{subsubcategory.title}} ({{subsubcategory.total}})</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col">
+        <div class="wrapper-md">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a ui-sref="app" class="btn btn-sm btn-default pull-right"><i
+                        class="fa fa-shopping-cart fa-fw m-r-xs"></i> Inquiry Cart ({{cartItems}})</a>
+                    <ul class="breadcrumb bg-white b-a col-xs-6" ng-show="selectedCategory.id">
+                        <li>{{selectedCategory.title}}</li>
+                        <li ng-show="selectedCategory.subcategory.id">{{selectedCategory.subcategory.title}}</li>
+                        <li ng-show="selectedCategory.subcategory.subsubcategory.id">{{selectedCategory.subcategory.subsubcategory.title}}</li>
+                    </ul>
+                    <div class="clearfix"></div>
+                    <br/>
+
+                    <div class="supplier-row clearfix" ng-repeat="product in selectedProducts">
+                        <div class="col-sm-3 text-center">
+                            <img class="mc-logo" ng-src="/api/content?contentPath={{product.picture.url}}"
+                                 alt="{{product.title}}">
+                            <br><br>
+                            <span class="btn btn-sm btn-success" ng-click="addToCart(product)">Add to Inquiry Cart</span>
+                        </div>
+                        <div class="col-sm-9">
+                            <h4>{{product.title}}</h4>
+                            <ul class="product-description-list">
+                                <li><b>Product Code:</b> {{product.code}}</li>
+                                <li><b>Minimum Quantity:</b> {{product.quantity}}</li>
+                                <li><b>Unit:</b> {{product.unit.unitSymbol}}</li>
+                                <li><b>Unit Price:</b> <span>{{product.productPricingGroups[0].price}}</span>
+                                    <span class="badge gst-badge bg-success" ng-show="supplier.gstRegistered">GST Inclusive</span></li>
+                                <li><b>Brand:</b> {{product.brand}}</li>
+                                <li><b>Origin:</b> {{product.origin}}</li>
+                                <li><b>Certified Hahal:</b> <span ng-show="product.certifiedHalal">Yes</span><span ng-show="!product.certifiedHalal">No</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-12" ng-show="product.productAliasSet.length > 0">
+                            <div class="padding-row">
+                                <p>Also known as:</p>
+                                <div class="col-xs-3 category-badge"
+                                     ng-repeat="alias in product.productAliasSet">
+                                    <span class="badge bg-warning col-xs-12">{{alias.name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
