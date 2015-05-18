@@ -49,11 +49,12 @@
             <td>
                 <button class="btn btn-info btn-rounded text-center" ng-show="categorySelected" ng-click="addNewSubCategory()">Add new subcategory</button>
                 <ul class="list-group gutter list-group-lg list-group-sp types-list">
-                    <li class="list-group-item selectable" ng-class="{greenBackground: data.clicked}" ng-repeat="data in subcategories"
+                    <li class="list-group-item selectable" ng-class="{greenBackground: data.clicked}"
+                        ng-repeat="data in subcategories" ng-click="showSubSubCategories(data)"
                         ng-mouseover = "edit = true" ng-mouseout= "edit = false">
                         <div>
                             <button class="btn btn-sm btn-info  pull-right" ng-show="edit" ng-click="editSubCategory(data)">Edit</button>
-                            <h5 ng-click="showSubSubCategories(data)">{{data.category.title}} ({{data.count}})</h5>
+                            <h5>{{data.category.title}} ({{data.count}})</h5>
                         </div>
                     </li>
                 </ul>

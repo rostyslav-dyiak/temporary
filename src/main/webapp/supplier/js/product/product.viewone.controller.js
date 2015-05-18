@@ -6,37 +6,70 @@
         .$inject = [
         '$scope',
         'toaster',
-        'ProductFactory'
+        'ProductFactory',
+        'UnitFactory',
+        'CategoryFactory'
     ];
 
-    function ViewProductController($scope, toaster, ProductFactory) {
+    function ViewProductController($scope, toaster, ProductFactory, UnitFactory, CategoryFactory) {
         $scope.product = {
-            quantity: 1,
-            productAliasSet: [
-                {
-                    name: 'first myName'
-                },
-                {
-                    name: 'second myName'
-                }
-            ]
+            quantity: 0
         };
 
-        $scope.quantity1 = 3;
-        $scope.products = [];
+
+        $scope.units = [];
+        $scope.categories = [];
 
         $scope.removeOtherName = removeOtherName;
         $scope.addOtherName = addOtherName;
+        $scope.saveProduct = saveProduct;
+        $scope.deleteProduct = deleteProduct;
 
         activate();
 
         function activate() {
-            //ProductFactory.query({},
-            //    function (data) {
-            //        $scope.products = data;
-            //    }, function (e) {
-            //        console.error(e);
-            //    });
+            UnitFactory.query({},
+                function (data) {
+                    $scope.units = data;
+                }, function (e) {
+                    console.error(e);
+                }
+            )
+            CategoryFactory.query({},
+                function (data) {
+                    data.forEach(function (category) {
+                        if (category.parentId == null) {
+                            $scope.categories.push(category);
+                        }
+                    });
+                }, function (e) {
+                    console.error(e);
+                }
+            )
+        }
+
+        function saveProduct() {
+            ProductFactory.update(
+                $scope.product
+                , function (data) {
+                    toaster.pop('success', 'Success', 'Product saved');
+                    activate();
+                }, function (e) {
+                    console.error(e);
+                    toaster.pop('error', 'Error', 'Please try again');
+                });
+        }
+
+        function deleteProduct() {
+            ProductFactory.delete(
+                $scope.product
+                , function (data) {
+                    toaster.pop('success', 'Success', 'Product deleted');
+                    activate();
+                }, function (e) {
+                    console.error(e);
+                    toaster.pop('error', 'Error', 'Please try again');
+                });
         }
 
         function removeOtherName(name) {

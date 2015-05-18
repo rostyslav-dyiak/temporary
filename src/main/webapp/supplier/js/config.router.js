@@ -113,12 +113,15 @@ angular.module('app')
                             function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
                                     'js/product/product.factory.js',
+                                    'js/product/unit.factory.js',
+                                    'js/product/category.factory.js',
                                     'js/product/product.viewone.controller.js'
                                 ]);
                             }
                         ]
                     }
                 })
+
                 .state('app.pricingProductTable', {
                     url: '/pricing/product_table',
                     templateUrl: 'templates/pricing/pricing.product-table.html',
