@@ -1,5 +1,33 @@
 <div class="bg-light lter b-b wrapper-md">
-    <button class="btn btn-default back-button" back-button>Back</button>
+    <div class="row">
+        <div class="col-lg-6">
+            <button class="btn btn-default back-button" back-button>Back</button>
+            <div class="form-group">
+                <div class="col-lg-3">
+                    <img ngf-thumbnail="logo[0]" class="mc-logo"
+                         ng-src="/api/content?contentPath={{userCompanyDTO.company.logo.url}}">
+                </div>
+                <div class="col-lg-6">
+                    <h4>Product code</h4>
+                    <label class="btn btn-danger" ng-model="radioModel" uncheckable>Remove this product</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="pull-right">
+                <h5>Total amount earn from this</h5>
+                <h5>product: </h5>
+
+                <div class="form-group">
+                    <div class="btn-group m-r">
+                        <label class="btn btn-default" ng-model="radioModel" btn-radio="'Available'" uncheckable>Available</label>
+                        <label class="btn btn-default" ng-model="radioModel" btn-radio="'Unavailable'" uncheckable>Unavailable</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </div>
 <div class="wrapper-md" ng-controller="ViewProductController">
@@ -25,6 +53,26 @@
                                     </div>
                                     <input type="text" ng-model="product.code" class="form-subelement form-control"
                                            disabled>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Product image</label>
+
+                                    <div class="col-lg-10">
+                                        <img ngf-thumbnail="logo[0]" class="mc-logo"
+                                             ng-src="/api/content?contentPath={{product.picture.url}}">
+
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default" ng-model="logo" ngf-select
+                                                    ngf-change="uploadLogo(logo)">Upload
+                                                Image
+                                            </button>
+                                            <button type="button" class="btn btn-default" ng-click="removeLogo()">
+                                                Remove
+                                            </button>
+                                            <input name="fileName" class="form-control " ng-model="logo[0].name"
+                                                   disabled>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -178,16 +226,111 @@
                 <tab-heading>
                     Pricing
                 </tab-heading>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+
+                                <div class="table-responsive scroll-box-big">
+                                    <table st-table="rowCollection" st-safe-src="pricingGroups" st-select-mode
+                                           class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center" st-sort="name">Name</th>
+                                            <th class="text-center" st-sort="description">Note</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="selectable" ng-class="{selected: row.id == selectedPricingGroup.id}"
+                                            ng-repeat="row in rowCollection" ng-click="selectPricingGroup(row)">
+                                            <td>{{row.groupName}}</td>
+                                            <td>{{row.description}}</td>
+                                            <td class="edit-input" ng-click="editPrice(pricingGroup)">
+                                                <input type="text" ng-model="pricingGroup.price"
+                                                       class="form-control col-md-8"
+                                                       placeholder="pricingGroup.group.groupName"
+                                                       ng-hide="pricingGroup.price == row.basePrice && !pricingGroup.editMode"
+                                                       ng-disabled="!pricingGroup.editMode"
+                                                       ng-enter="saveProduct(row, pricingGroup)">
+                                                <span ng-show="pricingGroup.saving">Saving Changes...</span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </tab>
             <tab class="tab-bootstrap col-sm-3">
                 <tab-heading>
                     Customers
                 </tab-heading>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+
+                                <div class="table-responsive scroll-box-big">
+                                    <table st-table="rowCollection" st-safe-src="purchasers" st-select-mode
+                                           class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center" st-sort="customer">Customer</th>
+                                            <th class="text-center" st-sort="description">Last Purchase</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="selectable" ng-repeat="row in rowCollection"
+                                            ng-click="selectPurchaser(row)">
+                                            <td>{{row.title}}</td>
+                                            <td>{{row.date | date:"EEEE, MMM dd.yyyy h:mma"}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </tab>
             <tab class="tab-bootstrap col-sm-3">
                 <tab-heading>
                     History
                 </tab-heading>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+
+                                <div class="table-responsive scroll-box-big">
+                                    <table st-table="rowCollection" st-safe-src="purchasers" st-select-mode
+                                           class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center" st-sort="action">Action</th>
+                                            <th class="text-center" st-sort="date">Date</th>
+                                            <th class="text-center" st-sort="date">Action by:</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="selectable" ng-repeat="row in rowCollection"
+                                            ng-click="selectPurchaser(row)">
+                                            <td>{{row.action}}</td>
+                                            <td>{{row.date | date:"EEEE, MMM dd.yyyy h:mma"}}</td>
+                                            <td>{{row.actionBy}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </tab>
         </tabset>
     </div>
