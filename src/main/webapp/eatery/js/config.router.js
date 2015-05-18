@@ -64,6 +64,27 @@
                             ]
                         }
                     })
+                    .state('app.storeSupplier', {
+                        url: '/store/supplier/:id',
+                        templateUrl: 'templates/store/store.supplier.html',
+                        controller: function ($stateParams) {
+                            $stateParams.id
+                        },
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        '/js/directives/ng-enter.directive.js',
+                                        'js/store/category.factory.js',
+                                        'js/store/supplier-for-category.factory.js',
+                                        'js/store/supplier.category.factory.js',
+                                        'js/store/supplier.product.factory.js',
+                                        'js/store/store.supplier.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
+                    })
                     .state('app.inventory', {
                         url: '/inventory',
                         templateUrl: 'templates/inventory.html'

@@ -5514,3 +5514,11 @@ a.text-#000000:hover {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.product-description-list {
+    padding: 0;
+    list-style: none;
+}
+.padding-row {
+    padding: 15px;
+}

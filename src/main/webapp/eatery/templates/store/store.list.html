@@ -26,20 +26,19 @@
         <div class="wrapper-md">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="store-cart"></div>
-                    <a ui-ref="" class="btn btn-sm btn-default pull-right"><i class="fa fa-shopping-cart fa-fw m-r-xs"></i> Inquiry Cart ({{cartItems}})</a>
+                    <a ui-sref="app" class="btn btn-sm btn-default pull-right" ng-show="admin"><i class="fa fa-shopping-cart fa-fw m-r-xs"></i> Inquiry Cart ({{cartItems}})</a>
                     <span>{{selectedSuppliers.length}} suppliers selling {{selectedCategory.title}}:</span>
                     <br/><br/>
 
                     <div class="supplier-row clearfix" ng-repeat="supplier in selectedSuppliers">
                         <div class="col-sm-3 text-center">
-                            <h4>{{supplier.supplier.name}}</h4>
+                            <a ui-sref="app"><h4>{{supplier.supplier.name}}</h4></a>
                             <img class="mc-logo" ng-src="/api/content?contentPath={{supplier.supplier.logo.url}}"
                                  alt="{{supplier.supplier.name}}">
 
                             <div class="clearfix"></div>
                             <br>
-                            <a class="btn btn-sm btn-success">View Supplier's Store</a>
+                            <a ui-sref="app.storeSupplier({id: {{supplier.id}} })" class="btn btn-sm btn-success">View Supplier's Store</a>
                         </div>
                         <div class="col-sm-9">
                             <p>Available Categories:</p>
