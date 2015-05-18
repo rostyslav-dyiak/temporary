@@ -1,8 +1,6 @@
 package com.kb.config;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.inject.Inject;
 
 import org.elasticsearch.client.Client;
 import org.elasticsearch.node.NodeBuilder;
@@ -17,21 +15,13 @@ import org.springframework.data.repository.query.QueryLookupStrategy.Key;
 
 import com.kb.converter.Converter;
 import com.kb.domain.Product;
-import com.kb.repository.ProductRepository;
 import com.kb.search.model.ProductSearch;
-import com.kb.search.repository.product.ProductSearchRepository;
 
 @Configuration
 @EnableElasticsearchRepositories(value = { "com.kb.search" }, queryLookupStrategy = Key.USE_DECLARED_QUERY)
 @Profile("!" + Constants.SPRING_PROFILE_PRODUCTION)
 public class ElasticsearchDevConfig {
     private final Logger log = LoggerFactory.getLogger(ElasticsearchDevConfig.class);
-    
-    @Inject
-    private ProductRepository productRepository;
-    
-    @Inject
-    private ProductSearchRepository productSearchRepository;
     
 	@Resource(name = "productEntitySearchConverter")
 	private Converter<Product, ProductSearch> productEntitySearchConverter;
@@ -48,18 +38,4 @@ public class ElasticsearchDevConfig {
 		return new NodeBuilder();
 	}
 
-	@PostConstruct
-	public void setup() {
-		productRepository.findAll()
-			.forEach(product -> {
-				productSearchRepository.delete(product.getId());
-				ProductSearch productSearch = productEntitySearchConverter.convert(product);
-				
-				productSearchRepository.save(productSearch);
-				log.info("product search: {}", product.getId());
-			});
-		
-		
-		
-	}
 }
