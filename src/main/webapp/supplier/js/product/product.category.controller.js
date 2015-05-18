@@ -106,6 +106,8 @@
             $scope.subCategorySelected = null;
             $scope.subcategories = [];
             $scope.subsubcategories = [];
+            $scope.editSub = false;
+            $scope.editSubSub = false;
             discardNewSubCategory();
             for(var i = 0; i < $scope.categories.length; i++){
                 $scope.categories[i].clicked = false;
@@ -122,6 +124,8 @@
         function showSubSubCategories(data) {
             $scope.subCategorySelected = data;
             $scope.subsubcategories = [];
+            $scope.editCat = false;
+            $scope.editSubSub = false;
             discardNewSubSubCategory();
             for(var i = 0; i < $scope.subcategories.length; i++){
                 $scope.subcategories[i].clicked = false;
@@ -136,6 +140,9 @@
         }
 
         function addNewCategory(){
+            $scope.editCat = false;
+            $scope.editSub = false;
+            $scope.editSubSub = false;
             $scope.addNewCat = true;
         }
 
@@ -163,6 +170,9 @@
         }
 
         function addNewSubCategory(){
+            $scope.editCat = false;
+            $scope.editSub = false;
+            $scope.editSubSub = false;
             $scope.addNewSub = true;
         }
 
@@ -191,6 +201,9 @@
         }
 
         function addNewSubSubCategory(){
+            $scope.editCat = false;
+            $scope.editSub = false;
+            $scope.editSubSub = false;
             $scope.addNewSubSub = true;
         }
 
@@ -224,6 +237,9 @@
             $scope.editSub = false;
             $scope.editSubSub = false;
             $scope.edited = data.category;
+            discardNewCategory();
+            discardNewSubCategory();
+            discardNewSubSubCategory();
         }
 
         function editSubCategory(data){
@@ -231,6 +247,9 @@
             $scope.editCat = false;
             $scope.editSubSub = false;
             $scope.edited = data.category;
+            discardNewCategory();
+            discardNewSubCategory();
+            discardNewSubSubCategory();
         }
 
         function editSubSubCategory(data){
@@ -238,6 +257,9 @@
             $scope.editSub = false;
             $scope.editSubSub = true;
             $scope.edited = data.category;
+            discardNewCategory();
+            discardNewSubCategory();
+            discardNewSubSubCategory();
         }
 
         function update(){
