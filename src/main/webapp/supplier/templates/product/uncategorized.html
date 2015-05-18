@@ -1,0 +1,142 @@
+<div ng-controller="ProductUncategorizedController">
+    <div class="bg-light lter b-b wrapper-md clearfix">
+        <button class="btn btn-default back-button" back-button>Back</button>
+    </div>
+    <div class="wrapper-md">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table st-table="rowCollection" st-safe-src="products" class="table table-striped">
+                                <tbody>
+                                <tr><td>
+                                    <ul ui-sortable="sortableOptions" class="list-group gutter list-group-lg list-group-sp ">
+                                        <li class="list-group-item " ng-repeat="row in rowCollection">
+                                            <table class="table">
+                                                <tr><td>
+                                                    <br><br>
+                                                    <div align="center"><img width="150" height="150" src="http://onlinecompanywarehouse.co.za/wp/wp-content/uploads/2013/10/company_256.png"></div>
+                                                </td>
+                                                <td>
+                                                    <table>
+                                                        <thead>
+                                                        <th>
+                                                            <h3 class="text-center">{{ row.title }}</h3></th>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                Product Code
+                                                            </td>
+                                                            <td>
+                                                                : {{ row.title }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                               Minimum Quantity
+                                                            </td>
+                                                            <td>
+                                                                : {{ row.quantity }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Unit
+                                                            </td>
+                                                            <td>
+                                                                : {{ row.unit.unitSymbol }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Unit Price
+                                                            </td>
+                                                            <td>
+                                                                : {{ row.basePrice }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Brand
+                                                            </td>
+                                                            <td>
+                                                                : {{ row.brand }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Origin
+                                                            </td>
+                                                            <td>
+                                                                : {{ row.origin }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Certified Halal
+                                                            </td>
+                                                            <td>
+                                                                : {{ row.certifiedHalal }}
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+
+                                                    </table>
+
+                                                </td>
+                                                <td>
+                                                    <table>
+                                                        <tbody>
+                                                        <tr><td><br></td></tr>
+                                                        <tr><td>
+                                                            <h3> Category</h3>
+                                                        </td><td>
+                                                            <select class="form-control ng-pristine ng-valid ng-touched selectable" ng-class="{redBackground: !row.category}" ng-model="row.categoryIndex" ng-change="selectCategory(row)">
+                                                                <option ng-repeat="category in categories" ng-value="$index" ng-selected="category.id == row.category.id">{{category.title}}</option>
+                                                            </select>
+                                                        </td></tr>
+                                                        <tr><td>
+                                                            <h3> Subcategory</h3>
+                                                        </td><td>
+                                                            <select class="form-control ng-pristine ng-valid ng-touched selectable" ng-class="{redBackground: !row.subCategory}" ng-model="row.subCategoryIndex" ng-change="selectSubCategory(row)">
+                                                                <option ng-repeat="category in row.listSubCategories" ng-value="$index" ng-selected="category.id == row.subCategory.id">{{category.title}}</option>
+                                                            </select>
+                                                        </td></tr>
+                                                        <tr><td>
+                                                            <h3> Sub-subcategory</h3>
+                                                        </td><td>
+                                                            <select class="form-control ng-pristine ng-valid ng-touched selectable" ng-class="{redBackground: !row.subSubCategory}" ng-model="row.subSubCategoryIndex"  ng-change="selectSubSubCategory(row)">
+                                                                <option ng-repeat="category in row.listSubSubCategories" ng-value="$index">{{category.title}}</option>
+                                                            </select>
+                                                        </td></tr>
+                                                        </tbody>
+
+                                                    </table>
+
+                                                </td></tr>
+                                            </table>
+                                        </li>
+                                    </ul>
+
+                                </td></tr>
+
+                                </tbody>
+                                <tfoot>
+                                <tr class="text-center">
+                                    <td colspan="9" class="text-center">
+                                        <div st-pagination st-items-by-page="2" class="no-margin"></div>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

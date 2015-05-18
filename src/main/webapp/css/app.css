@@ -5307,6 +5307,10 @@ a.text-#000000:hover {
     background-color: #9fda58;
 }
 
+.selectable.redBackground {
+    background-color: #ac050b;
+}
+
 .margin-center {
     margin: 0 auto;
 }

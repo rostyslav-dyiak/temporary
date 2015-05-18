@@ -66,6 +66,7 @@ angular.module('app')
                         deps: ['$ocLazyLoad',
                             function ($ocLazyLoad) {
                                 return $ocLazyLoad.load([
+                                    'js/product/unit.factory.js',
                                     'js/product/product.factory.js',
                                     'js/product/product.controller.js'
                                 ]);
@@ -83,6 +84,22 @@ angular.module('app')
                                     'js/product/product.uncategorized.factory.js',
                                     'js/product/category.factory.js',
                                     'js/product/product.category.controller.js'
+                                ]);
+                            }
+                        ]
+                    }
+                })
+                .state('app.product.uncategorized', {
+                    url: '/uncategorized',
+                    templateUrl: 'templates/product/uncategorized.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    'js/product/product.uncategorized.factory.js',
+                                    'js/product/category.factory.js',
+                                    'js/product/product.factory.js',
+                                    'js/product/product.uncategorized.controller.js'
                                 ]);
                             }
                         ]

@@ -19,6 +19,6 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 
     Page<Product> findByCompany(Company company, Pageable page);
 
-    List<Product> findByCompanyAndCategoryIsNull(Company company);
+    List<Product> findByCompanyAndSubSubCategoryIsNull(Company company);
 
 }

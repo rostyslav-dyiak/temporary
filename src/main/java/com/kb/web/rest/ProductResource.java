@@ -1,26 +1,5 @@
 package com.kb.web.rest;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
-
-import javax.inject.Inject;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.codahale.metrics.annotation.Timed;
 import com.kb.domain.Product;
 import com.kb.domain.User;
@@ -30,6 +9,20 @@ import com.kb.security.SecurityUtils;
 import com.kb.service.product.ProductService;
 import com.kb.web.rest.dto.product.ProductDto;
 import com.kb.web.rest.util.PaginationUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+
+import javax.inject.Inject;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * REST controller for managing Product.
@@ -38,13 +31,13 @@ import com.kb.web.rest.util.PaginationUtil;
 @RequestMapping("/api")
 public class ProductResource {
     private final Logger log = LoggerFactory.getLogger(ProductResource.class);
-    
+
     @Inject
     private UserRepository userRepository;
 
     @Inject
     private ProductService productService;
-    
+
     @RequestMapping(value = "/products",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -80,7 +73,7 @@ public class ProductResource {
         Optional<User> user = userRepository.findOneByEmail(SecurityUtils.getCurrentLogin());
         if(user.isPresent()) {
             log.debug("REST request to get all Products");
-            List<Product> products = productService.findByCompanyAndCategoryIsNull(user.get().getCompany());
+            List<Product> products = productService.findByCompanyAndSubSubCategoryIsNull(user.get().getCompany());
             return new ResponseEntity<>(products, HttpStatus.OK);
         } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

@@ -1,14 +1,13 @@
 package com.kb.service.product;
 
-import java.util.List;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
 import com.kb.domain.Company;
 import com.kb.domain.Product;
 import com.kb.search.model.ProductSearch;
 import com.kb.web.rest.dto.product.ProductDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface ProductService {
 
@@ -18,7 +17,7 @@ public interface ProductService {
 
 	Page<Product> findByCompany(Company company, Pageable generatePageRequest);
 
-	List<Product> findByCompanyAndCategoryIsNull(Company company);
+	List<Product> findByCompanyAndSubSubCategoryIsNull(Company company);
 
 	Product findOne(Long id);
 
