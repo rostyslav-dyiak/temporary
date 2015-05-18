@@ -118,9 +118,19 @@
                     })
                     .state('app.inquiry', {
                         url: '/inquiry',
-                        templateUrl: 'templates/admin/inquiry.html',
+                        templateUrl: 'templates/admin/inquiry/inquiry.html',
                         data: {
                             authorizedRoles: [USER_ROLES.eateryAdmin]
+                        },
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/inquiry/inquiry.factory.js',
+                                        'js/inquiry/inquiry.controller.js'
+                                    ]);
+                                }
+                            ]
                         }
                     })
                     .state('app.companyProfile', {

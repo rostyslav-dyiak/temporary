@@ -1,0 +1,154 @@
+<div class="wrapper-md" ng-controller="InquiryController">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="input-group">
+                        <input type="text" ng-model="searchQuery" ng-enter="search()"
+                               class="form-control input-sm bg-light no-border rounded padder"
+                               placeholder="Search..." aria-autocomplete="list" aria-expanded="false">
+                      <span class="input-group-btn">
+                        <button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
+                      </span>
+                    </div>
+                    <br>
+
+                    <div class="col-sm-12 supplier-row selectable" ng-click="selectInquiry(inquiry)"
+                         ng-repeat="inquiry in inquiries">
+                        <div class="col-sm-7">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <img class="img-responsive margin-center"
+                                         ng-src="/api/content?contentPath={{inquiry.supplier.supplier.logo.url}}">
+                                </div>
+                                <div class="col-sm-7">
+                                    <span>{{inquiry.supplier.supplier.name}}</span><br><br>
+                                    <a class="btn btn-sm btn-success">New Reply</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 text-center">
+                            <span>Last Activity</span><br>
+                            <span>{{inquiry.lastModifiedDate}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <span ng-click="deleteInquiry()" class="btn btn-sm btn-default pull-right" ng-show="admin"><i
+                        class="fa fa-trash-o fa-fw m-r-xs"></i> Delete Inquiry</span>
+                    <tabset class="tab-container">
+                        <tab>
+                            <tab-heading>
+                                Last Respond
+                            </tab-heading>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <form name="latestRespondForm"
+                                          class="col-sm-12 form-horizontal form-validation scroll-box-big">
+                                        <div class="form-group">
+                                            <label class="control-label">Payment Term</label>
+                                            <input type="text" ng-model="selectedInquiry.paymentTerm"
+                                                   class="form-control"
+                                                   placeholder="Payment Term" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Supplier-In-Charge</label>
+                                            <input type="text" ng-model="selectedInquiry.supplier.name"
+                                                   class="form-control"
+                                                   placeholder="Supplier-In-Charge" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Outlet Delivery Address</label>
+
+                                            <div class="col-sm-12"
+                                                 ng-repeat="outlet in selectedInquiry.outlets">
+                                                <div class="supplier-row row">
+                                                    <div class="col-sm-12">
+                                                        <h4>{{outlet.name}}</h4>
+                                                        <span>{{outlet.deliveryAddress}}</span>
+
+                                                        <div class="clearfix"></div>
+                                                        <div class="btn-group">
+                                                            <label class="btn btn-success"
+                                                                   ng-model="outlet.deliveryDay.monday"
+                                                                   btn-checkbox>Monday</label>
+                                                            <label class="btn btn-success"
+                                                                   ng-model="outlet.deliveryDay.tuesday"
+                                                                   btn-checkbox>Tuesday</label>
+                                                            <label class="btn btn-success"
+                                                                   ng-model="outlet.deliveryDay.wednesday"
+                                                                   btn-checkbox>Wednesday</label>
+                                                            <label class="btn btn-success"
+                                                                   ng-model="outlet.deliveryDay.thursday"
+                                                                   btn-checkbox>Thursday</label>
+                                                            <label class="btn btn-success"
+                                                                   ng-model="outlet.deliveryDay.friday"
+                                                                   btn-checkbox>Friday</label>
+                                                            <label class="btn btn-success"
+                                                                   ng-model="outlet.deliveryDay.saturday"
+                                                                   btn-checkbox>Saturday</label>
+                                                            <label class="btn btn-success"
+                                                                   ng-model="outlet.deliveryDay.sunday"
+                                                                   btn-checkbox>Sunday</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Items Inquired</label>
+
+                                            <div class="col-sm-12"
+                                                 ng-repeat="product in selectedInquiry.products">
+                                                <div class="supplier-row row">
+                                                    <div class="col-sm-12">
+                                                        <div class="col-sm-2">
+                                                            <img class="img-responsive margin-center"
+                                                                 ng-src="/api/content?contentPath={{product.picture.url}}">
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <h4>{{product.title}}</h4>
+                                                            <ul class="product-description-list">
+                                                                <li><b>Product Code:</b> {{product.code}}</li>
+                                                                <li><b>Unit:</b> {{product.unit.unitSymbol}}</li>
+                                                            </ul>
+                                                            <div class="col-xs-12 text-center">
+                                                                Quantity per week {{product.quantity}} UNIT
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 text-center">
+                                                            <h5>Price</h5>
+                                                            <b ng-hide="product.productPricingGroups.lenght > 0">{{product.basePrice}}</b>
+                                                            <b ng-show="product.productPricingGroups.lenght > 0">{{product.productPricingGroups[0].price}}</b>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <button type="submit" ng-disabled="!latestRespondForm.$valid"
+                                                    class="btn btn-sm btn-info"
+                                                    ng-click="addToSupplier()">Add to a supplier
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </tab>
+                        <!--   -->
+                        <tab>
+                            <tab-heading>
+                                History
+                            </tab-heading>
+
+                        </tab>
+                    </tabset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
