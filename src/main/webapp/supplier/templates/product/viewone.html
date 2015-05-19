@@ -1,11 +1,11 @@
-<div class="bg-light lter b-b wrapper-md">
+<div class="bg-light lter b-b wrapper-md" ng-controller="ViewProductController">
     <div class="row">
         <div class="col-lg-6">
             <button class="btn btn-default back-button" back-button>Back</button>
             <div class="form-group">
                 <div class="col-lg-3">
                     <img ngf-thumbnail="logo[0]" class="mc-logo"
-                         ng-src="/api/content?contentPath={{userCompanyDTO.company.logo.url}}">
+                         ng-src="/api/content?contentPath={{product.picture.url}}">
                 </div>
                 <div class="col-lg-6">
                     <h4>{{product.code}}</h4>
@@ -46,13 +46,13 @@
 
                                     <div class="checkbox">
                                         <label class="i-checks">
-                                            <input type="checkbox" checked value="">
+                                            <input type="checkbox" checked ng-model="generateCode">
                                             <i></i>
                                             Generate product code
                                         </label>
                                     </div>
                                     <input type="text" ng-model="product.code" class="form-subelement form-control"
-                                           disabled required>
+                                           required ng-disabled="generateCode ">
                                 </div>
                                 <div class="col-lg-6">
                                     <label>Product image</label>
@@ -108,27 +108,22 @@
                                     <label>Category</label>
                                     <select name="category" ng-model="product.category"
                                             ng-options="category.title for category in categories"
-                                            class="form-control m-b"
+                                            class="form-control m-b" ng-change="loadSubCategories()"
                                             required>
                                     </select>
                                 </div>
                                 <div class="col-lg-4">
                                     <label>Subcategory</label>
-                                    <select name="subcategory" ng-model="product.subcategory" class="form-control m-b">
-                                        <option>option 1</option>
-                                        <option>option 2</option>
-                                        <option>option 3</option>
-                                        <option>option 4</option>
+                                    <select name="subcategory" ng-model="product.subcategory" class="form-control m-b"
+                                            ng-options="subcategory.title for subcategory in subCategories"
+                                            ng-change="loadSubSubCategories()">
                                     </select>
                                 </div>
                                 <div class="col-lg-4">
                                     <label>Sub-subcategory</label>
                                     <select name="subSubCategory" ng-model="product.subSubCategory"
-                                            class="form-control m-b">
-                                        <option>option 1</option>
-                                        <option>option 2</option>
-                                        <option>option 3</option>
-                                        <option>option 4</option>
+                                            class="form-control m-b"
+                                            ng-options="category.title for subSubCategory in subSubCategories">
                                     </select>
                                 </div>
                             </div>
@@ -211,10 +206,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="col-sm-6">
-                        <form name="addEditForm" class="form-horizontal form-validation">
                         </form>
                     </div>
                 </div>

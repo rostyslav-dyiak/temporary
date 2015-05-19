@@ -8,22 +8,31 @@
         'toaster',
         'ProductFactory',
         'UnitFactory',
-        'CategoryFactory'
+        'CategoryFactory',
+        'SubCategoryFactory',
+        'FileUploadService'
     ];
 
-    function ViewProductController($scope, toaster, ProductFactory, UnitFactory, CategoryFactory) {
+    function ViewProductController($scope, toaster, ProductFactory, UnitFactory, CategoryFactory, SubCategoryFactory, FileUploadService) {
         $scope.product = {
+            code: "ABCD-0001",
             quantity: 0
         };
 
 
         $scope.units = [];
         $scope.categories = [];
+        $scope.subCategories = [];
+        $scope.subSubCategories = [];
+        $scope.generateCode = true;
 
         $scope.removeOtherName = removeOtherName;
         $scope.addOtherName = addOtherName;
         $scope.saveProduct = saveProduct;
         $scope.deleteProduct = deleteProduct;
+        $scope.loadSubCategories = loadSubCategories;
+        $scope.loadSubSubCategories = loadSubSubCategories;
+        $scope.uploadLogo = uploadLogo;
 
         activate();
 
@@ -65,7 +74,6 @@
                 $scope.product
                 , function (data) {
                     toaster.pop('success', 'Success', 'Product deleted');
-                    activate();
                 }, function (e) {
                     console.error(e);
                     toaster.pop('error', 'Error', 'Please try again');
@@ -82,6 +90,39 @@
                 $scope.product.productAliasSet = [];
             }
             $scope.product.productAliasSet.push('');
+        }
+
+        function loadSubCategories() {
+            SubCategoryFactory.query({
+                id: $scope.product.category.id
+            }, function (data) {
+                $scope.subCategories = data;
+            }, function (e) {
+                console.error(e);
+            });
+        }
+
+        function loadSubSubCategories() {
+            SubCategoryFactory.query({
+                    id: $scope.product.subcategory.id
+                }
+                , function (data) {
+                    $scope.subSubCategories = data;
+                }, function (e) {
+                    console.error(e);
+                });
+        }
+
+        function uploadLogo(image) {
+            if ($scope.logo && image.length > 0) {
+                FileUploadService.uploadFileToUrl(image[0])
+                    .then(function (response) {
+                        $scope.product.picture = {
+                            title: image[0].name,
+                            url: response.data.path
+                        };
+                    });
+            }
         }
     }
 

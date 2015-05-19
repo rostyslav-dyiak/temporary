@@ -115,7 +115,9 @@ angular.module('app')
                                     'js/product/product.factory.js',
                                     'js/product/unit.factory.js',
                                     'js/product/category.factory.js',
-                                    'js/product/product.viewone.controller.js'
+                                    'js/product/subcategory.factory.js',
+                                    'js/product/product.viewone.controller.js',
+                                    '/js/services/file-upload.service.js',
                                 ]);
                             }
                         ]

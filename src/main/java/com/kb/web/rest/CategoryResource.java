@@ -89,6 +89,18 @@ public class CategoryResource {
     }
 
     /**
+     * GET  /categorys/:id -> get the "id" category.
+     */
+    @RequestMapping(value = "/categorys/{id}/subcategories",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Category> getSubcategories(@PathVariable Long id) {
+        log.debug("REST request to get subcategories : {}", id);
+        return categoryRepository.findAllByParentId(id);
+    }
+
+    /**
      * DELETE  /categorys/:id -> delete the "id" category.
      */
     @RequestMapping(value = "/categorys/{id}",
