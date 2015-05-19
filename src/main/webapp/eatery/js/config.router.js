@@ -54,7 +54,10 @@
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
                                         '/js/directives/ng-enter.directive.js',
+                                        '/js/filters/range.filter.js',
                                         'js/store/category.factory.js',
+                                        'js/store/inquiry.factory.js',
+                                        'js/store/outlets.factory.js',
                                         'js/store/supplier-for-category.factory.js',
                                         'js/store/supplier.category.factory.js',
                                         'js/store/supplier.product.factory.js',

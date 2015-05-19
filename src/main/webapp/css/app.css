@@ -5311,6 +5311,12 @@ a.text-#000000:hover {
     background-color: #ac050b;
 }
 
+.close-icon {
+    margin: 10px 5px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
 .margin-center {
     margin: 0 auto;
 }
@@ -5322,6 +5328,7 @@ a.text-#000000:hover {
 .reset-padding {
     padding: 0 !important;
 }
+
 .padding-8 {
     padding: 8px !important;
 }
@@ -5355,6 +5362,7 @@ a.text-#000000:hover {
     max-width: 80px;
     max-height: 80px;
 }
+
 .mc-logo.smaller {
     max-width: 40px;
     max-height: 40px;
@@ -5539,6 +5547,7 @@ a.text-#000000:hover {
     padding: 0;
     list-style: none;
 }
+
 .padding-row {
     padding: 15px;
 }
