@@ -6,16 +6,6 @@
         </div>
         <div class="wrapper hidden-sm hidden-xs" id="category-menu">
             <ul class="nav nav-pills nav-stacked nav-sm">
-                <li>
-                    <div class="input-group">
-                        <input type="text" ng-model="searchQuery" ng-enter="search()"
-                               class="form-control input-sm bg-light no-border rounded padder"
-                               placeholder="Search..." aria-autocomplete="list" aria-expanded="false">
-                      <span class="input-group-btn">
-                        <button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
-                      </span>
-                    </div>
-                </li>
                 <li ng-repeat="category in categories">
                     <a ng-click="selectCategory(category)">{{category.title}}</a>
                 </li>
@@ -26,7 +16,7 @@
         <div class="wrapper-md">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <a ui-sref="app" class="btn btn-sm btn-default pull-right" ng-show="admin"><i class="fa fa-shopping-cart fa-fw m-r-xs"></i> Inquiry Cart ({{cartItems}})</a>
+
                     <span>{{selectedSuppliers.length}} suppliers selling {{selectedCategory.title}}:</span>
                     <br/><br/>
 
@@ -38,7 +28,7 @@
 
                             <div class="clearfix"></div>
                             <br>
-                            <a ui-sref="app.storeSupplier({id: {{supplier.id}} })" class="btn btn-sm btn-success">View Supplier's Store</a>
+                            <a ui-sref="app.store.supplier({id: {{supplier.id}} })" class="btn btn-sm btn-success">View Supplier's Store</a>
                         </div>
                         <div class="col-sm-9">
                             <p>Available Categories:</p>

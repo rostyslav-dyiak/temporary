@@ -5542,3 +5542,12 @@ a.text-#000000:hover {
 .padding-row {
     padding: 15px;
 }
+
+.cart-dialog {
+    width: 45%;
+    height: 100%;
+    right: 0;
+    top: 0;
+    position: fixed;
+    z-index: 9999;
+}
