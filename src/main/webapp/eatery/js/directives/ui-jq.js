@@ -68,18 +68,6 @@ angular.module('ui.jq', ['ui.load']).
             });
           }
         }
-
-        if ( JQ_CONFIG[attrs.uiJq] ) {
-          uiLoad.load(JQ_CONFIG[attrs.uiJq]).then(function() {
-            callPlugin();
-            refresh();
-          }).catch(function() {
-            
-          });
-        } else {
-          callPlugin();
-          refresh();
-        }
       };
     }
   };
