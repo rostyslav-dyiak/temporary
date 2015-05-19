@@ -10,35 +10,19 @@
                 }
             }
         },
+        "seenDate": "12/05/2015",
+        "deliveryPerWeek": 2,
         "lastModifiedDate": "10/05/2015",
         "outlets": [
             {
                 "id": 3,
                 "name": "Beggins",
-                "deliveryAddress": "Lviv, Storozhenka",
-                "deliveryDay": {
-                    "monday": false,
-                    "tuesday": false,
-                    "wednesday": true,
-                    "thursday": false,
-                    "friday": false,
-                    "saturday": false,
-                    "sunday": false
-                }
+                "deliveryAddress": "Lviv, Storozhenka"
             },
             {
                 "id": 3,
                 "name": "Beggins",
-                "deliveryAddress": "Lviv, Storozhenka",
-                "deliveryDay": {
-                    "monday": false,
-                    "tuesday": true,
-                    "wednesday": false,
-                    "thursday": false,
-                    "friday": true,
-                    "saturday": false,
-                    "sunday": false
-                }
+                "deliveryAddress": "Lviv, Storozhenka"
             }
         ],
         "products": [

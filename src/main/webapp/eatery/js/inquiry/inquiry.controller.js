@@ -7,13 +7,16 @@
         .$inject = [
         '$scope',
         'toaster',
-        'InquiryFactory'
+        'InquiryFactory',
+        'InquiryReplyFactory'
     ];
 
-    function InquiryController($scope, toaster, InquiryFactory) {
+    function InquiryController($scope, toaster, InquiryFactory, InquiryReplyFactory) {
         $scope.inquiries = [];
         $scope.searchQuery = '';
         $scope.selectedInquiry = {};
+        $scope.selectedInquiryResponses = [];
+        $scope.latestInquiryRespond = [];
 
         $scope.search = search;
         $scope.selectInquiry = selectInquiry;
@@ -38,6 +41,14 @@
 
         function selectInquiry(inquiry) {
             $scope.selectedInquiry = inquiry;
+            InquiryReplyFactory.query({
+                id: inquiry.id
+            }, function (data) {
+                $scope.selectedInquiryResponses = data;
+                $scope.latestInquiryRespond = data[data.length - 1];
+            },  function (e) {
+                console.error(e);
+            });
         }
 
         function deleteInquiry() {
