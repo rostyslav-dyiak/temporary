@@ -1,0 +1,67 @@
+<div class="bg-light lter b-b wrapper-md clearfix">
+    <h1 class="m-n font-thin h3 pull-left">Company Profile</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <accordion close-others="true">
+            <accordion-group heading="{{outlet.name}}" ng-repeat="outlet in outlets">
+                <form name="addEditForm" class="form-horizontal form-validate">
+                    <div class="form-group">
+                        <label class="control-label">Message</label>
+
+                        <textarea class="form-control" rows="5" placeholder="Type your message"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Delivery Address</label>
+
+                        <div class="col-lg-10">
+                            <input type="text" ng-model="outlet.deliveryAddress" class="form-control"
+                                   placeholder="Delivery Address" required
+                                   ng-disabled="currentOutlet.id != outlet.id">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Postal Code</label>
+
+                        <div class="col-lg-10">
+                            <input type="text" ng-model="outlet.postalCode" min="1" max="999999"
+                                   class="form-control" placeholder="Postal Code"
+                                   ng-disabled="currentOutlet.id != outlet.id">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Outlet Contact Number</label>
+
+                        <div class="col-lg-10">
+                            <input type="text" ng-model="outlet.contactNumber" class="form-control"
+                                   placeholder="Outlet Contact Number" required
+                                   ng-disabled="currentOutlet.id != outlet.id">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Outlet Email Address</label>
+
+                        <div class="col-lg-10">
+                            <input type="email" ng-model="outlet.email" class="form-control"
+                                   placeholder="Outlet Email Address" required
+                                   ng-disabled="currentOutlet.id != outlet.id">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button class="btn btn-sm btn-info" ng-click="edit(outlet)"
+                                    ng-hide="currentOutlet.id == outlet.id" ng-disabled="addEditForm.$invalid">
+                                Edit
+                            </button>
+                            <button type="submit" class="btn btn-sm btn-info" ng-click="save(outlet)"
+                                    ng-show="currentOutlet.id == outlet.id" ng-disabled="addEditForm.$invalid">
+                                Save
+                            </button>
+                            <button class="btn btn-sm btn-danger" back-button>Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </accordion-group>
+        </accordion>
+    </div>
+</div>

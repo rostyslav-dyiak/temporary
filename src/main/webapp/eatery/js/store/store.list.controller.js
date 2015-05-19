@@ -17,11 +17,8 @@
         $scope.categories = [];
         $scope.selectedCategory = [];
         $scope.selectedSuppliers = [];
-        $scope.cartItems = 3;
-        $scope.searchQuery = '';
 
         $scope.selectCategory = selectCategory;
-        $scope.search = search;
 
         activate();
 
@@ -57,11 +54,6 @@
             }, function (e) {
                 console.error(e);
             });
-        }
-
-        function search() {
-            // $scope.searchQuery
-            console.log("Sending request...");
         }
 
         function getSupplierCategories(supplierIndex) {

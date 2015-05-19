@@ -13,6 +13,7 @@
 
     function InquiryController($scope, toaster, InquiryFactory, InquiryReplyFactory) {
         $scope.inquiries = [];
+        $scope.rowCollection = [];
         $scope.searchQuery = '';
         $scope.selectedInquiry = {};
         $scope.selectedInquiryResponses = [];
@@ -29,6 +30,7 @@
             InquiryFactory.query({},
                 function (data) {
                     $scope.inquiries = data;
+                    $scope.rowCollection = data;
                 }, function (e) {
                     console.error(e);
                 });
