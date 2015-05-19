@@ -21,14 +21,10 @@
         $scope.selectedProducts = [];
         $scope.selectedCategory = {};
         $scope.supplier = {};
-        $scope.cartItems = 3;
-        $scope.searchQuery = '';
 
         $scope.selectCategory = selectCategory;
         $scope.selectSubCategory = selectSubCategory;
         $scope.selectSubSubCategory = selectSubSubCategory;
-        $scope.search = search;
-        $scope.addToCart = addToCart;
 
         activate();
 
@@ -74,15 +70,6 @@
         function selectSubSubCategory(subsubcategory) {
             $scope.selectedCategory.subcategory.subsubcategory = subsubcategory;
 
-        }
-
-        function search() {
-            // $scope.searchQuery
-            console.log("Sending request...");
-        }
-
-        function addToCart(product) {
-            console.log(product.title + " have been added to cart");
         }
     }
 })();

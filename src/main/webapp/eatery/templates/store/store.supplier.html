@@ -6,16 +6,6 @@
         </div>
         <div class="wrapper hidden-sm hidden-xs" id="category-menu">
             <ul class="nav nav-pills nav-stacked nav-sm">
-                <li>
-                    <div class="input-group">
-                        <input type="text" ng-model="searchQuery" ng-enter="search()"
-                               class="form-control input-sm bg-light no-border rounded padder"
-                               placeholder="Search..." aria-autocomplete="list" aria-expanded="false">
-                      <span class="input-group-btn">
-                        <button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
-                      </span>
-                    </div>
-                </li>
                 <li class="text-center">
                     <h3>{{supplier.supplier.name}}</h3>
                     <img class="mc-logo" ng-src="/api/content?contentPath={{supplier.supplier.logo.url}}"
@@ -65,8 +55,6 @@
         <div class="wrapper-md">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <a ui-sref="app" class="btn btn-sm btn-default pull-right"><i
-                        class="fa fa-shopping-cart fa-fw m-r-xs"></i> Inquiry Cart ({{cartItems}})</a>
                     <ul class="breadcrumb bg-white b-a col-xs-6" ng-show="selectedCategory.id">
                         <li>{{selectedCategory.title}}</li>
                         <li ng-show="selectedCategory.subcategory.id">{{selectedCategory.subcategory.title}}</li>

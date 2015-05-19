@@ -48,7 +48,7 @@
                     })
                     .state('app.store', {
                         url: '/store',
-                        templateUrl: 'templates/store/store.list.html',
+                        templateUrl: 'templates/store/store.html',
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
@@ -58,14 +58,27 @@
                                         'js/store/supplier-for-category.factory.js',
                                         'js/store/supplier.category.factory.js',
                                         'js/store/supplier.product.factory.js',
+                                        'js/store/store.controller.js'
+                                    ]);
+                                }
+                            ]
+                        }
+                    })
+                    .state('app.store.list', {
+                        url: '/list',
+                        templateUrl: 'templates/store/store.list.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
                                         'js/store/store.list.controller.js'
                                     ]);
                                 }
                             ]
                         }
                     })
-                    .state('app.storeSupplier', {
-                        url: '/store/supplier/:id',
+                    .state('app.store.supplier', {
+                        url: '/supplier/:id',
                         templateUrl: 'templates/store/store.supplier.html',
                         controller: function ($stateParams) {
                             $stateParams.id
@@ -74,11 +87,6 @@
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
-                                        '/js/directives/ng-enter.directive.js',
-                                        'js/store/category.factory.js',
-                                        'js/store/supplier-for-category.factory.js',
-                                        'js/store/supplier.category.factory.js',
-                                        'js/store/supplier.product.factory.js',
                                         'js/store/store.supplier.controller.js'
                                     ]);
                                 }
