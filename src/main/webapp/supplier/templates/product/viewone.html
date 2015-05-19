@@ -4,7 +4,7 @@
             <button class="btn btn-default back-button" back-button>Back</button>
             <div class="form-group">
                 <div class="col-lg-3">
-                    <img ngf-thumbnail="logo[0]" class="mc-logo"
+                    <img ngf-thumbnail="/api/content?contentPath={{product.picture.url}}" class="mc-logo"
                          ng-src="/api/content?contentPath={{product.picture.url}}">
                 </div>
                 <div class="col-lg-6">
@@ -198,7 +198,7 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <button class="full-width-button btn btn-lg btn-warning"
-                                                confirmed-click="cancel()" ng-confirm-click>
+                                                confirmed-click="revertChanges()" ng-confirm-click>
                                             Revert Changes
                                         </button>
                                     </div>
