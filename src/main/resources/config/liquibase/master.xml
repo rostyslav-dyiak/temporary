@@ -25,7 +25,9 @@
     <include file="classpath:config/liquibase/changelog/20150513091136_added_entity_ProductAlias.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20150514120125_added_entity_PricingGroup.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20150514121925_added_entity_ProductPricingGroup.xml" relativeToChangelogFile="false"/>
-
+    <include file="classpath:config/liquibase/changelog/20150519112124_added_entity_Inquiry.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20150519124557_added_entity_InquiryProduct.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20150519125547_added_entity_InquiryOutlet.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/create-update-date.xml" relativeToChangelogFile="false"/>
 
     <include file="classpath:config/liquibase/changelog/custom_added_column_status_to_Outlet.xml" relativeToChangelogFile="false"/>

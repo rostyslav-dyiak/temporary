@@ -1,0 +1,24 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "schedule",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Schedule",
+            "fieldNameUnderscored": "schedule",
+            "fieldInJavaBeanMethod": "Schedule",
+            "fieldValidate": false
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOneToMany": false,
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": false,
+    "fieldsContainBigDecimal": false,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "changelogDate": "20150519125547",
+    "pagination": "no",
+    "validation": false
+}

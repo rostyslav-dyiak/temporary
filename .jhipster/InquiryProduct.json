@@ -1,0 +1,24 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "quanityPerWeek",
+            "fieldType": "Integer",
+            "fieldNameCapitalized": "QuanityPerWeek",
+            "fieldNameUnderscored": "quanity_per_week",
+            "fieldInJavaBeanMethod": "QuanityPerWeek",
+            "fieldValidate": false
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOneToMany": false,
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": false,
+    "fieldsContainBigDecimal": false,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "changelogDate": "20150519124557",
+    "pagination": "no",
+    "validation": false
+}

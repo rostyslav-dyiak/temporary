@@ -1,0 +1,42 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "message",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Message",
+            "fieldNameUnderscored": "message",
+            "fieldInJavaBeanMethod": "Message",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "paymentTerm",
+            "fieldType": "String",
+            "fieldNameCapitalized": "PaymentTerm",
+            "fieldNameUnderscored": "payment_term",
+            "fieldInJavaBeanMethod": "PaymentTerm",
+            "fieldValidate": false
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "deliveryPerWeek",
+            "fieldType": "String",
+            "fieldNameCapitalized": "DeliveryPerWeek",
+            "fieldNameUnderscored": "delivery_per_week",
+            "fieldInJavaBeanMethod": "DeliveryPerWeek",
+            "fieldValidate": false
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOneToMany": false,
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": false,
+    "fieldsContainBigDecimal": false,
+    "fieldsContainDateTime": false,
+    "fieldsContainDate": false,
+    "changelogDate": "20150519112124",
+    "pagination": "pager",
+    "validation": false
+}
