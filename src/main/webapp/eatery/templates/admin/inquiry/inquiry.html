@@ -12,25 +12,32 @@
                       </span>
                     </div>
                     <br>
-
-                    <div class="col-sm-12 supplier-row selectable" ng-click="selectInquiry(inquiry)"
-                         ng-repeat="inquiry in inquiries">
-                        <div class="col-sm-7">
-                            <div class="row">
-                                <div class="col-sm-5">
-                                    <img class="img-responsive margin-center"
-                                         ng-src="/api/content?contentPath={{inquiry.supplier.supplier.logo.url}}">
-                                </div>
-                                <div class="col-sm-7">
-                                    <span>{{inquiry.supplier.supplier.name}}</span><br><br>
+                    <div class="row text-center">
+                        <table st-table="rowCollection" st-safe-src="inquiries" class="table table-striped text-center">
+                            <tbody>
+                            <tr class="selectable" ng-repeat="row in rowCollection" ng-click="selectInquiry(row)">
+                                <td class="padding-8">
+                                    <img class="mc-logo smaller reset-margin margin-center"
+                                         ng-src="/api/content?contentPath={{row.supplier.supplier.logo.url}}">
+                                </td>
+                                <td class="padding-8">
+                                    <span>{{row.supplier.supplier.name}}</span><br><br>
                                     <a class="btn btn-sm btn-success">New Reply</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-5 text-center">
-                            <span>Last Activity</span><br>
-                            <span>{{inquiry.lastModifiedDate}}</span>
-                        </div>
+                                </td>
+                                <td class="padding-8">
+                                    <span>Last Activity</span><br>
+                                    <span>{{row.lastModifiedDate}}</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="3" class="text-center">
+                                    <div st-pagination class="no-margin"></div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
             </div>

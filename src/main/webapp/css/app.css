@@ -5315,6 +5315,17 @@ a.text-#000000:hover {
     margin: 0 auto;
 }
 
+.reset-margin {
+    margin: 0 !important;
+}
+
+.reset-padding {
+    padding: 0 !important;
+}
+.padding-8 {
+    padding: 8px !important;
+}
+
 .additional-padding {
     padding: 10px 0;
 }
@@ -5343,6 +5354,10 @@ a.text-#000000:hover {
 .mc-logo.small {
     max-width: 80px;
     max-height: 80px;
+}
+.mc-logo.smaller {
+    max-width: 40px;
+    max-height: 40px;
 }
 
 .edit-input {
