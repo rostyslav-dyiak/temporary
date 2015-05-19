@@ -1,0 +1,89 @@
+[
+    {
+        "id": 1,
+        "supplier": {
+            "id": 2,
+            "supplier": {
+                "name": "Fox AA",
+                "logo": {
+                    "url": "/logo_placeholder.png"
+                }
+            }
+        },
+        "seenDate": "12/05/2015",
+        "deliveryPerWeek": 2,
+        "lastModifiedDate": "10/05/2015",
+        "outlets": [
+            {
+                "id": 3,
+                "name": "Beggins",
+                "deliveryAddress": "Lviv, Storozhenka"
+            },
+            {
+                "id": 3,
+                "name": "Beggins",
+                "deliveryAddress": "Lviv, Storozhenka"
+            }
+        ],
+        "products": [
+            {
+                "id": 1,
+                "title": "apple 2 hdfg fjdkgh",
+                "picture": {
+                    "url": "/logo_placeholder.png"
+                },
+                "code": "kjdgh7 34",
+                "quantity": 20,
+                "basePrice": 120,
+                "unit": {
+                    "unitSymbol": "kg"
+                },
+                "productPricingGroups": [
+                    {
+                        "price": 230
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "title": "banana 4",
+                "picture": {
+                    "url": "/logo_placeholder.png"
+                },
+                "code": "kjdgh7 34",
+                "quantity": 20,
+                "basePrice": 120,
+                "unit": {
+                    "unitSymbol": "kg"
+                },
+                "productPricingGroups": []
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "supplier": {
+            "id": 1,
+            "supplier": {
+                "name": "Harry Potter",
+                "logo": {
+                    "url": "/logo_placeholder.png"
+                }
+            }
+        },
+        "lastModifiedDate": "23/05/2015"
+    },
+    {
+        "id": 3,
+        "supplier": {
+            "id": 5,
+            "supplier": {
+                "name": "Foodx",
+                "logo": {
+                    "url": "/logo_placeholder.png"
+                }
+            }
+        },
+        "lastModifiedDate": "18/05/2015"
+    }
+]
