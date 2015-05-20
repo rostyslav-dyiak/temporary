@@ -66,7 +66,7 @@
 
         function addToSupplier() {
             InquiryFactory.update($scope.selectedInquiry,
-                function (data) {
+                function () {
                     toaster.pop('success', 'Success', 'Inquiry has been added to a supplier');
                 }, function (e) {
                     console.error(e);

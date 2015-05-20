@@ -189,9 +189,23 @@ angular.module('app')
                 })
                 .state('app.inquiry', {
                     url: '/inquiry',
-                    templateUrl: 'templates/admin/inquiry.html',
+                    templateUrl: 'templates/admin/inquiry/inquiry.html',
                     data: {
                         authorizedRoles: [USER_ROLES.supplierAdmin]
+                    },
+                    resolve: {
+                        deps: ['$ocLazyLoad',
+                            function ($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    'js/inquiry/inquiry.factory.js',
+                                    'js/inquiry/inquiry.reply.factory.js',
+                                    'js/inquiry/payment.factory.js',
+                                    'js/inquiry/pricing-groups.factory.js',
+                                    'js/inquiry/team.factory.js',
+                                    'js/inquiry/inquiry.controller.js'
+                                ]);
+                            }
+                        ]
                     }
                 })
                 .state('app.companySettings', {
