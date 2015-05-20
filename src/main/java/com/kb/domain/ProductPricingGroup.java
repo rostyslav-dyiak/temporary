@@ -4,16 +4,6 @@ package com.kb.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Objects;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 /**
  * A ProductPricingGroup.
@@ -68,6 +58,30 @@ public class ProductPricingGroup implements Serializable {
 
     public void setProduct(final Product product) {
         this.product = product;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ProductPricingGroup that = (ProductPricingGroup) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (price != null ? !price.equals(that.price) : that.price != null) return false;
+        if (pricingGroup != null ? !pricingGroup.equals(that.pricingGroup) : that.pricingGroup != null) return false;
+        if (product != null ? !product.equals(that.product) : that.product != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (pricingGroup != null ? pricingGroup.hashCode() : 0);
+        result = 31 * result + (product != null ? product.hashCode() : 0);
+        return result;
     }
 
     @Override

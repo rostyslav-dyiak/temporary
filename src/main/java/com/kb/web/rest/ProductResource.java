@@ -94,7 +94,7 @@ public class ProductResource {
         	return new ResponseEntity<>(products, HttpStatus.OK);
         } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-    };
+    }
 
     @RequestMapping(value = "/products/{id}",
             method = RequestMethod.GET,

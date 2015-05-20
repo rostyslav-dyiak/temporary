@@ -5,20 +5,23 @@
     ViewProductController
         .$inject = [
         '$scope',
+        '$stateParams',
         'toaster',
         'ProductFactory',
         'UnitFactory',
         'CategoryFactory',
         'SubCategoryFactory',
-        'FileUploadService'
+        'FileUploadService',
+        'AuthServerProvider'
     ];
 
-    function ViewProductController($scope, toaster, ProductFactory, UnitFactory, CategoryFactory, SubCategoryFactory, FileUploadService) {
+    function ViewProductController($scope, $stateParams, toaster, ProductFactory, UnitFactory, CategoryFactory, SubCategoryFactory, FileUploadService, AuthServerProvider) {
+        $scope.productId = $stateParams.id;
+        var code = AuthServerProvider.currentUserCompany().code;
         $scope.product = {
-            code: "ABCD-0001",
+            code: code + randomString(4, '0123456789'),
             quantity: 0
         };
-
 
         $scope.units = [];
         $scope.categories = [];
@@ -39,6 +42,22 @@
         activate();
 
         function activate() {
+            if ($scope.productId) {
+                ProductFactory.get({
+                        id: $scope.productId
+                    }, function (data) {
+                        $scope.product = data;
+                        $scope.category = $scope.product.category;
+                        $scope.subCategory = $scope.product.subCategory;
+                        $scope.subSubCategory = $scope.product.subSubCategory;
+                        /*loadSubCategories();
+                         loadSubSubCategories();*/
+                        $scope.unit = $scope.product.unit;
+                    }, function (e) {
+                        console.error(e);
+                    }
+                )
+            }
             UnitFactory.query({},
                 function (data) {
                     $scope.units = data;
@@ -95,10 +114,12 @@
         }
 
         function loadSubCategories() {
+
             SubCategoryFactory.query({
                 id: $scope.product.category.id
             }, function (data) {
                 $scope.subCategories = data;
+
             }, function (e) {
                 console.error(e);
             });
@@ -106,7 +127,7 @@
 
         function loadSubSubCategories() {
             SubCategoryFactory.query({
-                    id: $scope.product.subcategory.id
+                    id: $scope.product.subCategory.id
                 }
                 , function (data) {
                     $scope.subSubCategories = data;
@@ -136,10 +157,16 @@
 
         function revertChanges() {
             $scope.product = {
-                code: "ABCD-0001",
+                code: code + randomString(4, '0123456789'),
                 quantity: 0
             };
             $scope.generateCode = true;
+        }
+
+        function randomString(length, chars) {
+            var result = '';
+            for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+            return result;
         }
     }
 

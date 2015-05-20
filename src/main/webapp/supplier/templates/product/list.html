@@ -23,7 +23,7 @@
 
                 </thead>
                 <tbody>
-                <tr ng-repeat="row in rowCollection">
+                <tr ng-repeat="row in rowCollection" ui-sref="app.product.add({id: row.id })">
                     <td>{{row.id}}</td>
                     <td>{{row.code}}</td>
                     <td><img class="company-logo-small" ng-src="/api/content?contentPath={{row.picture.url}}">{{row.title}}</td>

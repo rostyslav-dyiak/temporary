@@ -15,6 +15,8 @@ public interface ProductService {
 
 	void save(Product product);
 
+    void update(Product product);
+
 	Page<Product> findByCompany(Company company, Pageable generatePageRequest);
 
 	List<Product> findByCompanyAndSubSubCategoryIsNull(Company company);

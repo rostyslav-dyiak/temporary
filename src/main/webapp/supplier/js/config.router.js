@@ -106,8 +106,11 @@ angular.module('app')
                     }
                 })
                 .state('app.product.add', {
-                    url: '/viewone',
+                    url: '/viewone/:id',
                     templateUrl: 'templates/product/viewone.html',
+                    controller: function ($stateParams) {
+                        $stateParams.id
+                    },
                     resolve: {
                         deps: ['$ocLazyLoad',
                             function ($ocLazyLoad) {
