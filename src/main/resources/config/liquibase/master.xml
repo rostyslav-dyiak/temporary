@@ -49,6 +49,9 @@
     <include file="classpath:config/liquibase/changelog/20150507083733_added_entity_SystemAnnouncementUser.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20150508140746_added_entity_TaxType.xml"
              relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20150519121925_added_entity_ProductHistory.xml"
+             relativeToChangelogFile="false"/>
+
     <include file="classpath:config/liquibase/changelog/custom_add_company_to_product.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/custom_add_columns_base_price_sub_sub_category_to_product.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/custom_add_invitation_history_table.xml"
