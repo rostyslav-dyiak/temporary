@@ -16,8 +16,8 @@ public class InquiryProduct implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "quanity_per_week")
-    private Integer quanityPerWeek;
+    @Column(name = "quantity_per_week")
+    private Integer quantityPerWeek;
 
     @ManyToOne
     @JoinColumn(name = "inquiry_id")
@@ -27,6 +27,10 @@ public class InquiryProduct implements Serializable {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @ManyToOne
+    @JoinColumn(name = "pricing_group_id")
+    private PricingGroup pricingGroup;
+
     public Long getId() {
         return id;
     }
@@ -35,12 +39,12 @@ public class InquiryProduct implements Serializable {
         this.id = id;
     }
 
-    public Integer getQuanityPerWeek() {
-        return quanityPerWeek;
+    public Integer getQuantityPerWeek() {
+        return quantityPerWeek;
     }
 
-    public void setQuanityPerWeek(Integer quanityPerWeek) {
-        this.quanityPerWeek = quanityPerWeek;
+    public void setQuantityPerWeek(Integer quantityPerWeek) {
+        this.quantityPerWeek = quantityPerWeek;
     }
 
     public Inquiry getInquiry() {
@@ -57,6 +61,14 @@ public class InquiryProduct implements Serializable {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public PricingGroup getPricingGroup() {
+        return pricingGroup;
+    }
+
+    public void setPricingGroup(PricingGroup pricingGroup) {
+        this.pricingGroup = pricingGroup;
     }
 
     @Override

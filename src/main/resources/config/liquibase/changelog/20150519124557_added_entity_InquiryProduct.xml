@@ -15,9 +15,10 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="quanity_per_week" type="integer"/>
+            <column name="quantity_per_week" type="integer"/>
             <column name="inquiry_id" type="bigint"/>
             <column name="product_id" type="bigint"/>
+            <column name="pricing_group_id" type="bigint"/>
         </createTable>
         <addForeignKeyConstraint baseColumnNames="inquiry_id"
                                  baseTableName="T_INQUIRY_PRODUCT"
@@ -29,6 +30,11 @@
                                  constraintName="fk_product"
                                  referencedColumnNames="id"
                                  referencedTableName="PRODUCT"/>
+        <addForeignKeyConstraint baseColumnNames="pricing_group_id"
+                                 baseTableName="T_INQUIRY_PRODUCT"
+                                 constraintName="fk_pricing_group"
+                                 referencedColumnNames="id"
+                                 referencedTableName="T_PRICINGGROUP"/>
 
     </changeSet>
 </databaseChangeLog>

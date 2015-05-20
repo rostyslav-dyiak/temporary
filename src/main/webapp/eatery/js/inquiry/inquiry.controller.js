@@ -32,7 +32,6 @@
                     $scope.inquiries = data;
                     $scope.rowCollection = data;
                 }, function (e) {
-                    console.error(e);
                 });
         }
 
