@@ -1,15 +1,15 @@
-<div class="bg-light lter b-b wrapper-md">
+<div class="bg-light lter b-b wrapper-md" ng-controller="ViewProductController">
     <div class="row">
         <div class="col-lg-6">
             <button class="btn btn-default back-button" back-button>Back</button>
             <div class="form-group">
                 <div class="col-lg-3">
-                    <img ngf-thumbnail="logo[0]" class="mc-logo"
-                         ng-src="/api/content?contentPath={{userCompanyDTO.company.logo.url}}">
+                    <img ngf-thumbnail="/api/content?contentPath={{product.picture.url}}" class="mc-logo"
+                         ng-src="/api/content?contentPath={{product.picture.url}}">
                 </div>
                 <div class="col-lg-6">
-                    <h4>Product code</h4>
-                    <label class="btn btn-danger" ng-model="radioModel" uncheckable>Remove this product</label>
+                    <h4>{{product.code}}</h4>
+                    <label class="btn btn-danger" ng-click="deleteProduct()" uncheckable>Remove this product</label>
                 </div>
             </div>
         </div>
@@ -20,8 +20,8 @@
 
                 <div class="form-group">
                     <div class="btn-group m-r">
-                        <label class="btn btn-default" ng-model="radioModel" btn-radio="'Available'" uncheckable>Available</label>
-                        <label class="btn btn-default" ng-model="radioModel" btn-radio="'Unavailable'" uncheckable>Unavailable</label>
+                        <label class="btn btn-default" ng-model="product.available" btn-radio="true" uncheckable>Available</label>
+                        <label class="btn btn-default" ng-model="product.available" btn-radio="false" uncheckable>Unavailable</label>
                     </div>
                 </div>
             </div>
@@ -46,13 +46,13 @@
 
                                     <div class="checkbox">
                                         <label class="i-checks">
-                                            <input type="checkbox" checked value="">
+                                            <input type="checkbox" checked ng-model="generateCode">
                                             <i></i>
                                             Generate product code
                                         </label>
                                     </div>
                                     <input type="text" ng-model="product.code" class="form-subelement form-control"
-                                           disabled>
+                                           required ng-disabled="generateCode ">
                                 </div>
                                 <div class="col-lg-6">
                                     <label>Product image</label>
@@ -79,7 +79,7 @@
                                 <div class="col-lg-6">
                                     <label>Product Name</label>
                                     <input type="text" ng-model="product.title" class="form-control"
-                                           placeholder="Product Name">
+                                           placeholder="Product Name" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -90,7 +90,7 @@
                                         <div class="col-xs-10">
                                             <input type="text" class="form-control"
                                                    ng-model="product.productAliasSet[$index].name"
-                                                   placeholder="name" required>
+                                                   placeholder="name">
                                         </div>
                                         <div class="col-xs-1">
                                             <button class="btn btn-sm btn-danger" ng-click="removeOtherName(name)">
@@ -106,36 +106,30 @@
                             <div class="form-group">
                                 <div class="col-lg-4">
                                     <label>Category</label>
-                                    <select name="category" ng-model="product.category" class="form-control m-b">
-                                        <option>option 1</option>
-                                        <option>option 2</option>
-                                        <option>option 3</option>
-                                        <option>option 4</option>
+                                    <select name="category" ng-model="product.category"
+                                            ng-options="category.title for category in categories"
+                                            class="form-control m-b" ng-change="loadSubCategories()"
+                                            required>
                                     </select>
                                 </div>
                                 <div class="col-lg-4">
                                     <label>Subcategory</label>
-                                    <select name="subcategory" ng-model="product.subcategory" class="form-control m-b">
-                                        <option>option 1</option>
-                                        <option>option 2</option>
-                                        <option>option 3</option>
-                                        <option>option 4</option>
+                                    <select name="subcategory" ng-model="product.subcategory" class="form-control m-b"
+                                            ng-options="subcategory.title for subcategory in subCategories"
+                                            ng-change="loadSubSubCategories()">
                                     </select>
                                 </div>
                                 <div class="col-lg-4">
                                     <label>Sub-subcategory</label>
                                     <select name="subSubCategory" ng-model="product.subSubCategory"
-                                            class="form-control m-b">
-                                        <option>option 1</option>
-                                        <option>option 2</option>
-                                        <option>option 3</option>
-                                        <option>option 4</option>
+                                            class="form-control m-b"
+                                            ng-options="category.title for subSubCategory in subSubCategories">
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-4">
-                                    <div counter value="product.quantity" min="1" max="9999" step="1"></div>
+                                    <div counter value="product.quantity" min="1" max="9999" step="1" required></div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -155,7 +149,7 @@
                                     <label class="control-label">Certified Halal</label>
                                     <select name="type" ng-model="product.certifiedHalal" class="form-control"
                                             ng-options="o.v as o.n for o in [{ n: 'Yes', v: false }, { n: 'No', v: true }]"
-                                            required>
+                                        >
                                     </select>
                                 </div>
                             </div>
@@ -163,7 +157,7 @@
                                 <div class="col-lg-4">
                                     <label class="control-label">Unit</label>
                                     <select name="type" ng-model="product.unit" class="form-control"
-                                            ng-options="o.v as o.n for o in [{ n: 'Yes', v: false }, { n: 'No', v: true }]"
+                                            ng-options="unit.unitSymbol for unit in units"
                                             required>
                                     </select>
                                 </div>
@@ -173,16 +167,14 @@
                                            placeholder="Unit Description">
                                 </div>
                                 <div class="col-lg-4">
-                                    <div class="">
-                                        <label></label>
+                                    <label></label>
 
-                                        <div class="checkbox">
-                                            <label class="i-checks i-checks-lg">
-                                                <input type="checkbox" checked value="">
-                                                <i></i>
-                                                Hide unit description for this item
-                                            </label>
-                                        </div>
+                                    <div class="checkbox">
+                                        <label class="i-checks i-checks-lg">
+                                            <input type="checkbox" checked value="">
+                                            <i></i>
+                                            Hide unit description for this item
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -200,13 +192,13 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <button type="submit" ng-disabled="addEditForm.$invalid"
-                                                ng-click="saveDistrict()"
+                                                ng-click="saveProduct()"
                                                 class="full-width-button btn btn-lg btn-info">Save
                                         </button>
                                     </div>
                                     <div class="col-lg-4">
                                         <button class="full-width-button btn btn-lg btn-warning"
-                                                confirmed-click="cancel()" ng-confirm-click>
+                                                confirmed-click="revertChanges()" ng-confirm-click>
                                             Revert Changes
                                         </button>
                                     </div>
@@ -214,10 +206,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="col-sm-6">
-                        <form name="addEditForm" class="form-horizontal form-validation">
                         </form>
                     </div>
                 </div>

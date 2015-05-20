@@ -1,8 +1,8 @@
 (function () {
     'use strict';
 
-    app.controller('ViewProductController', ViewProductController);
-    ViewProductController
+    app.controller('ViewPricingProductController', ViewPricingProductController);
+    ViewPricingProductController
         .$inject = [
         '$scope',
         'toaster',
@@ -13,7 +13,7 @@
         'FileUploadService'
     ];
 
-    function ViewProductController($scope, toaster, ProductFactory, UnitFactory, CategoryFactory, SubCategoryFactory, FileUploadService) {
+    function ViewPricingProductController($scope, toaster, ProductFactory, UnitFactory, CategoryFactory, SubCategoryFactory, FileUploadService) {
         $scope.product = {
             code: "ABCD-0001",
             quantity: 0
