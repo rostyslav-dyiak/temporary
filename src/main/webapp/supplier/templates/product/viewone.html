@@ -4,8 +4,7 @@
             <button class="btn btn-default back-button" back-button>Back</button>
             <div class="form-group">
                 <div class="col-lg-3">
-                    <img ngf-thumbnail="/api/content?contentPath={{product.picture.url}}" class="mc-logo"
-                         ng-src="/api/content?contentPath={{product.picture.url}}">
+                    <img ngf-thumbnail="/api/content?contentPath={{product.picture.url}}" class="mc-logo">
                 </div>
                 <div class="col-lg-6">
                     <h4>{{product.code}}</h4>
@@ -30,14 +29,14 @@
 
 
 </div>
-<div class="wrapper-md" ng-controller="ViewProductController">
+<div class="wrapper-md">
     <div class="panel panel-default">
         <tabset class="tab-container">
             <tab class="tab-bootstrap col-sm-3">
                 <tab-heading>
                     Info
                 </tab-heading>
-                <div class="row">
+                <div class="row" ng-controller="ViewProductController">
                     <div class="col-sm-12">
                         <form name="addEditForm" class="form-horizontal col-sm-12 form-validation">
                             <div class="form-group">
@@ -214,7 +213,7 @@
                 <tab-heading>
                     Pricing
                 </tab-heading>
-                <div class="row">
+                <div class="row" ng-controller="ViewPricingProductController">
                     <div class="col-sm-12">
                         <div class="panel panel-default">
                             <div class="panel-body">
@@ -230,18 +229,15 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr class="selectable" ng-class="{selected: row.id == selectedPricingGroup.id}"
-                                            ng-repeat="row in rowCollection" ng-click="selectPricingGroup(row)">
-                                            <td>{{row.groupName}}</td>
-                                            <td>{{row.description}}</td>
-                                            <td class="edit-input" ng-click="editPrice(pricingGroup)">
+                                        <tr ng-repeat="row in rowCollection" ng-click="selectPricingGroup(row)">
+                                            <td class="text-center">{{row.groupName}}</td>
+                                            <td class="text-center">{{row.description}}</td>
+                                            <td class="edit-input" ng-click="editPrice(row)">
                                                 <input type="text" ng-model="pricingGroup.price"
-                                                       class="form-control col-md-8"
-                                                       placeholder="pricingGroup.group.groupName"
-                                                       ng-hide="pricingGroup.price == row.basePrice && !pricingGroup.editMode"
-                                                       ng-disabled="!pricingGroup.editMode"
+                                                       class="form-control col-md-4"
+                                                       placeholder="$10"
+                                                       ng-disabled="!row.editMode"
                                                        ng-enter="saveProduct(row, pricingGroup)">
-                                                <span ng-show="pricingGroup.saving">Saving Changes...</span>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -256,7 +252,7 @@
                 <tab-heading>
                     Customers
                 </tab-heading>
-                <div class="row">
+                <div class="row" ng-controller="ViewCustomersProductController">
                     <div class="col-sm-12">
                         <div class="panel panel-default">
                             <div class="panel-body">
@@ -266,16 +262,18 @@
                                            class="table table-striped">
                                         <thead>
                                         <tr>
-                                            <th class="text-center" st-sort="customer">Customer</th>
-                                            <th class="text-center" st-sort="description">Last Purchase</th>
+                                            <th class="text-center" st-sort="name">Customer</th>
+                                            <th class="text-center" st-sort="lastPurchase">Last Purchase</th>
                                             <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr class="selectable" ng-repeat="row in rowCollection"
                                             ng-click="selectPurchaser(row)">
-                                            <td>{{row.title}}</td>
-                                            <td>{{row.date | date:"EEEE, MMM dd.yyyy h:mma"}}</td>
+                                            <td class="text-center">{{row.code}} {{row.name}}</td>
+                                            <td class="text-center">{{row.lastPurchase | date:"EEEE, MMM dd.yyyy
+                                                h:mma"}}
+                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>

@@ -1,0 +1,20 @@
+[
+    {
+        "id": 0,
+        "code": "2103",
+        "name": "MR BEAN",
+        "lastPurchase": "03-04-2014"
+    },
+    {
+        "id": 1,
+        "code": "4114",
+        "name": "Jimmy's market",
+        "lastPurchase": "03-09-2015"
+    },
+    {
+        "id": 2,
+        "code": "0023",
+        "name": "Coffee Shop",
+        "lastPurchase": "17-05-2015"
+    }
+]
