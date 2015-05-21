@@ -1,0 +1,76 @@
+<div class="modal-header">
+    <h3 class="modal-title">Product Info</h3>
+</div>
+<div class="modal-body">
+    <div class="col-sm-12 form-horizontal">
+        <div class="form-group">
+            <label class="control-label">Product Name and Other Names</label>
+            <input type="text" ng-value="product.names"
+                   class="form-control"
+                   placeholder="Product Name and Other Names" disabled>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Product Code</label>
+            <input type="text" ng-value="product.code"
+                   class="form-control"
+                   placeholder="Product Code" disabled>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Product Image</label>
+            <img class="mc-logo small reset-margin margin-center"
+                 ng-src="/api/content?contentPath={{product.picture.url}}">
+        </div>
+        <div class="form-group">
+            <label class="control-label">Product Description</label>
+            <input type="text" ng-value="product.description"
+                   class="form-control"
+                   placeholder="Product Description" disabled>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Minimum Quantity</label>
+            <input type="text" ng-value="product.quantity"
+                   class="form-control"
+                   placeholder="Minimum Quantity" disabled>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Brand</label>
+            <input type="text" ng-value="product.brand"
+                   class="form-control"
+                   placeholder="Brand" disabled>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Origin</label>
+            <input type="text" ng-value="product.origin"
+                   class="form-control"
+                   placeholder="Origin" disabled>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Certified Halal</label>
+            <input type="text" ng-value="product.certifiedHalal ? 'TRUE': 'FALSE'"
+                   class="form-control"
+                   placeholder="Certified Halal" disabled>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Unit</label>
+            <input type="text" ng-value="product.unitSymbol"
+                   class="form-control"
+                   placeholder="Unit" disabled>
+        </div>
+        <div class="form-group" ng-show="product.price">
+            <label class="control-label">Unit Price</label>
+            <input type="text" ng-value="product.price"
+                   class="form-control"
+                   placeholder="Unit Price" disabled>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Supplier</label>
+            <input type="text" ng-value="product.company.name"
+                   class="form-control"
+                   placeholder="Supplier" disabled>
+        </div>
+
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="dismiss()">Dismiss</button>
+</div>

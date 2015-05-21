@@ -1,0 +1,135 @@
+<div class="modal-header">
+    <h3 class="modal-title" ng-hide="selectedProduct.id">Supplier Profile</h3>
+    <h3 class="modal-title" ng-show="selectedProduct.id">Product Info</h3>
+</div>
+<div class="modal-body">
+    <div ng-hide="selectedProduct.id">
+        <div class="row">
+            <div class="col-sm-2">
+                <img class="mc-logo small reset-margin margin-center"
+                     ng-src="/api/content?contentPath={{supplier.supplier.logo.url}}">
+            </div>
+            <div class="col-sm-10">
+                <a class="btn btn-success pull-right">View Transaction History</a>
+                <h4>{{supplier.supplier.name}}</h4>
+                <img class="mc-logo smaller"
+                     ng-src="/api/content?contentPath={{picture.url}}" ng-repeat="picture in supplier.pictures">
+            </div>
+        </div>
+        <br/>
+
+        <div class="col-sm-12">
+            <textarea class="form-control" rows="6" placeholder="Type your message"
+                      disabled>{{supplier.busDescription}}</textarea>
+
+            <div class="col-xs-3 category-badge"
+                 ng-repeat="supplierCategory in supplier.categories">
+                <span class="badge bg-warning col-xs-12">{{supplierCategory.title}}</span>
+            </div>
+            <br/>
+            <ul class="product-description-list">
+                <li><b>Company Code:</b> {{supplier.supplier.code}}</li>
+                <li><b>Address:</b> {{supplier.address}}</li>
+                <li><b>Business Registration No:</b> {{supplier.busRegNumber}}</li>
+                <li><b>GST-Registered:</b> <span ng-show="supplier.gstRegistered">YES</span><span ng-show="!supplier.gstRegistered">NO</span></li>
+                <li ng-show="supplier.gstRegistered"><b>GST-Registration No.:</b> {{supplier.gstRegistrationNumber}}</li>
+                <li><b>Email Address:</b> {{supplier.supplier.email}}</li>
+                <li><b>Contact Number:</b> {{supplier.supplier.contactNumber}}</li>
+                <li><b>Fax Number:</b> {{supplier.faxNumber}}</li>
+            </ul>
+        </div>
+        <br/>
+
+        <div class="row text-center">
+            <a ui-sref="app.store.supplier({id: {{supplier.id}} })" class="btn btn-success" target="_blank">View
+                Products Catalogue</a>
+
+            <p>Popular Products by this Supplier</p>
+
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="col-xs-3 text-center" ng-repeat="product in popularProducts | limitTo:4"
+                     ng-click="openProduct(product)">
+                    <img class="img-responsive margin-center"
+                         ng-src="/api/content?contentPath={{product.picture.url}}">
+
+                    <p class="product-title">{{product.title}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="selectedProduct.id">
+        <div class="col-sm-12 form-horizontal">
+            <div class="form-group">
+                <label class="control-label">Product Name and Other Names</label>
+                <input type="text" ng-value="product.names"
+                       class="form-control"
+                       placeholder="Product Name and Other Names" disabled>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Product Code</label>
+                <input type="text" ng-value="product.code"
+                       class="form-control"
+                       placeholder="Product Code" disabled>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Product Image</label>
+                <img class="mc-logo small reset-margin margin-center"
+                     ng-src="/api/content?contentPath={{product.picture.url}}">
+            </div>
+            <div class="form-group">
+                <label class="control-label">Product Description</label>
+                <input type="text" ng-value="product.description"
+                       class="form-control"
+                       placeholder="Product Description" disabled>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Minimum Quantity</label>
+                <input type="text" ng-value="product.quantity"
+                       class="form-control"
+                       placeholder="Minimum Quantity" disabled>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Brand</label>
+                <input type="text" ng-value="product.brand"
+                       class="form-control"
+                       placeholder="Brand" disabled>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Origin</label>
+                <input type="text" ng-value="product.origin"
+                       class="form-control"
+                       placeholder="Origin" disabled>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Certified Halal</label>
+                <input type="text" ng-value="product.certifiedHalal ? 'TRUE': 'FALSE'"
+                       class="form-control"
+                       placeholder="Certified Halal" disabled>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Unit</label>
+                <input type="text" ng-value="product.unitSymbol"
+                       class="form-control"
+                       placeholder="Unit" disabled>
+            </div>
+            <div class="form-group" ng-show="product.price">
+                <label class="control-label">Unit Price</label>
+                <input type="text" ng-value="product.price"
+                       class="form-control"
+                       placeholder="Unit Price" disabled>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Supplier</label>
+                <input type="text" ng-value="product.company.name"
+                       class="form-control"
+                       placeholder="Supplier" disabled>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="dismiss()">Dismiss</button>
+</div>
