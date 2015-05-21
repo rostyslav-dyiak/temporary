@@ -9,7 +9,7 @@
     ];
 
     function EateryInvitationFactory($resource) {
-        return $resource('/api/businessTypes/:id', {}, {
+        return $resource('api/eatery-invitation.json', {}, {
             'query': {
                 method: 'GET',
                 isArray: true
@@ -19,5 +19,4 @@
             }
         });
     }
-
 })();

@@ -3,6 +3,31 @@
         <div class="col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-body">
+                    <div class="col-sm-12"
+                         ng-repeat="invitation in eateryInvitations">
+                        <div class="supplier-row row" ng-class="rowClass(invitation)">
+                            <div class="col-sm-12" ng-click="editInvitation(invitation)">
+                                <div class="col-sm-6">
+                                    <span>From: <b>{{invitation.from}}</b></span>
+                                    </br>
+                                    <span>To:  <b>{{invitation.to}}</b></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <span>{{invitation.createDate | date:"EEEE, MMM dd.yyyy h:mma"}}</span>
+                                    </br>
+                                    <div>
+                                        <span><b>{{invitation.status}}</b></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
                     <form name="form" class="form-horizontal col-sm-12 form-validation">
                         <div class="form-group">
                             <label class=" control-label">From</label>
@@ -36,65 +61,39 @@
                         </div>
                         <div class="form-group">
                             <label>Recommendation message</label>
-                            <textarea type="email" class="form-control"
+                            <textarea type="text" class="form-control"
                                       ng-model="eateryInvitation.recommendationMessage"
                                       placeholder="Recommendation Message" required></textarea>
                         </div>
                         <div class="form-group">
                             <label>Email Content</label>
-                            <textarea type="email" class="form-control" ng-model="eateryInvitation.emailContent"
-                                      placeholder="Email Content" required></textarea>
+                            <textarea type="text" class="form-control"
+                                      ng-model="eateryInvitation.emailContent"
+                                      placeholder="Email Content" value="" required></textarea>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-2 control-label">Contact number</label>
-
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" ng-model="userCompanyDTO.company.contactNumber"
-                                       placeholder="Contact number" required>
-                            </div>
-                        </div>
-                        <div class="form-group" ng-hide="!companyId || companyStatus == 'PENDING'">
-                            <label class="col-lg-2 control-label">Status</label>
-
-                            <div class="col-lg-10">
-                                <div class="radio">
-                                    <label class="i-checks">
-                                        <input type="radio" ng-model="userCompanyDTO.company.status" name="status"
-                                               value="ACTIVE">
-                                        <i></i> Active
-                                    </label>
+                            <div class="col-sm-12">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-5">
+                                     <span type="submit" class="full-width-button btn btn-sm btn-info"
+                                           ng-click="markFinalized()">Mark Finalized</span>
                                 </div>
-                                <div class="radio">
-                                    <label class="i-checks">
-                                        <input type="radio" ng-model="userCompanyDTO.company.status" name="status"
-                                               value="INACTIVE"
-                                               checked>
-                                        <i></i> Inactive
-                                    </label>
-                                </div>
+                                <div class="col-sm-5">
+                                    <span type="submit" class="full-width-button btn btn-sm btn-info"
+                                          ng-click="sendEmail()">Send Email</span></div>
+                                <div class="col-sm-1"></div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-lg-offset-2 col-lg-10">
-                                <span type="submit" class="btn btn-sm btn-info" ng-disabled="form.$invalid"
-                                      ng-show="!companyId" ng-disabled="addEditForm.$invalid" ng-click="addCompany()">Send Invitation</span>
-                                <span type="submit" class="btn btn-sm btn-info"
-                                      ng-show="companyId && companyStatus == 'PENDING'"
-                                      ng-disabled="addEditForm.$invalid"
-                                      ng-click="updateCompanyInfo()">Update and Send</span>
-                                <span type="submit" class="btn btn-sm btn-info"
-                                      ng-show="companyId && companyStatus != 'PENDING'"
-                                      ng-disabled="addEditForm.$invalid" ng-click="addCompany()">Update</span>
-                                <span class="btn btn-sm btn-danger" back-button>Cancel</span>
-                                <span class="btn btn-sm btn-danger" confirmed-click="deleteCompany()"
-                                      ng-hide="!companyId" ng-confirm-click>Delete</span>
-                            </div>
+                            <label>History</label>
+                            <textarea type="text" class="form-control"
+                                      ng-model="eateryInvitation.emailContent"
+                                      placeholder="History" required></textarea>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
-        </div>
+
     </div>
 </div>

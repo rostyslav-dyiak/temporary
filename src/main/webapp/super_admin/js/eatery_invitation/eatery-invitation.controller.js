@@ -12,84 +12,35 @@
 
     function EateryInvitationController($scope, toaster, EateryInvitationFactory) {
         $scope.eateryInvitation = {};
+        $scope.eateryInvitations = {};
 
-        $scope.saveType = saveType;
-        $scope.editType = editType;
-        $scope.removeType = removeType;
-        $scope.newBusinessType = newBusinessType;
-        $scope.cancel = cancel;
-
+        $scope.rowClass = rowClass;
+        $scope.editInvitation = editInvitation;
         activate();
 
         function activate() {
             EateryInvitationFactory.query({},
                 function (data) {
-                    $scope.types = angular.copy(data);
-                    //Delete this
-                    for (var i = 0; i < $scope.types.length; i++) {
-                        $scope.types[i].order = i;
-                    }
-                    // End of delete
-                    $scope.types.sort(function (a, b) {
-                        return a.order > b.order;
-                    });
+                    $scope.eateryInvitations = data;
                 }, function (e) {
                     console.error(e);
                 });
         }
 
-        $scope.sortableOptions = {
-            stop: function () {
-                for (var index in $scope.types) {
-                    $scope.types[index].order = index;
-                }
+        function rowClass(invitation) {
+            if (invitation.status == 'Pending Send') {
+                return 'red-supplier-row';
             }
-        };
-
-        function saveType() {
-            BusinessTypeFactory.update({
-                id: $scope.type.id,
-                name: $scope.type.name,
-                description: $scope.type.description
-            }, function (data) {
-                toaster.pop('success', 'Success', 'Business type saved');
-                activate();
-            }, function (e) {
-                console.error(e);
-                toaster.pop('error', 'Error', 'Please try again');
-            });
-
+            else {
+                return 'green-supplier-row';
+            }
         }
 
-        function newBusinessType() {
-            $scope.type = {};
-            $scope.newType = true;
+
+        function editInvitation(invitation) {
+            $scope.eateryInvitation = invitation;
         }
 
-        function removeType(id) {
-            BusinessTypeFactory.delete({
-                    id: id
-                },
-                function () {
-                    toaster.pop('success', 'Success', 'Business type removed');
-                    activate();
-                }, function (e) {
-                    console.error(e);
-                    toaster.pop('error', 'Error', 'Please try again');
-                });
-        }
-
-        function editType(type) {
-            $scope.newType = false;
-            $scope.selectedType = type;
-            $scope.type.id = type.id;
-            $scope.type.name = type.name;
-            $scope.type.description = type.description;
-        }
-
-        function cancel() {
-            $scope.type = {};
-        }
 
     }
 })();
