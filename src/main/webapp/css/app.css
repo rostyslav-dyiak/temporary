@@ -5513,6 +5513,14 @@ a.text-#000000:hover {
     background: #F7F7F7;
 }
 
+.green-supplier-row {
+    background: #91EA90;
+}
+
+.red-supplier-row {
+    background: #FF998D;
+}
+
 .category-badge {
     padding: 5px;
 }

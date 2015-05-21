@@ -1,0 +1,47 @@
+[
+    {
+        "id": 0,
+        "from": "FoodService",
+        "to": "MR Bean",
+        "contactPerson": "Oleh",
+        "contactNumber": "951599515",
+        "email": "oleh.test@gmail.com",
+        "createDate": "1431683828152",
+        "recommendationMessage": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "status": "Finalized"
+    },
+    {
+        "id": 1,
+        "from": "FoodService",
+        "to": "Coffee Shop",
+        "contactPerson": "Oleh",
+        "contactNumber": "951599515",
+        "email": "oleh.test@gmail.com",
+        "createDate": "1431683828152",
+        "recommendationMessage": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "status": "Finalized"
+    },
+    {
+        "id": 2,
+        "from": "FoodService",
+        "to": "StarBucks",
+        "contactPerson": "Oleh",
+        "contactNumber": "951599515",
+        "email": "oleh.test@gmail.com",
+        "createDate": "1431683828152",
+        "recommendationMessage": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "status": "Sent"
+    },
+    {
+        "id": 3,
+        "from": "FoodService",
+        "to": "MR Bean",
+        "contactPerson": "Oleh",
+        "contactNumber": "951599515",
+        "email": "oleh.test@gmail.com",
+        "createDate": "1431683828152",
+        "recommendationMessage": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "status": "Pending Send"
+    }
+]
+
