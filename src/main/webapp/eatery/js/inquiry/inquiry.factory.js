@@ -9,7 +9,7 @@
     ];
 
     function InquiryFactory($resource) {
-        return $resource('/api/inquirys/:id', {}, {
+        return $resource('/api/inquirys/last/:id', {}, {
             'query': {
                 method: 'GET',
                 isArray: true

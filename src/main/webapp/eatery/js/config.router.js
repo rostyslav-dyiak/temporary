@@ -137,6 +137,7 @@
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
                                     return $ocLazyLoad.load([
+                                        'js/inquiry/company.factory.js',
                                         'js/inquiry/inquiry.factory.js',
                                         'js/inquiry/inquiry.reply.factory.js',
                                         'js/inquiry/inquiry.controller.js'

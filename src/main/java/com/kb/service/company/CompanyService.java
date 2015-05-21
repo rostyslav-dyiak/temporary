@@ -16,4 +16,8 @@ public interface CompanyService {
     public Company find(Long id);
 
     public void delete(Long id);
+
+    Company findBySupplierDetails(Long id);
+
+    Company findByEateryDetails(Long id);
 }

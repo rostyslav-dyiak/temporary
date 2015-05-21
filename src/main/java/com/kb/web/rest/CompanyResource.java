@@ -128,6 +128,29 @@ public class CompanyResource {
         companyService.delete(id);
     }
 
+
+    @RequestMapping(value = "/supplier/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Company> findBySupplierDetails(@PathVariable final Long id) {
+        log.debug("REST request to findBySupplierDetails : {}", id);
+        return new ResponseEntity<>(
+            companyService.findBySupplierDetails(id),
+            HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/eatery/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Company> findByEateryDetails(@PathVariable final Long id) {
+        log.debug("REST request to findByEateryDetails : {}", id);
+        return new ResponseEntity<>(
+            companyService.findByEateryDetails(id),
+            HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/{id}/outlets",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)

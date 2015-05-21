@@ -8,10 +8,11 @@
         '$scope',
         'toaster',
         'InquiryFactory',
-        'InquiryReplyFactory'
+        'InquiryReplyFactory',
+        'CompanyFactory'
     ];
 
-    function InquiryController($scope, toaster, InquiryFactory, InquiryReplyFactory) {
+    function InquiryController($scope, toaster, InquiryFactory, InquiryReplyFactory, CompanyFactory) {
         $scope.inquiries = [];
         $scope.rowCollection = [];
         $scope.searchQuery = '';
@@ -31,7 +32,40 @@
                 function (data) {
                     $scope.inquiries = data;
                     $scope.rowCollection = data;
+                    initializeInquiries();
                 }, function (e) {
+                });
+        }
+
+        function initializeInquiries(){
+            for(var i = 0; i < $scope.rowCollection.length; i++){
+                var inquiry = $scope.rowCollection[i];
+                initializeSupplier(inquiry);
+                initializeEnquiry(inquiry);
+            }
+        }
+
+        function initializeSupplier(inquiry){
+            CompanyFactory.get({
+                    type: 'supplier',
+                    id: inquiry.supplierDetails.id
+                },
+                function (data) {
+                    inquiry.supplierDetails.supplier = data;
+                }, function (e) {
+                    console.error(e);
+                });
+        }
+
+        function initializeEnquiry(inquiry){
+            CompanyFactory.get({
+                    type: 'eatery',
+                    id: inquiry.eateryDetails.id
+                },
+                function (data) {
+                    inquiry.eateryDetails.eatery = data;
+                }, function (e) {
+                    console.error(e);
                 });
         }
 
@@ -42,14 +76,16 @@
 
         function selectInquiry(inquiry) {
             $scope.selectedInquiry = inquiry;
-            InquiryReplyFactory.query({
-                id: inquiry.id
-            }, function (data) {
-                $scope.selectedInquiryResponses = data;
-                $scope.latestInquiryRespond = data[data.length - 1];
-            },  function (e) {
-                console.error(e);
-            });
+            //$scope.latestInquiryRespond = $scope.selectedInquiry;
+
+            //InquiryReplyFactory.query({
+            //    id: inquiry.id
+            //}, function (data) {
+            //    $scope.selectedInquiryResponses = data;
+            //    $scope.latestInquiryRespond = data[data.length - 1];
+            //},  function (e) {
+            //    console.error(e);
+            //});
         }
 
         function deleteInquiry() {

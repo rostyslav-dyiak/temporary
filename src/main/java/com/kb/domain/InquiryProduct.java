@@ -1,6 +1,9 @@
 package com.kb.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -47,10 +50,12 @@ public class InquiryProduct implements Serializable {
         this.quantityPerWeek = quantityPerWeek;
     }
 
+    @JsonIgnore
     public Inquiry getInquiry() {
         return inquiry;
     }
 
+    @JsonProperty
     public void setInquiry(Inquiry inquiry) {
         this.inquiry = inquiry;
     }
