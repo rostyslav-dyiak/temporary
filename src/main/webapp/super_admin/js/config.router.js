@@ -379,7 +379,17 @@
                     })
                     .state('app.eateryInvitation', {
                         url: '/eatery_invitation',
-                        templateUrl: 'templates/eatery_invitation.html'
+                        templateUrl: 'templates/eatery_invitation.html',
+                        resolve: {
+                            deps: ['$ocLazyLoad',
+                                function ($ocLazyLoad) {
+                                    return $ocLazyLoad.load([
+                                        'js/eatery_invitation/eatery-invitation.controller.js',
+                                        'js/eatery_invitation/eatery-invitation.factory.js'
+                                    ]);
+                                }
+                            ]
+                        }
                     })
                     .state('app.standingOrderConversion', {
                         url: '/standing_order_conversion',

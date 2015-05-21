@@ -27,7 +27,6 @@
             OffDayFactory.get({},
                 function (data) {
                     $scope.announcements = data.dates;
-                    console.log($scope.announcements);
                 },
                 function (e) {
                     console.log(e);

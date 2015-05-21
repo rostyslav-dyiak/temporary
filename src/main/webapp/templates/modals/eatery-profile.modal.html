@@ -1,0 +1,61 @@
+<div class="modal-header">
+    <h3 class="modal-title">Eatery Profile</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-2">
+            <img class="mc-logo small reset-margin margin-center"
+                 ng-src="/api/content?contentPath={{eatery.eatery.logo.url}}">
+        </div>
+        <div class="col-sm-10">
+            <a class="btn btn-success pull-right">View Transaction History</a>
+            <h4>{{eatery.eatery.name}}</h4>
+        </div>
+    </div>
+    <br/>
+
+    <div class="col-sm-12">
+        <ul class="product-description-list">
+            <li><b>Company Code:</b> {{eatery.eatery.code}}</li>
+            <li><b>Business Type:</b> {{eatery.businessType}}</li>
+            <li><b>Number of Outlets:</b> {{eatery.eatery.outlets.length}}</li>
+            <li><b>Billing Address:</b> {{eatery.billingAddress}}</li>
+            <li><b>Business Registration No:</b> {{eatery.busRegNumber}}</li>
+            <li><b>Email Address:</b> {{eatery.eatery.email}}</li>
+            <li><b>Contact Number:</b> {{eatery.eatery.contactNumber}}</li>
+            <li><b>Fax Number:</b> {{eatery.faxNumber}}</li>
+        </ul>
+    </div>
+    <br/>
+
+    <div class="table-responsive">
+        <table st-table="rowCollection" st-safe-src="eatery.eatery.outlets" class="table table-striped text-center">
+            <thead>
+            <tr>
+                <th class="text-center" st-sort="name">Name of Outlet</th>
+                <th class="text-center" st-sort="deliveryAddress">Address</th>
+                <th class="text-center" st-sort="email">Email Address</th>
+                <th class="text-center" st-sort="contactNumber">Contact Number</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in rowCollection">
+                <td>{{row.name}}</td>
+                <td>{{row.deliveryAddress}}</td>
+                <td>{{row.email}}</td>
+                <td>{{row.contactNumber}}</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3" class="text-center">
+                    <div st-pagination class="no-margin"></div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="dismiss()">Dismiss</button>
+</div>

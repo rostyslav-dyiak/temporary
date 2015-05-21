@@ -54,7 +54,10 @@
                             </div>
                             <div class="col-sm-7">
                                 <span>Inquiry from {{selectedInquiry.eatery.eatery.name}}</span><br><br>
-                                <a class="btn btn-sm btn-success">View Company Profile</a>
+                                <span class="btn btn-sm btn-success" ng-click="openEateryProfileModal()">View Company Profile</span>
+                                <script type="text/ng-template" id="myModalContent.html">
+                                    <div ng-include="'/templates/modals/eatery-profile.modal.html'"></div>
+                                </script>
                             </div>
                         </div>
                     </div>
