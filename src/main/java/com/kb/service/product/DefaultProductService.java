@@ -3,14 +3,11 @@ package com.kb.service.product;
 import com.kb.converter.Converter;
 import com.kb.domain.Company;
 import com.kb.domain.Product;
-import com.kb.domain.ProductHistory;
-import com.kb.domain.ProductHistoryActions;
 import com.kb.repository.ProductHistoryRepository;
 import com.kb.repository.ProductRepository;
 import com.kb.search.model.ProductSearch;
 import com.kb.search.repository.product.ProductSearchRepository;
 import com.kb.web.rest.dto.product.ProductDto;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -79,8 +76,6 @@ public class DefaultProductService implements ProductService {
     public void save(final Product product) {
 
         productRepository.save(product);
-        ProductHistory history = new ProductHistory(ProductHistoryActions.CREATED, StringUtils.EMPTY, StringUtils.EMPTY, StringUtils.EMPTY, product);
-        productHistoryRepository.save(history);
         ProductSearch productSearch = productEntitySearchConverter.convert(product);
         productSearchRepository.save(productSearch);
     }
@@ -118,7 +113,7 @@ public class DefaultProductService implements ProductService {
     private void saveUpdateHistory(Product product) {
         Product oldProduct = productRepository.findOne(product.getId());
         if (!oldProduct.getAvailable().equals(product.getAvailable())) {
-            productHistoryRepository.save(new ProductHistory(ProductHistoryActions.UPDATED, "status", oldProduct.getAvailable().toString(), product.getAvailable().toString(), product));
+            /*productHistoryRepository.save(new ProductHistory(ProductHistoryActions.UPDATED, "status", oldProduct.getAvailable().toString(), product.getAvailable().toString(), product));*/
         }
     }
 }
