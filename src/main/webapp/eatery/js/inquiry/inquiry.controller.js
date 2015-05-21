@@ -100,7 +100,7 @@
                 $scope.selectedInquiryHistory.unshift(parent);
                 parent = parent.parent;
             } while(parent);
-            if(!inquiry.seenDate){
+            if(inquiry.parent && !inquiry.seenDate){
                 InquiryFactory.updateLast({id: inquiry.id},
                     function (data) {
                         inquiry.seenDate = data.seenDate;
