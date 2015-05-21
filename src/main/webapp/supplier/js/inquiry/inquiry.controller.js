@@ -6,6 +6,7 @@
     InquiryController
         .$inject = [
         '$scope',
+        '$modal',
         'toaster',
         'InquiryFactory',
         'InquiryReplyFactory',
@@ -14,7 +15,7 @@
         'TeamFactory'
     ];
 
-    function InquiryController($scope, toaster, InquiryFactory, InquiryReplyFactory, PricingGroupFactory, PaymentFactory, TeamFactory) {
+    function InquiryController($scope, $modal, toaster, InquiryFactory, InquiryReplyFactory, PricingGroupFactory, PaymentFactory, TeamFactory) {
         $scope.inquiries = [];
         $scope.rowCollection = [];
         $scope.searchQuery = '';
@@ -34,6 +35,7 @@
         $scope.validateDay = validateDay;
         $scope.discard = discard;
         $scope.send = send;
+        $scope.openEateryProfileModal = openEateryProfileModal;
 
         activate();
 
@@ -126,6 +128,25 @@
                 console.log($scope.reply.inquiryOutlets[i].schedule);
             }
             $scope.reply.inquiryOutlets = temp;
+        }
+
+        function openEateryProfileModal() {
+            $modal.open({
+                templateUrl: 'myModalContent.html',
+                controller: 'EateryProfileController',
+                resolve: {
+                    eatery: function () {
+                        return $scope.selectedInquiry.eatery;
+                    },
+                    deps: ['$ocLazyLoad',
+                        function ($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                '/js/modals/eatery-profile.controller.js'
+                            ]);
+                        }
+                    ]
+                }
+            });
         }
 
         function getBooleanArray(daysText) {

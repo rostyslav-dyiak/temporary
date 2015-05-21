@@ -105,4 +105,16 @@ public class InquiryResource {
         log.debug("REST request to delete Inquiry : {}", id);
         inquiryRepository.delete(id);
     }
+
+    @RequestMapping(value = "/inquirys/last",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Inquiry>> getAllLast(@RequestParam(value = "page" , required = false) Integer offset,
+                                                @RequestParam(value = "per_page", required = false) Integer limit)
+        throws URISyntaxException {
+        Page<Inquiry> page = inquiryRepository.findByChildIsNull(PaginationUtil.generatePageRequest(offset, limit));
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/inquirys/last", offset, limit);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 }

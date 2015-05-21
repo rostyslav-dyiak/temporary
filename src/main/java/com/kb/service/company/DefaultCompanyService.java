@@ -4,6 +4,8 @@ import com.kb.domain.Company;
 import com.kb.domain.EateryDetails;
 import com.kb.domain.SupplierDetails;
 import com.kb.repository.CompanyRepository;
+import com.kb.repository.EateryDetailsRepository;
+import com.kb.repository.SupplierDetailsRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,10 @@ import javax.transaction.Transactional;
 public class DefaultCompanyService implements CompanyService {
     @Inject
     private CompanyRepository companyRepository;
+    @Inject
+    private SupplierDetailsRepository supplierDetailsRepository;
+    @Inject
+    private EateryDetailsRepository eateryDetailsRepository;
 
     @Override
     @Transactional
@@ -40,6 +46,20 @@ public class DefaultCompanyService implements CompanyService {
     @Override
     public void delete(final Long id) {
         companyRepository.delete(id);
+    }
+
+    @Override
+    @Transactional
+    public Company findBySupplierDetails(Long id) {
+        SupplierDetails supplierDetails = supplierDetailsRepository.findOne(id);
+        return supplierDetails.getSupplier();
+    }
+
+    @Override
+    @Transactional
+    public Company findByEateryDetails(Long id) {
+        EateryDetails eateryDetails = eateryDetailsRepository.findOne(id);
+        return eateryDetails.getEatery();
     }
 
     private Company initializeDetails(final Company company) {

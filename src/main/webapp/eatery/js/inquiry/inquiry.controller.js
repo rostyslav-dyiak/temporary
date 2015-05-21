@@ -8,16 +8,16 @@
         '$scope',
         'toaster',
         'InquiryFactory',
-        'InquiryReplyFactory'
+        'InquiryReplyFactory',
+        'CompanyFactory'
     ];
 
-    function InquiryController($scope, toaster, InquiryFactory, InquiryReplyFactory) {
+    function InquiryController($scope, toaster, InquiryFactory, InquiryReplyFactory, CompanyFactory) {
         $scope.inquiries = [];
         $scope.rowCollection = [];
         $scope.searchQuery = '';
         $scope.selectedInquiry = {};
-        $scope.selectedInquiryResponses = [];
-        $scope.latestInquiryRespond = [];
+        $scope.selectedInquiryHistory = [];
 
         $scope.search = search;
         $scope.selectInquiry = selectInquiry;
@@ -31,8 +31,61 @@
                 function (data) {
                     $scope.inquiries = data;
                     $scope.rowCollection = data;
+                    initializeInquiries();
                 }, function (e) {
                 });
+        }
+
+        function initializeInquiries(){
+            for(var i = 0; i < $scope.rowCollection.length; i++){
+                var inquiry = $scope.rowCollection[i];
+                if(inquiry.parent){
+                    if(inquiry.seenDate){
+                        inquiry.reply = {status: 'Viewed',date: inquiry.createdDate};
+                    }else{
+                        inquiry.reply = {status: 'New Reply',date: inquiry.createdDate};
+                    }
+                }else{
+                    inquiry.reply = {status: 'No Reply',date: inquiry.createdDate};
+                }
+                for(var j = 0; j < inquiry.inquiryOutlets.length; j++){
+                    if(inquiry.inquiryOutlets[j].schedule != null){
+                        inquiry.inquiryOutlets[j].schedule = getBooleanArray(inquiry.inquiryOutlets[j].schedule);
+                    }
+                }
+                initializeSupplier(inquiry);
+                initializeEnquiry(inquiry);
+            }
+        }
+
+        function initializeSupplier(inquiry){
+            CompanyFactory.get({
+                    type: 'supplier',
+                    id: inquiry.supplierDetails.id
+                },
+                function (data) {
+                    inquiry.supplierDetails.supplier = data;
+                }, function (e) {
+                    console.error(e);
+                });
+        }
+
+        function initializeEnquiry(inquiry){
+            CompanyFactory.get({
+                    type: 'eatery',
+                    id: inquiry.eateryDetails.id
+                },
+                function (data) {
+                    inquiry.eateryDetails.eatery = data;
+                }, function (e) {
+                    console.error(e);
+                });
+        }
+
+        function getBooleanArray(daysText) {
+            return daysText.split('_').map(function (x) {
+                return parseInt(x) != 0
+            });
         }
 
         function search() {
@@ -42,14 +95,11 @@
 
         function selectInquiry(inquiry) {
             $scope.selectedInquiry = inquiry;
-            InquiryReplyFactory.query({
-                id: inquiry.id
-            }, function (data) {
-                $scope.selectedInquiryResponses = data;
-                $scope.latestInquiryRespond = data[data.length - 1];
-            },  function (e) {
-                console.error(e);
-            });
+            var parent = inquiry;
+            do{
+                $scope.selectedInquiryHistory.unshift(parent);
+                parent = parent.parent;
+            } while(parent);
         }
 
         function deleteInquiry() {

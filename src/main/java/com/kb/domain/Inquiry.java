@@ -1,6 +1,7 @@
 package com.kb.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -34,6 +35,11 @@ public class Inquiry extends AbstractAuditingEntity implements Serializable {
     @JoinColumn(name = "parent_id")
     private Inquiry parent;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "child_id")
+    private Inquiry child;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "payment_term_id")
     private PaymentTerm paymentTerm;
@@ -46,10 +52,10 @@ public class Inquiry extends AbstractAuditingEntity implements Serializable {
     @JoinColumn(name = "supplier_details_id")
     private SupplierDetails supplierDetails;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "inquiry")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "inquiry", fetch = FetchType.EAGER)
     private Set<InquiryOutlet> inquiryOutlets;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "inquiry")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "inquiry", fetch = FetchType.EAGER)
     private Set<InquiryProduct> inquiryProducts;
 
     public Long getId() {
@@ -130,6 +136,14 @@ public class Inquiry extends AbstractAuditingEntity implements Serializable {
 
     public void setInquiryProducts(Set<InquiryProduct> inquiryProducts) {
         this.inquiryProducts = inquiryProducts;
+    }
+
+    public Inquiry getChild() {
+        return child;
+    }
+
+    public void setChild(Inquiry child) {
+        this.child = child;
     }
 
     @Override
