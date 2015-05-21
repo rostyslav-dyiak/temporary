@@ -100,6 +100,14 @@
                 $scope.selectedInquiryHistory.unshift(parent);
                 parent = parent.parent;
             } while(parent);
+            if(!inquiry.seenDate){
+                InquiryFactory.updateLast({id: inquiry.id},
+                    function (data) {
+                        inquiry.seenDate = data.seenDate;
+                        inquiry.reply = {status: 'Viewed',date: inquiry.createdDate};
+                    }, function (e) {
+                    });
+            }
         }
 
         function deleteInquiry() {

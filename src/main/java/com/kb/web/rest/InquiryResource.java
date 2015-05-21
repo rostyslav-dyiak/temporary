@@ -3,6 +3,7 @@ package com.kb.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.kb.domain.Inquiry;
 import com.kb.repository.InquiryRepository;
+import com.kb.service.inquiry.InquiryService;
 import com.kb.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,8 @@ public class InquiryResource {
 
     @Inject
     private InquiryRepository inquiryRepository;
+    @Inject
+    private InquiryService inquiryService;
 
     /**
      * POST  /inquirys -> Create a new inquiry.
@@ -116,5 +119,13 @@ public class InquiryResource {
         Page<Inquiry> page = inquiryRepository.findByChildIsNull(PaginationUtil.generatePageRequest(offset, limit));
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/inquirys/last", offset, limit);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/inquirys/last/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Inquiry> updateLast(@PathVariable final Long id){
+        return new ResponseEntity<>(inquiryService.updateLast(id), HttpStatus.CREATED);
     }
 }
