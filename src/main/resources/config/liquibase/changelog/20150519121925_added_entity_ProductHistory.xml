@@ -41,5 +41,11 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="addActionColumn" author="rostyslav_dyyak">
+        <addColumn tableName="T_PRODUCT_HISTORY">
+            <column name="action" type="varchar(50)"/>
+        </addColumn>
+    </changeSet>
+
 
 </databaseChangeLog>

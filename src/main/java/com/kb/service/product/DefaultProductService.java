@@ -3,10 +3,14 @@ package com.kb.service.product;
 import com.kb.converter.Converter;
 import com.kb.domain.Company;
 import com.kb.domain.Product;
+import com.kb.domain.ProductHistory;
+import com.kb.domain.ProductHistoryActions;
+import com.kb.repository.ProductHistoryRepository;
 import com.kb.repository.ProductRepository;
 import com.kb.search.model.ProductSearch;
 import com.kb.search.repository.product.ProductSearchRepository;
 import com.kb.web.rest.dto.product.ProductDto;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,80 +22,103 @@ import java.util.List;
 @Service
 public class DefaultProductService implements ProductService {
 
-	@Inject
-	private ProductRepository productRepository;
+    private static final String EMPTY_FIELD = "";
 
-	@Inject
-	private ProductSearchRepository productSearchRepository;
+    @Inject
+    private ProductRepository productRepository;
 
-	@Resource(name = "productSearchConverter")
-	private Converter<ProductSearch, ProductDto> productSearchConverter;
+    @Inject
+    private ProductSearchRepository productSearchRepository;
 
-	@Resource(name = "productConverter")
-	private Converter<Product, ProductDto> productConverter;
+    @Inject
+    private ProductHistoryRepository productHistoryRepository;
 
-	@Resource(name = "productEntitySearchConverter")
-	private Converter<Product, ProductSearch> productEntitySearchConverter;
+    @Resource(name = "productSearchConverter")
+    private Converter<ProductSearch, ProductDto> productSearchConverter;
 
-	@Override
-	public List<ProductDto> findAll(final Pageable pageable, final ProductSearch dto, final Boolean applySearch) {
-		List<ProductDto> products = null;
+    @Resource(name = "productConverter")
+    private Converter<Product, ProductDto> productConverter;
 
-		if (applySearch) {
-			List<ProductSearch> productEntities = productSearchRepository.findGlobal(dto.getTitle(),
-					dto.getDescription(),
-					dto.getBrand(),
-					dto.getOrigin(),
-					dto.getCertifiedHalal(),
-					dto.getCodeGenerate(),
-					dto.getUnitDescription(),
-					dto.getUnitHide(),
-					dto.getAvailable(),
-					dto.getCode(),
-					dto.getQuantity(),
-					dto.getBasePrice(),
-					dto.getCategoryId(),
-					dto.getSubCategoryId(),
-					dto.getSubSubCategoryId(),
-					dto.getUnitId(),
-					dto.getPictureId(),
-					dto.getCompanyId(),
-					pageable).getContent();
-			products = productSearchConverter.convertAll(productEntities);
-		} else {
-			List<Product> productEntities = productRepository.findAll(pageable).getContent();
-			products = productConverter.convertAll(productEntities);
-		}
+    @Resource(name = "productEntitySearchConverter")
+    private Converter<Product, ProductSearch> productEntitySearchConverter;
 
-		return products;
-	}
+    @Override
+    public List<ProductDto> findAll(final Pageable pageable, final ProductSearch dto, final Boolean applySearch) {
+        List<ProductDto> products = null;
 
-	@Override
-	public void save(final Product product) {
-		productRepository.save(product);
-		ProductSearch productSearch = productEntitySearchConverter.convert(product);
-		productSearchRepository.save(productSearch);
-	}
+        if (applySearch) {
+            List<ProductSearch> productEntities = productSearchRepository.findGlobal(dto.getTitle(),
+                dto.getDescription(),
+                dto.getBrand(),
+                dto.getOrigin(),
+                dto.getCertifiedHalal(),
+                dto.getCodeGenerate(),
+                dto.getUnitDescription(),
+                dto.getUnitHide(),
+                dto.getAvailable(),
+                dto.getCode(),
+                dto.getQuantity(),
+                dto.getBasePrice(),
+                dto.getCategoryId(),
+                dto.getSubCategoryId(),
+                dto.getSubSubCategoryId(),
+                dto.getUnitId(),
+                dto.getPictureId(),
+                dto.getCompanyId(),
+                pageable).getContent();
+            products = productSearchConverter.convertAll(productEntities);
+        } else {
+            List<Product> productEntities = productRepository.findAll(pageable).getContent();
+            products = productConverter.convertAll(productEntities);
+        }
 
-	@Override
-	public Page<Product> findByCompany(final Company company, final Pageable page) {
-		return productRepository.findByCompany(company, page);
-	}
+        return products;
+    }
 
-	@Override
-	public List<Product> findByCompanyAndSubSubCategoryIsNull(final Company company) {
-		return productRepository.findByCompanyAndSubSubCategoryIsNull(company);
-	}
+    @Override
+    public void save(final Product product) {
 
-	@Override
-	public Product findOne(final Long id) {
-		return productRepository.findOne(id);
-	}
+        productRepository.save(product);
+        ProductHistory history = new ProductHistory(ProductHistoryActions.CREATED, StringUtils.EMPTY, StringUtils.EMPTY, StringUtils.EMPTY, product);
+        productHistoryRepository.save(history);
+        ProductSearch productSearch = productEntitySearchConverter.convert(product);
+        productSearchRepository.save(productSearch);
+    }
 
-	@Override
-	public void delete(final Long id) {
-		productRepository.delete(id);
-		productSearchRepository.delete(id);
-	}
+    @Override
+    public void update(final Product product) {
+        productRepository.save(product);
+        saveUpdateHistory(product);
+        ProductSearch productSearch = productEntitySearchConverter.convert(product);
+        productSearchRepository.save(productSearch);
+    }
 
+    @Override
+    public Page<Product> findByCompany(final Company company, final Pageable page) {
+        return productRepository.findByCompany(company, page);
+    }
+
+    @Override
+    public List<Product> findByCompanyAndSubSubCategoryIsNull(final Company company) {
+        return productRepository.findByCompanyAndSubSubCategoryIsNull(company);
+    }
+
+    @Override
+    public Product findOne(final Long id) {
+        return productRepository.findOne(id);
+    }
+
+    @Override
+    public void delete(final Long id) {
+        productRepository.delete(id);
+        productSearchRepository.delete(id);
+    }
+
+
+    private void saveUpdateHistory(Product product) {
+        Product oldProduct = productRepository.findOne(product.getId());
+        if (!oldProduct.getAvailable().equals(product.getAvailable())) {
+            productHistoryRepository.save(new ProductHistory(ProductHistoryActions.UPDATED, "status", oldProduct.getAvailable().toString(), product.getAvailable().toString(), product));
+        }
+    }
 }

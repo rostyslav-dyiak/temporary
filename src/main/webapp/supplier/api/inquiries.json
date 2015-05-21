@@ -1,9 +1,9 @@
 [
     {
         "id": 1,
-        "supplier": {
+        "eatery": {
             "id": 2,
-            "supplier": {
+            "eatery": {
                 "name": "Fox AA",
                 "logo": {
                     "url": "/logo_placeholder.png"
@@ -14,7 +14,7 @@
         "seenDate": "12/05/2015",
         "deliveryPerWeek": 2,
         "lastModifiedDate": "10/05/2015",
-        "outlets": [
+        "inquiryOutlets": [
             {
                 "id": 3,
                 "name": "Beggins",
@@ -26,7 +26,7 @@
                 "deliveryAddress": "Lviv, Storozhenka"
             }
         ],
-        "products": [
+        "inquiryProducts": [
             {
                 "id": 1,
                 "title": "apple 2 hdfg fjdkgh",
@@ -63,23 +63,23 @@
     },
     {
         "id": 2,
-        "supplier": {
+        "eatery": {
             "id": 1,
-            "supplier": {
+            "eatery": {
                 "name": "Harry Potter",
                 "logo": {
                     "url": "/logo_placeholder.png"
                 }
             }
         },
-        "status": "NO REPLY",
+        "status": "REJECTED",
         "lastModifiedDate": "23/05/2015"
     },
     {
         "id": 3,
-        "supplier": {
+        "eatery": {
             "id": 5,
-            "supplier": {
+            "eatery": {
                 "name": "Foodx",
                 "logo": {
                     "url": "/logo_placeholder.png"

@@ -1,0 +1,149 @@
+[
+    {
+        "id": 1,
+        "message": "Sure",
+        "lastModifiedDate": "10/05/2015",
+        "seenDate": "12/05/2015",
+        "eatery": {
+            "id": 2,
+            "eatery": {
+                "name": "Fox AA",
+                "logo": {
+                    "url": "/logo_placeholder.png"
+                }
+            }
+        },
+        "supplier": {
+            "id": 2,
+            "supplier": {
+                "name": "Supplier Fox AA",
+                "logo": {
+                    "url": "/logo_placeholder.png"
+                }
+            }
+        },
+        "inquiryOutlets": [
+            {
+                "id": 3,
+                "name": "Beggins",
+                "deliveryAddress": "Lviv, Storozhenka",
+                "schedule": "1_0_0_0_1_0_0"
+            },
+            {
+                "id": 3,
+                "name": "Beggins",
+                "deliveryAddress": "Lviv, Storozhenka",
+                "schedule": "0_0_1_0_0_0_0"
+            }
+        ],
+        "inquiryProducts": [
+            {
+                "id": 1,
+                "title": "apple 2 hdfg fjdkgh",
+                "picture": {
+                    "url": "/logo_placeholder.png"
+                },
+                "code": "kjdgh7 34",
+                "quantity": 20,
+                "basePrice": 120,
+                "unit": {
+                    "unitSymbol": "kg"
+                },
+                "productPricingGroups": [
+                    {
+                        "groupName": "some name",
+                        "price": 230
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "title": "banana 4",
+                "picture": {
+                    "url": "/logo_placeholder.png"
+                },
+                "code": "kjdgh7 34",
+                "quantity": 20,
+                "basePrice": 120,
+                "unit": {
+                    "unitSymbol": "kg"
+                },
+                "productPricingGroups": [
+                    {
+                        "groupName": "1 some name",
+                        "price": 30
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "message": "Even better",
+        "supplier": {
+            "id": 2,
+            "supplier": {
+                "name": "Fox AA",
+                "logo": {
+                    "url": "/logo_placeholder.png"
+                }
+            }
+        },
+        "lastModifiedDate": "10/05/2015",
+        "seenDate": "15/05/2015",
+        "inquiryOutlets": [
+            {
+                "id": 3,
+                "name": "Beggins",
+                "deliveryAddress": "Lviv, Storozhenka",
+                "schedule": "1_1_0_0_1_0_0"
+            },
+            {
+                "id": 3,
+                "name": "Beggins",
+                "deliveryAddress": "Lviv, Storozhenka",
+                "schedule": "0_0_0_0_1_0_1"
+            }
+        ],
+        "inquiryProducts": [
+            {
+                "id": 1,
+                "title": "apple 2 hdfg fjdkgh",
+                "picture": {
+                    "url": "/logo_placeholder.png"
+                },
+                "code": "kjdgh7 34",
+                "quantity": 20,
+                "basePrice": 120,
+                "unit": {
+                    "unitSymbol": "kg"
+                },
+                "productPricingGroups": [
+                    {
+                        "groupName": "some name",
+                        "price": 650
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "title": "banana 4",
+                "picture": {
+                    "url": "/logo_placeholder.png"
+                },
+                "code": "kjdgh7 34",
+                "quantity": 20,
+                "basePrice": 120,
+                "unit": {
+                    "unitSymbol": "kg"
+                },
+                "productPricingGroups": [
+                    {
+                        "groupName": "some 32 name",
+                        "price": 636
+                    }
+                ]
+            }
+        ]
+    }
+]
