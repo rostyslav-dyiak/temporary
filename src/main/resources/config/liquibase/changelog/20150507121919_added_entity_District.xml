@@ -19,6 +19,12 @@
             <column name="description" type="varchar(255)"/>
             <column name="locations" type="varchar(255)"/>
         </createTable>
+    </changeSet>
 
+    <changeSet id="change_locations_column_type" author="rostyslavdyyak">
+        <modifyDataType
+            columnName="locations"
+            newDataType="text"
+            tableName="T_DISTRICT"/>
     </changeSet>
 </databaseChangeLog>
